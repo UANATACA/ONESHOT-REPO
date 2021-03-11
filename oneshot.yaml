@@ -1,0 +1,915 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: UANATACA ONESHOT API DOCUMENTATION FOR DEVELOPERS
+  x-logo:
+      url: https://i.ibb.co/FwcHkGb/logoUana.png
+      backgroundColor: #FFFFFF
+      altText: Oneshot logo
+  description: 
+      $ref: ./Oneshot_guide.md
+
+host: one-shot.developers.uanataca.com
+schemes: 
+  - https
+
+tags:
+- name: "TOKENS"
+  description: "
+  
+<html>
+<table>
+  <tr>
+    <th>Group</th><th>Method</th><th>Endpoint</th><th>Action</th>
+  </tr>
+  <tr>
+    <td>TOKENS</td><td>POST</td><td>/token</td><td>Create a new token</td>
+  </tr>
+  <tr>
+    <td>TOKENS</td><td>GET</td><td>/token/{pk}</td><td>Retrieve a token</td>
+  </tr>
+  <tr>
+    <td>TOKENS</td><td>GET</td><td>/tokens</td><td>List all available tokens</td>
+  </tr>
+  <tr>
+    <td>TOKENS</td><td>DELETE</td><td>/token/{uid}</td><td>Delete a token</td>
+  </tr>
+  <tr>
+    <td>REQUESTS</td><td>POST</td><td>/request</td><td>Create a new request</td>
+  </tr>
+  <tr>
+    <td>REQUESTS</td><td>GET</td><td>/request/{pk}</td><td>Retrieve a new request</td>
+  </tr>
+  <tr>
+    <td>REQUESTS</td><td>POST</td><td>/otp/{pk}</td><td>Generate a new OTP</td>
+  </tr>
+  <tr>
+    <td>REQUESTS</td><td>POST</td><td>/sign/{pk}</td><td>Start the signature process</td>
+  </tr>
+  <tr>
+    <td>DOCUMENTS</td><td>POST</td><td>/document/{pk}</td><td>Upload a document</td>
+  </tr>
+  <tr>
+    <td>DOCUMENTS</td><td>GET</td><td>/document/{pk}/{type}/{uid}</td><td>Retrieve a document</td>
+  </tr>
+  <tr>
+    <td>DOCUMENTS</td><td>GET</td><td>/document/{pk}/contract</td><td>Retrieve the signature contract for a request</td>
+  </tr>
+  <tr>
+    <td>DOCUMENTS</td><td>GET</td><td>/document/{pk}</td><td>List documents uploaded for a request</td>
+  </tr>
+  <tr>
+    <td>DOCUMENTS</td><td>DELETE</td><td>/document/{pk}/{type}/{uid}</td><td>Delete a document</td>
+  </tr>
+  <tr>
+    <td>DOCUMENTS</td><td>DELETE</td><td>/documents/{pk}</td><td>Delete all documents uploaded for a request</td>
+  </tr>
+  <tr>
+    <td>IMAGES</td><td>POST</td><td>/image</td><td>Upload a new image</td>
+  </tr>
+  <tr>
+    <td>IMAGES</td><td>GET</td><td>/image/{uid}</td><td>Retrieve an image</td>
+  </tr>
+  <tr>
+    <td>IMAGES</td><td>DELETE</td><td>/image/{uid}</td><td>Delete an image</td>
+  </tr>
+  <tr>
+    <td>IMAGES</td><td>GET</td><td>/images</td><td>List all uploaded images</td>
+  </tr>
+  <tr>
+    <td>IMAGES</td><td>DELETE</td><td>/images</td><td>Delete all uploaded images</td>
+  </tr>
+</table> 
+</br> 
+</html>
+
+  
+  
+  "
+- name: "REQUESTS"
+- name: "DOCUMENTS"
+- name: "IMAGES"
+
+paths:
+
+###### tokens ######
+###############################################################################
+
+  /api/v1/token:
+    post: 
+      summary: CREATE TOKEN
+      tags:
+        - TOKENS
+      description: Creates a new token that contains the RAO's credentials.
+      consumes:
+        - "application/json"
+      produces:
+        - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        description: Token JSON structure that needs to be included in the **REQUEST**
+        schema:
+          $ref: "#/definitions/TokenObject"
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+              {
+                  "status": "200 OK",
+                  "details": "{token}"
+              }
+  #############
+  /api/v1/token/{uid}:
+    get: 
+      summary: GET TOKEN
+      tags:
+        - TOKENS
+      description: Retrieves the token with the given uid and lists the associated credentials.
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: uid
+        type: string 
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": {
+                        "username": "",
+                        "password": true,
+                        "pin": true
+                    }
+                }
+  #############
+    delete:
+      summary: DELETE TOKEN
+      tags:
+        - TOKENS
+      description: Deletes the token with the specified `{uid}` identifier.
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: uid
+        type: string 
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": "Token deleted successfully"
+                }
+  #############
+  /api/v1/tokens:
+    get: 
+      summary: LIST TOKENS
+      tags:
+        - TOKENS
+      description: Returns a list of all tokens available and their associated data.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": {
+                        "{uid_1}": {
+                            "username": "",
+                            "password": true,
+                            "pin": true
+                        },
+                        "{uid_2}": {
+                            "username": "5053349",
+                            "password": true,
+                            "pin": true
+                        },
+                        "{uid_N}": {
+                            "username": "5053349",
+                            "password": true,
+                            "pin": true
+                        }
+                    }
+                }
+
+###### requests ######
+###############################################################################
+
+  /api/v1/request:
+    post:
+      summary: CREATE REQUEST
+      tags:
+        - REQUESTS
+      description: Creates a new digital signature request for the user identified by the provided information.
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+      - in: formData
+        name: given_name
+        description: The user's given name
+        required: true
+        type: string
+        default: User
+      - in: formData
+        name: surname_1
+        description: The user's first surname
+        required: true
+        type: string
+        default: Surname1
+      - in: formData
+        name: surname_2
+        description: The user's second surname
+        required: true
+        type: string
+        default: Surname2
+      - in: formData
+        name: id_document_type
+        required: true
+        type: string
+        enum: [IDC, PAS, PNO, TIN]
+        description: >
+          Document types for the user identification document:
+           * **IDC** - Identification based on national identity card number
+           * **PAS** - Identification based on passport number
+           * **PNO** - Identification based on (national) personal number (national civic registration number)
+           * **TIN** - Tax Identification Number according to the European Commission
+      - in: formData
+        name: id_document_country
+        description: Two-letter code for the country issuing the user's id document
+        required: true
+        type: string
+        default: ES
+      - in: formData
+        name: email
+        description: The user's email
+        required: true
+        type: string
+        default: example@mail.com
+      - in: formData
+        name: mobile_phone_number
+        description: User's mobile phone number
+        required: true
+        type: string
+        default: "+34999999999"
+      - in: formData
+        name: registration_authority 
+        description: The Registration Authority id number
+        required: true
+        type: string
+        default: "139"
+      - in: formData
+        name: profile
+        enum: [PFnubeAFCiudadano, PFnubeNC]
+        type: string
+        description: >
+          Document types for the user identification document:
+           * **PFnubeAFCiudadano** - Digital certificate used for qualified signature
+           * **PFnubeNC** - Digital certificate used for non-qualified signature
+        required: true
+      - in: formData
+        name: token
+        description: The token `{uid}` retrieved from the **CREATE TOKEN** call.
+        type: string
+      - in: formData
+        name: username
+        description: The RAO's username
+        type: string
+        default: "5053349"
+      - in: formData
+        name: password
+        description: The RAO's password
+        type: string
+        default: Gy6F37xK
+      - in: formData
+        name: pin
+        description: The RAO's pin
+        type: string
+        default: belorado74
+      - in: formData
+        name: document_front
+        description: Front side image of the user's document
+        type: file
+        required: true
+      - in: formData
+        name: document_rear
+        description: Rear side image of the user's document
+        type: file
+        required: true
+      - in: formData
+        name: document_owner
+        description: An image of the user holding the identifying document below his/her face.
+        type: file
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+              {
+                  "status": "201 Created",
+                  "details": {pk}
+              }                               
+  #############
+  /api/v1/request/{pk}:
+    get: 
+      summary: GET REQUEST
+      tags:
+        - REQUESTS
+      description: Returns user information for a signature request with using the `{pk}` number obtained from the **CREATE REQUEST** call.
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: pk
+        type: string 
+        description: The request unique identifier
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+              {
+                  "status": "200 OK",
+                  "details": {
+                      "citizen_tax_number": null,
+                      "paperless_mode": true,
+                      "organization_rol":,
+                      "birth_country": null,
+                      "birth_city": null,
+                      "mobile_phone_number": "",
+                      "residence_state": null,
+                      "title": null,
+                      "ext_recognition_data": null,
+                      "process_application": null,
+                      "country_name": "ES",
+                      "approving_user": {
+                          "pk": ,
+                          "request": ,
+                          "permission_profile": ,
+                          "registration_authority": 
+                      },
+                      "birth_province": null,
+                      "birth_state": null,
+                      "residence_postal_code": null,
+                      "id_document_number": null,
+                      "smartcard_sn": null,
+                      "secure_element": 2,
+                      "organization_state": null,
+                      "responsible_legal_documents": null,
+                      "id_document_issuer": null,
+                      "profile": "",
+                      "organization_address": null,
+                      "provider_registration_number": null,
+                      "sex": null,
+                      "registering_user": {
+                          "pk": ,
+                          "request": ,
+                          "permission_profile": ,
+                          "registration_authority": 
+                      },
+                      "description": null,
+                      "organization_tax_number": null,
+                      "administrative_unit": null,
+                      "organization_name": null,
+                      "approving_rao": {
+                          "id_document_description": "",
+                          "certificate": {
+                              "profile": "",
+                              "status": 0,
+                              "valid_from": "",
+                              "valid_to": "",
+                              "valid": "VALID",
+                              "revokation_reason": null,
+                              "serial_number": "",
+                              "issuer": "2.5.4.97=VATES-A66721499, CN=UANATACA CA1 DEVEL 2016, OU=AC-UANATACA, O=UANATACA S.A., L=Barcelona (see current address at www.uanataca.com/address), C=ES",
+                              "data": "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",
+                              "subject": "CN=Operator Example, 2.5.4.5=IDCES-Y9999999E, 2.5.4.42=Operator, 2.5.4.4=Operator Example, OU=Operator Example DPR:www.uanataca.com, C=ES"
+                          },
+                          "registration_authority": [],
+                          "registration_authority_master": ,
+                          "id_document_number": "",
+                          "given_name": "",
+                          "surname_2": "",
+                          "pk": ,
+                          "surname_1": "",
+                          "id_document_issuer": ""
+                      },
+                      "organization_country": null,
+                      "email": "",
+                      "producing_user": null,
+                      "responsible_second_surname": null,
+                      "responsible_name": null,
+                      "professional_id_number": null,
+                      "residence_address": null,
+                      "responsible_legal_level": null,
+                      "residence_district": null,
+                      "entity_owner_serial_number": null,
+                      "id_responsible_document_type": null,
+                      "residence_city": null,
+                      "subscriber_responsible_serial": null,
+                      "organization_city": null,
+                      "surname_2": "",
+                      "surname_1": "",
+                      "fix_phone_number": null,
+                      "id_responsible_document_number": null,
+                      "validity_time": "1",
+                      "registration": null,
+                      "organization_province": null,
+                      "organization_identifier": null,
+                      "subscriber": null,
+                      "birth_canton": null,
+                      "special_conditions": null,
+                      "serial_number": "",
+                      "scratchcard": "",
+                      "registration_authority": ,
+                      "responsible_serial": null,
+                      "id_document_type": "IDC",
+                      "empowerment": null,
+                      "responsible_registry_data": null,
+                      "id_responsible_document_country": null,
+                      "entity_owner": null,
+                      "pk": ,
+                      "circumstances": null,
+                      "responsible_position": null,
+                      "producing_rao": null,
+                      "organization_email": null,
+                      "limit": null,
+                      "residence": null,
+                      "residence_canton": null,
+                      "citizenship": null,
+                      "organizational_unit_3": null,
+                      "organizational_unit_2": null,
+                      "organizational_unit_1": null,
+                      "organization_postal_code": null,
+                      "responsible_email": null,
+                      "given_name": "Name",
+                      "id_responsible_document_issuer": null,
+                      "organization_url": null,
+                      "status": "ENROLLREADY",
+                      "id_document_description": null,
+                      "certificate_set": [],
+                      "residence_province": null,
+                      "responsible_first_surname": null,
+                      "id_document_country": "ES",
+                      "complement_number": null,
+                      "birth_district": null,
+                      "birth_date": null,
+                      "representation": null
+                  }
+              }
+  #############
+  /api/v1/otp/{pk}:
+    post: 
+      summary: GENERATE OTP
+      tags:
+        - REQUESTS
+      description: Used to generate a new One-Time Password (OTP) code for a user. The OTP is sent directly to the user as an SMS message.
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: pk
+        description: The request unique identifier
+        type: string 
+        required: true
+      responses:
+        200:
+          description: Successful Response. **THE USER MUST RECEIVE AN SMS ONCE EXECUTED THIS CALL !!!**
+          examples:
+            application/json:
+              {
+                  "status": "200 OK",
+                  "details": "OTP generated"
+              }
+  #############
+  /api/v1/sign/{pk}:
+    post: 
+      summary: SIGN
+      tags:
+        - REQUESTS
+      description: Signs all the previously uploaded documents using the instant one-usage certificate, specially generated for the request.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: pk
+        description: The request unique identifier
+        type: string 
+        required: true
+      - in: "body"
+        name: "body"
+        description: "
+        
+        Token JSON structure that needs to be included in the **REQUEST**. **Please consider**:\n
+          - **IMAGELESS SIGNATURE:** A signature without image WILL be applied to all documents on the same call, just by removing the `options` JSON object. \n
+          - **IMAGED SIGNATURE:** The RAO must specify the doc(s) the signatures of which an image will be added. The JSON object  `options` must be specified for each selected document.\n
+          - The parameter `page` refers to the page of the document the image will be placed. If the number exceeds the document total number of pages, the image is placed on the last page.\n
+          - The parameter `position` refers to the X-Y axis location of the image on the specified page.
+         "
+        schema:
+          $ref: "#/definitions/SignObject"
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+              {
+                  "status": "200 OK",
+                  "details": "Documents correctly signed"
+              }
+
+###### documents ######
+###############################################################################
+
+  /api/v1/document/{pk}:
+    post: 
+      summary: UPLOAD DOCUMENT
+      tags:
+        - DOCUMENTS
+      description: Uploads a document and associates it to a given `{pk}` request.
+      produces:
+        - application/json
+      consumes:
+        - multipart/form-data
+      parameters:
+      - in: path
+        name: pk
+        type: string
+        description: The request unique identifier
+        required: true
+      - in: formData
+        name: file
+        type: file
+        description: The location of the document for signing  
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": "{docid}"
+                }
+  #############
+  /api/v1/document/{pk}/{type}/{docid}:
+    get: 
+      summary: RETRIEVE DOCUMENT
+      tags:
+        - DOCUMENTS
+      description: Retrieves the specified `{docid}` original or signed document.
+      produces:
+        - application/pdf
+      parameters:
+      - in: path
+        name: pk
+        type: string
+        description: The request unique identifier
+        required: true
+      - in: path
+        name: type
+        type: string
+        enum: [original, signed]
+        description: >
+          Types of documents for retrieval:
+           * **original** - The original document (no signature)
+           * **signed** - The signed document
+        required: true
+      - in: path
+        name: docid
+        type: string 
+        description: The document unique identifier
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/pdf:
+              The signed contract ready to download.
+              
+  #############              
+    delete: 
+      summary: DELETE DOCUMENT
+      tags:
+        - DOCUMENTS
+      description: Deletes the specified `{docid}` original or signed document.
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: pk
+        type: string
+        description: The request unique identifier
+        required: true
+      - in: path
+        name: type
+        type: string
+        enum: [original, signed]
+        description: >
+          Types of documents for retrieval:
+           * **original** - The original document (no signature)
+           * **signed** - The signed document
+        required: true
+      - in: path
+        name: docid
+        type: string 
+        description: The document unique identifier
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": "Document successfully deleted"
+                }
+  #############              
+  /api/v1/documents/{pk}:
+    get: 
+      summary: LIST DOCUMENTS
+      tags:
+        - DOCUMENTS
+      description: Lists all uploaded documents associated to a specific `{pk}` request.
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: pk
+        type: string
+        description: The request unique identifier
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+              {
+                  "status": "200 OK",
+                  "details": {
+                      "{docid_1}": {
+                          "upload_date": "",
+                          "ext": "",
+                          "size": ,
+                          "mime": "",
+                          "filename": "Doc_1_name.pdf"
+                      },
+                      "{docid_2}": {
+                          "upload_date": "",
+                          "ext": "",
+                          "size": ,
+                          "mime": "",
+                          "filename": "Doc_2_name.pdf"
+                      },
+                      "{docid_N}": {
+                      "upload_date": "",
+                      "ext": "",
+                      "size": ,
+                      "mime": "",
+                      "filename": "Doc_N_name.pdf"
+                      }
+                  }
+              }
+  #############
+    delete: 
+      summary: DELETE ALL DOCUMENTS
+      tags:
+        - DOCUMENTS
+      description: Deletes all uploaded documents associated to a specific `{pk}` request.
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: pk
+        type: string
+        description: The request unique identifier
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+              {
+                  "status": "200 OK",
+                  "details": "Documents deleted successfully"
+              }
+  #############
+  /api/v1/document/{pk}/contract:
+    get: 
+      summary: RETRIEVE CONTRACT
+      tags:
+        - DOCUMENTS
+      description: Returns the digital signature contract document corresponding to a digital signature `{pk}` request.
+      produces:
+        - application/pdf
+      parameters:
+      - in: path
+        name: pk
+        type: string
+        description: The request unique identifier
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/pdf:
+              The signed contract ready to download.
+
+###### images ######
+###############################################################################
+
+  /api/v1/image:
+    post: 
+      summary: UPLOAD IMAGE
+      tags:
+        - IMAGES
+      description: Uploads an image for using in document signature.
+      produces:
+        - application/json
+      consumes:
+        - multipart/form-data
+      parameters:
+      - in: formData
+        name: image
+        type: file
+        description: The image to add to the signature in .PNG format.  
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+              {
+                  "status": "200 OK",
+                  "details": "{imgid}"
+              }
+  #############
+  /api/v1/image/{imgid}:
+    get: 
+      summary: RETRIEVE IMAGE
+      tags:
+        - IMAGES
+      description: Retrieves a previously uploaded image.
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: imgid
+        type: string
+        description: The image unique identifier
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+              {
+                  "status": "200 OK",
+                  "details": "{imgid}"
+              }
+    delete: 
+      summary: DELETE IMAGE
+      tags:
+        - IMAGES
+      description: Deletes a previously uploaded image.
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: imgid
+        type: string
+        description: The image unique identifier
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+              {
+                  "status": "200 OK",
+                  "details": "Image deleted"
+              }
+  #############
+  /api/v1/images:
+    get: 
+      summary: LIST IMAGES
+      tags:
+        - IMAGES
+      description: Lists all uploaded images.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+              {
+                  "status": "200 OK",
+                  "details": {
+                      "{imgid_1}": {
+                          "upload_date": "",
+                          "ext": ".png",
+                          "size": [   ],
+                          "mime": "image/png",
+                          "filename": "image_1.png"
+                      },
+                      "{imgid_2}": {
+                          "upload_date": "",
+                          "ext": ".png",
+                          "size": [   ],
+                          "mime": "image/png",
+                          "filename": "image_2.png"
+                      },
+                      "{imgid_N}": {
+                          "upload_date": "",
+                          "ext": ".png",
+                          "size": [   ],
+                          "mime": "image/png",
+                          "filename": "image_N.png"
+                      }                      
+                  }
+              }
+    #############
+    delete: 
+      summary: DELETE ALL IMAGES
+      tags:
+        - IMAGES
+      description: Deletes all uploaded images.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+              {
+                  "status": "200 OK",
+                  "details": "Images deleted successfully"
+              }
+
+
+
+
+
+###### definitions ######
+###############################################################################
+
+
+definitions:
+    TokenObject:
+        type: "object"
+        properties:
+            username:
+                type: "string"
+                default: "5053349"
+                description: "The RAO's username"
+            password:
+                type: "string"
+                default: "Gy6F37xK"
+                description: "The RAO's password"
+            pin:
+                type: "string"
+                default: "belorado74"
+                description: "The RAO's pin"
+    SignObject:
+        type: "object"
+        properties:
+            secret:
+                type: "string"
+                default: "[insert the SMS OTP code here (delete brackets)]"
+                description: "The OTP code sent to the client via SMS"
+            options:
+                type: "object"
+                properties:
+                    insert the {docid} here:
+                        type: "object"
+                        properties:
+                            position:
+                                type: "string"
+                                default: "300, 100, 500, 150"
+                                description: "The X-Y coordinates for signature image position"
+                            page:
+                                type: "number"
+                                default: 1
+                                description: "The document page where the signature will be placed"
+                            image:
+                                type: "string"
+                                default: "[insert the {imgid} here (delete brackets)]"
+                                description: "The signature image"
