@@ -4,10 +4,9 @@ info:
   title: UANATACA ONESHOT API DOCUMENTATION FOR DEVELOPERS
   x-logo:
       url: https://i.ibb.co/FwcHkGb/logoUana.png
-      backgroundColor: #FFFFFF
       altText: Oneshot logo
   description: 
-      $ref: ./Oneshot_guide.md
+      $ref: ./oneshot_gui.md
 
 host: one-shot.developers.uanataca.com
 schemes: 
