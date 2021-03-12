@@ -128,7 +128,7 @@ paths:
     post: 
       summary: CREATE TOKEN
       tags:
-        - TOKENS
+        - Tokens
       description: Creates a new token that contains the RAO's credentials.
       consumes:
         - "application/json"
@@ -154,7 +154,7 @@ paths:
     get: 
       summary: GET TOKEN
       tags:
-        - TOKENS
+        - Tokens
       description: Retrieves the token with the given uid and lists the associated credentials.
       produces:
         - application/json
@@ -180,7 +180,7 @@ paths:
     delete:
       summary: DELETE TOKEN
       tags:
-        - TOKENS
+        - Tokens
       description: Deletes the token with the specified `{uid}` identifier.
       produces:
         - application/json
@@ -203,7 +203,7 @@ paths:
     get: 
       summary: LIST TOKENS
       tags:
-        - TOKENS
+        - Tokens
       description: Returns a list of all tokens available and their associated data.
       produces:
         - application/json
@@ -240,7 +240,7 @@ paths:
     post:
       summary: CREATE REQUEST
       tags:
-        - REQUESTS
+        - Requessts
       description: Creates a new digital signature request for the user identified by the provided information.
       consumes:
         - multipart/form-data
@@ -357,7 +357,7 @@ paths:
     get: 
       summary: GET REQUEST
       tags:
-        - REQUESTS
+        - Requessts
       description: Returns user information for a signature request with using the `{pk}` number obtained from the **CREATE REQUEST** call.
       produces:
         - application/json
@@ -506,7 +506,7 @@ paths:
     post: 
       summary: GENERATE OTP
       tags:
-        - REQUESTS
+        - Requessts
       description: Used to generate a new One-Time Password (OTP) code for a user. The OTP is sent directly to the user as an SMS message.
       produces:
         - application/json
@@ -530,7 +530,7 @@ paths:
     post: 
       summary: SIGN
       tags:
-        - REQUESTS
+        - Requessts
       description: Signs all the previously uploaded documents using the instant one-usage certificate, specially generated for the request.
       consumes:
         - application/json
@@ -571,7 +571,7 @@ paths:
     post: 
       summary: UPLOAD DOCUMENT
       tags:
-        - DOCUMENTS
+        - Documents
       description: Uploads a document and associates it to a given `{pk}` request.
       produces:
         - application/json
@@ -602,7 +602,7 @@ paths:
     get: 
       summary: RETRIEVE DOCUMENT
       tags:
-        - DOCUMENTS
+        - Documents
       description: Retrieves the specified `{docid}` original or signed document.
       produces:
         - application/pdf
@@ -637,7 +637,7 @@ paths:
     delete: 
       summary: DELETE DOCUMENT
       tags:
-        - DOCUMENTS
+        - Documents
       description: Deletes the specified `{docid}` original or signed document.
       produces:
         - application/json
@@ -675,7 +675,7 @@ paths:
     get: 
       summary: LIST DOCUMENTS
       tags:
-        - DOCUMENTS
+        - Documents
       description: Lists all uploaded documents associated to a specific `{pk}` request.
       produces:
         - application/json
@@ -720,7 +720,7 @@ paths:
     delete: 
       summary: DELETE ALL DOCUMENTS
       tags:
-        - DOCUMENTS
+        - Documents
       description: Deletes all uploaded documents associated to a specific `{pk}` request.
       produces:
         - application/json
@@ -744,7 +744,7 @@ paths:
     get: 
       summary: RETRIEVE CONTRACT
       tags:
-        - DOCUMENTS
+        - Documents
       description: Returns the digital signature contract document corresponding to a digital signature `{pk}` request.
       produces:
         - application/pdf
@@ -768,7 +768,7 @@ paths:
     post: 
       summary: UPLOAD IMAGE
       tags:
-        - IMAGES
+        - Images
       description: Uploads an image for using in document signature.
       produces:
         - application/json
@@ -794,7 +794,7 @@ paths:
     get: 
       summary: RETRIEVE IMAGE
       tags:
-        - IMAGES
+        - Images
       description: Retrieves a previously uploaded image.
       produces:
         - application/json
@@ -816,7 +816,7 @@ paths:
     delete: 
       summary: DELETE IMAGE
       tags:
-        - IMAGES
+        - Images
       description: Deletes a previously uploaded image.
       produces:
         - application/json
@@ -840,7 +840,7 @@ paths:
     get: 
       summary: LIST IMAGES
       tags:
-        - IMAGES
+        - Images
       description: Lists all uploaded images.
       produces:
         - application/json
@@ -879,7 +879,7 @@ paths:
     delete: 
       summary: DELETE ALL IMAGES
       tags:
-        - IMAGES
+        - Images
       description: Deletes all uploaded images.
       produces:
         - application/json
