@@ -240,7 +240,7 @@ paths:
     post:
       summary: CREATE REQUEST
       tags:
-        - Requessts
+        - Requests
       description: Creates a new digital signature request for the user identified by the provided information.
       consumes:
         - multipart/form-data
@@ -357,7 +357,7 @@ paths:
     get: 
       summary: GET REQUEST
       tags:
-        - Requessts
+        - Requests
       description: Returns user information for a signature request with using the `{pk}` number obtained from the **CREATE REQUEST** call.
       produces:
         - application/json
@@ -506,7 +506,7 @@ paths:
     post: 
       summary: GENERATE OTP
       tags:
-        - Requessts
+        - Requests
       description: Used to generate a new One-Time Password (OTP) code for a user. The OTP is sent directly to the user as an SMS message.
       produces:
         - application/json
@@ -530,7 +530,7 @@ paths:
     post: 
       summary: SIGN
       tags:
-        - Requessts
+        - Requests
       description: Signs all the previously uploaded documents using the instant one-usage certificate, specially generated for the request.
       consumes:
         - application/json
