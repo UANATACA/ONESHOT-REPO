@@ -141,73 +141,6 @@ All files uploaded to One-Shot Optimizer are saved on the /opt/bit4id/oneshot_op
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ While the service will not delete uploaded files unless explicitly requested through an API call, it is **strongly recommended** that you backup any files that you want to preserve using an alternative system.</blockquote>
 
-# List of Calls
-
-<html>
-<table>
-  <tr>
-    <th>Group</th><th>Method</th><th>Endpoint</th><th>Action</th>
-  </tr>
-  <tr>
-    <td>TOKENS</td><td>POST</td><td>/token</td><td>Create a new token</td>
-  </tr>
-  <tr>
-    <td>TOKENS</td><td>GET</td><td>/token/{pk}</td><td>Retrieve a token</td>
-  </tr>
-  <tr>
-    <td>TOKENS</td><td>GET</td><td>/tokens</td><td>List all available tokens</td>
-  </tr>
-  <tr>
-    <td>TOKENS</td><td>DELETE</td><td>/token/{uid}</td><td>Delete a token</td>
-  </tr>
-  <tr>
-    <td>REQUESTS</td><td>POST</td><td>/request</td><td>Create a new request</td>
-  </tr>
-  <tr>
-    <td>REQUESTS</td><td>GET</td><td>/request/{pk}</td><td>Retrieve a new request</td>
-  </tr>
-  <tr>
-    <td>REQUESTS</td><td>POST</td><td>/otp/{pk}</td><td>Generate a new OTP</td>
-  </tr>
-  <tr>
-    <td>REQUESTS</td><td>POST</td><td>/sign/{pk}</td><td>Start the signature process</td>
-  </tr>
-  <tr>
-    <td>DOCUMENTS</td><td>POST</td><td>/document/{pk}</td><td>Upload a document</td>
-  </tr>
-  <tr>
-    <td>DOCUMENTS</td><td>GET</td><td>/document/{pk}/{type}/{uid}</td><td>Retrieve a document</td>
-  </tr>
-  <tr>
-    <td>DOCUMENTS</td><td>GET</td><td>/document/{pk}/contract</td><td>Retrieve the signature contract for a request</td>
-  </tr>
-  <tr>
-    <td>DOCUMENTS</td><td>GET</td><td>/document/{pk}</td><td>List documents uploaded for a request</td>
-  </tr>
-  <tr>
-    <td>DOCUMENTS</td><td>DELETE</td><td>/document/{pk}/{type}/{uid}</td><td>Delete a document</td>
-  </tr>
-  <tr>
-    <td>DOCUMENTS</td><td>DELETE</td><td>/documents/{pk}</td><td>Delete all documents uploaded for a request</td>
-  </tr>
-  <tr>
-    <td>IMAGES</td><td>POST</td><td>/image</td><td>Upload a new image</td>
-  </tr>
-  <tr>
-    <td>IMAGES</td><td>GET</td><td>/image/{uid}</td><td>Retrieve an image</td>
-  </tr>
-  <tr>
-    <td>IMAGES</td><td>DELETE</td><td>/image/{uid}</td><td>Delete an image</td>
-  </tr>
-  <tr>
-    <td>IMAGES</td><td>GET</td><td>/images</td><td>List all uploaded images</td>
-  </tr>
-  <tr>
-    <td>IMAGES</td><td>DELETE</td><td>/images</td><td>Delete all uploaded images</td>
-  </tr>
-</table> 
-</br> 
-</html>
 
 # Workflow
 
@@ -364,6 +297,4 @@ The response by the server will be the document in binary format:
 	1 | %PDF
 	2 | ...
 
-# Watch on Video
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/tUGLf5y1dEA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+# API Reference
