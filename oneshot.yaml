@@ -29,10 +29,10 @@ A token is a string that can be used in place of the Registration Authority Offi
     <td>GET</td><td><a href='#tag/Tokens/paths/~1api~1v1~1token~1{uid}/get'>/token/{pk}</a></td><td>Retrieve a token</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Tokens/paths/~1api~1v1~1tokens/get'>/tokens</a></td><td>List all available tokens</td>
-  </tr>
-  <tr>
     <td>DELETE</td><td><a href='#tag/Tokens/paths/~1api~1v1~1token~1{uid}/delete'>/token/{uid}</a></td><td>Delete a token</td>
+  </tr>
+ <tr>
+    <td>GET</td><td><a href='#tag/Tokens/paths/~1api~1v1~1tokens/get'>/tokens</a></td><td>List all available tokens</td>
   </tr>
 </table> 
 </html>
@@ -176,6 +176,28 @@ paths:
                         "pin": true
                     }
                 }
+ #############
+    delete:
+      summary: DELETE TOKEN
+      tags:
+        - Tokens
+      description: Deletes the token with the specified `{uid}` identifier.
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: uid
+        type: string 
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": "Token deleted successfully"
+                }
   #############
   /api/v1/tokens:
     get: 
@@ -210,29 +232,6 @@ paths:
                         }
                     }
                 } 
- #############
-    delete:
-      summary: DELETE TOKEN
-      tags:
-        - Tokens
-      description: Deletes the token with the specified `{uid}` identifier.
-      produces:
-        - application/json
-      parameters:
-      - in: path
-        name: uid
-        type: string 
-        required: true
-      responses:
-        200:
-          description: Successful Response
-          examples:
-            application/json:
-                {
-                    "status": "200 OK",
-                    "details": "Token deleted successfully"
-                }
-
 
 ###### requests ######
 ###############################################################################
