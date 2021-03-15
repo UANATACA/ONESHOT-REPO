@@ -660,7 +660,6 @@ paths:
       responses:
         200:
           description: Successful Response
-          examples:
           schema:
             type: object
             properties:
@@ -670,6 +669,7 @@ paths:
               details: 
                 type: string
                 description: The uploaded document id
+          examples:
             application/json:
                 {
                     "status": "200 OK",
