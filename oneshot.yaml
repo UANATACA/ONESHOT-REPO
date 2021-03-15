@@ -903,7 +903,6 @@ definitions:
             secret:
                 type: "string"
                 description: "The OTP code sent to the user"
-                required: true
             options:
                 type: "object"
                 description: "Visual graphic signature properties.<br>
