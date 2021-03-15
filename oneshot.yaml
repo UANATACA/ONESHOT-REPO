@@ -887,6 +887,8 @@ paths:
 definitions:
     TokenObject:
         type: "object"
+        required:
+          - username
         properties:
             username:
                 type: "string"
@@ -899,6 +901,8 @@ definitions:
                 description: "The RAO's digital identity PIN"
     SignObject:
         type: "object"
+        required:
+          - secret
         properties:
             secret:
                 type: "string"
