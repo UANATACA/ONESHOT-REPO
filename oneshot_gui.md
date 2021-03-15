@@ -33,7 +33,7 @@ The One-Shot Optimizer exposes a RESTful HTTP API that allows any application ca
 
 A common workflow involving the One-Shot Signature Service can be summarized by the following image:
 
-![img](https://developers.uanataca.com/static/images/optimizer_schema_en.jpg)
+![img](https://i.ibb.co/JBvGZGG/oneshot-wkf.png)
 
 1. The client application requests the creation and approval of a new digital signature certificate, providing all required data through API calls.
 2. The One-Shot Optimizer API returns an identifier for the certificate request.

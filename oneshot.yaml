@@ -3,7 +3,11 @@ info:
   version: '1.0'
   title: UANATACA ONESHOT API DOCUMENTATION
   x-logo:
+<<<<<<< Updated upstream
       url: oneshot_logo.png
+=======
+      url: https://i.ibb.co/BCNsnYf/oneshot-logo.png
+>>>>>>> Stashed changes
       altText: Oneshot logo
   description: 
       $ref: ./oneshot_gui.md
