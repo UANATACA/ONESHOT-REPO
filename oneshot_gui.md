@@ -7,7 +7,7 @@ One-Shot Signature is a complete solution for the digital signature of documents
 Documents are signed through the creation of **single-use** signature certificates, which are created when needed and immediately used to electronically sign all documents included in a given transaction. The digital signature will include a time stamp, proving the existence and integrity of the documents at the time of signature.
 
 The signature procedure is activated with a code sent directly to the signatary by SMS, allowing the end user to complete the signature without requiring the installation of dedicated software. 
-<br></br>
+<br></br><br></br>
 ![img](https://i.ibb.co/JBvGZGG/oneshot-wkf.png)
 
 ## Basic digital signature procedure
