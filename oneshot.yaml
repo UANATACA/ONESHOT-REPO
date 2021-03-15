@@ -256,15 +256,15 @@ paths:
                 description: The response status id
               details: 
                  description: A JSON object with the token id and the user credentials
-                properties:
-                  tokenid:
-                    type: string
-                  username: 
-                    type: string
-                  password:
-                    type: boolean
-                  pin:
-                    type: boolean
+                  properties:
+                    tokenid:
+                      type: string
+                    username: 
+                      type: string
+                    password:
+                      type: boolean
+                    pin:
+                      type: boolean
           examples:
             application/json:
                 {
