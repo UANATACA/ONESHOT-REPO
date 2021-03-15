@@ -134,7 +134,7 @@ paths:
         - Tokens
       description: Creates a new token that contains the Registration Authority Officer (RAO) credentials.
       consumes:
-        - "application/json"
+        - application/json
       produces:
         - application/json
       parameters:
@@ -145,11 +145,20 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: the created token number
           examples:
             application/json:
               {
                   "status": "200 OK",
-                  "details": "{token}"
+                  "details": "a44765ab8ca04e429a565f02d22179a0"
               }
   #############
   /api/v1/token/{uid}:
@@ -170,12 +179,27 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details:
+                description: A JSON object with the user credentials
+                properties:
+                  username: 
+                    type: string
+                  password:
+                    type: boolean
+                  pin:
+                    type: boolean
           examples:
             application/json:
                 {
                     "status": "200 OK",
                     "details": {
-                        "username": "",
+                        "username": "5057249",
                         "password": true,
                         "pin": true
                     }
@@ -197,6 +221,15 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: Successful token deletion confirmation message
           examples:
             application/json:
                 {
@@ -215,6 +248,23 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                 description: A JSON object with the token id and the user credentials
+                properties:
+                  tokenid:
+                    type: string
+                  username: 
+                    type: string
+                  password:
+                    type: boolean
+                  pin:
+                    type: boolean
           examples:
             application/json:
                 {
@@ -334,13 +384,22 @@ paths:
         type: file
         required: true
       responses:
-        200:
+        201:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: number
+                description: The created request id        
           examples:
             application/json:
               {
                   "status": "201 Created",
-                  "details": {pk}
+                  "details": 29571
               }                               
   #############
   /api/v1/request/{pk}:
@@ -348,7 +407,7 @@ paths:
       summary: GET REQUEST
       tags:
         - Requests
-      description: Retrieve request's information with the id obtained in the **CREATE REQUEST** response.
+      description: Retrieve request information with the id obtained in the **CREATE REQUEST** response.
       produces:
         - application/json
       parameters:
@@ -360,6 +419,15 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: object
+                description: JSON object with information associated to the request 
           examples:
             application/json:
               {
@@ -510,6 +578,15 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: OTP code sent confirmation message
           examples:
             application/json:
               {
@@ -540,6 +617,15 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: Successful signature(s) confirmation message
           examples:
             application/json:
               {
@@ -575,10 +661,19 @@ paths:
         200:
           description: Successful Response
           examples:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The uploaded document id
             application/json:
                 {
                     "status": "200 OK",
-                    "details": "{uid}"
+                    "details": "a73b1253-838f-4340-8ae8-e0a1524f7472"
                 }
   #############
   /api/v1/document/{pk}/{type}/{uid}:
@@ -613,9 +708,23 @@ paths:
         200:
           description: Successful Response
           examples:
-            application/pdf:
-              The signed contract ready to download.
-              
+            text/plain:
+                " %PDF-1.7\n
+                  %����\n
+                  1 0 obj\n
+                  <</Type/Catalog/Pages 2 0 R/Lang(es-ES) /StructTreeRoot 10 0 R/MarkInfo<</Marked true>>/Metadata 26 0 R/ViewerPreferences 27 0 R>>\n
+                  endobj\n\n
+
+                  2 0 obj\n
+                  <</Type/Pages/Count 1/Kids[ 3 0 R] >>\n
+                  endobj\n\n
+
+                  3 0 obj\n
+                  <</Type/Page/Parent 2 0 R/Resources<</Font<</F1 5 0 R>>/ExtGState<</GS7 7 0 R/GS8 8 0 R>>/ProcSet[/PDF/Text/ImageB/ImageC/ImageI] >>/MediaBox[ 0 0 595.32 841.92] /Contents 4 0 R/Group<</Type/Group/S/Transparency/CS/DeviceRGB>>/Tabs/S/StructParents 0>>\n
+                  endobj\n
+                  (...)\n
+                "
+             
   #############              
     delete: 
       summary: DELETE DOCUMENT
@@ -647,6 +756,15 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: Successful document deletion confirmation message
           examples:
             application/json:
                 {
@@ -672,30 +790,46 @@ paths:
         200:
           description: Successful Response
           examples:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                description: A JSON object containing the document id object
+                properties:
+                  docid:
+                    description: Document related information
+                    properties:
+                      upload_date: 
+                        type: string
+                      ext:
+                        type: string
+                      size:
+                        type: string
+                      mime:
+                        type: string
+                      filename:
+                        type: string    
+          examples:
             application/json:
               {
                   "status": "200 OK",
                   "details": {
-                      "{docid_1}": {
-                          "upload_date": "",
-                          "ext": "",
-                          "size": ,
-                          "mime": "",
-                          "filename": "Doc_1_name.pdf"
+                      "5f04778a-54f6-426a-b204-5573eb01e5da": {
+                          "upload_date": "11/11/2019 18:03:07",
+                          "ext": ".pdf",
+                          "size": 128012,
+                          "mime": "application/pdf",
+                          "filename": "test-11.pdf"
                       },
-                      "{docid_2}": {
-                          "upload_date": "",
-                          "ext": "",
-                          "size": ,
-                          "mime": "",
-                          "filename": "Doc_2_name.pdf"
-                      },
-                      "{docid_N}": {
-                      "upload_date": "",
-                      "ext": "",
-                      "size": ,
-                      "mime": "",
-                      "filename": "Doc_N_name.pdf"
+                      "b1902f56-ca7b-4ef4-8741-242dc211c037": {
+                          "upload_date": "11/11/2019 18:03:12",
+                          "ext": ".pdf",
+                          "size": 100337,
+                          "mime": "application/pdf",
+                          "filename": "test.pdf"
                       }
                   }
               }
@@ -716,6 +850,14 @@ paths:
       responses:
         200:
           description: Successful Response
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: Successful document list deletion confirmation message
           examples:
             application/json:
               {
@@ -741,8 +883,22 @@ paths:
         200:
           description: Successful Response
           examples:
-            application/pdf:
-              The signed contract ready to download.
+            text/plain:
+                " %PDF-1.7\n
+                  %����\n
+                  1 0 obj\n
+                  <</Type/Catalog/Pages 2 0 R/Lang(es-ES) /StructTreeRoot 10 0 R/MarkInfo<</Marked true>>/Metadata 26 0 R/ViewerPreferences 27 0 R>>\n
+                  endobj\n\n
+
+                  2 0 obj\n
+                  <</Type/Pages/Count 1/Kids[ 3 0 R] >>\n
+                  endobj\n\n
+
+                  3 0 obj\n
+                  <</Type/Page/Parent 2 0 R/Resources<</Font<</F1 5 0 R>>/ExtGState<</GS7 7 0 R/GS8 8 0 R>>/ProcSet[/PDF/Text/ImageB/ImageC/ImageI] >>/MediaBox[ 0 0 595.32 841.92] /Contents 4 0 R/Group<</Type/Group/S/Transparency/CS/DeviceRGB>>/Tabs/S/StructParents 0>>\n
+                  endobj\n
+                  (...)\n
+                "
 
 ###### images ######
 ###############################################################################
@@ -766,11 +922,20 @@ paths:
       responses:
         200:
           description: Successful Response
-          examples:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The uploaded image id
+          examples:  
             application/json:
               {
                   "status": "200 OK",
-                  "details": "{uid}"
+                  "details": "bfd74f73-7b22-40a6-ad37-6fc867263309"
               }
   #############
   /api/v1/image/{uid}:
@@ -791,11 +956,8 @@ paths:
         200:
           description: Successful Response
           examples:
-            application/json:
-              {
-                  "status": "200 OK",
-                  "details": "{uid}"
-              }
+            text/png:
+               The retrieved image in png format   
     delete: 
       summary: DELETE IMAGE
       tags:
@@ -812,6 +974,15 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The successful image deletion confirmation message
           examples:
             application/json:
               {
@@ -830,6 +1001,28 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                description: A JSON object containing the image id object
+                properties:
+                  imgid:
+                    description: Image related information
+                    properties:
+                      upload_date: 
+                        type: string
+                      ext:
+                        type: string
+                      size:
+                        type: string
+                      mime:
+                        type: string
+                      filename:
+                        type: string  
           examples:
             application/json:
               {
@@ -869,6 +1062,15 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The successful image list deletion confirmation message
           examples:
             application/json:
               {
