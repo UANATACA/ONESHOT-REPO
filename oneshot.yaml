@@ -586,7 +586,7 @@ paths:
                 description: The response status id
               details: 
                 type: string
-                description: OTP code sent confirmation message
+                description: OTP sent code confirmation message
           examples:
             application/json:
               {
