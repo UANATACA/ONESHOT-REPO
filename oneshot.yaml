@@ -789,7 +789,6 @@ paths:
       responses:
         200:
           description: Successful Response
-          examples:
           schema:
             type: object
             properties:
