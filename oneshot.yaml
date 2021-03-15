@@ -903,18 +903,19 @@ definitions:
             secret:
                 type: "string"
                 description: "The OTP code sent to the user"
+                required: true
             options:
                 type: "object"
                 description: "Visual graphic signature properties.<br>
                               It is required to previously upload an image. See <a href='#tag/Images'>images</a> api reference"
                 properties:
-                            position:
-                                type: "string"
-                                description: "The coordinates in points (pt) for signature image position and size, starting from bottom left corner (x1,y1,x2,y2).<br>
-                                               1px = 0.75pt"
-                            page:
-                                type: "number"
-                                description: "The document page where the signature will be placed. The first page starts in `0`"
-                            image:
-                                type: "string"
-                                description: "The previous uploaded image id"
+                    position:
+                        type: "string"
+                        description: "The coordinates in points (pt) for signature image position and size, starting from bottom left corner (x1,y1,x2,y2).<br>
+                                      1px = 0.75pt"
+                        page:
+                            type: "number"
+                            description: "The document page where the signature will be placed. The first page starts in `0`"
+                        image:
+                            type: "string"
+                            description: "The previous uploaded image id"
