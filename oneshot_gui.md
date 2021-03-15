@@ -7,9 +7,9 @@ One-Shot Signature is a complete solution for the digital signature of documents
 Documents are signed through the creation of **single-use** signature certificates, which are created when needed and immediately used to electronically sign all documents included in a given transaction. The digital signature will include a time stamp, proving the existence and integrity of the documents at the time of signature.
 
 The signature procedure is activated with a code sent directly to the signatary by SMS, allowing the end user to complete the signature without requiring the installation of dedicated software. 
-<br>
-![img](https://i.ibb.co/JBvGZGG/oneshot-wkf.png)
 </br>
+![img](https://i.ibb.co/JBvGZGG/oneshot-wkf.png)
+
 ## Basic digital signature procedure
 
 A valid digital signature requires a certificate, emitted by a trusted a Certification Authority (CA). This certificate is used to establish that the document was signed by a specific entity (in our case, the user) that is known to the CA. Although certificate generation is largely automated within One-Shot Signature, having an idea of what is going on under the hood will help us to better understand its operation.
@@ -34,7 +34,7 @@ The One-Shot Optimizer exposes a RESTful HTTP API that allows any application ca
 
 
 A common workflow involving the One-Shot Signature Service can be summarized by the following image:
-</br>
+<br></br>
 ![img](https://i.ibb.co/n1PHDmR/oneshot.jpg)
 </br>
 1. The client application requests the creation and approval of a new digital signature certificate, providing all required data through API calls.
