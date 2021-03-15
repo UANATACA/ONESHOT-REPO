@@ -160,6 +160,40 @@ paths:
                   "status": "200 OK",
                   "details": "a44765ab8ca04e429a565f02d22179a0"
               }
+        400:
+          description: Invalid JSON
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Invalid JSON
+              description: 
+                type: string
+                description: The response error message  
+          examples:
+            application/json:
+              {
+                  "status": "Invalid JSON",
+                  "details": "Could not parse JSON body – Invalid control character at: line 4 column 24 (char 82)"
+              }        
+        404:
+          description: Invalid username
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message  
+          examples:
+            application/json:
+              {
+                  "status": "404 Not Found",
+                  "details": "Error getting RAO's id. Make sure the credentials are correct"
+              }        
   #############
   /api/v1/token/{uid}:
     get: 
@@ -204,6 +238,23 @@ paths:
                         "pin": true
                     }
                 }
+        404:
+          description: "`uid` not found"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message  
+          examples:
+            application/json:
+              {
+                  "status": "404 Not Found",
+                  "details": "Token not found"
+              } 
  #############
     delete:
       summary: DELETE TOKEN
@@ -236,6 +287,23 @@ paths:
                     "status": "200 OK",
                     "details": "Token deleted successfully"
                 }
+        404:
+          description: "`uid` not found"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message  
+          examples:
+            application/json:
+              {
+                  "status": "404 Not Found",
+                  "details": "Token not found"
+              } 
   #############
   /api/v1/tokens:
     get: 
@@ -400,7 +468,92 @@ paths:
               {
                   "status": "201 Created",
                   "details": 29571
-              }                               
+              }  
+        400:
+          description: Missing parameters
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message        
+          examples:
+            application/json:
+              { 
+                  "status": "400 Bad Request", 
+                  "details": "Missing Parameters" 
+              }
+        412:
+          description: Missing parameters
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message        
+          examples:
+            application/json:
+              { 
+                  "status": "412 Precondition Failed", 
+                  "details": "Error occured during request approval: Invalid request fields: mobile_phone_number" 
+              }
+        404:
+          description: Invalid username
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message        
+          examples:
+            application/json:
+              { 
+                  "status": "404 Not Found", 
+                  "details": "Error getting RAO's id. Make sure the credentials are correct" 
+              }
+        403:
+          description: Invalid PIN or password
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message        
+          examples:
+            application/json:
+              { 
+                  "status": "404 Not Found", 
+                  "details": "Error getting RAO's id. Make sure the credentials are correct"
+              }
+        500:
+          description: Invalid PIN or password
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message        
+          examples:
+            application/json:
+              { 
+                  "status": "500 Internal Server Error", 
+                  "details": "You do not have permission to perform this action."
+              }                                 
   #############
   /api/v1/request/{pk}:
     get: 
