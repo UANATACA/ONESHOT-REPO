@@ -535,14 +535,6 @@ paths:
         required: true
       - in: "body"
         name: "body"
-        description: "
-        
-        Token JSON structure that needs to be included in the **REQUEST**. **Please consider**:\n
-          - **IMAGELESS SIGNATURE:** A signature without image WILL be applied to all documents on the same call, just by removing the `options` JSON object. \n
-          - **IMAGED SIGNATURE:** The RAO must specify the doc(s) the signatures of which an image will be added. The JSON object  `options` must be specified for each selected document.\n
-          - The parameter `page` refers to the page of the document the image will be placed. If the number exceeds the document total number of pages, the image is placed on the last page.\n
-          - The parameter `position` refers to the X-Y axis location of the image on the specified page.
-         "
         schema:
           $ref: "#/definitions/SignObject"
       responses:
