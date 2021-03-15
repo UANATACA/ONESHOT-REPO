@@ -899,7 +899,7 @@ definitions:
             username:
                 type: "string"
                 description: "The RAO's digital identity username"
-                required: true
+                required: "true"
             password:
                 type: "string"
                 description: "The RAO's digital identity password"
@@ -912,7 +912,7 @@ definitions:
             secret:
                 type: "string"
                 description: "The OTP code sent to the user"
-                required: true
+                required: "true"
             options:
                 type: "object"
                 description: "Visual graphic signature properties.<br>
