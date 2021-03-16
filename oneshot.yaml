@@ -2394,60 +2394,60 @@ paths:
                   "status": "200 OK",
                   "details": "Images deleted successfully"
               }
-    x-codeSamples:
-      - lang: 'curl'
-        source: |
-                curl -i -X DELETE \
-                  https://one-shot.developers.uanataca.com/api/v1/images
-      - lang: 'JavaScript'
-        source: |
-                const resp = await fetch(
-                  'https://one-shot.developers.uanataca.com/api/v1/images',
-                  {method: 'DELETE'}
-                );
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X DELETE \
+                    https://one-shot.developers.uanataca.com/api/v1/images
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/images',
+                    {method: 'DELETE'}
+                  );
 
-                const data = await resp.text();
-                console.log(data);
-      - lang: 'Python'
-        source: |
-                import requests
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
 
-                url = "https://one-shot.developers.uanataca.com/api/v1/images"
+                  url = "https://one-shot.developers.uanataca.com/api/v1/images"
 
-                response = requests.delete(url)
+                  response = requests.delete(url)
 
-                data = response.json()
-                print(data)
-      - lang: 'Node.js'
-        source: |
-                const fetch = require('node-fetch');
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
 
-                const resp = await fetch(
-                  'https://one-shot.developers.uanataca.com/api/v1/images',
-                  {method: 'DELETE'}
-                );
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/images',
+                    {method: 'DELETE'}
+                  );
 
-                const data = await resp.text();
-                console.log(data);
-      - lang: 'C#'
-        source: |
-                using System;
-                using System.Net.Http;
-                using System.Threading.Tasks;
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
 
-                public class Program
-                {
-                  public static async Task Main(string[] args)
+                  public class Program
                   {
-                    using (var client = new HttpClient())
+                    public static async Task Main(string[] args)
                     {
-                      var request = await client.DeleteAsync("https://one-shot.developers.uanataca.com/api/v1/images");
-                      var response = await request.Content.ReadAsStringAsync();
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.DeleteAsync("https://one-shot.developers.uanataca.com/api/v1/images");
+                        var response = await request.Content.ReadAsStringAsync();
 
-                      Console.WriteLine(response);
+                        Console.WriteLine(response);
+                      }
                     }
                   }
-                }
 ###### definitions ######
 ###############################################################################
 
