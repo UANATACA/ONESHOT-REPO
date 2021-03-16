@@ -193,7 +193,103 @@ paths:
               {
                   "status": "404 Not Found",
                   "details": "Error getting RAO's id. Make sure the credentials are correct"
-              }        
+              }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://one-shot.developers.uanataca.com/api/v1/token \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "username": "5057249",
+                      "password": "Gy6F89xK",
+                      "pin": "belorado74"
+                    }'
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/token',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        pin: 'belorado74'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/token"
+
+                  payload = {
+                    "username": "5057249",
+                    "password": "Gy6F89xK",
+                    "pin": "belorado74"
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/token',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        pin: 'belorado74'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          username: '5057249',
+                          password: 'Gy6F89xK',
+                          pin: 'belorado74'
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://one-shot.developers.uanataca.com/api/v1/token", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }       
   #############
   /api/v1/token/{uid}:
     get: 
@@ -254,7 +350,61 @@ paths:
               {
                   "status": "404 Not Found",
                   "details": "Token not found"
-              } 
+              }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X GET \ 
+                    https://one-shot.developers.uanataca.com/api/v1/token/a44765ab8ca04e429a565f02d22179a0
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/token/a44765ab8ca04e429a565f02d22179a0',
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/token/a44765ab8ca04e429a565f02d22179a0"
+
+                  response = requests.get(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/token/a44765ab8ca04e429a565f02d22179a0',
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.GetAsync("https://one-shot.developers.uanataca.com/api/v1/token/a44765ab8ca04e429a565f02d22179a0");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }       
  #############
     delete:
       summary: DELETE TOKEN
@@ -303,7 +453,61 @@ paths:
               {
                   "status": "404 Not Found",
                   "details": "Token not found"
-              } 
+              }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X DELETE \
+                    https://one-shot.developers.uanataca.com/api/v1/token/a44765ab8ca04e429a565f02d22179a0
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/token/a44765ab8ca04e429a565f02d22179a0',
+                    {method: 'DELETE'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/token/a44765ab8ca04e429a565f02d22179a0"
+
+                  response = requests.delete(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/token/a44765ab8ca04e429a565f02d22179a0',
+                    {method: 'DELETE'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.DeleteAsync("https://one-shot.developers.uanataca.com/api/v1/token/a44765ab8ca04e429a565f02d22179a0");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  } 
   #############
   /api/v1/tokens:
     get: 
@@ -350,7 +554,60 @@ paths:
                         }
                     }
                 } 
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X GET \
+                    https://one-shot.developers.uanataca.com/api/v1/tokens
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/tokens',
+                    {method: 'GET'}
+                  );
 
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/tokens"
+
+                  response = requests.get(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/tokens',
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.GetAsync("https://one-shot.developers.uanataca.com/api/v1/tokens");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
 ###### requests ######
 ###############################################################################
 
@@ -394,6 +651,11 @@ paths:
       - in: formData
         name: id_document_country
         description: The user's id document country two-letters code (ISO 3166-1 alpha-2)
+        required: true
+        type: string
+      - in: formData
+        name: serial_number
+        description: Serial number of the user's id document
         required: true
         type: string
       - in: formData
@@ -553,7 +815,162 @@ paths:
               { 
                   "status": "500 Internal Server Error", 
                   "details": "You do not have permission to perform this action."
-              }                                 
+              }    
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://one-shot.developers.uanataca.com/api/v1/request \
+                    -H 'Content-Type: multipart/form-data' \
+                    -F given_name=Name \
+                    -F surname_1=Surname1 \
+                    -F surname_2=Surname2 \
+                    -F id_document_type=IDC \
+                    -F id_document_country=ES \
+                    -F serial_number=A1111111W \
+                    -F email=mail@domain \
+                    -F mobile_phone_number=+34999999999 \
+                    -F registration_authority=124 \
+                    -F profile=PFnubeQAFCiudadano \
+                    -F token=a44765ab8ca04e429a565f02d22179a0 \
+                    -F username=5057249
+                    -F password=Gy6F89xK \
+                    -F pin=belorado74 \
+                    -F document_front=@sample_folder/img_front.png \
+                    -F document_rear=@sample_folder/img_rear.png \
+                    -F document_owner=@sample_folder/img_selfie.png \
+        - lang: 'JavaScript'
+          source: |
+                  var formdata = new FormData();
+                  formdata.append("given_name", "Name");
+                  formdata.append("surname_1", "Surname1");
+                  formdata.append("surname_2", "Surname2");
+                  formdata.append("id_document_type", "IDC");
+                  formdata.append("id_document_country", "ES");
+                  formdata.append("serial_number", "A1111111W");
+                  formdata.append("email", "mail@domain");
+                  formdata.append("mobile_phone_number", "+34999999999");
+                  formdata.append("registration_authority", "124");
+                  formdata.append("profile", "PFnubeQAFCiudadano");
+                  formdata.append("token", "a44765ab8ca04e429a565f02d22179a0");
+                  formdata.append("username", "5057249");
+                  formdata.append("password", "Gy6F89xK");
+                  formdata.append("pin", "belorado74");
+                  formdata.append("document_front", fileInput.files[0], "sample_folder/img_front.png");
+                  formdata.append("document_rear", fileInput.files[0], "sample_folder/img_rear.png");
+                  formdata.append("document_selfie", fileInput.files[0], "sample_folder/img_selfie.png");
+
+                  var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: formdata,
+                    redirect: 'follow'
+                  };
+
+                  fetch("https://one-shot.developers.uanataca.com/api/v1/request", requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/request"
+
+                  payload={'given_name': 'Name',
+                  'surname_1': 'Surname1',
+                  'surname_2': 'Surname2',
+                  'id_document_type': 'IDC',
+                  'id_document_country': 'ES',
+                  'serial_number': 'A1111111W',
+                  'email': 'mail@domain',
+                  'mobile_phone_number': '+34999999999',
+                  'registration_authority': '124',
+                  'profile': 'PFnubeQAFCiudadano',
+                  'token': 'a44765ab8ca04e429a565f02d22179a0',
+                  'username': '5057249',
+                  'password': 'Gy6F89xK',
+                  'pin': 'belorado74'}
+                  files=[
+                    ('document_front',('file',open('sample_folder/img_front.png','rb'),'image/png')),
+                    ('document_rear',('file',open('sample_folder/img_rear.png','rb'),'image/png')),
+                    ('document_owner',('file',open('sample_folder/img_selfie.png','rb'),'image/png'))
+                  ]
+                  headers = {
+                    'Content-Type': 'application/json'
+                  }
+
+                  response = requests.request("POST", url, headers=headers, data=payload, files=files)
+
+                  print(response.text)
+        - lang: 'Node.js'
+          source: |
+                  const fs = require('fs');
+                  const FormData = require('form-data');
+                  const fetch = require('node-fetch');
+                  const formData = new FormData();
+
+                  formData.append('given_name', 'Name');
+                  formData.append('surname_1', 'Surname1');
+                  formData.append('surname_2', 'Surname2');
+                  formData.append('id_document_type', 'IDC');
+                  formData.append('id_document_country', 'ES');
+                  formData.append('serial_number', 'A1111111W');
+                  formData.append('email', 'mail@domain');
+                  formData.append('mobile_phone_number', '+34999999999');
+                  formData.append('registration_authority', '124');
+                  formData.append('profile', 'PFnubeQAFCiudadano');
+                  formData.append('token', 'a44765ab8ca04e429a565f02d22179a0');
+                  formData.append('username', '5057249');
+                  formData.append('password', 'Gy6F89xK');
+                  formData.append('pin', 'belorado74');
+                  formData.append('document_front', fs.createReadStream('sample_folder/img_front.png'));
+                  formData.append('document_rear', fs.createReadStream('sample_folder/img_rear.png'));
+                  formData.append('document_owner', fs.createReadStream('sample_folder/img_selfie.png'));
+
+                  const url = 'https://one-shot.developers.uanataca.com/api/v1/request';
+
+                  const options = {
+                    method: 'POST',
+                    headers: {
+                      Accept: 'text/plain',
+                      'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001'
+                    }
+                  };
+
+                  options.body = formData;
+
+                  fetch(url, options)
+                    .then(res => res.json())
+                    .then(json => console.log(json))
+                    .catch(err => console.error('error:' + err));
+        - lang: 'C#'
+          source: |
+                    var client = new RestClient("https://one-shot.developers.uanataca.com/api/v1/request");
+                    client.Timeout = -1;
+                    var request = new RestRequest(Method.POST);
+                    request.AddHeader("content-type", "multipart/form-data; boundary=----011000010111000001101001");
+                    request.AddParameter("given_name", "Name");
+                    request.AddParameter("surname_1", "Surname1");
+                    request.AddParameter("surname_2", "Surname2");
+                    request.AddParameter("id_document_type", "IDC");
+                    request.AddParameter("id_document_country", "ES");
+                    request.AddParameter("serial_number", "A1111111W");
+                    request.AddParameter("email", "mail@domain");
+                    request.AddParameter("mobile_phone_number", "+34999999999");
+                    request.AddParameter("registration_authority", "124");
+                    request.AddParameter("profile", "PFnubeQAFCiudadano");
+                    request.AddParameter("token", "a44765ab8ca04e429a565f02d22179a0");
+                    request.AddParameter("username", "5057249");
+                    request.AddParameter("password", "Gy6F89xK");
+                    request.AddParameter("pin", "belorado74");
+                    request.AddFile("document_front", "sample_folder/img_front.png");
+                    request.AddFile("document_rear", "sample_folder/img_rear.png");
+                    request.AddFile("document_owner", "sample_folder/img_selfie.png");
+
+                    IRestResponse response = client.Execute(request);
+                    Console.WriteLine(response.Content);
+                             
   #############
   /api/v1/request/{pk}:
     get: 
@@ -712,6 +1129,60 @@ paths:
                       "representation": null
                   }
               }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X GET \
+                    https://one-shot.developers.uanataca.com/api/v1/request/29571
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/request/29571',
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/request/29571"
+
+                  response = requests.get(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/request/29571',
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.GetAsync("https://one-shot.developers.uanataca.com/api/v1/request/29571");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
   #############
   /api/v1/otp/{pk}:
     post: 
@@ -746,6 +1217,60 @@ paths:
                   "status": "200 OK",
                   "details": "OTP generated"
               }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://one-shot.developers.uanataca.com/api/v1/otp/29571
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/otp/29571',
+                    {method: 'POST'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/otp/29571"
+
+                  response = requests.post(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/otp/29571',
+                    {method: 'POST'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.PostAsync("https://one-shot.developers.uanataca.com/api/v1/otp/29571", null);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
   #############
   /api/v1/sign/{pk}:
     post: 
@@ -785,7 +1310,122 @@ paths:
                   "status": "200 OK",
                   "details": "Documents correctly signed"
               }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://one-shot.developers.uanataca.com/api/v1/sign/29571 \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                          "secret"   : "052174",
+                          "options": {
+                              "5f04778a-54f6-426a-b204-5573eb01e5da": {
+                                  "position": "300, 100, 500, 150",
+                                  "image": "b0b6370e-8b54-4d8b-ab6f-a002cf08dd28",
+                                  "page": 0
+                              }
+                        }'
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/sign/29571',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                          "secret"   : "052174",
+                          "options": {
+                              "5f04778a-54f6-426a-b204-5573eb01e5da": {
+                                  "position": "300, 100, 500, 150",
+                                  "image": "b0b6370e-8b54-4d8b-ab6f-a002cf08dd28",
+                                  "page": 0
+                              }
+                            })
+                    }
+                  );
 
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/sign/29571"
+
+                  payload = {
+                              "secret"   : "052174",
+                              "options": {
+                                  "5f04778a-54f6-426a-b204-5573eb01e5da": {
+                                    "position": "300, 100, 500, 150",
+                                    "image": "b0b6370e-8b54-4d8b-ab6f-a002cf08dd28",
+                                      "page": 0
+                              }
+                            }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/sign/29571',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                          "secret"   : "052174",
+                          "options": {
+                              "5f04778a-54f6-426a-b204-5573eb01e5da": {
+                                  "position": "300, 100, 500, 150",
+                                  "image": "b0b6370e-8b54-4d8b-ab6f-a002cf08dd28",
+                                  "page": 0
+                              }
+                            })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          "secret"   : "052174",
+                          "options": {
+                              "5f04778a-54f6-426a-b204-5573eb01e5da": {
+                                  "position": "300, 100, 500, 150",
+                                  "image": "b0b6370e-8b54-4d8b-ab6f-a002cf08dd28",
+                                  "page": 0
+                              }
+                            }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://one-shot.developers.uanataca.com/api/v1/sign/29571", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
 ###### documents ######
 ###############################################################################
 
@@ -828,6 +1468,80 @@ paths:
                     "status": "200 OK",
                     "details": "a73b1253-838f-4340-8ae8-e0a1524f7472"
                 }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://one-shot.developers.uanataca.com/api/v1/document/29571 \
+                    -H 'Content-Type: multipart/form-data' \
+                    -F file=@sample_folder/document.pdf
+        - lang: 'JavaScript'
+          source: |
+                    var formdata = new FormData();
+                    formdata.append("file", fileInput.files[0], "sample_folder/document.pdf");
+
+                    var requestOptions = {
+                      method: 'POST',
+                      headers: myHeaders,
+                      body: formdata,
+                      redirect: 'follow'
+                    };
+
+                    fetch("https://one-shot.developers.uanataca.com/api/v1/document/29571", requestOptions)
+                      .then(response => response.text())
+                      .then(result => console.log(result))
+                      .catch(error => console.log('error', error));
+        - lang: 'Python'
+          source: |
+                    import requests
+
+                    url = "https://one-shot.developers.uanataca.com/api/v1/document/29571"
+
+                    payload={}
+                    files=[
+                      ('file',('document.pdf',open('sample_folder/document.pdf','rb'),'application/pdf'))
+                    ]
+                    
+                    headers = {"Content-Type": "multipart/form-data"}
+
+                    response = requests.request("POST", url, headers=headers, data=payload, files=files)
+
+                    print(response.text)
+        - lang: 'Node.js'
+          source: |
+                  const fs = require('fs');
+                  const FormData = require('form-data');
+                  const fetch = require('node-fetch');
+                  const formData = new FormData();
+
+                  formData.append('file', fs.createReadStream('sample_folder/document.pdf'));
+  
+                  const url = 'https://one-shot.developers.uanataca.com/api/v1/document/29571';
+
+                  const options = {
+                    method: 'POST',
+                    headers: {
+                      Accept: 'text/plain',
+                      'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001'
+                    }
+                  };
+
+                  options.body = formData;
+
+                  fetch(url, options)
+                    .then(res => res.json())
+                    .then(json => console.log(json))
+                    .catch(err => console.error('error:' + err));
+        - lang: 'C#'
+          source: |
+                  var client = new RestClient("https://one-shot.developers.uanataca.com/api/v1/document/29571");
+                  client.Timeout = -1;
+                  var request = new RestRequest(Method.POST);
+                  request.AddHeader("content-type", "multipart/form-data; boundary=----011000010111000001101001");
+                  request.AddFile("file", "sample_folder/document.pdf");
+  
+                  IRestResponse response = client.Execute(request);
+                  Console.WriteLine(response.Content);
   #############
   /api/v1/document/{pk}/{type}/{uid}:
     get: 
@@ -877,7 +1591,60 @@ paths:
                   endobj\n
                   (...)\n
                 "
-             
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X GET \
+                    https://one-shot.developers.uanataca.com/api/v1/document/29571/signed/a73b1253-838f-4340-8ae8-e0a1524f7472
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/document/29571/signed/a73b1253-838f-4340-8ae8-e0a1524f7472',
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/document/29571/signed/a73b1253-838f-4340-8ae8-e0a1524f7472"
+
+                  response = requests.get(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/document/29571/signed/a73b1253-838f-4340-8ae8-e0a1524f7472',
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.GetAsync("https://one-shot.developers.uanataca.com/api/v1/document/29571/signed/a73b1253-838f-4340-8ae8-e0a1524f7472");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }            
   #############              
     delete: 
       summary: DELETE DOCUMENT
@@ -924,6 +1691,60 @@ paths:
                     "status": "200 OK",
                     "details": "Document successfully deleted"
                 }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X DELETE \
+                    https://one-shot.developers.uanataca.com/api/v1/document/29571/signed/a73b1253-838f-4340-8ae8-e0a1524f7472
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/document/29571/signed/a73b1253-838f-4340-8ae8-e0a1524f7472',
+                    {method: 'DELETE'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/document/29571/signed/a73b1253-838f-4340-8ae8-e0a1524f7472"
+
+                  response = requests.delete(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/document/29571/signed/a73b1253-838f-4340-8ae8-e0a1524f7472',
+                    {method: 'DELETE'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.DeleteAsync("https://one-shot.developers.uanataca.com/api/v1/document/29571/signed/a73b1253-838f-4340-8ae8-e0a1524f7472");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }            
   #############              
   /api/v1/documents/{pk}:
     get: 
@@ -985,6 +1806,60 @@ paths:
                       }
                   }
               }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X GET \
+                    https://one-shot.developers.uanataca.com/api/v1/documents/29571
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/documents/29571',
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/documents/29571"
+
+                  response = requests.get(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/documents/29571',
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.GetAsync("https://one-shot.developers.uanataca.com/api/v1/documents/29571");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
   #############
     delete: 
       summary: DELETE ALL DOCUMENTS
@@ -1017,6 +1892,60 @@ paths:
                   "status": "200 OK",
                   "details": "Documents deleted successfully"
               }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X DELETE \
+                    https://one-shot.developers.uanataca.com/api/v1/documents/29571
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/documents/29571',
+                    {method: 'DELETE'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/documents/29571"
+
+                  response = requests.delete(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/documents/29571',
+                    {method: 'DELETE'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.DeleteAsync("https://one-shot.developers.uanataca.com/api/v1/documents/29571");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
   #############
   /api/v1/document/{pk}/contract:
     get: 
@@ -1052,7 +1981,60 @@ paths:
                   endobj\n
                   (...)\n
                 "
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X GET \
+                    https://one-shot.developers.uanataca.com/api/v1/document/29571/contract
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/document/29571/contract',
+                    {method: 'GET'}
+                  );
 
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/document/29571/contract"
+
+                  response = requests.get(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/document/29571/contract',
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.GetAsync("https://one-shot.developers.uanataca.com/api/v1/document/29571/contract");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
 ###### images ######
 ###############################################################################
 
@@ -1090,6 +2072,80 @@ paths:
                   "status": "200 OK",
                   "details": "bfd74f73-7b22-40a6-ad37-6fc867263309"
               }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://one-shot.developers.uanataca.com/api/v1/image \
+                    -H 'Content-Type: multipart/form-data' \
+                    -F image=@sample_folder/image.png
+        - lang: 'JavaScript'
+          source: |
+                    var formdata = new FormData();
+                    formdata.append("image", fileInput.files[0], "sample_folder/image.png");
+
+                    var requestOptions = {
+                      method: 'POST',
+                      headers: myHeaders,
+                      body: formdata,
+                      redirect: 'follow'
+                    };
+
+                    fetch("https://one-shot.developers.uanataca.com/api/v1/image", requestOptions)
+                      .then(response => response.text())
+                      .then(result => console.log(result))
+                      .catch(error => console.log('error', error));
+        - lang: 'Python'
+          source: |
+                    import requests
+
+                    url = "https://one-shot.developers.uanataca.com/api/v1/image"
+
+                    payload={}
+                    files=[
+                      ('image',('image.png',open('sample_folder/image.png','rb'),'application/pdf'))
+                    ]
+                    
+                    headers = {"Content-Type": "multipart/form-data"}
+
+                    response = requests.request("POST", url, headers=headers, data=payload, files=files)
+
+                    print(response.text)
+        - lang: 'Node.js'
+          source: |
+                  const fs = require('fs');
+                  const FormData = require('form-data');
+                  const fetch = require('node-fetch');
+                  const formData = new FormData();
+
+                  formData.append('image', fs.createReadStream('sample_folder/document.pdf'));
+  
+                  const url = 'https://one-shot.developers.uanataca.com/api/v1/images';
+
+                  const options = {
+                    method: 'POST',
+                    headers: {
+                      Accept: 'text/plain',
+                      'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001'
+                    }
+                  };
+
+                  options.body = formData;
+
+                  fetch(url, options)
+                    .then(res => res.json())
+                    .then(json => console.log(json))
+                    .catch(err => console.error('error:' + err));
+        - lang: 'C#'
+          source: |
+                  var client = new RestClient("https://one-shot.developers.uanataca.com/api/v1/images");
+                  client.Timeout = -1;
+                  var request = new RestRequest(Method.POST);
+                  request.AddHeader("content-type", "multipart/form-data; boundary=----011000010111000001101001");
+                  request.AddFile("image", "sample_folder/document.pdf");
+  
+                  IRestResponse response = client.Execute(request);
+                  Console.WriteLine(response.Content);
   #############
   /api/v1/image/{uid}:
     get: 
@@ -1142,6 +2198,60 @@ paths:
                   "status": "200 OK",
                   "details": "Image deleted"
               }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X GET \
+                    https://one-shot.developers.uanataca.com/api/v1/image/bfd74f73-7b22-40a6-ad37-6fc867263309
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/image/bfd74f73-7b22-40a6-ad37-6fc867263309',
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/image/bfd74f73-7b22-40a6-ad37-6fc867263309"
+
+                  response = requests.get(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/image/bfd74f73-7b22-40a6-ad37-6fc867263309',
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.GetAsync("https://one-shot.developers.uanataca.com/api/v1/image/bfd74f73-7b22-40a6-ad37-6fc867263309");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
   #############
   /api/v1/images:
     get: 
@@ -1204,6 +2314,60 @@ paths:
                       }                      
                   }
               }
+    x-codeSamples:
+      - lang: 'curl'
+        source: |
+                curl -i -X GET \
+                  https://one-shot.developers.uanataca.com/api/v1/images
+      - lang: 'JavaScript'
+        source: |
+                const resp = await fetch(
+                  'https://one-shot.developers.uanataca.com/api/v1/images',
+                  {method: 'GET'}
+                );
+
+                const data = await resp.text();
+                console.log(data);
+      - lang: 'Python'
+        source: |
+                import requests
+
+                url = "https://one-shot.developers.uanataca.com/api/v1/images"
+
+                response = requests.get(url)
+
+                data = response.json()
+                print(data)
+      - lang: 'Node.js'
+        source: |
+                const fetch = require('node-fetch');
+
+                const resp = await fetch(
+                  'https://one-shot.developers.uanataca.com/api/v1/images',
+                  {method: 'GET'}
+                );
+
+                const data = await resp.text();
+                console.log(data);
+      - lang: 'C#'
+        source: |
+                using System;
+                using System.Net.Http;
+                using System.Threading.Tasks;
+
+                public class Program
+                {
+                  public static async Task Main(string[] args)
+                  {
+                    using (var client = new HttpClient())
+                    {
+                      var request = await client.GetAsync("https://one-shot.developers.uanataca.com/api/v1/images");
+                      var response = await request.Content.ReadAsStringAsync();
+
+                      Console.WriteLine(response);
+                    }
+                  }
+                }
     #############
     delete: 
       summary: DELETE ALL IMAGES
@@ -1230,11 +2394,60 @@ paths:
                   "status": "200 OK",
                   "details": "Images deleted successfully"
               }
+    x-codeSamples:
+      - lang: 'curl'
+        source: |
+                curl -i -X DELETE \
+                  https://one-shot.developers.uanataca.com/api/v1/images
+      - lang: 'JavaScript'
+        source: |
+                const resp = await fetch(
+                  'https://one-shot.developers.uanataca.com/api/v1/images',
+                  {method: 'DELETE'}
+                );
 
+                const data = await resp.text();
+                console.log(data);
+      - lang: 'Python'
+        source: |
+                import requests
 
+                url = "https://one-shot.developers.uanataca.com/api/v1/images"
 
+                response = requests.delete(url)
 
+                data = response.json()
+                print(data)
+      - lang: 'Node.js'
+        source: |
+                const fetch = require('node-fetch');
 
+                const resp = await fetch(
+                  'https://one-shot.developers.uanataca.com/api/v1/images',
+                  {method: 'DELETE'}
+                );
+
+                const data = await resp.text();
+                console.log(data);
+      - lang: 'C#'
+        source: |
+                using System;
+                using System.Net.Http;
+                using System.Threading.Tasks;
+
+                public class Program
+                {
+                  public static async Task Main(string[] args)
+                  {
+                    using (var client = new HttpClient())
+                    {
+                      var request = await client.DeleteAsync("https://one-shot.developers.uanataca.com/api/v1/images");
+                      var response = await request.Content.ReadAsStringAsync();
+
+                      Console.WriteLine(response);
+                    }
+                  }
+                }
 ###### definitions ######
 ###############################################################################
 
@@ -1265,7 +2478,7 @@ definitions:
             options:
                 type: "object"
                 description: "Visual graphic signature properties.<br>
-                              It is required to previously upload an image. See <a href='#tag/Images'>images</a> api reference"
+                              It is required prior to uploading an image. See <a href='#tag/Images'>images</a> api reference"
                 properties:
                     position:
                         type: "string"
