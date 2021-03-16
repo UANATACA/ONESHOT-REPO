@@ -2166,38 +2166,7 @@ paths:
           description: Successful Response
           examples:
             text/png:
-               The retrieved image in png format   
-    delete: 
-      summary: DELETE IMAGE
-      tags:
-        - Images
-      description: Deletes a previously uploaded image.
-      produces:
-        - application/json
-      parameters:
-      - in: path
-        name: uid
-        type: string
-        description: The image unique identifier
-        required: true
-      responses:
-        200:
-          description: Successful Response
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                description: The response status id
-              details: 
-                type: string
-                description: The successful image deletion confirmation message
-          examples:
-            application/json:
-              {
-                  "status": "200 OK",
-                  "details": "Image deleted"
-              }
+               The retrieved image in png format
       x-codeSamples:
         - lang: 'curl'
           source: |
@@ -2246,6 +2215,91 @@ paths:
                       using (var client = new HttpClient())
                       {
                         var request = await client.GetAsync("https://one-shot.developers.uanataca.com/api/v1/image/bfd74f73-7b22-40a6-ad37-6fc867263309");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }   
+    delete: 
+      summary: DELETE IMAGE
+      tags:
+        - Images
+      description: Deletes a previously uploaded image.
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: uid
+        type: string
+        description: The image unique identifier
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The successful image deletion confirmation message
+          examples:
+            application/json:
+              {
+                  "status": "200 OK",
+                  "details": "Image deleted"
+              }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X DELETE \
+                    https://one-shot.developers.uanataca.com/api/v1/image/bfd74f73-7b22-40a6-ad37-6fc867263309
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/image/bfd74f73-7b22-40a6-ad37-6fc867263309',
+                    {method: 'DELETE'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/image/bfd74f73-7b22-40a6-ad37-6fc867263309"
+
+                  response = requests.get(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://one-shot.developers.uanataca.com/api/v1/image/bfd74f73-7b22-40a6-ad37-6fc867263309',
+                    {method: 'DELETE'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.DeleteAsync("https://one-shot.developers.uanataca.com/api/v1/image/bfd74f73-7b22-40a6-ad37-6fc867263309");
                         var response = await request.Content.ReadAsStringAsync();
 
                         Console.WriteLine(response);
