@@ -1,24 +1,26 @@
-# Introduction
+# What it is
 
-## What is One-Shot Signature
-
+<div style="text-align: justify">
 One-Shot Signature is a complete solution for the digital signature of documents within your application. It is designed so that no sensitive data has to be sent away from your premises, as only hashes of the documents to be signed need to be transmitted to the signature service.
-
-Documents are signed through the creation of **single-use** signature certificates, which are created when needed and immediately used to electronically sign all documents included in a given transaction. The digital signature will include a time stamp, proving the existence and integrity of the documents at the time of signature.
-
+<br></br>
+Documents are signed through the creation of <strong>single-use</strong> digital certificates, which are created when needed and immediately used to electronically sign all documents included in a given transaction. The digital signature will include a time stamp, proving the existence and integrity of the documents at the time of signature.
+<br></br>
 The signature procedure is activated with a code sent directly to the signatary by SMS, allowing the end user to complete the signature without requiring the installation of dedicated software. 
-<br></br><br></br>
+</div>
+
+# How it works
+
+<div style="text-align: justify">
+A valid digital signature requires a certificate, emitted by a trusted a Certification Authority (CA). This certificate is used to establish that the document was signed by a specific entity (in our case, the user) that is known to the CA. Although certificate generation is largely automated within One-Shot Signature, having an idea of what is going on under the hood will help us to better understand its operation.
+<br></br>
+Within the context of a Public Key Infrastructure (PKI), the entity responsible for registering new digital identities is called a Registration Authority (RA). RA employ Registration Authority Officers (RAO) to add new user identities to the infrastructure and request the creation of new digital signature certificates for its users. Each of these certificates can then be used to digitally sign documents, such as contracts.
+<br></br>
+In the case of One-Shot Signature, certificates are generated on the spot every time a new set of documents requires a signature. Through the One-Shot Signature API, you will play the role of a RAO, providing identifying data for each user and requesting the generation of signature certificates. Once user registration data has been provided and the certificate is ready to be generated, the end user will receive a One-Time Password (OTP) through an SMS message, which can be used to initiate the generation of the certificate and complete the signature procedure. After a successful signature, you will be able to retrieve the signed documents.
+</div>
+<br></br>
 ![img](https://i.ibb.co/JBvGZGG/oneshot-wkf.png)
 
-## Basic digital signature procedure
-
-A valid digital signature requires a certificate, emitted by a trusted a Certification Authority (CA). This certificate is used to establish that the document was signed by a specific entity (in our case, the user) that is known to the CA. Although certificate generation is largely automated within One-Shot Signature, having an idea of what is going on under the hood will help us to better understand its operation.
-
-Within the context of a Public Key Infrastructure (PKI), the entity responsible for registering new digital identities is called a Registration Authority (RA). RA employ Registration Authority Officers (RAO) to add new user identities to the infrastructure and request the creation of new digital signature certificates for its users. Each of these certificates can then be used to digitally sign documents, such as contracts.
-
-In the case of One-Shot Signature, certificates are generated on the spot every time a new set of documents requires a signature. Through the One-Shot Signature API, you will play the role of a RAO, providing identifying data for each user and requesting the generation of signature certificates. Once user registration data has been provided and the certificate is ready to be generated, the end user will receive a One-Time Password (OTP) through an SMS message, which can be used to initiate the generation of the certificate and complete the signature procedure. After a successful signature, you will be able to retrieve the signed documents.
-
-## Step-by-step One-Shot Signature operation
+# Flow chart
 
 The One-Shot Signature workflow involves the following components:
 
@@ -54,6 +56,19 @@ A common workflow involving the One-Shot Signature Service can be summarized by 
 15. Finally, the client application calls the One-Shot Optimizer API to obtain the signed document.
 
 # Configuration
+
+One-Shot Optimizer can be supplied as a Docker or as a Virtual Machine image.
+
+
+## Hardware requirements
+
+
+**CPU:** modern multicore (minimum 4 core)
+
+**RAM:** 8GB
+
+**HDD:** 200 GB
+
 
 **One-Shot Optimizer configuration**
 
@@ -131,11 +146,6 @@ You should also make sure that the NO\_REQUIRED_DOCUMENTS is correctly set to tr
 
 Once again, you will need to restart the One-Shot Optimizer service with **systemctl restart optimizer** before the changes take effect.
 
-**Additional information**
-
-**Logs**
-
-The logs generated during normal One-Shot Optimizer operation can be found on the path /opt/bit4id/oneshot_optimizer/logs/optimizer.log.
 
 **File permanence**
 
@@ -146,11 +156,12 @@ All files uploaded to One-Shot Optimizer are saved on the /opt/bit4id/oneshot_op
 
 # Workflow
 
-## Using One-Shot Signature
-
 This section section presents the workflow for a simple use case of the One-Shot Signature service with a step-by-step description of the API calls required to allow a user to digitally sign a document provided by the client application.
 
-You can follow the example using the One-Shot Optimizer virtual machine configured for the test environment. You can find the instructions to set up the virtual machine in the configuration page.
+You can follow the example using the developers One-Shot Optimizer configured for test environment, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
+
+https://one-shot.developers.uanataca.com
+
 
 Before we begin, let's recap the objects and entities involved in the operation:
 
@@ -161,9 +172,6 @@ Before we begin, let's recap the objects and entities involved in the operation:
 **Document** A PDF file to be signed.
 
 **One-Time Password (OTP)** a secret code sent by SMS directly to your users so that they can confirm their identity and complete the digital signature.
-
-## Step By Step
-
 The basic digital signature process involves the following steps:
 
 - Retrieve an existing token for the RAO
@@ -172,9 +180,9 @@ The basic digital signature process involves the following steps:
 - Generate an OTP
 - Sign the document
 - Retrieve the signed document
+- Delete documents from Optimizer
 
-
-**Retrieve an existing token for the RAO**
+> STEP 1: Retrieve an existing token for the RAO
 
 The test One-Shot Optimizer virtual machine is pre-configured with a RAO account ready to be used within the test environment. This account has an associated token, that can be used to identify the RAO in API calls. We can list existing tokens with the /api/v1/tokens API endpoint.
 
@@ -200,8 +208,9 @@ This output tells us that a single token "791ef6ff519b41cfa2f311e6cd144586" exis
 To use tokens in a production environment, you will need to create them first with the corresponding API call.
 
 Tokens can also be generated without providing all credentials. In that case, the missing credentials (pin or password) have to be provided as additional arguments every time the token is used.
+</br>
 
-**Create a new Digital Signature Request**
+> STEP 2: Create a new Digital Signature Request
 
 Within the One-Shot Signature Service, all data pertaining to a given digital signature is collected within a Digital Signature Request. This includes both the identifying information of the signing user, which is provided when you create the signature request, and the document or documents to be signed, which we will upload later.
 
@@ -230,8 +239,9 @@ If the signature request is completed successfully, we will get the unique ident
 	4 | }
 
 The request code will be used to identify this digital signature request in subsequent calls.
+</br>
 
-**Upload a document**
+> STEP 3: Upload a document
 
 After creating the digital signature request, we can associate to it all documents that should be signed by the user. For each document, we make a multipart/form-data HTTP POST request with the **PDF** document to upload.
 
@@ -246,7 +256,9 @@ If the upload is successful, the response will contain the identifier assigned t
 	3 |     "details": "712c29ac-a2dc-4530-8c67-d0f227d8294b"
 	4 | }
 
-**Generate an OTP**
+</br>
+
+> STEP 4: Generate an OTP
 
 Once the documents to be signed are ready, we need to generate a secure One time password (OTP) that will allow the user to sign them. The OTP is generated by calling the otp endpoint and the resulting OTP is sent as an SMS message directly to the phone number we provided when creating the signature request.
 
@@ -262,8 +274,9 @@ A successful call will look like this:
 	4 | }
 
 With this call, an SMS with the secret is sent to the mobile phone number associated to the signature request.
+</br>
 
-**Sign the document**
+> STEP 5: Sign the document
 
 In this step we are going to finalize the creation of the signature certificate and sign all documents previously uploaded for the signature request.
 
@@ -272,7 +285,7 @@ Call the sign endpoint with the request id and json parameters containing the OT
 params.json:
 
 	1 | {
-	2 |     "secret": "000000"
+	2 |     "secret": "123456"
 	3 | }
 
 </br>
@@ -286,9 +299,11 @@ A successful call will result in the following response:
 	3 |     "details": "Documents correctly signed"
 	4 | }
 
-**Retrieve signed document**
+</br>
 
-The only remaining step is getting the signed document.
+> STEP 6: Retrieve signed document
+
+Once the signature is done, the next step is getting the signed documents.
 
 To do this, query with an HTTP GET request the endpoint /api/v1/document/{pk}/{type}/{uid}, where {pk} is the Request's unique identifier, {type} is the type of the document (it can be "original" for the uploaded document or "signed" for the digitally-signed version) and {uid} is the unique id string assigned to the document.
 
@@ -298,5 +313,37 @@ The response by the server will be the document in binary format:
 
 	1 | %PDF
 	2 | ...
+
+</br>
+
+> STEP 7: Delete documents from Optimizer
+
+The last step 
+
+</br>
+
+
+
+# Logs
+
+Service logs file `optimizer.log` is stored in a local folder in One-Shot Optimizer.
+
+Docker path:
+
+**./common/etc/logs**
+
+Virtual Machine path:
+
+**/opt/bit4id/oneshot_optimizer/logs**
+
+
+
+# Postman collection
+
+A postman collection is available as a support for a quick start.<br>
+It is only required to edit `host`variable in Postman environment with the IP or domain of One-Shot Optimizer.
+
+<a href="https://cdn.bit4id.com/es/uanataca/public/oneshot/Uanataca_One-Shot_Postman.zip">One-Shot Postman collection download</a>
+
 
 # API Reference
