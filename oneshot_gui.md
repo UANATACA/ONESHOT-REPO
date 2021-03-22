@@ -37,7 +37,7 @@ The One-Shot Optimizer exposes a RESTful HTTP API that allows any application ca
 
 A common workflow involving the One-Shot Signature Service can be summarized by the following image:
 <br></br>
-![img](https://i.ibb.co/n1PHDmR/oneshot.jpg)
+![img](https://i.ibb.co/MNr9WV9/oneshot-flc1.png)
 </br>
 1. The client application requests the creation and approval of a new digital signature certificate, providing all required data through API calls.
 2. The One-Shot Optimizer API returns an identifier for the certificate request.
@@ -70,7 +70,93 @@ One-Shot Optimizer can be supplied as a Docker or as a Virtual Machine image.
 **HDD:** 200 GB
 
 
-**One-Shot Optimizer configuration**
+## One-Shot Optimizer on Docker
+
+
+This configuration requires a server with a Linux CentOS operating system.
+
+</br>
+
+
+> STEP 1: Install Docker and Docker-Compose.
+
+*Docker*
+
+Run the following commands in this order.
+
+	sudo yum install -y yum-utils
+	yum install -y yum-utils device-mapper-persistent-data lvm2
+	yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+	sudo yum install docker-ce docker-ce-cli containerd.io
+	sudo systemctl start docker
+
+
+
+*Docker-Compose*
+
+Run the following commands in this order.
+
+
+	sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+	chmod +x /usr/local/bin/docker-compose
+
+
+Run command **docker-compose version** to check the installation. The outcome should show this information:
+
+
+![img](https://i.ibb.co/WphfmXH/signbox-docker1.png) 
+
+</br>
+
+> STEP 2: Create folders to store settings and logs outside docker image.
+
+Create a local folder named **Oneshot_Optimizer** and extract all .zip content here.
+
+Move One-Shot Optimizer folder to the path **/opt** in the server.
+
+The outcome should look like this:
+
+![img](https://i.ibb.co/2M57krb/oneshot-docker2.png)
+
+Create server folders to store service settings and logs.
+
+	mkdir -p /opt/SignBox_Optimizer/common/etc
+	mkdir -p /opt/SignBox_Optimizer/common/etc/logs
+
+Extract `img.zip` and `tsa.zip` content and move to path **/opt/SignBox_Optimizer/common/etc** in the server. This should look like this:
+
+![img](https://i.ibb.co/RbWZcdd/signbox-docker4-1.png)
+
+</br>
+
+> STEP 3: Modify the `Docker-Compose.yml` file by adding the highlighted folders.
+
+	cd /opt/SignBox_Optimizer
+
+![img](https://i.ibb.co/sbvLXwW/signbox-docker3.png)
+
+</br>
+
+> STEP 4: Load Docker One-Shot images.
+
+Run the following commands:
+
+	cd /opt/OneShot_Optimizer
+	tar -xzf docker_signbox.tar.gz 
+	docker image load -i signbox.tar 
+
+</br>
+
+> STEP 5: Launch the service.
+
+Run:
+
+	docker-compose up -d
+
+</br>
+
+
+## One-Shot Optimizer on Virtual Machine
 
 The local component of One-Shot Signature is the One-Shot Optimizer, which is provided pre-installed in a virtual machine. This page provides a guide to the configuration of the One-Shot Optimizer service and its integration within your network.
 
@@ -103,7 +189,9 @@ To do so, open the file custom.ini in /opt/bit4id/oneshot_optimizer/etc and intr
 
 Once you are done modifying the file, restart the One-Shot Optimizer service with **systemctl restart optimizer** so that changes take effect.
 
-**Configuration of the One-Shot Optimizer service for production**
+## Production settings
+
+Once you are ready to deploy One-Shot Optimizer in a production environment, you will need to configure it to use the production credentials.
 
 **Requirements:**
 
@@ -112,7 +200,6 @@ Once you are done modifying the file, restart the One-Shot Optimizer service wit
 - Certificate (.cer) and key (.key) files to connect to the Uanataca production environment.
 - The Id number for the Registration Authority that will produce the certificates.
 
-Once you are ready to deploy One-Shot Optimizer in a production environment, you will need to configure it to use the production credentials.
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ We recommend starting from a clean copy of the One-Shot Optimizer virtual machine for this step. This prevents leftover files from the test environment from causing errors in production.</blockquote>
 
@@ -158,9 +245,7 @@ All files uploaded to One-Shot Optimizer are saved on the /opt/bit4id/oneshot_op
 
 This section section presents the workflow for a simple use case of the One-Shot Signature service with a step-by-step description of the API calls required to allow a user to digitally sign a document provided by the client application.
 
-You can follow the example using the developers One-Shot Optimizer configured for test environment, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
-
-https://one-shot.developers.uanataca.com
+You can follow the example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
 
 
 Before we begin, let's recap the objects and entities involved in the operation:
@@ -186,9 +271,9 @@ The basic digital signature process involves the following steps:
 
 The test One-Shot Optimizer virtual machine is pre-configured with a RAO account ready to be used within the test environment. This account has an associated token, that can be used to identify the RAO in API calls. We can list existing tokens with the /api/v1/tokens API endpoint.
 
-Assuming that https://oneshot.demo.uanataca.com is the URL for the One-Shot Optimizer virtual machine, we can access the endpoint with:
+Assuming that https://one-shot.developers.uanataca.com is the URL for the One-Shot Optimizer virtual machine, we can access the endpoint with:
 
-	curl -X GET https://oneshot.demo.uanataca.com/api/v1/tokens
+	curl -X GET https://one-shot.developers.uanataca.com/api/v1/tokens
 
 On the clean machine, this should return a single token:
 
@@ -216,7 +301,7 @@ Within the One-Shot Signature Service, all data pertaining to a given digital si
 
 We can crete a new signature request with a POST call to the api/v1/request API endpoint. This call must include enough information to identify both the signing user and the RAO initiating the request. The full description of the arguments accepted by this endpoint can be found in the detailed documentation, but for now it is enough to include at least the following:
 
-	1 | curl --location --request POST 'https://oneshot.demo.uanataca.com/api/v1/request' \
+	1 | curl --location --request POST 'https://one-shot.developers.uanataca.com/api/v1/request' \
 	2 |      --form 'token=791ef6ff519b41cfa2f311e6cd144586' \
 	3 |      --form 'profile=PFnubeAFCiudadano' \
 	4 |      --form 'given_name=name_of_the_user' \
@@ -245,7 +330,7 @@ The request code will be used to identify this digital signature request in subs
 
 After creating the digital signature request, we can associate to it all documents that should be signed by the user. For each document, we make a multipart/form-data HTTP POST request with the **PDF** document to upload.
 
-	curl -F "file=@doc.pdf" -X POST https://oneshot.demo.uanataca.com/api/v1/document/1464
+	curl -F "file=@doc.pdf" -X POST https://one-shot.developers.uanataca.com/api/v1/document/1464
 
 Note that the number at the end of the call is the request id we obtained in the previous step.
 
@@ -264,7 +349,7 @@ Once the documents to be signed are ready, we need to generate a secure One time
 
 When calling the OTP endpoint, provide the request identifier returned by the request endpoint:
 
-	curl -X POST https://oneshot.demo.uanataca.com/api/v1/otp/1464
+	curl -X POST https://one-shot.developers.uanataca.com/api/v1/otp/1464
 
 A successful call will look like this:
 
@@ -290,7 +375,7 @@ params.json:
 
 </br>
 
-	curl -d @params.json -H "Content-Type: application/json -X POST https://oneshot.demo.uanataca.com/api/v1/sign/1464
+	curl -d @params.json -H "Content-Type: application/json -X POST https://one-shot.developers.uanataca.com/api/v1/sign/1464
 
 A successful call will result in the following response:
 
@@ -307,7 +392,7 @@ Once the signature is done, the next step is getting the signed documents.
 
 To do this, query with an HTTP GET request the endpoint /api/v1/document/{pk}/{type}/{uid}, where {pk} is the Request's unique identifier, {type} is the type of the document (it can be "original" for the uploaded document or "signed" for the digitally-signed version) and {uid} is the unique id string assigned to the document.
 
-	curl -X GET https://oneshot.demo.uanataca.com/api/v1/document/1464/signed/712c29ac-a2dc-4530-8c67-d0f227d8294b
+	curl -X GET https://one-shot.developers.uanataca.com/api/v1/document/1464/signed/712c29ac-a2dc-4530-8c67-d0f227d8294b
 
 The response by the server will be the document in binary format:
 
