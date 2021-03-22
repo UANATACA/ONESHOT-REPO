@@ -4,8 +4,6 @@
 One-Shot Signature is a complete solution for the digital signature of documents within your application. It is designed so that no sensitive data has to be sent away from your premises, as only hashes of the documents to be signed need to be transmitted to the signature service.
 <br></br>
 Documents are signed through the creation of <strong>single-use</strong> digital certificates, which are created when needed and immediately used to electronically sign all documents included in a given transaction. The digital signature will include a time stamp, proving the existence and integrity of the documents at the time of signature.
-<br></br>
-The signature procedure is activated with a code sent directly to the signatary by SMS, allowing the end user to complete the signature without requiring the installation of dedicated software. 
 </div>
 
 # How it works
@@ -16,44 +14,69 @@ A valid digital signature requires a certificate, emitted by a trusted a Certifi
 Within the context of a Public Key Infrastructure (PKI), the entity responsible for registering new digital identities is called a Registration Authority (RA). RA employ Registration Authority Officers (RAO) to add new user identities to the infrastructure and request the creation of new digital signature certificates for its users. Each of these certificates can then be used to digitally sign documents, such as contracts.
 <br></br>
 In the case of One-Shot Signature, certificates are generated on the spot every time a new set of documents requires a signature. Through the One-Shot Signature API, you will play the role of a RAO, providing identifying data for each user and requesting the generation of signature certificates. Once user registration data has been provided and the certificate is ready to be generated, the end user will receive a One-Time Password (OTP) through an SMS message, which can be used to initiate the generation of the certificate and complete the signature procedure. After a successful signature, you will be able to retrieve the signed documents.
+<br></br>
+The service is given with One-Shot Optimizer that is a server system exposing http RESTful APIs by means of which, business applications are enabled to require the digital signature. 
+<br></br>
+One-Shot Optimizer performs the most computationally expensive workload of the signature process, thus reducing the data traffic on the local network and make the most of the cryptographic hardware acceleration. The documnets to be signed are processed in the customer business layer and are not send to Uanataca Services, instead is sent a hash of the document created using a hash algorithm. 
 </div>
 <br></br>
+
 ![img](https://i.ibb.co/JBvGZGG/oneshot-wkf.png)
+
 
 # Flow chart
 
-The One-Shot Signature workflow involves the following components:
-
-**One-Shot Signature Service:** Uanataca's digital signature service, responsible for the actual digital signature.
-
-**One-Shot Optimizer:** software component of the digital signature solution, it runs on a system under your control and takes care of the manipulation of the documents to be signed, so that no sensitive documents need to leave your network (only hashes of the documents need to be sent to the One-Shot Signature Service).
-
-The One-Shot Optimizer exposes a RESTful HTTP API that allows any application capable of performing HTTP requests to interact with the signature service.
-
-**Client Business Application:** an application that provides a business-specific service and requires digital signature as part of its operation.
-
-**OTP:** a One-Time Password token used to simplify the digital signature procedure.
-
-
-A common workflow involving the One-Shot Signature Service can be summarized by the following image:
+<div style="text-align: justify">
+In a common One-Shot Signature service, an OTP (One-Time Password) code is sent by sms to the end user directly from Uanataca services. The OTP verification is used to activate the issuing of single-use digital signature certificate and the usage of it to sign the signature request documents.
 <br></br>
+One-Shot Signature can use other external authentication methods instead of Uanataca SMS. This alternative methods are subjected to approval.
+<br></br>
+The following images summarize One-Shot Signature flow involving both authentication methods:
+</div>
+<br></br>
+
+> Uanataca SMS
+
 ![img](https://i.ibb.co/MNr9WV9/oneshot-flc1.png)
+
 </br>
-1. The client application requests the creation and approval of a new digital signature certificate, providing all required data through API calls.
-2. The One-Shot Optimizer API returns an identifier for the certificate request.
-3. The client application provides One-Shot Optimizer the document to be signed by the end user.
-4. The client application presents the document to be signed to its end user.
-5. After reviewing the document, the end user agrees to sign it.
-6. The client application starts the signature process by requesting the generation of a One-Time Password (OTP) token for the signature.
-7. The One-Shot Signature service sends the OTP directly to the end user through an SMS message.
-8. By introducing the OTP, the end user identifies himself as the subject of the signature certificate.
-9. The client application provides the OTP and the identifier of the signature request to the One-Shot Optimizer.
-10. The One-Shot Optimizer takes care of computing the hash of the document to be signed...
-11. and sends them together with the request identifier and OTP to the One-Shot Signature service.
-12. The One-Shot Signature service generates the signature certificate for the end user and uses it to sign the hash.
-13. The signed hashes and the signature identifier are returned to the One-Shot Optimizer...
-14. who takes care of generating the signed document envelope, combining the documents with the signed hashes.
-15. Finally, the client application calls the One-Shot Optimizer API to obtain the signed document.
+1. The client application creates a new digital signature request, providing all required user data
+2. One-Shot Optimizer returns an identifier for the certificate request
+3. The client application provides the documents to be signed by the end user
+4. The client application shows the documents to be signed to its end user
+5. After reviewing the document, the end user agrees to sign it
+6. The client application starts the signature process by requesting the generation of a One-Time Password (OTP) token for the signature
+7. Uanataca services sends the OTP directly to the end user through an SMS message
+8. By introducing the OTP, the end user identifies himself as the subject of the signature certificate
+9. The client application provides the OTP and the identifier of the signature request to the One-Shot Optimizer
+10. One-Shot Optimizer takes care of computing the hash of the documents to be signed in the business layer
+11. Hashes are sent together with the request identifier and OTP code to Uanataca Services
+12. The end user signature certificate is generated and used to sign the hashes
+13. The signed hashes and the signature identifier are returned to the One-Shot Optimizer
+14. One-Shot Optimizer generates the signed document envelopment, combining the original documents with the signed hashes
+15. Finallly, the client application calls One-Shot Optimizer API to obtain the signed documents
+<br></br>
+
+> Other authentication methods
+
+
+![img](https://i.ibb.co/FJCPhCF/oneshot-flc2.png)
+
+</br>
+1. The client application creates a new digital signature request, providing all required user data
+2. One-Shot Optimizer returns an identifier for the certificate request
+3. The client application provides the documents to be signed by the end user
+4. The client application shows the documents to be signed to its end user
+5. After reviewing the document, the end user agrees to sign it
+6. The client application starts the signature process with an authentication method provided by the client
+7. One-Shot Optimizer takes care of computing the hash of the documents to be signed in the business layer
+8. Hashes are sent together with the request identifier and an id of the busuness authentication method to Uanataca Services
+9. The end user signature certificate is generated and used to sign the hashes
+10. The signed hashes and the signature identifier are returned to the One-Shot Optimizer
+11. One-Shot Optimizer generates the signed document envelopment, combining the original documents with the signed hashes
+12. Finallly, the client application calls One-Shot Optimizer API to obtain the signed documents
+
+
 
 # Configuration
 
@@ -110,7 +133,7 @@ Run command **docker-compose version** to check the installation. The outcome sh
 
 > STEP 2: Create folders to store settings and logs outside docker image.
 
-Create a local folder named **Oneshot_Optimizer** and extract all .zip content here.
+Create a local folder and extract all .zip content here.
 
 Move One-Shot Optimizer folder to the path **/opt** in the server.
 
