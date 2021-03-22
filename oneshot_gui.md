@@ -40,6 +40,7 @@ The following images summarize One-Shot Signature flow involving both authentica
 ![img](https://i.ibb.co/MNr9WV9/oneshot-flc1.png)
 
 </br>
+
 1. The client application creates a new digital signature request, providing all required user data
 2. One-Shot Optimizer returns an identifier for the certificate request
 3. The client application provides the documents to be signed by the end user
@@ -63,6 +64,7 @@ The following images summarize One-Shot Signature flow involving both authentica
 ![img](https://i.ibb.co/FJCPhCF/oneshot-flc2.png)
 
 </br>
+
 1. The client application creates a new digital signature request, providing all required user data
 2. One-Shot Optimizer returns an identifier for the certificate request
 3. The client application provides the documents to be signed by the end user
