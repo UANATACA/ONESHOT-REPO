@@ -157,7 +157,7 @@ Docker-compose.yml settings file:
 
 </br>
 
-> STEP 4: Load Docker One-Shot images.
+> STEP 4: Load One-Shot Docker images.
 
 Run the following commands:
 
@@ -221,53 +221,60 @@ See <a href="#section/Configuration/Service-settings">service settings</a> confi
 </br>
 
 
-
-
-
-
 ## Service settings
 
-
-**Before you begin**
-
-This document assumes that you received an up-to-date image of the One-Shot Optimizer virtual machine and a billing account with its associate username and password.
-
-To begin setting up One-Shot Optimizer, start the virtual machine and log into it using the provided credentials.
+<div style="text-align: justify">
+One-Shot Signature can be configured to use in test or production environment.
+</div>
+<br></br>
 
 
 > Test environment
 
 **Requirements:**
 
-- An up-to-date One-Shot Optimizer Virtual Machine image.
 - Billing credentials for the Uanataca test environment.
 
-The machine you received is already configured to use the Uanataca test environment. To start testing One-Shot Signature, it is enough to configure it to use your test environment billing account.
+One-Shot Optimizer is already configured to use the Uanataca test environment. To start testing One-Shot Signature, it is enough to configure your Uanataca billing account for test environment.
 
-To do so, open the file custom.ini in /opt/bit4id/oneshot_optimizer/etc and introduce the provided username and password under the [BILLING] section.
+To do so, open the settings file `custom.ini` and insert the provided username and password under the [BILLING] section.
+
+**/opt/oneshot_optimizer/common/etc/custom.ini** or custom mapped volume (Docker)
+
+**/opt/bit4id/oneshot_optimizer/etc/custom.ini** (Virtual Machine)
+
+Password must be inserted in base64 format. Run this command to convert your password to base64
+
+	echo -n <<billing_password>> | base64
+
+Custom.ini settings:
 
 	1 | [BILLING]
-	2 | USERNAME = my-test-account@uanataca.com
-	3 | PASSWORD = my-test-password
+	2 | USERNAME = billing-test-account@organization
+	3 | PASSWORD = base64-password
 
-Once you are done modifying the file, restart the One-Shot Optimizer service with **systemctl restart optimizer** so that changes take effect.
+Once you are done editing the file, restart the One-Shot Optimizer service to changes take effect.
 
-
-Once you are ready to deploy One-Shot Optimizer in a production environment, you will need to configure it to use the production credentials.
+	systemctl restart optimizer
+<br></br>
 
 > Production environment
 
 **Requirements:**
 
-- An up-to-date One-Shot Optimizer Virtual Machine image.
 - Billing credentials for the Uanataca production environment.
 - Certificate (.cer) and key (.key) files to connect to the Uanataca production environment.
-- The Id number for the Registration Authority that will produce the certificates.
+- The Id number for the Registration Authority that will issue the certificates.
 
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ We recommend starting from a clean copy of One-Shot Optimizer for this step. This prevents leftover files from the test environment from causing errors in production.</blockquote>
 
-<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ We recommend starting from a clean copy of the One-Shot Optimizer virtual machine for this step. This prevents leftover files from the test environment from causing errors in production.</blockquote>
+You should have received a certificate (.cer) and key (.key) file to be used to identify your application in communications with the production signature service. Place both files in the certificates folder, replacing the certificates for the test environment present in the virtual machine.
 
-You should have received a certificate (.cer) and key (.key) file to be used to identify your application in communications with the production signature service. Place both in the /opt/bit4id/oneshot_optimizer/etc/certs/ folder, replacing the certificates for the test environment present in the virtual machine.
+**/opt/oneshot_optimizer/common/etc/certs** or custom mapped volume (Docker)
+
+**/opt/bit4id/oneshot_optimizer/etc/certs/** (Virtual Machine)
+
+![img](https://i.ibb.co/dtcK4h6/oneshot-docker5.png)
 
 Open the custom.ini file in /opt/bit4id/oneshot_optimizer/etc and configure it to interact with the production environment. The parts that you will likely need to change are listed below:
 
@@ -285,24 +292,36 @@ Open the custom.ini file in /opt/bit4id/oneshot_optimizer/etc and configure it t
 	12| NO_REQUIRED_DOCUMENTS          = true
 	13|
 	14| DEFAULT_RA                     = 999
-	15| DEFAULT_PROFILE                = PFnubeAFCiudadano
-
-Under [ENV], set 'ENVIRONMENT = prod'.
-
-Under the [BILLING] section, introduce the production billing credentials.
-
-Under the [RA] section, make sure that the DEFAULT\_RA id matches your Registration Authority's identifer and the DEFAULT_PROFILE is set to the correct profile. Typically, this will be either PFnubeQAFCiudadano for qualified certificates or PFnubeNC for non-qualified certificates.
-
-You should also make sure that the NO\_REQUIRED_DOCUMENTS is correctly set to true or false depending on whether your RA is set to require (false) or not (true) uploads of the user's documents to generate a certificate.
-
-Once again, you will need to restart the One-Shot Optimizer service with **systemctl restart optimizer** before the changes take effect.
+	15| DEFAULT_PROFILE                = PFnubeQAFCiudadano
 
 
-**File permanence**
+Under [ENV] section, set environment to `prod`
 
-All files uploaded to One-Shot Optimizer are saved on the /opt/bit4id/oneshot_optimizer/tmp folder of the virtual machine. This includes documents (original and signed) as well as images used as a graphical representation of the signature in the signed pdf. Documents are organized in folders, grouped by request id.
+[ENV]
 
-<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ While the service will not delete uploaded files unless explicitly requested through an API call, it is **strongly recommended** that you backup any files that you want to preserve using an alternative system.</blockquote>
+ `ENVIRONMENT = prod`
+
+Under the [BILLING] section, introduce the production Uanataca Billing credentials. Password must be inserted in base64 format. Run this command to convert your password to base64
+
+	echo -n <<billing_password>> | base64
+
+[BILLING]:
+
+`USERNAME = billing-prod-account@organization`<br>
+`PASSWORD = base64-password`
+
+Under the [RA] section, make sure that the DEFAULT_RA matches your Registration Authority's identifer and the DEFAULT_PROFILE is set to the correct profile. Typically, this will be either `PFnubeQAFCiudadano` for EU eIDAS qualified certificates or `PFnubeNC` for non-qualified certificates.
+
+[RA]:
+
+`DEFAULT_RA = 999`<br>
+`DEFAULT_PROFILE = PFnubeQAFCiudadano`
+
+
+Once you are done editing the file, restart the One-Shot Optimizer service to changes take effect.
+
+	systemctl restart optimizer
+<br></br>
 
 
 # Workflow
@@ -467,7 +486,10 @@ The response by the server will be the document in binary format:
 
 > STEP 7: Delete documents from Optimizer
 
-The last step 
+
+All files uploaded to One-Shot Optimizer are saved on the /opt/bit4id/oneshot_optimizer/tmp folder of the virtual machine. This includes documents (original and signed) as well as images used as a graphical representation of the signature in the signed pdf. Documents are organized in folders, grouped by request id.
+
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ While the service will not delete uploaded files unless explicitly requested through an API call, it is **strongly recommended** that you backup any files that you want to preserve using an alternative system.</blockquote>
 
 </br>
 
