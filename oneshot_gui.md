@@ -3,17 +3,17 @@
 <div style="text-align: justify">
 One-Shot Signature is a complete solution for the digital signature of documents within your application. It is designed so that no sensitive data has to be sent away from your premises, as only hashes of the documents to be signed need to be transmitted to the signature service.
 <br></br>
-Documents are signed through the creation of <strong>single-use</strong> digital certificates, which are created when needed and immediately used to electronically sign all documents included in a given transaction. The digital signature will include a time stamp, proving the existence and integrity of the documents at the time of signature.
+Documents are signed through the creation of <strong>single-use</strong> digital certificates, which are created when needed and immediately used to electronically sign all documents included in a given transaction. Digital signatures will include a time stamp, proving the existence and integrity of the documents at the time of signature.
 </div>
 
 # How it works
 
 <div style="text-align: justify">
-A valid digital signature requires a certificate, emitted by a trusted a Certification Authority (CA). This certificate is used to establish that the document was signed by a specific entity (in our case, the user) that is known to the CA. Although certificate generation is largely automated within One-Shot Signature, having an idea of what is going on under the hood will help us to better understand its operation.
+A valid digital signature requires a certificate, emitted by a trusted a Certification Authority (CA). This certificate is used to establish that the document was signed by a specific entity (in our case, the user). Although certificate generation is largely automated within One-Shot Signature, having an idea of what is going on under the hood will help us to better understand its operation.
 <br></br>
-Within the context of a Public Key Infrastructure (PKI), the entity responsible for registering new digital identities is called a Registration Authority (RA). RA employ Registration Authority Officers (RAO) to add new user identities to the infrastructure and request the creation of new digital signature certificates for its users. Each of these certificates can then be used to digitally sign documents, such as contracts.
+Within the context of a Public Key Infrastructure (PKI), the entity responsible for registering new digital identities is called a Registration Authority (RA). RA employ Registration Authority Officers (RAO) to add new user identities to the infrastructure and request the creation of new digital signature certificates for its users. Each of these certificates can then be used to digitally sign documents.
 <br></br>
-In the case of One-Shot Signature, certificates are generated on the spot every time a new set of documents requires a signature. Through the One-Shot Signature API, you will play the role of a RAO, providing identifying data for each user and requesting the generation of signature certificates. Once user registration data has been provided and the certificate is ready to be generated, the end user will receive a One-Time Password (OTP) through an SMS message, which can be used to initiate the generation of the certificate and complete the signature procedure. After a successful signature, you will be able to retrieve the signed documents.
+In the case of One-Shot Signature, certificates are generated on the spot every time a new set of documents requires a signature. Through the One-Shot Signature service, you will play the role of a RAO, providing identifying data for each user and requesting the generation of signature certificates. Once user registration data has been provided and the certificate is ready to be generated, the end user will activate the generation of the digital certificate and complete the signature procedure.
 <br></br>
 The service is given with One-Shot Optimizer that is a server system exposing http RESTful APIs by means of which, business applications are enabled to require the digital signature. 
 <br></br>
@@ -82,7 +82,7 @@ The following images summarize One-Shot Signature flow involving both authentica
 
 # Configuration
 
-One-Shot Optimizer can be supplied as a Docker or as a Virtual Machine image.
+One-Shot Optimizer can be supplied as a **Docker** or as a **Virtual Machine** image.
 
 
 ## Hardware requirements
@@ -112,7 +112,7 @@ Run the following commands in this order.
 	sudo yum install -y yum-utils
 	yum install -y yum-utils device-mapper-persistent-data lvm2
 	yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-	sudo yum install docker-ce docker-ce-cli containerd.io
+	sudo yum install -y docker-ce docker-ce-cli containerd.io
 	sudo systemctl start docker
 
 
@@ -133,9 +133,9 @@ Run command **docker-compose version** to check the installation. The outcome sh
 
 </br>
 
-> STEP 2: Create folders to store settings and logs outside docker image.
+> STEP 2: Extract and copy One-Shot Optimizer zip content to the server.
 
-Create a local folder and extract all .zip content here.
+Extract all `oneshot_optimizer_docker.zip` content in a local folder.
 
 Move One-Shot Optimizer folder to the path **/opt** in the server.
 
@@ -143,22 +143,17 @@ The outcome should look like this:
 
 ![img](https://i.ibb.co/2M57krb/oneshot-docker2.png)
 
-Create server folders to store service settings and logs.
-
-	mkdir -p /opt/SignBox_Optimizer/common/etc
-	mkdir -p /opt/SignBox_Optimizer/common/etc/logs
-
-Extract `img.zip` and `tsa.zip` content and move to path **/opt/SignBox_Optimizer/common/etc** in the server. This should look like this:
-
-![img](https://i.ibb.co/RbWZcdd/signbox-docker4-1.png)
-
 </br>
 
-> STEP 3: Modify the `Docker-Compose.yml` file by adding the highlighted folders.
+> STEP 3: Mapping volumes (for environments with a pool of One-Shot Optimizer).
 
-	cd /opt/SignBox_Optimizer
+In high performance environments with a pool of One-Shot Optimizer, service settings and logs must be stored in a shared volume outside Optimizer servers. These volumes must be defined in `docker-compose.yaml` file in each One-Shot Optimizer.
 
-![img](https://i.ibb.co/sbvLXwW/signbox-docker3.png)
+	cd /opt/oneshot_optimizer
+
+Docker-compose.yml settings file:
+
+![img](https://i.ibb.co/mH3jGd0/oneshot-docker3.png)
 
 </br>
 
@@ -166,9 +161,14 @@ Extract `img.zip` and `tsa.zip` content and move to path **/opt/SignBox_Optimize
 
 Run the following commands:
 
-	cd /opt/OneShot_Optimizer
-	tar -xzf docker_signbox.tar.gz 
-	docker image load -i signbox.tar 
+	cd /opt/oneshot_optimizer
+	docker image load -i oneshot_optimizer.tar
+	docker image load -i oneshot_imgconverter.tar
+
+Remove image files:
+
+	rm /opt/oneshot_optimizer/oneshot_optimizer.tar
+	rm /opt/oneshot_optimizer/oneshot_imgconverter.tar
 
 </br>
 
@@ -180,10 +180,53 @@ Run:
 
 </br>
 
+> STEP 6: Service settings.
+
+See <a href="#section/Configuration/Service-settings">service settings</a> configuration section.
+
+</br>
+
 
 ## One-Shot Optimizer on Virtual Machine
 
-The local component of One-Shot Signature is the One-Shot Optimizer, which is provided pre-installed in a virtual machine. This page provides a guide to the configuration of the One-Shot Optimizer service and its integration within your network.
+<div style="text-align: justify">
+The Virtual Machine is supplied in an OVA file. One-Shot Optimizer image is compatible with common virtual environments like VMWare, AWS, Azure or VirtualBox.
+</div>
+</br>
+
+> STEP 1: Import One-Shot Optimizer (VM) in the virtual environment.
+
+<div style="text-align: justify">
+Adjust the system requirements for optimal usage considering host terminal resources described in <a href="#section/Configuration/Hardware-requirements"> hardware requirements</a>.
+</div>
+
+</br>
+
+> STEP 2: Network configuration.
+
+The network settings are configured on the file `ifcfg-ens33`, which can be found in the path **/etc/sysconfig/network-scripts**. Edit the file and insert the correct IP address, network mask, gateway and DNS for your network.
+
+Then restart network services with command **service network restart**.
+
+Example:
+
+![img](https://i.ibb.co/2gcwTGf/oneshot-docker4.png)
+
+</br>
+
+> STEP 3: Service settings.
+
+See <a href="#section/Configuration/Service-settings">service settings</a> configuration section.
+
+</br>
+
+
+
+
+
+
+## Service settings
+
 
 **Before you begin**
 
@@ -191,13 +234,8 @@ This document assumes that you received an up-to-date image of the One-Shot Opti
 
 To begin setting up One-Shot Optimizer, start the virtual machine and log into it using the provided credentials.
 
-**Network configuration**
 
-The network configuration is controlled by the file ifcfg-ens33, which can be found in the path /etc/sysconfig/network-scripts. Open that file and introduce the correct IP address, network mask, gateway and DNS for your network.
-
-Once you are done, restart the network service with the command service network restart.
-
-**Configuration of the One-Shot Optimizer service for testing**
+> Test environment
 
 **Requirements:**
 
@@ -214,9 +252,10 @@ To do so, open the file custom.ini in /opt/bit4id/oneshot_optimizer/etc and intr
 
 Once you are done modifying the file, restart the One-Shot Optimizer service with **systemctl restart optimizer** so that changes take effect.
 
-## Production settings
 
 Once you are ready to deploy One-Shot Optimizer in a production environment, you will need to configure it to use the production credentials.
+
+> Production environment
 
 **Requirements:**
 
