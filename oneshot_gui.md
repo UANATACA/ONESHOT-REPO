@@ -147,7 +147,7 @@ The outcome should look like this:
 
 > STEP 3: Mapping volumes (for environments with a pool of One-Shot Optimizer).
 
-In high performance environments with a pool of One-Shot Optimizer, service settings and logs must be stored in a shared volume outside Optimizer servers. These volumes must be defined in `docker-compose.yaml` file in each One-Shot Optimizer.
+In high performance environments with a pool of One-Shot Optimizer, service settings and logs must be stored in a shared volume outside Optimizer servers. These volumes must be defined in `docker-compose.yml` file in each One-Shot Optimizer.
 
 	cd /opt/oneshot_optimizer
 
@@ -229,21 +229,23 @@ One-Shot Signature can be configured to use in test or production environment.
 <br></br>
 
 
-> Test environment
+> TEST environment
 
 **Requirements:**
 
-- Billing credentials for the Uanataca test environment.
+- Billing credentials for Uanataca test environment.
 
-One-Shot Optimizer is already configured to use the Uanataca test environment. To start testing One-Shot Signature, it is enough to configure your Uanataca billing account for test environment.
+One-Shot Optimizer is already configured to use the Uanataca test environment. To start testing One-Shot Signature, it is enough to configure your Uanataca Billing account for test environment.
 
 To do so, open the settings file `custom.ini` and insert the provided username and password under the [BILLING] section.
+
+Custom.ini folder:
 
 **/opt/oneshot_optimizer/common/etc/custom.ini** or custom mapped volume (Docker)
 
 **/opt/bit4id/oneshot_optimizer/etc/custom.ini** (Virtual Machine)
 
-Password must be inserted in base64 format. Run this command to convert your password to base64
+**Password must be inserted in base64 format.** Run this command to convert your password to base64
 
 	echo -n <<billing_password>> | base64
 
@@ -258,11 +260,11 @@ Once you are done editing the file, restart the One-Shot Optimizer service to ch
 	systemctl restart optimizer
 <br></br>
 
-> Production environment
+> PRODUCTION environment
 
 **Requirements:**
 
-- Billing credentials for the Uanataca production environment.
+- Billing credentials for Uanataca production environment.
 - Certificate (.cer) and key (.key) files to connect to the Uanataca production environment.
 - The Id number for the Registration Authority that will issue the certificates.
 
@@ -301,7 +303,7 @@ Under [ENV] section, set environment to `prod`
 
  `ENVIRONMENT = prod`
 
-Under the [BILLING] section, introduce the production Uanataca Billing credentials. Password must be inserted in base64 format. Run this command to convert your password to base64
+Under the [BILLING] section, introduce the production Uanataca Billing credentials. **Password must be inserted in base64 format**. Run this command to convert your password to base64
 
 	echo -n <<billing_password>> | base64
 
@@ -331,30 +333,21 @@ This section section presents the workflow for a simple use case of the One-Shot
 You can follow the example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
 
 
-Before we begin, let's recap the objects and entities involved in the operation:
-
-**Registration Authority Officer (RAO)** is an agent authorized by a Registration Authority to enroll new accounts into a private key infrastructure system. For the One-Shot Signature service, this means the agent in charge of collecting all identifying information for each user and creating new signature requests.
-
-**Token** One-Shot Signature uses tokens to identify the RAO who creates each signature request. While the use of tokens is entirely optional, it is often convenient to create and use a token for a RAO instead of introducing the full credentials every time that they are required.
-
-**Document** A PDF file to be signed.
-
-**One-Time Password (OTP)** a secret code sent by SMS directly to your users so that they can confirm their identity and complete the digital signature.
 The basic digital signature process involves the following steps:
 
 - Retrieve an existing token for the RAO
 - Create a new Digital Signature Request
 - Upload a document
-- Generate an OTP
+- Generate an OTP (only for Uanataca SMS)
 - Sign the document
 - Retrieve the signed document
 - Delete documents from Optimizer
 
 > STEP 1: Retrieve an existing token for the RAO
 
-The test One-Shot Optimizer virtual machine is pre-configured with a RAO account ready to be used within the test environment. This account has an associated token, that can be used to identify the RAO in API calls. We can list existing tokens with the /api/v1/tokens API endpoint.
+API reference: <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List tokens</a>
 
-Assuming that https://one-shot.developers.uanataca.com is the URL for the One-Shot Optimizer virtual machine, we can access the endpoint with:
+The test One-Shot Optimizer is pre-configured with a Registration Authority Officer (RAO) account ready to be used within the test environment. This account has an associated token, that can be used to identify the RAO in API calls.
 
 	curl -X GET https://one-shot.developers.uanataca.com/api/v1/tokens
 
@@ -363,41 +356,39 @@ On the clean machine, this should return a single token:
 	1 | {
 	2 |     "status": "200 OK",
 	3 |     "details": {
-	4 |         "791ef6ff519b41cfa2f311e6cd144586": {
-	5 |             "username": "9900123",
+	4 |         "6d1cae4d55be4cdf9cac50ee36f73406": {
+	5 |             "username": "9001800",
 	6 |             "password": true,
 	7 |             "pin": true
 	8 |         }
 	9 |     }
 	10| }
 
-This output tells us that a single token "791ef6ff519b41cfa2f311e6cd144586" exists. This token is associated to the RAO account with id "9900123" and can be used in place of the password and pin.
+This output tells us that a single token "6d1cae4d55be4cdf9cac50ee36f73406" exists. This token is associated to the RAO account with id "9001800" and can be used in place of the password and pin.
 
-To use tokens in a production environment, you will need to create them first with the corresponding API call.
-
-Tokens can also be generated without providing all credentials. In that case, the missing credentials (pin or password) have to be provided as additional arguments every time the token is used.
+To use tokens in a production environment, you will need to create them first with the corresponding <a href="#tag/Tokens/paths/~1api~1v1~1token/post">Create token</a> API call.
 </br>
 
 > STEP 2: Create a new Digital Signature Request
 
+API reference: <a href="#tag/Requests/paths/~1api~1v1~1request/post">Create request</a>
+
 Within the One-Shot Signature Service, all data pertaining to a given digital signature is collected within a Digital Signature Request. This includes both the identifying information of the signing user, which is provided when you create the signature request, and the document or documents to be signed, which we will upload later.
 
-We can crete a new signature request with a POST call to the api/v1/request API endpoint. This call must include enough information to identify both the signing user and the RAO initiating the request. The full description of the arguments accepted by this endpoint can be found in the detailed documentation, but for now it is enough to include at least the following:
+This call must include enough information to identify both the signing user and the RAO approving the request. The full description of the arguments accepted by this endpoint can be found in the API call detailed documentation, but for now it is enough to include at least the following:
 
 	1 | curl --location --request POST 'https://one-shot.developers.uanataca.com/api/v1/request' \
-	2 |      --form 'token=791ef6ff519b41cfa2f311e6cd144586' \
-	3 |      --form 'profile=PFnubeAFCiudadano' \
+	2 |      --form 'token=6d1cae4d55be4cdf9cac50ee36f73406' \
+	3 |      --form 'profile=PFnubeQAFCiudadano' \
 	4 |      --form 'given_name=name_of_the_user' \
 	5 |      --form 'surname_1=surname_of_the_user' \
 	6 |      --form 'email=user-example@domain.com' \
-	7 |      --form 'mobile_phone_number=+393391234567' \
+	7 |      --form 'mobile_phone_number=+343391234567' \
 	8 |      --form 'document_front=@document_front.png' \
 	9 |      --form 'document_rear=@document_rear.png' \
 	10|      --form 'document_owner=@document_owner.png'
 
 where token is the token representing the RAO credentials obtained in the previous step.
-
-Note that here we are providing images of the user's identification document. These may not be required in production if your Registration Authority allows enrollment without documents.
 
 If the signature request is completed successfully, we will get the unique identifier assigned to it:
 
@@ -411,13 +402,16 @@ The request code will be used to identify this digital signature request in subs
 
 > STEP 3: Upload a document
 
-After creating the digital signature request, we can associate to it all documents that should be signed by the user. For each document, we make a multipart/form-data HTTP POST request with the **PDF** document to upload.
+API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}/post">Upload document</a>
+
+
+After creating the digital signature request, we can associate to it all pdf documents that should be signed by the user.
 
 	curl -F "file=@doc.pdf" -X POST https://one-shot.developers.uanataca.com/api/v1/document/1464
 
 Note that the number at the end of the call is the request id we obtained in the previous step.
 
-If the upload is successful, the response will contain the identifier assigned to the document:
+If the upload is successful, the response will contain the identifier assigned to each document:
 
 	1 | {
 	2 |     "status": "200 OK",
@@ -428,7 +422,11 @@ If the upload is successful, the response will contain the identifier assigned t
 
 > STEP 4: Generate an OTP
 
-Once the documents to be signed are ready, we need to generate a secure One time password (OTP) that will allow the user to sign them. The OTP is generated by calling the otp endpoint and the resulting OTP is sent as an SMS message directly to the phone number we provided when creating the signature request.
+API reference: <a href="#tag/Requests/paths/~1api~1v1~1otp~1{pk}/post">Generate OTP code</a>
+
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ This step is only used for flows using Uanataca SMS.</blockquote>
+
+Once the documents to be signed are ready, we need to generate a secure One-time password (OTP) that will allow the user to sign them. The OTP is generated by calling the otp endpoint and the resulting OTP is sent as an SMS message directly to the phone number we provided when creating the signature request.
 
 When calling the OTP endpoint, provide the request identifier returned by the request endpoint:
 
@@ -441,24 +439,34 @@ A successful call will look like this:
 	3 |     "details": "OTP generated"
 	4 | }
 
-With this call, an SMS with the secret is sent to the mobile phone number associated to the signature request.
+With this call, an SMS with the secret code is sent to the mobile phone number associated to the signature request.
 </br>
 
 > STEP 5: Sign the document
 
-In this step we are going to finalize the creation of the signature certificate and sign all documents previously uploaded for the signature request.
+API reference: <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">Sign</a>
+
+In this step we are going to issue the digital signature certificate and sign all documents previously uploaded for the signature request.
 
 Call the sign endpoint with the request id and json parameters containing the OTP:
 
-params.json:
+	curl -d @params.json -H "Content-Type: application/json -X POST https://one-shot.developers.uanataca.com/api/v1/sign/1464
+
+params.json for Uanataca SMS:
 
 	1 | {
 	2 |     "secret": "123456"
 	3 | }
 
-</br>
+params.json for other authentication methods:
 
-	curl -d @params.json -H "Content-Type: application/json -X POST https://one-shot.developers.uanataca.com/api/v1/sign/1464
+	1 | {
+	2 |     "secret": "123456"
+	3 |     "ext_unlock_type": "biometric"
+	4 |     "ext_unlock_value": "12345678-12345678"
+	5 | }
+
+</br>
 
 A successful call will result in the following response:
 
@@ -471,9 +479,11 @@ A successful call will result in the following response:
 
 > STEP 6: Retrieve signed document
 
+API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/get">Retrieve document</a>
+
 Once the signature is done, the next step is getting the signed documents.
 
-To do this, query with an HTTP GET request the endpoint /api/v1/document/{pk}/{type}/{uid}, where {pk} is the Request's unique identifier, {type} is the type of the document (it can be "original" for the uploaded document or "signed" for the digitally-signed version) and {uid} is the unique id string assigned to the document.
+To do this, query with an HTTP GET request the endpoint /api/v1/document/{pk}/{type}/{uid}, where {pk} is the Request's unique identifier, {type} is the type of the document (it can be "original" for the uploaded document or "signed" for the digitally-signed version) and {uid} is the document unique identifier.
 
 	curl -X GET https://one-shot.developers.uanataca.com/api/v1/document/1464/signed/712c29ac-a2dc-4530-8c67-d0f227d8294b
 
@@ -486,10 +496,14 @@ The response by the server will be the document in binary format:
 
 > STEP 7: Delete documents from Optimizer
 
+API reference: <a href="#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete">Delete all request documents</a>
 
-All files uploaded to One-Shot Optimizer are saved on the /opt/bit4id/oneshot_optimizer/tmp folder of the virtual machine. This includes documents (original and signed) as well as images used as a graphical representation of the signature in the signed pdf. Documents are organized in folders, grouped by request id.
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ While the service will not delete uploaded files unless explicitly requested through an API call, it is <strong>strongly recommended</strong> that you backup any files that you want to preserve using an alternative system.</blockquote>
 
-<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ While the service will not delete uploaded files unless explicitly requested through an API call, it is **strongly recommended** that you backup any files that you want to preserve using an alternative system.</blockquote>
+Delete all documents associated to an ended digital signature request.
+
+	curl -X DELETE https://one-shot.developers.uanataca.com/api/v1/documents/1464
+
 
 </br>
 
@@ -501,7 +515,7 @@ Service logs file `optimizer.log` is stored in a local folder in One-Shot Optimi
 
 Docker path:
 
-**./common/etc/logs**
+**/opt/oneshot_optimizer/common/logs** or custom mapped volume
 
 Virtual Machine path:
 
