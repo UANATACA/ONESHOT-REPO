@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
-  version: '1.0'
-  title: UANATACA ONESHOT API DOCUMENTATION
+  version: 'v1'
+  title: UANATACA ONE-SHOT SIGNATURE API DOCUMENTATION
   x-logo:
       url: https://i.ibb.co/BCNsnYf/oneshot-logo.png
       altText: Oneshot logo
