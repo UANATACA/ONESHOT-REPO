@@ -2529,6 +2529,12 @@ definitions:
             secret:
                 type: "string"
                 description: "The OTP code sent to the user"
+            ext_unlock_type:
+                type: "string"
+                description: "The external authentication method type"
+            ext_unlock_value:
+                type: "string"
+                description: "The id of the external authenticacion request"
             options:
                 type: "object"
                 description: "Visual graphic signature properties.<br>
