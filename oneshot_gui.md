@@ -21,7 +21,7 @@ One-Shot Optimizer performs the most computationally expensive workload of the s
 </div>
 <br></br>
 
-![img](https://i.ibb.co/JBvGZGG/oneshot-wkf.png)
+![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot-hiw.png?token=ATF574U5424BOAT76QIETTLALXDNS)
 
 
 # Flow chart
@@ -37,7 +37,7 @@ The following images summarize One-Shot Signature flow involving both authentica
 
 > Uanataca SMS
 
-![img](https://i.ibb.co/MNr9WV9/oneshot-flc1.png)
+![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot_flc1.png?token=ATF574VQRVE6BQAWX5JF643ALXD5U)
 
 </br>
 
@@ -61,7 +61,7 @@ The following images summarize One-Shot Signature flow involving both authentica
 > Other authentication methods
 
 
-![img](https://i.ibb.co/FJCPhCF/oneshot-flc2.png)
+![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot_flc2.png?token=ATF574VLUYY4IJMIPE37SITALXEGS)
 
 </br>
 

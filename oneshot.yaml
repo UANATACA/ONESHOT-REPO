@@ -3,7 +3,7 @@ info:
   version: 'v1'
   title: UANATACA ONE-SHOT SIGNATURE API DOCUMENTATION
   x-logo:
-      url: https://i.ibb.co/Qn2y5hT/oneshot-logo.png
+      url: https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot_logo.png?token=ATF574UWGCYOZPK5RIPMLJ3ALW6HA
       altText: Oneshot logo
   description: 
     $ref: ./oneshot_gui.md
