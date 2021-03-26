@@ -12,6 +12,14 @@ host: one-shot.developers.uanataca.com
 schemes: 
   - https
 
+x-tagGroups:
+  - name: API Reference
+    tags:
+      - Tokens
+      - Requests
+      - Documents
+      - Images
+
 tags:
 - name: "Tokens"
   description: "
