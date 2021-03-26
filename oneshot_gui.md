@@ -130,7 +130,7 @@ Run the following commands in this order.
 Run command **docker-compose version** to check the installation. The outcome should show this information:
 
 
-![img](https://i.ibb.co/WphfmXH/signbox-docker1.png) 
+![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot-docker1.png?token=ATF574UUBXJRM4MJH7PE5JTALXEUO) 
 
 </br>
 
@@ -142,7 +142,7 @@ Move One-Shot Optimizer folder to the path **/opt** in the server.
 
 The outcome should look like this:
 
-![img](https://i.ibb.co/2M57krb/oneshot-docker2.png)
+![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot-docker2.png?token=ATF574R6PU4TUA3NT35UXRDALXFBI)
 
 </br>
 
@@ -154,7 +154,7 @@ In high performance environments with a pool of One-Shot Optimizer, service sett
 
 Docker-compose.yml settings file:
 
-![img](https://i.ibb.co/mH3jGd0/oneshot-docker3.png)
+![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot-docker3.png?token=ATF574RZXABFCEHY55ET653ALXFK4)
 
 </br>
 
@@ -211,7 +211,7 @@ Then restart network services with command **service network restart**.
 
 Example:
 
-![img](https://i.ibb.co/2gcwTGf/oneshot-docker4.png)
+![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot-docker4.png?token=ATF574UWJW335UGJUW64WPDALXFZS)
 
 </br>
 
@@ -277,7 +277,7 @@ You should have received a certificate (.cer) and key (.key) file to be used to 
 
 **/opt/bit4id/oneshot_optimizer/etc/certs/** (Virtual Machine)
 
-![img](https://i.ibb.co/dtcK4h6/oneshot-docker5.png)
+![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot-docker5.png?token=ATF574QNARKGNAMRG7ZISHDALXGQU)
 
 Open the custom.ini file in /opt/bit4id/oneshot_optimizer/etc and configure it to interact with the production environment. The parts that you will likely need to change are listed below:
 
