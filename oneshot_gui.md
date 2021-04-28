@@ -109,8 +109,7 @@ This configuration requires a server with a Linux CentOS operating system.
 
 Run the following commands in this order.
 
-	sudo yum update
-	sudo yum install -y yum-utils
+	sudo yum update -y
 	yum install -y yum-utils device-mapper-persistent-data lvm2
 	yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 	sudo yum install -y docker-ce docker-ce-cli containerd.io
@@ -168,8 +167,8 @@ Run the following commands:
 
 Remove image files:
 
-	rm /opt/oneshot_optimizer/oneshot_optimizer.tar
-	rm /opt/oneshot_optimizer/oneshot_imgconverter.tar
+	rm -rf /opt/oneshot_optimizer/oneshot_optimizer.tar
+	rm -rf /opt/oneshot_optimizer/oneshot_imgconverter.tar
 
 </br>
 
