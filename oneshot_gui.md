@@ -9,7 +9,7 @@ Documents are signed through the creation of <strong>single-use</strong> digital
 # How it works
 
 <div style="text-align: justify">
-A valid digital signature requires a certificate, emitted by a trusted a Certification Authority (CA). This certificate is used to establish that the document was signed by a specific entity (in our case, the user). Although certificate generation is largely automated within One-Shot Signature, having an idea of what is going on under the hood will help us to better understand its operation.
+A valid digital signature requires a certificate, issued by a trusted Certification Authority (CA). This certificate is used to establish that the document was signed by a specific entity (in our case, the user). Although certificate generation is largely automated within One-Shot Signature, having an idea of what is going on under the hood will help us to better understand its operation.
 <br></br>
 Within the context of a Public Key Infrastructure (PKI), the entity responsible for registering new digital identities is called a Registration Authority (RA). RA employ Registration Authority Officers (RAO) to add new user identities to the infrastructure and request the creation of new digital signature certificates for its users. Each of these certificates can then be used to digitally sign documents.
 <br></br>
@@ -41,21 +41,21 @@ The following images summarize One-Shot Signature flow involving both authentica
 
 </br>
 
-1. The client application creates a new digital signature request, providing all required user data
+1. The business application creates a new digital signature request, providing all required user data
 2. One-Shot Optimizer returns an identifier for the certificate request
-3. The client application provides the documents to be signed by the end user
-4. The client application shows the documents to be signed to its end user
+3. The business application provides the documents to be signed by the end user
+4. The business application shows the documents to be signed to its end user
 5. After reviewing the document, the end user agrees to sign it
-6. The client application starts the signature process by requesting the generation of a One-Time Password (OTP) token for the signature
+6. The business application starts the signature process by requesting the generation of a One-Time Password (OTP) token for the signature
 7. Uanataca services sends the OTP directly to the end user through an SMS message
 8. By introducing the OTP, the end user identifies himself as the subject of the signature certificate
-9. The client application provides the OTP and the identifier of the signature request to the One-Shot Optimizer
+9. The business application provides the OTP and the identifier of the signature request to the One-Shot Optimizer
 10. One-Shot Optimizer takes care of computing the hash of the documents to be signed in the business layer
 11. Hashes are sent together with the request identifier and OTP code to Uanataca Services
 12. The end user signature certificate is generated and used to sign the hashes
 13. The signed hashes and the signature identifier are returned to the One-Shot Optimizer
 14. One-Shot Optimizer generates the signed document envelopment, combining the original documents with the signed hashes
-15. Finallly, the client application calls One-Shot Optimizer API to obtain the signed documents
+15. Finallly, the business application calls One-Shot Optimizer API to obtain the signed documents
 <br></br>
 
 > Other authentication methods
@@ -65,10 +65,10 @@ The following images summarize One-Shot Signature flow involving both authentica
 
 </br>
 
-1. The client application creates a new digital signature request, providing all required user data
+1. The business application creates a new digital signature request, providing all required user data
 2. One-Shot Optimizer returns an identifier for the certificate request
-3. The client application provides the documents to be signed by the end user
-4. The client application shows the documents to be signed to its end user
+3. The business application provides the documents to be signed by the end user
+4. The business application shows the documents to be signed to its end user
 5. After reviewing the document, the end user agrees to sign it
 6. The client application starts the signature process with an authentication method provided by the client
 7. One-Shot Optimizer takes care of computing the hash of the documents to be signed in the business layer
@@ -76,13 +76,16 @@ The following images summarize One-Shot Signature flow involving both authentica
 9. The end user signature certificate is generated and used to sign the hashes
 10. The signed hashes and the signature identifier are returned to the One-Shot Optimizer
 11. One-Shot Optimizer generates the signed document envelopment, combining the original documents with the signed hashes
-12. Finallly, the client application calls One-Shot Optimizer API to obtain the signed documents
+12. Finallly, the business application calls One-Shot Optimizer API to obtain the signed documents
 
 
 
 # Configuration
 
 One-Shot Optimizer can be supplied as a **Docker** or as a **Virtual Machine** image.
+See the configuration description in:<br>
+<a href="#section/Configuration/One-Shot-Optimizer-on-Docker"> One-Shot Optimizer on Docker</a><br>
+<a href="#section/Configuration/One-Shot-Optimizer-on-Virtual-Machine-(OVA)"> One-Shot Optimizer on Virtual Machine</a>
 
 
 ## Hardware requirements
@@ -531,4 +534,4 @@ It is only required to edit `host`variable in Postman environment with the IP or
 <a href="https://cdn.bit4id.com/es/uanataca/public/oneshot/Uanataca_One-Shot_Postman.zip">One-Shot Postman collection download</a>
 
 
-# API Reference
+<div id="APIReference" style="padding-top: 60px;"><h1>API Reference<h1></div>

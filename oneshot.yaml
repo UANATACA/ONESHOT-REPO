@@ -211,7 +211,7 @@ paths:
                     -d '{
                       "username": "5057249",
                       "password": "Gy6F89xK",
-                      "pin": "belorado74"
+                      "pin": "t8tr6vkg"
                     }'
         - lang: 'JavaScript'
           source: |
@@ -225,7 +225,7 @@ paths:
                       body: JSON.stringify({
                         username: '5057249',
                         password: 'Gy6F89xK',
-                        pin: 'belorado74'
+                        pin: 't8tr6vkg'
                       })
                     }
                   );
@@ -241,7 +241,7 @@ paths:
                   payload = {
                     "username": "5057249",
                     "password": "Gy6F89xK",
-                    "pin": "belorado74"
+                    "pin": "t8tr6vkg"
                   }
 
                   headers = {"Content-Type": "application/json"}
@@ -264,7 +264,7 @@ paths:
                       body: JSON.stringify({
                         username: '5057249',
                         password: 'Gy6F89xK',
-                        pin: 'belorado74'
+                        pin: 't8tr6vkg'
                       })
                     }
                   );
@@ -288,7 +288,7 @@ paths:
                         JObject json = JObject.Parse(@"{
                           username: '5057249',
                           password: 'Gy6F89xK',
-                          pin: 'belorado74'
+                          pin: 't8tr6vkg'
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
                         var request = await client.PostAsync("https://one-shot.developers.uanataca.com/api/v1/token", postData);
@@ -304,7 +304,7 @@ paths:
       summary: GET TOKEN
       tags:
         - Tokens
-      description: "Retrieves the token associated credentials with the given unique idedntifier.<br>
+      description: "Retrieves the token associated credentials with the given unique identifier.<br>
                     The response get a `true` or `false` value regarding if password and PIN parameters are associated to the token."
       produces:
         - application/json
@@ -687,7 +687,7 @@ paths:
         type: string
         description: >
           Digital certificate profiles allowed:
-           * **PFnubeQAFCiudadano** - Uanataca's eIDAS quaalified digital certificate used for qualified signature in the European Union
+           * **PFnubeQAFCiudadano** - Uanataca's eIDAS qualified digital certificate used for qualified signature in the European Union
            * **PFnubeNC** - Uanataca's normalized digital certificate used for advanced signature
         required: true
       - in: formData
@@ -720,7 +720,6 @@ paths:
         name: document_owner
         description: A selfie image of the user holding the identifying document below his/her chin (JPEG or PNG).
         type: file
-        required: true
       responses:
         201:
           description: Successful Response
@@ -830,40 +829,40 @@ paths:
                   curl -i -X POST \
                     https://one-shot.developers.uanataca.com/api/v1/request \
                     -H 'Content-Type: multipart/form-data' \
-                    -F given_name=Name \
-                    -F surname_1=Surname1 \
-                    -F surname_2=Surname2 \
+                    -F given_name=John \
+                    -F surname_1=Smith \
+                    -F surname_2=Lopez \
                     -F id_document_type=IDC \
                     -F id_document_country=ES \
-                    -F serial_number=A1111111W \
-                    -F email=mail@domain \
+                    -F serial_number=12345678A \
+                    -F email=john_smithlop@uanataca.com \
                     -F mobile_phone_number=+34999999999 \
                     -F registration_authority=124 \
                     -F profile=PFnubeQAFCiudadano \
                     -F token=a44765ab8ca04e429a565f02d22179a0 \
                     -F username=5057249
                     -F password=Gy6F89xK \
-                    -F pin=belorado74 \
+                    -F pin=t8tr6vkg \
                     -F document_front=@sample_folder/img_front.png \
                     -F document_rear=@sample_folder/img_rear.png \
                     -F document_owner=@sample_folder/img_selfie.png \
         - lang: 'JavaScript'
           source: |
                   var formdata = new FormData();
-                  formdata.append("given_name", "Name");
-                  formdata.append("surname_1", "Surname1");
-                  formdata.append("surname_2", "Surname2");
+                  formdata.append("given_name", "John");
+                  formdata.append("surname_1", "Smith");
+                  formdata.append("surname_2", "Lopez");
                   formdata.append("id_document_type", "IDC");
                   formdata.append("id_document_country", "ES");
-                  formdata.append("serial_number", "A1111111W");
-                  formdata.append("email", "mail@domain");
+                  formdata.append("serial_number", "12345678A");
+                  formdata.append("email", "john_smithlop@uanataca.com");
                   formdata.append("mobile_phone_number", "+34999999999");
                   formdata.append("registration_authority", "124");
                   formdata.append("profile", "PFnubeQAFCiudadano");
                   formdata.append("token", "a44765ab8ca04e429a565f02d22179a0");
                   formdata.append("username", "5057249");
                   formdata.append("password", "Gy6F89xK");
-                  formdata.append("pin", "belorado74");
+                  formdata.append("pin", "t8tr6vkg");
                   formdata.append("document_front", fileInput.files[0], "sample_folder/img_front.png");
                   formdata.append("document_rear", fileInput.files[0], "sample_folder/img_rear.png");
                   formdata.append("document_selfie", fileInput.files[0], "sample_folder/img_selfie.png");
@@ -885,20 +884,20 @@ paths:
 
                   url = "https://one-shot.developers.uanataca.com/api/v1/request"
 
-                  payload={'given_name': 'Name',
-                  'surname_1': 'Surname1',
-                  'surname_2': 'Surname2',
+                  payload={'given_name': 'John',
+                  'surname_1': 'Smith',
+                  'surname_2': 'Lopez',
                   'id_document_type': 'IDC',
                   'id_document_country': 'ES',
-                  'serial_number': 'A1111111W',
-                  'email': 'mail@domain',
+                  'serial_number': '12345678A',
+                  'email': 'john_smithlop@uanataca.com',
                   'mobile_phone_number': '+34999999999',
                   'registration_authority': '124',
                   'profile': 'PFnubeQAFCiudadano',
                   'token': 'a44765ab8ca04e429a565f02d22179a0',
                   'username': '5057249',
                   'password': 'Gy6F89xK',
-                  'pin': 'belorado74'}
+                  'pin': 't8tr6vkg'}
                   files=[
                     ('document_front',('file',open('sample_folder/img_front.png','rb'),'image/png')),
                     ('document_rear',('file',open('sample_folder/img_rear.png','rb'),'image/png')),
@@ -918,20 +917,20 @@ paths:
                   const fetch = require('node-fetch');
                   const formData = new FormData();
 
-                  formData.append('given_name', 'Name');
-                  formData.append('surname_1', 'Surname1');
-                  formData.append('surname_2', 'Surname2');
+                  formData.append('given_name', 'John');
+                  formData.append('surname_1', 'Smith');
+                  formData.append('surname_2', 'Lopez');
                   formData.append('id_document_type', 'IDC');
                   formData.append('id_document_country', 'ES');
-                  formData.append('serial_number', 'A1111111W');
-                  formData.append('email', 'mail@domain');
+                  formData.append('serial_number', '12345678A');
+                  formData.append('email', 'john_smithlop@uanataca.com');
                   formData.append('mobile_phone_number', '+34999999999');
                   formData.append('registration_authority', '124');
                   formData.append('profile', 'PFnubeQAFCiudadano');
                   formData.append('token', 'a44765ab8ca04e429a565f02d22179a0');
                   formData.append('username', '5057249');
                   formData.append('password', 'Gy6F89xK');
-                  formData.append('pin', 'belorado74');
+                  formData.append('pin', 't8tr6vkg');
                   formData.append('document_front', fs.createReadStream('sample_folder/img_front.png'));
                   formData.append('document_rear', fs.createReadStream('sample_folder/img_rear.png'));
                   formData.append('document_owner', fs.createReadStream('sample_folder/img_selfie.png'));
@@ -958,20 +957,20 @@ paths:
                     client.Timeout = -1;
                     var request = new RestRequest(Method.POST);
                     request.AddHeader("content-type", "multipart/form-data; boundary=----011000010111000001101001");
-                    request.AddParameter("given_name", "Name");
-                    request.AddParameter("surname_1", "Surname1");
-                    request.AddParameter("surname_2", "Surname2");
+                    request.AddParameter("given_name", "John");
+                    request.AddParameter("surname_1", "Smith");
+                    request.AddParameter("surname_2", "Lopez");
                     request.AddParameter("id_document_type", "IDC");
                     request.AddParameter("id_document_country", "ES");
-                    request.AddParameter("serial_number", "A1111111W");
-                    request.AddParameter("email", "mail@domain");
+                    request.AddParameter("serial_number", "12345678A");
+                    request.AddParameter("email", "john_smithlop@uanataca.com");
                     request.AddParameter("mobile_phone_number", "+34999999999");
                     request.AddParameter("registration_authority", "124");
                     request.AddParameter("profile", "PFnubeQAFCiudadano");
                     request.AddParameter("token", "a44765ab8ca04e429a565f02d22179a0");
                     request.AddParameter("username", "5057249");
                     request.AddParameter("password", "Gy6F89xK");
-                    request.AddParameter("pin", "belorado74");
+                    request.AddParameter("pin", "t8tr6vkg");
                     request.AddFile("document_front", "sample_folder/img_front.png");
                     request.AddFile("document_rear", "sample_folder/img_rear.png");
                     request.AddFile("document_owner", "sample_folder/img_selfie.png");
@@ -1122,7 +1121,7 @@ paths:
                       "organizational_unit_1": null,
                       "organization_postal_code": null,
                       "responsible_email": null,
-                      "given_name": "Name",
+                      "given_name": "John",
                       "id_responsible_document_issuer": null,
                       "organization_url": null,
                       "status": "ENROLLREADY",
@@ -2536,17 +2535,20 @@ definitions:
         properties:
             secret:
                 type: "string"
-                description: "The OTP code sent to the user"
+                description: "The OTP code sent to the user.<br>
+                              For external authenticacion method, a customer code is provided"
             ext_unlock_type:
                 type: "string"
-                description: "The external authentication method type"
+                description: "The external authentication method type.
+                              This field is required for requests using external authenticacion methods"
             ext_unlock_value:
                 type: "string"
-                description: "The id of the external authenticacion request"
+                description: "The id of the external authenticacion request.
+                              This field is required for requests using external authenticacion methods"
             options:
                 type: "object"
                 description: "Visual graphic signature properties.<br>
-                              It is required prior to uploading an image. See <a href='#tag/Images'>images</a> api reference"
+                              **It is required prior to uploading an image.** See <a href='#tag/Images'>images</a> api reference"
                 properties:
                     position:
                         type: "string"
