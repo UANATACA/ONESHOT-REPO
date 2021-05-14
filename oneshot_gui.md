@@ -1,23 +1,27 @@
 # What it is
 
 <div style="text-align: justify">
-One-Shot Signature is a complete solution for the digital signature of documents within your application. It is designed so that no sensitive data has to be sent away from your premises, as only hashes of the documents to be signed need to be transmitted to the signature service.
+The solution for electronic signature with a One Time certificate issue. One-Shot API is the solution for Uanataca One-Shot Signature service, a complete option for the electronic signature of documents within your application or web.
 <br></br>
-Documents are signed through the creation of <strong>single-use</strong> digital certificates, which are created when needed and immediately used to electronically sign all documents included in a given transaction. Digital signatures will include a time stamp, proving the existence and integrity of the documents at the time of signature.
+It is designed so that no sensitive data has to be sent away from your premises, as only hashes of the documents to be signed need to be transmitted to the signature service. Documents are signed through the creation of single-use digital certificates, which are created at the moment for immediately be used to electronically sign all documents included in a given transaction.
+<br></br> 
+Electronic signatures include a time stamp, providing to the document signature with a reliable date and time.
+<br></br>
+Through this system we offer our One-shot Signature service, an autonomous solution adapting to multiple use cases.
 </div>
 
 # How it works
 
 <div style="text-align: justify">
-A valid digital signature requires a certificate, issued by a trusted Certification Authority (CA). This certificate is used to establish that the document was signed by a specific entity (in our case, the user). Although certificate generation is largely automated within One-Shot Signature, having an idea of what is going on under the hood will help us to better understand its operation.
+The API is given with One-Shot Optimizer that is a server system exposing http RESTful API by means of which, business applications are enabled to require the electronic signature.
 <br></br>
-Within the context of a Public Key Infrastructure (PKI), the entity responsible for registering new digital identities is called a Registration Authority (RA). RA employ Registration Authority Officers (RAO) to add new user identities to the infrastructure and request the creation of new digital signature certificates for its users. Each of these certificates can then be used to digitally sign documents.
+One-Shot Optimizer performs the most computationally expensive workload of the signature process, thus reducing the data traffic on the local network and make the most of the cryptographic hardware acceleration. The documents to be signed are processed in the customer business layer and are not send to Uanataca Services, instead is sent a hash of the document created using a hash algorithm.
 <br></br>
-In the case of One-Shot Signature, certificates are generated on the spot every time a new set of documents requires a signature. Through the One-Shot Signature service, you will play the role of a RAO, providing identifying data for each user and requesting the generation of signature certificates. Once user registration data has been provided and the certificate is ready to be generated, the end user will activate the generation of the digital certificate and complete the signature procedure.
+Uanataca is a Qualified Trusted Service Provider that issue digital certificates by a trusted Certification Authority (CA). The role of Registration Authority Officials (RAO) is needed to add new user requests to the infrastructure and so request the creation of new digital certificates for its users. Each of these certificates can then be used to electronically sign documents.
 <br></br>
-The service is given with One-Shot Optimizer that is a server system exposing http RESTful APIs by means of which, business applications are enabled to require the digital signature. 
+One-Shot Signature certificates are generated on the spot every time a new set of documents requires a signature. Through the One-Shot Signature service, you will play the role of a RAO, providing identifying data for each user and requesting the generation of signature certificates. Once user registration data has been provided and the certificate is ready to be generated, the end user will activate the generation of the digital certificate and complete the signature procedure.
 <br></br>
-One-Shot Optimizer performs the most computationally expensive workload of the signature process, thus reducing the data traffic on the local network and make the most of the cryptographic hardware acceleration. The documnets to be signed are processed in the customer business layer and are not send to Uanataca Services, instead is sent a hash of the document created using a hash algorithm. 
+The electronic signatures are performed in Uanataca Trusted Service Center side, where signature keys are generated and stored in a Qualified Electronic Signature Creation Device (QSCD) system.
 </div>
 <br></br>
 
@@ -44,18 +48,19 @@ The following images summarize One-Shot Signature flow involving both authentica
 1. The business application creates a new digital signature request, providing all required user data
 2. One-Shot Optimizer returns an identifier for the certificate request
 3. The business application provides the documents to be signed by the end user
-4. The business application shows the documents to be signed to its end user
-5. After reviewing the document, the end user agrees to sign it
-6. The business application starts the signature process by requesting the generation of a One-Time Password (OTP) token for the signature
-7. Uanataca services sends the OTP directly to the end user through an SMS message
-8. By introducing the OTP, the end user identifies himself as the subject of the signature certificate
-9. The business application provides the OTP and the identifier of the signature request to the One-Shot Optimizer
-10. One-Shot Optimizer takes care of computing the hash of the documents to be signed in the business layer
-11. Hashes are sent together with the request identifier and OTP code to Uanataca Services
-12. The end user signature certificate is generated and used to sign the hashes
-13. The signed hashes and the signature identifier are returned to the One-Shot Optimizer
-14. One-Shot Optimizer generates the signed document envelopment, combining the original documents with the signed hashes
-15. Finallly, the business application calls One-Shot Optimizer API to obtain the signed documents
+4. The business application retrieve the service contract
+5. The business application shows the documents to be signed and the service contract to its end user
+6. After reviewing the documents, the end user agrees to sign them
+7. The business application starts the signature process by requesting the generation of a One-Time Password (OTP) token for the signature
+8. Uanataca services sends the OTP directly to the end user through an SMS message
+9. By introducing the OTP, the end user identifies himself as the subject of the signature certificate
+10. The business application provides the OTP and the identifier of the signature request to the One-Shot Optimizer
+11. One-Shot Optimizer takes care of computing the hash of the documents to be signed in the business layer
+12. Hashes are sent together with the request identifier and OTP code to Uanataca Services
+13. The end user signature certificate is generated and used to sign the hashes
+14. The signed hashes and the signature identifier are returned to the One-Shot Optimizer
+15. One-Shot Optimizer generates the signed document envelopment, combining the original documents with the signed hashes
+16. Finallly, the business application calls One-Shot Optimizer API to obtain the signed documents
 <br></br>
 
 > Other authentication methods
@@ -68,15 +73,16 @@ The following images summarize One-Shot Signature flow involving both authentica
 1. The business application creates a new digital signature request, providing all required user data
 2. One-Shot Optimizer returns an identifier for the certificate request
 3. The business application provides the documents to be signed by the end user
-4. The business application shows the documents to be signed to its end user
-5. After reviewing the document, the end user agrees to sign it
-6. The client application starts the signature process with an authentication method provided by the client
-7. One-Shot Optimizer takes care of computing the hash of the documents to be signed in the business layer
-8. Hashes are sent together with the request identifier and an id of the busuness authentication method to Uanataca Services
-9. The end user signature certificate is generated and used to sign the hashes
-10. The signed hashes and the signature identifier are returned to the One-Shot Optimizer
-11. One-Shot Optimizer generates the signed document envelopment, combining the original documents with the signed hashes
-12. Finallly, the business application calls One-Shot Optimizer API to obtain the signed documents
+4. The business application retrieve the service contract
+5. The business application shows the documents to be signed and the service contract to its end user
+6. After reviewing the documents, the end user agrees to sign them
+7. The client application starts the signature process with an authentication method provided by the client
+8. One-Shot Optimizer takes care of computing the hash of the documents to be signed in the business layer
+9. Hashes are sent together with the request identifier and an id of the busuness authentication method to Uanataca Services
+10. The end user signature certificate is generated and used to sign the hashes
+11. The signed hashes and the signature identifier are returned to the One-Shot Optimizer
+12. One-Shot Optimizer generates the signed document envelopment, combining the original documents with the signed hashes
+13. Finallly, the business application calls One-Shot Optimizer API to obtain the signed documents
 
 
 
