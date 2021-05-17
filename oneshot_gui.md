@@ -25,7 +25,7 @@ The electronic signatures are performed in Uanataca Trusted Service Center side,
 </div>
 <br></br>
 
-![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot-hiw.png?token=ATF574U5424BOAT76QIETTLALXDNS)
+![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot-hiw.png)
 
 
 # Flow chart
@@ -41,7 +41,7 @@ The following images summarize One-Shot Signature flow involving both authentica
 
 > Uanataca SMS
 
-![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot_flc1.png?token=ATF574VQRVE6BQAWX5JF643ALXD5U)
+![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot_flc1.png)
 
 </br>
 
@@ -66,7 +66,7 @@ The following images summarize One-Shot Signature flow involving both authentica
 > Other authentication methods
 
 
-![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot_flc2.png?token=ATF574VLUYY4IJMIPE37SITALXEGS)
+![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot_flc2.png)
 
 </br>
 
@@ -138,7 +138,7 @@ Run the following commands in this order.
 Run command **docker-compose version** to check the installation. The outcome should show this information:
 
 
-![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot-docker1.png?token=ATF574UUBXJRM4MJH7PE5JTALXEUO) 
+![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot-docker1.png)
 
 </br>
 
@@ -150,7 +150,8 @@ Move One-Shot Optimizer folder to the path **/opt** in the server.
 
 The outcome should look like this:
 
-![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot-docker2.png?token=ATF574R6PU4TUA3NT35UXRDALXFBI)
+![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot-docker2.png)
+
 
 </br>
 
@@ -162,7 +163,7 @@ In high performance environments with a pool of One-Shot Optimizer, service sett
 
 Docker-compose.yml settings file:
 
-![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot-docker3.png?token=ATF574RZXABFCEHY55ET653ALXFK4)
+![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot-docker3.png)
 
 </br>
 
@@ -183,9 +184,22 @@ Remove image files:
 
 > STEP 5: Launch the service.
 
-Run:
+Run the following commands:
 
+	cd /opt/oneshot_optimizer
 	docker-compose up -d
+
+Check service status:
+
+	docker-compose ps
+
+	Name               Command               State                Ports
+	--------------------------------------------------------------------------------------------------------------------------------------------------
+	oneshot_optimizer_imgconverter_1   /opt/bit4id/imgconverter/b ...   Up      0.0.0.0:49153->5013/tcp,:::49153->5013/tcp
+	oneshot_optimizer_nginx_1          /docker-entrypoint.sh ngin ...   Up      0.0.0.0:443->443/tcp,:::443->443/tcp, 0.0.0.0:80->80/tcp,:::80->80/tcp
+	oneshot_optimizer_optimizer_1      oneshot_optimizer start          Up
+
+All services must be UP.
 
 </br>
 
@@ -219,7 +233,7 @@ Then restart network services with command **service network restart**.
 
 Example:
 
-![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot-docker4.png?token=ATF574UWJW335UGJUW64WPDALXFZS)
+![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot-docker4.png)
 
 </br>
 
@@ -266,7 +280,16 @@ Custom.ini settings:
 
 Once you are done editing the file, restart the One-Shot Optimizer service to changes take effect.
 
+Virtual Machine:
+
 	systemctl restart optimizer
+
+Docker:
+
+	cd /opt/oneshot_optimizer
+	docker-compose restart optimizer
+
+
 <br></br>
 
 > PRODUCTION environment
@@ -285,7 +308,7 @@ You should have received a certificate (.cer) and key (.key) file to be used to 
 
 **/opt/bit4id/oneshot_optimizer/etc/certs/** (Virtual Machine)
 
-![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img/oneshot-docker5.png?token=ATF574QNARKGNAMRG7ZISHDALXGQU)
+![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot-docker5.png)
 
 Open the custom.ini file in /opt/bit4id/oneshot_optimizer/etc and configure it to interact with the production environment. The parts that you will likely need to change are listed below:
 
@@ -331,7 +354,14 @@ Under the [RA] section, make sure that the DEFAULT_RA matches your Registration 
 
 Once you are done editing the file, restart the One-Shot Optimizer service to changes take effect.
 
+Virtual Machine:
+
 	systemctl restart optimizer
+
+Docker:
+
+	docker-compose restart optimizer
+
 <br></br>
 
 
