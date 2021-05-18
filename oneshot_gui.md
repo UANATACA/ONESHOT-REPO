@@ -193,7 +193,7 @@ Check service status:
 
 	docker-compose ps
 
-	Name               Command               State                Ports
+					Name              			  Command               State                Ports
 	--------------------------------------------------------------------------------------------------------------------------------------------------
 	oneshot_optimizer_imgconverter_1   /opt/bit4id/imgconverter/b ...   Up      0.0.0.0:49153->5013/tcp,:::49153->5013/tcp
 	oneshot_optimizer_nginx_1          /docker-entrypoint.sh ngin ...   Up      0.0.0.0:443->443/tcp,:::443->443/tcp, 0.0.0.0:80->80/tcp,:::80->80/tcp
@@ -367,7 +367,7 @@ Docker:
 
 # Workflow
 
-This section section presents the workflow for a simple use case of the One-Shot Signature service with a step-by-step description of the API calls required to allow a user to digitally sign a document provided by the client application.
+This section presents the workflow for a simple use case of the One-Shot Signature service with a step-by-step description of the API calls required to allow a user to digitally sign a document provided by the client application.
 
 You can follow the example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
 
@@ -377,6 +377,7 @@ The basic digital signature process involves the following steps:
 - Retrieve an existing token for the RAO
 - Create a new Digital Signature Request
 - Upload a document
+- Retrieve service contract
 - Generate an OTP (only for Uanataca SMS)
 - Sign the document
 - Retrieve the signed document
@@ -459,7 +460,24 @@ If the upload is successful, the response will contain the identifier assigned t
 
 </br>
 
-> STEP 4: Generate an OTP
+> STEP 4: Retrieve service contract
+
+API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1contract/get">Retrieve contract</a>
+
+As a Trusted Service Provider, Uanataca must inform certificate applicants of the terms and conditions governing the issuance of certificates. 
+
+A service contract is generated in each digital certificate issue. The user must view the service contract to sign later along with the documents to be signed in the signature request, using the one time certificate issued on the spot.
+
+	curl -X GET https://one-shot.developers.uanataca.com/api/v1/document/1464/contract
+
+The response by the server will be the service contract document file in binary format:
+
+	1 | %PDF
+	2 | ...
+
+</br>
+
+> STEP 5: Generate an OTP
 
 API reference: <a href="#tag/Requests/paths/~1api~1v1~1otp~1{pk}/post">Generate OTP code</a>
 
@@ -481,7 +499,7 @@ A successful call will look like this:
 With this call, an SMS with the secret code is sent to the mobile phone number associated to the signature request.
 </br>
 
-> STEP 5: Sign the document
+> STEP 6: Sign the document
 
 API reference: <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">Sign</a>
 
@@ -516,7 +534,7 @@ A successful call will result in the following response:
 
 </br>
 
-> STEP 6: Retrieve signed document
+> STEP 7: Retrieve signed document
 
 API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/get">Retrieve document</a>
 
@@ -533,7 +551,7 @@ The response by the server will be the document in binary format:
 
 </br>
 
-> STEP 7: Delete documents from Optimizer
+> STEP 8: Delete documents from Optimizer
 
 API reference: <a href="#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete">Delete all request documents</a>
 
@@ -568,6 +586,5 @@ A postman collection is available as a support for a quick start.<br>
 It is only required to edit `host`variable in Postman environment with the IP or domain of One-Shot Optimizer.
 
 <a href="https://cdn.bit4id.com/es/uanataca/public/oneshot/Uanataca_One-Shot_Postman.zip">One-Shot Postman collection download</a>
-
 
 <div id="APIReference" style="padding-top: 60px;"><h1>API Reference<h1></div>
