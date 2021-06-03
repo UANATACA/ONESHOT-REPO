@@ -157,7 +157,7 @@ The outcome should look like this:
 
 > STEP 3: Mapping volumes (for environments with a pool of One-Shot Optimizer).
 
-In high performance environments with a pool of One-Shot Optimizer, service settings, data and logs must be stored in a shared volume outside Optimizer servers. These volumes must be defined in `docker-compose.yml` file in each One-Shot Optimizer.
+In high performance environments with a pool of One-Shot Optimizer, service settings and logs must be stored in a shared volume outside Optimizer servers. These volumes must be defined in `docker-compose.yml` file in each One-Shot Optimizer.
 
 	cd /opt/oneshot_optimizer
 
@@ -306,7 +306,7 @@ You should have received a certificate (.cer) and key (.key) file to be used to 
 
 **/opt/oneshot_optimizer/common/etc/certs** or custom mapped volume (Docker)
 
-**/opt/bit4id/oneshot_optimizer/etc/certs** (Virtual Machine)
+**/opt/bit4id/oneshot_optimizer/etc/certs/** (Virtual Machine)
 
 ![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot-docker5.png)
 
@@ -360,7 +360,6 @@ Virtual Machine:
 
 Docker:
 
-	cd /opt/oneshot_optimizer
 	docker-compose restart optimizer
 
 <br></br>
@@ -587,5 +586,31 @@ A postman collection is available as a support for a quick start.<br>
 It is only required to edit `host`variable in Postman environment with the IP or domain of One-Shot Optimizer.
 
 <a href="https://cdn.bit4id.com/es/uanataca/public/oneshot/Uanataca_One-Shot_Postman.zip">One-Shot Postman collection download</a>
+
+
+# Video tutorials
+
+In this section you will find video tutorials covering the common 
+
+
+<div id="video_docker_config" style="padding-top: 60px;"><h2>One-Shot Optimizer configuration on Docker<h2></div>
+
+<figure class="video_container">
+  <iframe src="https://www.youtube.com/embed/o-LDz271DKY" frameborder="0" allowfullscreen="true"> </iframe>
+</figure>
+
+<div id="video_workflow1" style="padding-top: 60px;"><h2>One-Shot signature workflow using Uanataca SMS<h2></div>
+
+<figure class="video_container">
+  <iframe src="https://www.youtube.com/embed/o-LDz271DKY" frameborder="0" allowfullscreen="true"> </iframe>
+</figure>
+
+
+<div id="video_workflow2" style="padding-top: 60px;"><h2>One-Shot signature workflow using external authentication<h2></div>
+
+<figure class="video_container">
+  <iframe width= "80%" src="https://www.youtube.com/embed/o-LDz271DKY" frameborder="0" allowfullscreen="true"> </iframe>
+</figure>
+
 
 <div id="APIReference" style="padding-top: 60px;"><h1>API Reference<h1></div>
