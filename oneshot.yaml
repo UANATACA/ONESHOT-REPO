@@ -1284,7 +1284,9 @@ paths:
       summary: SIGN
       tags:
         - Requests
-      description: Signs all documents associated to a request using a one-time usage certificate generated for the signature request.
+      description: Signs all documents associated to a request using a one-time usage certificate generated for the signature request. </br></br>
+                   <a href="#section/Video-tutorials/Signature-Image-Configuration"><img src="https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/test/img4.png"></a><a href="#section/Video-tutorials/Signature-Image-Configuration"><b>&nbsp;Watch on video!</b></a>
+
       consumes:
         - application/json
       produces:
