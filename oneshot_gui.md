@@ -606,7 +606,7 @@ The Docker Optimizer configuration requires an One-Shot Optimizer image package 
 
 ## Signature Workflow (SMS)
 
-This tutorial covers the step-by-step <a href="https://oneshot-test.redoc.ly/#section/Workflow">workflow</a> for document signature using Uanataca's One-Shot service via SMS.<br></br>
+This tutorial covers the step-by-step <a href="#section/Workflow">workflow</a> for document signature using Uanataca's One-Shot service via SMS.<br></br>
 
 <figure class="video_container">
 	<iframe width="560" height="315" src="https://www.youtube.com/embed/-XxjUfgEPRw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -614,7 +614,7 @@ This tutorial covers the step-by-step <a href="https://oneshot-test.redoc.ly/#se
 
 ## Signature Workflow (External Authentication)
 
-This tutorial covers the step-by-step <a href="https://oneshot-test.redoc.ly/#section/Workflow">workflow</a> for document signature using Uanataca's One-Shot service via Exthernal Authentication. <br></br>
+This tutorial covers the step-by-step <a href="#section/Workflow">workflow</a> for document signature using Uanataca's One-Shot service via Exthernal Authentication. <br></br>
 
 <figure class="video_container">
 	<iframe width="560" height="315" src="https://www.youtube.com/embed/5w0sdhJ3y7I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -622,7 +622,7 @@ This tutorial covers the step-by-step <a href="https://oneshot-test.redoc.ly/#se
 
 ## Signature Image Configuration
 
-Using images in signatures is an optional feature. Learn how to set signature image parameters in our One-Shot API <a href="https://oneshot-test.redoc.ly/#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">sign</a> call.<br></br> 
+Using images in signatures is an optional feature. Learn how to set signature image parameters in our One-Shot API <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">sign</a> call.<br></br> 
 
 <figure class="video_container">
 	<iframe width="560" height="315" src="https://www.youtube.com/embed/YTDqwhBQZ5c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
