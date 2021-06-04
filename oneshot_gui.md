@@ -594,7 +594,7 @@ It is only required to edit `host`variable in Postman environment with the IP or
 
 # Video tutorials
 
-Need a better understanding of One-Shot service? Check the video tutorials below and follow step-by-step instructions! They will guarantee you use our API efficiently for the best experience in document signatures.
+Need a better understanding of One-Shot API? Check the video tutorials below and follow step-by-step instructions! They will guarantee you use our API efficiently for the best experience in document signatures.
 
 ## Docker Optimizer Configuration
 
