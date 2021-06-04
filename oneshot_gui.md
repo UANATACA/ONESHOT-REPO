@@ -598,7 +598,7 @@ Need a better understanding of One-Shot service? Check the video tutorials below
 
 ## Docker Optimizer Configuration
 
-The Docker Optimizer configuration requires an One-Shot Optimizer image package and a server using Linux Operating System with Internet access. Check our <a href="#section/Configuration/One-Shot-Optimizer-on-Docker">documentation</a>.<br></br>
+The Docker Optimizer configuration requires an One-Shot Optimizer image package and a server using Linux Operating System with Internet access. Please check our <a href="#section/Configuration/One-Shot-Optimizer-on-Docker">documentation</a>.<br></br>
 
 <figure class="video_container">
   <iframe width="560" margin-left="500px" height="315" src="https://www.youtube.com/embed/amGfQeMZQBA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
