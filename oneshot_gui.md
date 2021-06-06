@@ -590,7 +590,6 @@ It is only required to edit `host`variable in Postman environment with the IP or
 
 <a href="https://cdn.bit4id.com/es/uanataca/public/oneshot/Uanataca_One-Shot_Postman.zip">One-Shot Postman collection download</a>
 
-<div id="APIReference" style="padding-top: 60px;"><h1>API Reference<h1></div>
 
 # Video tutorials
 
@@ -627,3 +626,5 @@ Using images in signatures is an optional feature. Learn how to set signature im
 <figure class="video_container">
 	<iframe width="560" height="315" src="https://www.youtube.com/embed/YTDqwhBQZ5c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </figure>
+
+<div id="APIReference" style="padding-top: 60px;"><h1>API Reference<h1></div>
