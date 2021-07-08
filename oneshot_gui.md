@@ -764,7 +764,7 @@ If the signature request is completed successfully, we will get the unique ident
 	7 |     }
 	8 | }
 
-The request_pk output parameter will be used to identify this digital signature request in subsequent calls.
+The response is the a JSON containing important request parameters, in **VIDEOPENDING** status after creation. The request_pk output parameter will be used to identify this digital signature request in subsequent calls.
 
 If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.
 
@@ -981,7 +981,7 @@ With this call, an SMS with the secret code is sent to the mobile phone number a
 
 **API reference:** <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">Sign</a>
 
-In this step we are going to issue the digital signature certificate and sign all documents previously uploaded for the signature request.
+In this step, the request changes to **ISSUED** status, which means digital signature certificate is created and inmediately signs all previously uploaded documents associated to the signature request.
 
 Call the sign endpoint with the request id and json parameters containing the OTP:
 
