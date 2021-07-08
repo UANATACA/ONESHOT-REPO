@@ -286,13 +286,11 @@ A successful call will result in the following response:
 
 </br>
 
-> **STEP 7: SIGN THE DOCUMENT**
+> **STEP 7: RETRIEVE SIGNED DOCUMENT**
 
 </br>
 
-> STEP 7: Retrieve signed document
-
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/get">Retrieve document</a>
+API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/get">Retrieve Document</a>
 
 Once the signature is done, the next step is getting the signed documents.
 
@@ -328,17 +326,26 @@ Delete all documents associated to an ended digital signature request.
 
 ## 1-Step Workflow
 
-The 1-step mode Video ID works on the basis of request validation and approval actions being performed by the same operator.
+In External mode Video ID, digital evidences are uploaded to an independent Video ID platform. External mode Video ID can be executed in 1 or 2 steps.
+
+</br>
+
+![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/test2/img/oneshot_ext.png)
+
+</br>
 
 You can follow the example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
 
-This process involves the following steps:
+</br>
 
-**1) RETRIEVE AN EXISTING TOKEN FOR THE RAO**
+*This process involves the following steps:*
 
-**2) CREATE A NEW DIGITAL SIGNATURE REQUEST**
 
-**3) APPROVE A REQUEST**
+**1) CREATE A NEW VIDEO ID SIGNATURE REQUEST**
+
+**2) UPLOAD EVIDENCES (DATA & VIDEO)**
+
+**3) REQUEST VALIDATION**
 
 **4) REQUEST APPROVAL**
 
@@ -354,83 +361,193 @@ This process involves the following steps:
 
 **10) DELETE DOCUMENTS FROM OPTIMIZER**
 
-
-- Retrieve an existing token for the RAO
-- Create a new Digital Signature Request
-- Approve a Request with Video ID evidences
-- Upload a document
-- Retrieve service contract
-- Generate an OTP (only for Uanataca SMS)
-- Sign the document
-- Retrieve the signed document
-- Delete documents from Optimizer
-
-
-> STEP 1: Retrieve an existing token for the RAO
-
-API reference: <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List tokens</a>
-
-The test One-Shot Optimizer is pre-configured with a Registration Authority Officer (RAO) account ready to be used within the test environment. This account has an associated token, that can be used to identify the RAO in API calls.
-
-	curl -X GET https://one-shot.developers.uanataca.com/api/v1/tokens
-
-On the clean machine, this should return a single token:
-
-	1 | {
-	2 |     "status": "200 OK",
-	3 |     "details": {
-	4 |         "6d1cae4d55be4cdf9cac50ee36f73406": {
-	5 |             "username": "9001800",
-	6 |             "password": true,
-	7 |             "pin": true
-	8 |         }
-	9 |     }
-	10| }
-
-This output tells us that a single token "6d1cae4d55be4cdf9cac50ee36f73406" exists. This token is associated to the RAO account with id "9001800" and can be used in place of the password and pin.
-
-To use tokens in a production environment, you will need to create them first with the corresponding <a href="#tag/Tokens/paths/~1api~1v1~1token/post">Create token</a> API call.
 </br>
 
-> STEP 2: Create a new Digital Signature Request
+> **STEP 1: CREATE A NEW VIDEO ID SIGNATURE REQUEST**
 
-API reference: <a href="#tag/Requests/paths/~1api~1v1~1request/post">Create request</a>
+</br>
 
-Within the One-Shot Signature Service, all data pertaining to a given digital signature is collected within a Digital Signature Request. This includes both the identifying information of the signing user, which is provided when you create the signature request, and the document or documents to be signed, which we will upload later.
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid/post">Create Video ID Request</a>
 
-This call must include enough information to identify both the signing user and the RAO approving the request. The full description of the arguments accepted by this endpoint can be found in the API call detailed documentation, but for now it is enough to include at least the following:
+This call must include preliminary information to identify the signer. 
 
-	1 | curl --location --request POST 'https://one-shot.developers.uanataca.com/api/v1/request' \
-	2 |      --form 'token=6d1cae4d55be4cdf9cac50ee36f73406' \
-	3 |      --form 'profile=PFnubeQAFCiudadano' \
-	4 |      --form 'given_name=name_of_the_user' \
-	5 |      --form 'surname_1=surname_of_the_user' \
-	6 |      --form 'email=user-example@domain.com' \
-	7 |      --form 'mobile_phone_number=+343391234567' \
-	8 |      --form 'document_front=@document_front.png' \
-	9 |      --form 'document_rear=@document_rear.png' \
-	10|      --form 'document_owner=@document_owner.png'
 
-where token is the token representing the RAO credentials obtained in the previous step.
+	1 | curl -i -X POST \
+	2 |   https://one-shot.developers.uanataca.com/api/v1/videoid \
+	3 |   -H 'Content-Type: application/json' \
+	4 |   -d '{
+	5 |     "mobile_phone_number": "+34123123123",
+	6 |     "email": "mail@domain",
+	7 |     "registration_authority": "1000",
+	8 |     "profile": "PFnubeAFCiudadano",
+	9 |     "videoid_mode": "1"
+	10|   }'
 
 If the signature request is completed successfully, we will get the unique identifier assigned to it:
 
 	1 | {
-	2 |     "status": "201 Created",
-	3 |     "details": 1464
-	4 | }
+	2 |     "status": "200 OK",
+	3 |     "details": {
+	4 |         "videoid_pk": 150,
+	5 |         "videoid_link": "",
+	6 |         "request_pk": 45836
+	7 |     }
+	8 | }
 
-The request code will be used to identify this digital signature request in subsequent calls.
+The response is the a JSON containing important request parameters, in **VIDEOPENDING** status after creation. The request_pk output parameter will be used to identify this digital signature request in subsequent calls.
+
+If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.
+
+If request data needs to be retrieved, use the <a href="#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get">Get Request</a> call. Check API Reference.
+
 </br>
 
-> STEP 3: Upload a document
+> **STEP 2: UPLOAD EVIDENCES**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}/post">Upload document</a>
+</br>
+
+A previously created Video ID Request needs a set of information defined as evidences. The succesful upload of **ALL** this information will change the request status to **VIDEOREVIEW**.
+
+Data and images are uploaded by using the following call:
+
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences/post">Upload Data Evidence</a>
+
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ For this call the endpoint must be used is <b>lima.demo.bit4id.org</b> instead of <b>api.uanataca.com</b></blockquote>
+
+</br>
+
+**Data objects in detail:**
+
+`acceptance` : Client acceptance parameters (e.g. Terms & Conditions,  Privacy Policy). This is a customizable JSON object.<br>
+`data` : Set of pictures associated to the client's ID document plus a selfie of him/her. **Mandatory object** <br>
+`ocr_data` : Text information extracted from the client's ID document via Optical Character Recognition (OCR). **Mandatory** <br>
+`security_checks` : Set of validation fields associated to the client's identity (underaging, matching info, liveliness, etc) <br>
+`similarity_level` : Similarity between the client's selfie and the picture is shown on his/her ID document. **Mandatory** <br>
+
+    1 | curl -i -X POST https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences \
+    2 |   -H 'Content-Type: application/json' \
+    3 |   -d '{
+    4 |     "acceptance": {
+    5 |       "acceptance_test_data": true,
+    6 |       "another_field": 0
+    7 |     },
+    8 |     "data": {
+    9 |       "images": {
+    10|         "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
+    11|         "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
+    12|         "document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
+    13|         "document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
+    14|       },
+    15|       "ocr_data": {
+    16|         "given_name": "Name",
+    17|         "surname_1": "Surname 1",
+    18|         "surname_2": "Surname 2",
+    19|         "mobile_phone_number": "+34999999999",
+    20|         "serial_number": "A9999999E"
+    21|       },
+    22|       "security_checks": {
+    23|         "a_test_check": true,
+    24|         "another_check": true
+    25|       },
+    26|       "similarity_level": "high"
+    27|     }
+    28|   }'
+
+Successful response status
+
+	1 | {
+	2 |   SUCCESSFUL RESPONSE PENDING
+	3 | }
+
+</br>
+
+In the same way, binary multiformat Video evidence is uploaded by using the following call:
+
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences~1video/post">Upload Video</a>
+
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ For this call the endpoint must be used is <b>lima.demo.bit4id.org</b> instead of <b>api.uanataca.com</b></blockquote>
+
+    1 | curl -i -X POST https://lima.demo.bit4id.org/v1/upload/video/30e57b02819a430d8386fd85be9f499f/ \
+    2 |   -H 'Content-Type: multipart/form-data' \
+    3 |   -F video=@sample_folder/sample_video.mp4 
+
+Successful response status
+
+	1 | {
+	2 |   SUCCESSFUL RESPONSE PENDING
+	3 | }
+
+If the uploaded video needs to be retrieved, use <a href="#tag/Video-ID/paths/~1api~1v1~1download~1video~1{video_identifier}/get">Download Video</a>
+
+
+</br>
+
+> **STEP 3: REQUEST VALIDATION** `2-step mode only`
+
+</br>
+
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1validate/post">Validate Request</a>
+
+A Registration Authority Officer must validate the request data and evidences before approval. This call is used only for 2-step mode.  
+
+    1 | curl -i -X POST https://api.uanataca.com/api/v1/videoid/45836/validate \
+    2 | -H 'Content-Type: application/json' \
+    3 | --cert 'cer.pem' --key 'key.pem'
+    4 | -d '{
+    5 |     "username": "5012345",
+    6 |     "password": "Gy6F37xK",
+    7 |     "pin": "belorado74",
+    8 |     "rao": "1400"
+    9 |	   }'
+
+The validation successful response changes the request to **CREATED** status as a JSON object containing full request information is returned.
+
+    1 | {
+	2 |		SUCCESSFUL RESPONSE PENDING
+	3 | }
+
+For unsuccessful validations leading to a request refusal, the corresponding call is  <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1refuse/post">Refuse Request</a>. Check API Reference.
+
+</br>
+
+> **STEP 4: REQUEST APPROVAL**
+
+</br>
+
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1validate/post">Approve Request</a>
+
+This call makes the request ready for signature. Its status changes to **ENROLLREADY**. In 1-step mode, both validation and approval occur when executing this call.
+
+    1 | curl -i -X POST 'https://api.uanataca.com/api/v1/request/45836/approve' \
+    2 | -H 'Content-Type: application/json' \
+    3 | --cert 'cer.pem' --key 'key.pem'
+    4 | -d '{
+    5 |     "username": "1000279",
+    6 |     "password": "3DPTm:N4",
+    7 |     "pin": "23bYQq9a",
+    8 |     "rao": 123
+    9 |	   }'
+
+The response is a JSON object with added request approval information. 
+
+    1 | {
+	2 |		SUCCESSFUL RESPONSE PENDING
+	3 | }
+
+In case of not approving a request for any reason, the call <a href="#tag/Requests/paths/~1api~1v1~1requests~1{id}~1cancel/delete">Cancel Request</a> must be executed. Check API Reference.
+
+</br>
+
+> **STEP 5: UPLOAD A DOCUMENT**
+
+</br>
+
+**API Reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}/post">Upload Document</a>
 
 
 After creating the digital signature request, we can associate to it all pdf documents that should be signed by the user.
 
-	curl -F "file=@doc.pdf" -X POST https://one-shot.developers.uanataca.com/api/v1/document/1464
+	curl -F "file=@doc.pdf" -X POST https://one-shot.developers.uanataca.com/api/v1/document/45836
 
 Note that the number at the end of the call is the request id we obtained in the previous step.
 
@@ -443,9 +560,12 @@ If the upload is successful, the response will contain the identifier assigned t
 
 </br>
 
-> STEP 4: Retrieve service contract
+> **STEP 6: RETRIEVE SERVICE CONTRACT**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1contract/get">Retrieve contract</a>
+</br>
+
+
+**API Reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1contract/get">Retrieve Contract</a>
 
 As a Trusted Service Provider, Uanataca must inform certificate applicants of the terms and conditions governing the issuance of certificates. 
 
@@ -460,9 +580,11 @@ The response by the server will be the service contract document file in binary 
 
 </br>
 
-> STEP 5: Generate an OTP
+> **STEP 7: GENERATE AN OTP**
 
-API reference: <a href="#tag/Requests/paths/~1api~1v1~1otp~1{pk}/post">Generate OTP code</a>
+</br>
+
+**API Reference:** <a href="#tag/Requests/paths/~1api~1v1~1otp~1{pk}/post">Generate OTP code</a>
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">This step is only used for flows using Uanataca SMS.</blockquote>
 
@@ -470,7 +592,7 @@ Once the documents to be signed are ready, we need to generate a secure One-time
 
 When calling the OTP endpoint, provide the request identifier returned by the request endpoint:
 
-	curl -X POST https://one-shot.developers.uanataca.com/api/v1/otp/1464
+	curl -X POST https://one-shot.developers.uanataca.com/api/v1/otp/45836
 
 A successful call will look like this:
 
@@ -480,17 +602,20 @@ A successful call will look like this:
 	4 | }
 
 With this call, an SMS with the secret code is sent to the mobile phone number associated to the signature request.
+
 </br>
 
-> STEP 6: Sign the document
+> **STEP 8: SIGN THE DOCUMENT**
 
-API reference: <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">Sign</a>
+</br>
 
-In this step we are going to issue the digital signature certificate and sign all documents previously uploaded for the signature request.
+**API Reference:** <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">Sign</a>
+
+In this step, the request changes to **ISSUED** status, which means digital signature certificate is created and inmediately signs all previously uploaded documents associated to the signature request.
 
 Call the sign endpoint with the request id and json parameters containing the OTP:
 
-	curl -d @params.json -H "Content-Type: application/json -X POST https://one-shot.developers.uanataca.com/api/v1/sign/1464
+	curl -d @params.json -H "Content-Type: application/json -X POST https://one-shot.developers.uanataca.com/api/v1/sign/45836
 
 params.json for Uanataca SMS:
 
@@ -517,15 +642,17 @@ A successful call will result in the following response:
 
 </br>
 
-> STEP 7: Retrieve signed document
+> **STEP 9: RETRIEVE SIGNED DOCUMENT**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/get">Retrieve document</a>
+</br>
+
+**API reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/get">Retrieve document</a>
 
 Once the signature is done, the next step is getting the signed documents.
 
 To do this, query with an HTTP GET request the endpoint /api/v1/document/{pk}/{type}/{uid}, where {pk} is the Request's unique identifier, {type} is the type of the document (it can be "original" for the uploaded document or "signed" for the digitally-signed version) and {uid} is the document unique identifier.
 
-	curl -X GET https://one-shot.developers.uanataca.com/api/v1/document/1464/signed/712c29ac-a2dc-4530-8c67-d0f227d8294b
+	curl -X GET https://one-shot.developers.uanataca.com/api/v1/document/45836/signed/712c29ac-a2dc-4530-8c67-d0f227d8294b
 
 The response by the server will be the document in binary format:
 
@@ -534,105 +661,245 @@ The response by the server will be the document in binary format:
 
 </br>
 
-> STEP 8: Delete documents from Optimizer
+> **STEP 10: DELETE DOCUMENTS FROM OPTIMIZER**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete">Delete all request documents</a>
+</br>
+
+**API Reference:** <a href="#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete">Delete All Documents</a>
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ While the service will not delete uploaded files unless explicitly requested through an API call, it is <strong>strongly recommended</strong> that you backup any files that you want to preserve using an alternative system.</blockquote>
 
 Delete all documents associated to an ended digital signature request.
 
-	curl -X DELETE https://one-shot.developers.uanataca.com/api/v1/documents/1464
-
+	curl -X DELETE https://one-shot.developers.uanataca.com/api/v1/documents/45836
 
 </br>
 
 
 ## 2-Step Workflow 
 
-In 2-step mode Video ID, request validations and approvals are thought to be performed in different stages.
+In External mode Video ID, digital evidences are uploaded to an independent Video ID platform. External mode Video ID can be executed in 1 or 2 steps.
+
+</br>
+
+![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/test2/img/oneshot_ext.png)
+
+</br>
 
 You can follow the example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
 
-This process involves the following steps:
-
-- Retrieve an existing token for the RAO
-- Create a new Digital Signature Request
-- Validate a Request with Video ID evidences
-- Approve a Request with Video ID evidences
-- Upload a document
-- Retrieve service contract
-- Generate an OTP (only for Uanataca SMS)
-- Sign the document
-- Retrieve the signed document
-- Delete documents from Optimizer
-
-
-> STEP 1: Retrieve an existing token for the RAO
-
-API reference: <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List tokens</a>
-
-The test One-Shot Optimizer is pre-configured with a Registration Authority Officer (RAO) account ready to be used within the test environment. This account has an associated token, that can be used to identify the RAO in API calls.
-
-	curl -X GET https://one-shot.developers.uanataca.com/api/v1/tokens
-
-On the clean machine, this should return a single token:
-
-	1 | {
-	2 |     "status": "200 OK",
-	3 |     "details": {
-	4 |         "6d1cae4d55be4cdf9cac50ee36f73406": {
-	5 |             "username": "9001800",
-	6 |             "password": true,
-	7 |             "pin": true
-	8 |         }
-	9 |     }
-	10| }
-
-This output tells us that a single token "6d1cae4d55be4cdf9cac50ee36f73406" exists. This token is associated to the RAO account with id "9001800" and can be used in place of the password and pin.
-
-To use tokens in a production environment, you will need to create them first with the corresponding <a href="#tag/Tokens/paths/~1api~1v1~1token/post">Create token</a> API call.
 </br>
 
-> STEP 2: Create a new Digital Signature Request
+*This process involves the following steps:*
 
-API reference: <a href="#tag/Requests/paths/~1api~1v1~1request/post">Create request</a>
 
-Within the One-Shot Signature Service, all data pertaining to a given digital signature is collected within a Digital Signature Request. This includes both the identifying information of the signing user, which is provided when you create the signature request, and the document or documents to be signed, which we will upload later.
+**1) CREATE A NEW VIDEO ID SIGNATURE REQUEST**
 
-This call must include enough information to identify both the signing user and the RAO approving the request. The full description of the arguments accepted by this endpoint can be found in the API call detailed documentation, but for now it is enough to include at least the following:
+**2) UPLOAD EVIDENCES (DATA & VIDEO)**
 
-	1 | curl --location --request POST 'https://one-shot.developers.uanataca.com/api/v1/request' \
-	2 |      --form 'token=6d1cae4d55be4cdf9cac50ee36f73406' \
-	3 |      --form 'profile=PFnubeQAFCiudadano' \
-	4 |      --form 'given_name=name_of_the_user' \
-	5 |      --form 'surname_1=surname_of_the_user' \
-	6 |      --form 'email=user-example@domain.com' \
-	7 |      --form 'mobile_phone_number=+343391234567' \
-	8 |      --form 'document_front=@document_front.png' \
-	9 |      --form 'document_rear=@document_rear.png' \
-	10|      --form 'document_owner=@document_owner.png'
+**3) REQUEST VALIDATION**
 
-where token is the token representing the RAO credentials obtained in the previous step.
+**4) REQUEST APPROVAL**
+
+**5) UPLOAD A DOCUMENT**
+
+**6) RETRIEVE SERVICE CONTRACT**
+
+**7) GENERATE AN OTP (only for Uanataca SMS)**
+
+**8) SIGN THE DOCUMENT**
+
+**9) RETRIEVE SIGNED DOCUMENT**
+
+**10) DELETE DOCUMENTS FROM OPTIMIZER**
+
+</br>
+
+> **STEP 1: CREATE A NEW VIDEO ID SIGNATURE REQUEST**
+
+</br>
+
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid/post">Create Video ID Request</a>
+
+This call must include preliminary information to identify the signer. 
+
+
+	1 | curl -i -X POST \
+	2 |   https://one-shot.developers.uanataca.com/api/v1/videoid \
+	3 |   -H 'Content-Type: application/json' \
+	4 |   -d '{
+	5 |     "mobile_phone_number": "+34123123123",
+	6 |     "email": "mail@domain",
+	7 |     "registration_authority": "1000",
+	8 |     "profile": "PFnubeAFCiudadano",
+	9 |     "videoid_mode": "1"
+	10|   }'
 
 If the signature request is completed successfully, we will get the unique identifier assigned to it:
 
 	1 | {
-	2 |     "status": "201 Created",
-	3 |     "details": 1464
-	4 | }
+	2 |     "status": "200 OK",
+	3 |     "details": {
+	4 |         "videoid_pk": 150,
+	5 |         "videoid_link": "",
+	6 |         "request_pk": 45836
+	7 |     }
+	8 | }
 
-The request code will be used to identify this digital signature request in subsequent calls.
+The response is the a JSON containing important request parameters, in **VIDEOPENDING** status after creation. The request_pk output parameter will be used to identify this digital signature request in subsequent calls.
+
+If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.
+
+If request data needs to be retrieved, use the <a href="#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get">Get Request</a> call. Check API Reference.
+
 </br>
 
-> STEP 3: Upload a document
+> **STEP 2: UPLOAD EVIDENCES**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}/post">Upload document</a>
+</br>
+
+A previously created Video ID Request needs a set of information defined as evidences. The succesful upload of **ALL** this information will change the request status to **VIDEOREVIEW**.
+
+Data and images are uploaded by using the following call:
+
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences/post">Upload Data Evidence</a>
+
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ For this call the endpoint must be used is <b>lima.demo.bit4id.org</b> instead of <b>api.uanataca.com</b></blockquote>
+
+</br>
+
+**Data objects in detail:**
+
+`acceptance` : Client acceptance parameters (e.g. Terms & Conditions,  Privacy Policy). This is a customizable JSON object.<br>
+`data` : Set of pictures associated to the client's ID document plus a selfie of him/her. **Mandatory object** <br>
+`ocr_data` : Text information extracted from the client's ID document via Optical Character Recognition (OCR). **Mandatory** <br>
+`security_checks` : Set of validation fields associated to the client's identity (underaging, matching info, liveliness, etc) <br>
+`similarity_level` : Similarity between the client's selfie and the picture is shown on his/her ID document. **Mandatory** <br>
+
+    1 | curl -i -X POST https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences \
+    2 |   -H 'Content-Type: application/json' \
+    3 |   -d '{
+    4 |     "acceptance": {
+    5 |       "acceptance_test_data": true,
+    6 |       "another_field": 0
+    7 |     },
+    8 |     "data": {
+    9 |       "images": {
+    10|         "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
+    11|         "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
+    12|         "document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
+    13|         "document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
+    14|       },
+    15|       "ocr_data": {
+    16|         "given_name": "Name",
+    17|         "surname_1": "Surname 1",
+    18|         "surname_2": "Surname 2",
+    19|         "mobile_phone_number": "+34999999999",
+    20|         "serial_number": "A9999999E"
+    21|       },
+    22|       "security_checks": {
+    23|         "a_test_check": true,
+    24|         "another_check": true
+    25|       },
+    26|       "similarity_level": "high"
+    27|     }
+    28|   }'
+
+Successful response status
+
+	1 | {
+	2 |   SUCCESSFUL RESPONSE PENDING
+	3 | }
+
+</br>
+
+In the same way, binary multiformat Video evidence is uploaded by using the following call:
+
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences~1video/post">Upload Video</a>
+
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ For this call the endpoint must be used is <b>lima.demo.bit4id.org</b> instead of <b>api.uanataca.com</b></blockquote>
+
+    1 | curl -i -X POST https://lima.demo.bit4id.org/v1/upload/video/30e57b02819a430d8386fd85be9f499f/ \
+    2 |   -H 'Content-Type: multipart/form-data' \
+    3 |   -F video=@sample_folder/sample_video.mp4 
+
+Successful response status
+
+	1 | {
+	2 |   SUCCESSFUL RESPONSE PENDING
+	3 | }
+
+If the uploaded video needs to be retrieved, use <a href="#tag/Video-ID/paths/~1api~1v1~1download~1video~1{video_identifier}/get">Download Video</a>
+
+
+</br>
+
+> **STEP 3: REQUEST VALIDATION** `2-step mode only`
+
+</br>
+
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1validate/post">Validate Request</a>
+
+A Registration Authority Officer must validate the request data and evidences before approval. This call is used only for 2-step mode.  
+
+    1 | curl -i -X POST https://api.uanataca.com/api/v1/videoid/45836/validate \
+    2 | -H 'Content-Type: application/json' \
+    3 | --cert 'cer.pem' --key 'key.pem'
+    4 | -d '{
+    5 |     "username": "5012345",
+    6 |     "password": "Gy6F37xK",
+    7 |     "pin": "belorado74",
+    8 |     "rao": "1400"
+    9 |	   }'
+
+The validation successful response changes the request to **CREATED** status as a JSON object containing full request information is returned.
+
+    1 | {
+	2 |		SUCCESSFUL RESPONSE PENDING
+	3 | }
+
+For unsuccessful validations leading to a request refusal, the corresponding call is  <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1refuse/post">Refuse Request</a>. Check API Reference.
+
+</br>
+
+> **STEP 4: REQUEST APPROVAL**
+
+</br>
+
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1validate/post">Approve Request</a>
+
+This call makes the request ready for signature. Its status changes to **ENROLLREADY**. In 1-step mode, both validation and approval occur when executing this call.
+
+    1 | curl -i -X POST 'https://api.uanataca.com/api/v1/request/45836/approve' \
+    2 | -H 'Content-Type: application/json' \
+    3 | --cert 'cer.pem' --key 'key.pem'
+    4 | -d '{
+    5 |     "username": "1000279",
+    6 |     "password": "3DPTm:N4",
+    7 |     "pin": "23bYQq9a",
+    8 |     "rao": 123
+    9 |	   }'
+
+The response is a JSON object with added request approval information. 
+
+    1 | {
+	2 |		SUCCESSFUL RESPONSE PENDING
+	3 | }
+
+In case of not approving a request for any reason, the call <a href="#tag/Requests/paths/~1api~1v1~1requests~1{id}~1cancel/delete">Cancel Request</a> must be executed. Check API Reference.
+
+</br>
+
+> **STEP 5: UPLOAD A DOCUMENT**
+
+</br>
+
+**API Reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}/post">Upload Document</a>
 
 
 After creating the digital signature request, we can associate to it all pdf documents that should be signed by the user.
 
-	curl -F "file=@doc.pdf" -X POST https://one-shot.developers.uanataca.com/api/v1/document/1464
+	curl -F "file=@doc.pdf" -X POST https://one-shot.developers.uanataca.com/api/v1/document/45836
 
 Note that the number at the end of the call is the request id we obtained in the previous step.
 
@@ -645,9 +912,12 @@ If the upload is successful, the response will contain the identifier assigned t
 
 </br>
 
-> STEP 4: Retrieve service contract
+> **STEP 6: RETRIEVE SERVICE CONTRACT**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1contract/get">Retrieve contract</a>
+</br>
+
+
+**API Reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1contract/get">Retrieve Contract</a>
 
 As a Trusted Service Provider, Uanataca must inform certificate applicants of the terms and conditions governing the issuance of certificates. 
 
@@ -662,9 +932,11 @@ The response by the server will be the service contract document file in binary 
 
 </br>
 
-> STEP 5: Generate an OTP
+> **STEP 7: GENERATE AN OTP**
 
-API reference: <a href="#tag/Requests/paths/~1api~1v1~1otp~1{pk}/post">Generate OTP code</a>
+</br>
+
+**API Reference:** <a href="#tag/Requests/paths/~1api~1v1~1otp~1{pk}/post">Generate OTP code</a>
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">This step is only used for flows using Uanataca SMS.</blockquote>
 
@@ -672,7 +944,7 @@ Once the documents to be signed are ready, we need to generate a secure One-time
 
 When calling the OTP endpoint, provide the request identifier returned by the request endpoint:
 
-	curl -X POST https://one-shot.developers.uanataca.com/api/v1/otp/1464
+	curl -X POST https://one-shot.developers.uanataca.com/api/v1/otp/45836
 
 A successful call will look like this:
 
@@ -682,17 +954,20 @@ A successful call will look like this:
 	4 | }
 
 With this call, an SMS with the secret code is sent to the mobile phone number associated to the signature request.
+
 </br>
 
-> STEP 6: Sign the document
+> **STEP 8: SIGN THE DOCUMENT**
 
-API reference: <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">Sign</a>
+</br>
 
-In this step we are going to issue the digital signature certificate and sign all documents previously uploaded for the signature request.
+**API Reference:** <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">Sign</a>
+
+In this step, the request changes to **ISSUED** status, which means digital signature certificate is created and inmediately signs all previously uploaded documents associated to the signature request.
 
 Call the sign endpoint with the request id and json parameters containing the OTP:
 
-	curl -d @params.json -H "Content-Type: application/json -X POST https://one-shot.developers.uanataca.com/api/v1/sign/1464
+	curl -d @params.json -H "Content-Type: application/json -X POST https://one-shot.developers.uanataca.com/api/v1/sign/45836
 
 params.json for Uanataca SMS:
 
@@ -719,15 +994,17 @@ A successful call will result in the following response:
 
 </br>
 
-> STEP 7: Retrieve signed document
+> **STEP 9: RETRIEVE SIGNED DOCUMENT**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/get">Retrieve document</a>
+</br>
+
+**API reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/get">Retrieve document</a>
 
 Once the signature is done, the next step is getting the signed documents.
 
 To do this, query with an HTTP GET request the endpoint /api/v1/document/{pk}/{type}/{uid}, where {pk} is the Request's unique identifier, {type} is the type of the document (it can be "original" for the uploaded document or "signed" for the digitally-signed version) and {uid} is the document unique identifier.
 
-	curl -X GET https://one-shot.developers.uanataca.com/api/v1/document/1464/signed/712c29ac-a2dc-4530-8c67-d0f227d8294b
+	curl -X GET https://one-shot.developers.uanataca.com/api/v1/document/45836/signed/712c29ac-a2dc-4530-8c67-d0f227d8294b
 
 The response by the server will be the document in binary format:
 
@@ -736,16 +1013,17 @@ The response by the server will be the document in binary format:
 
 </br>
 
-> STEP 8: Delete documents from Optimizer
+> **STEP 10: DELETE DOCUMENTS FROM OPTIMIZER**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete">Delete all request documents</a>
+</br>
+
+**API Reference:** <a href="#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete">Delete All Documents</a>
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ While the service will not delete uploaded files unless explicitly requested through an API call, it is <strong>strongly recommended</strong> that you backup any files that you want to preserve using an alternative system.</blockquote>
 
 Delete all documents associated to an ended digital signature request.
 
-	curl -X DELETE https://one-shot.developers.uanataca.com/api/v1/documents/1464
-
+	curl -X DELETE https://one-shot.developers.uanataca.com/api/v1/documents/45836
 
 </br>
 
@@ -882,7 +1160,7 @@ Data and images are uploaded by using the following call:
 Successful response status
 
 	1 | {
-	2 |   "status": "200 OK"
+	2 |   SUCCESSFUL RESPONSE PENDING
 	3 | }
 
 </br>
@@ -900,7 +1178,7 @@ In the same way, binary multiformat Video evidence is uploaded by using the foll
 Successful response status
 
 	1 | {
-	2 |   "status": "200 OK"
+	2 |   SUCCESSFUL RESPONSE PENDING
 	3 | }
 
 If the uploaded video needs to be retrieved, use <a href="#tag/Video-ID/paths/~1api~1v1~1download~1video~1{video_identifier}/get">Download Video</a>
@@ -968,12 +1246,12 @@ In case of not approving a request for any reason, the call <a href="#tag/Reques
 
 </br>
 
-**API reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}/post">Upload Document</a>
+**API Reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}/post">Upload Document</a>
 
 
 After creating the digital signature request, we can associate to it all pdf documents that should be signed by the user.
 
-	curl -F "file=@doc.pdf" -X POST https://one-shot.developers.uanataca.com/api/v1/document/1464
+	curl -F "file=@doc.pdf" -X POST https://one-shot.developers.uanataca.com/api/v1/document/45836
 
 Note that the number at the end of the call is the request id we obtained in the previous step.
 
@@ -991,7 +1269,7 @@ If the upload is successful, the response will contain the identifier assigned t
 </br>
 
 
-**API reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1contract/get">Retrieve Contract</a>
+**API Reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1contract/get">Retrieve Contract</a>
 
 As a Trusted Service Provider, Uanataca must inform certificate applicants of the terms and conditions governing the issuance of certificates. 
 
@@ -1010,7 +1288,7 @@ The response by the server will be the service contract document file in binary 
 
 </br>
 
-**API reference:** <a href="#tag/Requests/paths/~1api~1v1~1otp~1{pk}/post">Generate OTP code</a>
+**API Reference:** <a href="#tag/Requests/paths/~1api~1v1~1otp~1{pk}/post">Generate OTP code</a>
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">This step is only used for flows using Uanataca SMS.</blockquote>
 
@@ -1018,7 +1296,7 @@ Once the documents to be signed are ready, we need to generate a secure One-time
 
 When calling the OTP endpoint, provide the request identifier returned by the request endpoint:
 
-	curl -X POST https://one-shot.developers.uanataca.com/api/v1/otp/1464
+	curl -X POST https://one-shot.developers.uanataca.com/api/v1/otp/45836
 
 A successful call will look like this:
 
@@ -1035,13 +1313,13 @@ With this call, an SMS with the secret code is sent to the mobile phone number a
 
 </br>
 
-**API reference:** <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">Sign</a>
+**API Reference:** <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">Sign</a>
 
 In this step, the request changes to **ISSUED** status, which means digital signature certificate is created and inmediately signs all previously uploaded documents associated to the signature request.
 
 Call the sign endpoint with the request id and json parameters containing the OTP:
 
-	curl -d @params.json -H "Content-Type: application/json -X POST https://one-shot.developers.uanataca.com/api/v1/sign/1464
+	curl -d @params.json -H "Content-Type: application/json -X POST https://one-shot.developers.uanataca.com/api/v1/sign/45836
 
 params.json for Uanataca SMS:
 
@@ -1078,7 +1356,7 @@ Once the signature is done, the next step is getting the signed documents.
 
 To do this, query with an HTTP GET request the endpoint /api/v1/document/{pk}/{type}/{uid}, where {pk} is the Request's unique identifier, {type} is the type of the document (it can be "original" for the uploaded document or "signed" for the digitally-signed version) and {uid} is the document unique identifier.
 
-	curl -X GET https://one-shot.developers.uanataca.com/api/v1/document/1464/signed/712c29ac-a2dc-4530-8c67-d0f227d8294b
+	curl -X GET https://one-shot.developers.uanataca.com/api/v1/document/45836/signed/712c29ac-a2dc-4530-8c67-d0f227d8294b
 
 The response by the server will be the document in binary format:
 
@@ -1091,14 +1369,13 @@ The response by the server will be the document in binary format:
 
 </br>
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete">Delete All Documents</a>
+**API Reference:** <a href="#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete">Delete All Documents</a>
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ While the service will not delete uploaded files unless explicitly requested through an API call, it is <strong>strongly recommended</strong> that you backup any files that you want to preserve using an alternative system.</blockquote>
 
 Delete all documents associated to an ended digital signature request.
 
-	curl -X DELETE https://one-shot.developers.uanataca.com/api/v1/documents/1464
-
+	curl -X DELETE https://one-shot.developers.uanataca.com/api/v1/documents/45836
 
 </br>
 
