@@ -129,7 +129,49 @@ Manage images associated to a visual graphic signature placed in the signed docu
 </br> 
 </html>
   "
+
+- name: "Video ID"
+  description: "
   
+<html>
+This allows the management of One-Shot signature by establishing a video call for identity verification.</br>
+<table>
+  <tr>
+    <th>Method</th><th>Endpoint</th><th>Action</th>
+  </tr>
+  <tr>
+    <td>POST</td><td><a href='#tag/Images/paths/~1api~1v1~1image/post'>/image</a></td><td>Create Request</td>
+  </tr>
+    <tr>
+    <td>POST</td><td><a href='#tag/Images/paths/~1api~1v1~1image/post'>/image</a></td><td>Update Request</td>
+  </tr>
+    <tr>
+    <td>POST</td><td><a href='#tag/Images/paths/~1api~1v1~1image/post'>/image</a></td><td>Cancel Request</td>
+  </tr>
+  <tr>
+    <td>GET</td><td><a href='#tag/Images/paths/~1api~1v1~1image~1{uid}/get'>/image/{uid}</a></td><td>Upload Data Evidence</td>
+  </tr>
+  <tr>
+    <td>DELETE</td><td><a href='#tag/Images/paths/~1api~1v1~1image~1{uid}/delete'>/image/{uid}</a></td><td>Upload Video</td>
+  </tr>
+  <tr>
+    <td>GET</td><td><a href='#tag/Images/paths/~1api~1v1~1images/get'>/images</a></td><td>Validate Request</td>
+  </tr>
+  <tr>
+    <td>GET</td><td><a href='#tag/Images/paths/~1api~1v1~1images/get'>/images</a></td><td>Refuse Request</td>
+  </tr>
+  <tr>
+    <td>GET</td><td><a href='#tag/Images/paths/~1api~1v1~1images/get'>/images</a></td><td>Approve Request</td>
+  </tr>
+  <tr>
+    <td>DELETE</td><td><a href='#tag/Images/paths/~1api~1v1~1images/delete'>/images</a></td><td>Download Video</td>
+  </tr>
+</table> 
+</br> 
+</html>
+  "
+
+
 paths:
 
 ###### tokens ######
