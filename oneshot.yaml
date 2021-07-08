@@ -3209,6 +3209,133 @@ paths:
                   IRestResponse response = client.Execute(request);
                   Console.WriteLine(response.Content);           
 
+############
+  /api/v1/videoid/{request_pk}/validate:
+    post: 
+      summary: VALIDATE REQUEST
+      tags:
+        - Video ID
+      description: "Validation of a Video ID Request"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: request_pk
+        type: string
+        description: The Request unique identifier
+        required: true
+      - in: "body"
+        name: "body"
+        schema:
+          $ref: "#/definitions/ValidateReqObject_VID"
+      responses:
+        200:
+          description: Successful Response
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://api.uanataca.com/api/v1/videoid/45836/validate \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "username": "5012345",
+                      "password": "Gy6F37xK",
+                      "pin": "belorado74",
+                      "rao_id": "1400"
+                    }'
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    `https://api.uanataca.com/api/v1/videoid/45836/validate`,
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5012345',
+                        password: 'Gy6F37xK',
+                        pin: 'belorado74',
+                        rao_id: '1400'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://api.uanataca.com/api/v1/videoid/45836/validate"
+
+                  payload = {
+                    "username": "5012345",
+                    "password": "Gy6F37xK",
+                    "pin": "belorado74",
+                    "rao_id": "1400"
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    `https://api.uanataca.com/api/v1/videoid/45836/validate`,
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5012345',
+                        password: 'Gy6F37xK',
+                        pin: 'belorado74',
+                        rao_id: '1400'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          username: '5012345',
+                          password: 'Gy6F37xK',
+                          pin: 'belorado74',
+                          rao_id: '1400'
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://api.uanataca.com/api/v1/videoid/45836/validate", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
+
+
 #############
   /api/v1/requests/{request_pk}/pl_approve:
     post: 
@@ -3367,7 +3494,7 @@ paths:
       - in: "body"
         name: "body"
         schema:
-          $ref: "#/definitions/ValidateReqObject_VID"
+          $ref: "#/definitions/RefuseReqObject_VID"
       responses:
         200:
           description: Successful Response
@@ -3743,3 +3870,22 @@ definitions:
         rao_id:
             type: "string"
             description: "The RAO's id" 
+###########
+  RefuseReqObject_VID:
+    type: "object"
+    properties:
+      username:
+          type: "string"
+          description: "The RAO's username"
+      password:
+          type: "string"
+          description: "The RAO's password"
+      pin:
+          type: "string"
+          description: "The RAO's pin"
+      rao_id:
+          type: "string"
+          description: "The RAO's id"
+      reason:
+          type: "string"
+          description: "Reason that caused VideoID refusal"
