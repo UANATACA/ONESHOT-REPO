@@ -3479,7 +3479,7 @@ paths:
                   }
 
 #############
-  api/v1/download/video/{video_identifier}:
+  /api/v1/download/video/{video_identifier}:
     get: 
       summary: DOWNLOAD VIDEO
       tags:
