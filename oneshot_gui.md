@@ -699,7 +699,7 @@ Delete all documents associated to an ended digital signature request.
 In External mode Video ID, digital evidences are uploaded to an independent Video ID platform. External mode Video ID can be executed in 1 or 2 steps.
 
 </br>
-![img](https://github.com/UANATACA/ONESHOT-REPO/raw/test2/img/oneshot_ext.png)
+![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/test2/img/oneshot_ext.png)
 </br>
 
 You can follow the example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
