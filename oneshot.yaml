@@ -1021,7 +1021,7 @@ paths:
                     Console.WriteLine(response.Content);
                              
   #############
-  /api/v1/request/{pk}:
+  /api/v1/request/{request_pk}:
     get: 
       summary: GET REQUEST
       tags:
@@ -2669,6 +2669,7 @@ paths:
         - lang: 'C#'
           source: |
 
+
   #############
   /api/v1/request/{request_pk}:
     put: 
@@ -2688,7 +2689,7 @@ paths:
       - in: "body"
         name: "body"
         schema:
-          $ref: "#/definitions/ReqObject_VID"
+          $ref: "#/definitions/CreateReqObject_VID"
       responses:
         200:
           description: Successful Response
@@ -2710,16 +2711,16 @@ paths:
                   request_pk:
                     type: string
                     description: The request id number          
-              examples:
-                application/json:
-                    {
-                        "status": "200 OK",
-                        "details": {
-                            "videoid_pk": 137,
-                            "videoid_link": "",
-                            "request_pk": 45836
-                        }
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": {
+                        "videoid_pk": 137,
+                        "videoid_link": "",
+                        "request_pk": 45836
                     }
+                }
         400:
           description: Bad Request | Missing required parameters
           schema:
