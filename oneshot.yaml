@@ -2592,16 +2592,16 @@ paths:
                   request_pk:
                     type: string
                     description: The request primary key          
-              examples:
-                application/json:
-                    {
-                        "status": "200 OK",
-                        "details": {
-                            "videoid_pk": 137,
-                            "videoid_link": "",
-                            "request_pk": 45836
-                        }
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": {
+                        "videoid_pk": 137,
+                        "videoid_link": "",
+                        "request_pk": 45836
                     }
+                }
         400:
           description: Bad Request | Missing required parameters
           schema:
