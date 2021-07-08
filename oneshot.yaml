@@ -3348,6 +3348,8 @@ paths:
                   }
 
 
+
+
 ###### definitions ######
 ###############################################################################
 
@@ -3502,21 +3504,21 @@ definitions:
               type: "string"
               description: similarity_level description 
 ###########
-  PlApproveReqObject:
-    type: "object"
-    properties:
-      username:
-          type: "string"
-          description: "The RAO's username"
-      password:
-          type: "string"
-          description: "The RAO's password"
-      pin:
-          type: "string"
-          description: "The RAO's PIN"
-      rao_id:
-          type: "string"
-          description: "The RAO's id"
-      lang:
-          type: "string"
-          description: "The contract language"
+    PlApproveReqObject:
+      type: "object"
+      properties:
+        username:
+            type: "string"
+            description: "The RAO's username"
+        password:
+            type: "string"
+            description: "The RAO's password"
+        pin:
+            type: "string"
+            description: "The RAO's PIN"
+        rao_id:
+            type: "string"
+            description: "The RAO's id"
+        lang:
+            type: "string"
+            description: "The contract language"
