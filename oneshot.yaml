@@ -2905,7 +2905,7 @@ paths:
                         "acceptance_test_data": true,
                         "another_field": 0
                       },
-                      "data": {
+                      "videoid_data": {
                         "images": {
                           "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
                           "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
@@ -2939,7 +2939,7 @@ paths:
                           acceptance_test_data: true,
                           another_field: 0
                         },
-                        data: {
+                        videoid_data: {
                           images: {
                             document_front: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)',
                             document_rear: '/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)',
@@ -2975,7 +2975,7 @@ paths:
                       "acceptance_test_data": True,
                       "another_field": 0
                     },
-                    "data": {
+                    "videoid_data": {
                       "images": {
                         "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
                         "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
@@ -3018,7 +3018,7 @@ paths:
                           acceptance_test_data: true,
                           another_field: 0
                         },
-                        data: {
+                        videoid_data: {
                           images: {
                             document_front: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)',
                             document_rear: '/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)',
@@ -3062,7 +3062,7 @@ paths:
                             acceptance_test_data: true,
                             another_field: 0
                           },
-                          data: {
+                          videoid_data: {
                             images: {
                               document_front: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)',
                               document_rear: '/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)',
@@ -3591,7 +3591,7 @@ paths:
                   }
 
 #############
-  /api/v1/download/video/{video_identifier}:
+  /api/v1/videoid/{request_pk}/download/video:
     get: 
       summary: DOWNLOAD VIDEO
       tags:
@@ -3612,11 +3612,11 @@ paths:
         - lang: 'curl'
           source: |
                   curl -i -X GET \
-                    https://api.uanataca.com/api/v1/download/video/123456
+                    https://api.uanataca.com/api/v1/videoid/45836/download/video
         - lang: 'Javascript'
           source: |
                   const resp = await fetch(
-                    `https://api.uanataca.com/api/v1/download/video/123456`,
+                    `https://api.uanataca.com/api/v1/videoid/45836/download/video`,
                     {method: 'GET'}
                   );
 
@@ -3626,7 +3626,7 @@ paths:
           source: |
                   import requests
 
-                  url = "https://api.uanataca.com/api/v1/download/video/123456"
+                  url = "https://api.uanataca.com/api/v1/videoid/45836/download/video"
 
                   response = requests.get(url)
 
@@ -3637,7 +3637,7 @@ paths:
                   const fetch = require('node-fetch');
 
                   const resp = await fetch(
-                    `https://api.uanataca.com/api/v1/download/video/123456`,
+                    `https://api.uanataca.com/api/v1/videoid/45836/download/video`,
                     {method: 'GET'}
                   );
 
@@ -3655,7 +3655,7 @@ paths:
                     {
                       using (var client = new HttpClient())
                       {
-                        var request = await client.GetAsync("https://api.uanataca.com/api/v1/download/video/123456", null);
+                        var request = await client.GetAsync("https://api.uanataca.com/api/v1/videoid/45836/download/video", null);
                         var response = await request.Content.ReadAsStringAsync();
 
                         Console.WriteLine(response);
@@ -3760,7 +3760,7 @@ definitions:
               type: "string"
             url-doc-termsconditions:
               type: "string"
-        data:
+        videoid_data:
           type: "object"
           description: Data to upload for Video ID
           properties:
