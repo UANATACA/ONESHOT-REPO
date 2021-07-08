@@ -432,7 +432,7 @@ In case of not approving a request for any reason, the call <a href="#tag/Reques
 
 </br>
 
-> **STEP 5: UPLOAD A DOCUMENT**
+> **STEP 3: UPLOAD A DOCUMENT**
 
 </br>
 
@@ -454,7 +454,7 @@ If the upload is successful, the response will contain the identifier assigned t
 
 </br>
 
-> **STEP 6: RETRIEVE SERVICE CONTRACT**
+> **STEP 4: RETRIEVE SERVICE CONTRACT**
 
 </br>
 
@@ -474,7 +474,7 @@ The response by the server will be the service contract document file in binary 
 
 </br>
 
-> **STEP 7: GENERATE AN OTP (only for Uanataca SMS)**
+> **STEP 5: GENERATE AN OTP (only for Uanataca SMS)**
 
 </br>
 
@@ -499,7 +499,7 @@ With this call, an SMS with the secret code is sent to the mobile phone number a
 
 </br>
 
-> **STEP 8: SIGN THE DOCUMENT**
+> **STEP 6: SIGN THE DOCUMENT**
 
 </br>
 
@@ -536,7 +536,7 @@ A successful call will result in the following response:
 
 </br>
 
-> **STEP 9: RETRIEVE SIGNED DOCUMENT**
+> **STEP 7: RETRIEVE SIGNED DOCUMENT**
 
 </br>
 
@@ -555,7 +555,7 @@ The response by the server will be the document in binary format:
 
 </br>
 
-> **STEP 10: DELETE DOCUMENTS FROM OPTIMIZER**
+> **STEP 8: DELETE DOCUMENTS FROM OPTIMIZER**
 
 </br>
 
