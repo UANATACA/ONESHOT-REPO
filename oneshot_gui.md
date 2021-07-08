@@ -87,14 +87,17 @@ The following images summarize One-Shot Signature flow involving both authentica
 12. One-Shot Optimizer generates the signed document envelopment, combining the original documents with the signed hashes
 13. Finally, the business application calls One-Shot Optimizer API to obtain the signed documents
 
+</br>
 
 This section presents the workflow for a simple use case of the One-Shot Signature service with a step-by-step description of the API calls required to allow a user to digitally sign a document provided by the client application. 
 
 <a href="#section/Video-tutorials/Signature-Workflow-(SMS)"><img src="https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img4.png"></a><a href="#section/Video-tutorials/Signature-Workflow-(SMS)"><b>&nbsp;Watch on video!</b></a>
 
-You can follow the example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
+You can follow the next example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
 
-The basic digital signature process involves the following steps:
+</br>
+
+*The basic digital signature process involves the following steps:*
 
 **1) RETRIEVE AN EXISTING TOKEN FOR THE RAO**
 
