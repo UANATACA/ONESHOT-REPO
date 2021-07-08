@@ -831,7 +831,7 @@ Successful response status
 
 </br>
 
-In the same way, MP4-format Video evidence is uploaded by using the following call:
+In the same way, binary multiformat Video evidence is uploaded by using the following call:
 
 **API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1upload~1video~1{video_identifier}/post">Upload Video</a>
 
