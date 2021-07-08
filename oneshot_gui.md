@@ -711,91 +711,102 @@ You can follow the example using the developers One-Shot Optimizer configured fo
 *This process involves the following steps:*
 
 
-**1) RETRIEVE AN EXISTING TOKEN FOR THE RAO**
+**1) CREATE A NEW VIDEO ID SIGNATURE REQUEST**
 
-**2) CREATE A NEW VIDEO ID SIGNATURE REQUEST**
+**2) UPLOAD EVIDENCES (DATA & VIDEO)**
 
-**3) UPLOAD EVIDENCES (DATA & VIDEO)**
+**3) VALIDATE VIDEO ID REQUEST**
 
-**4) VALIDATE A VIDEO ID REQUEST**
+**4) APPROVE VIDEO ID REQUEST**
 
-**5) APPROVE A VIDEO ID REQUEST**
+**5) UPLOAD A DOCUMENT**
 
-**6) UPLOAD A DOCUMENT**
+**6) RETRIEVE SERVICE CONTRACT**
 
-**7) RETRIEVE SERVICE CONTRACT**
+**7) GENERATE AN OTP (only for Uanataca SMS)**
 
-**8) GENERATE AN OTP (only for Uanataca SMS)**
+**8) SIGN THE DOCUMENT**
 
-**9) SIGN THE DOCUMENT**
+**9) RETRIEVE SIGNED DOCUMENT**
 
 **10) DELETE DOCUMENTS FROM OPTIMIZER**
 
 </br>
 
-> **STEP 1: RETRIEVE AN EXISTING TOKEN FOR THE RAO**
-
-</br>
-
-**API Reference:** <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List tokens</a>
-
-The test One-Shot Optimizer is pre-configured with a Registration Authority Officer (RAO) account ready to be used within the test environment. This account has an associated token, that can be used to identify the RAO in API calls.
-
-	curl -X GET https://one-shot.developers.uanataca.com/api/v1/tokens
-
-On the clean machine, this should return a single token:
-
-	1 | {
-	2 |     "status": "200 OK",
-	3 |     "details": {
-	4 |         "6d1cae4d55be4cdf9cac50ee36f73406": {
-	5 |             "username": "9001800",
-	6 |             "password": true,
-	7 |             "pin": true
-	8 |         }
-	9 |     }
-	10| }
-
-This output tells us that a single token "6d1cae4d55be4cdf9cac50ee36f73406" exists. This token is associated to the RAO account with id "9001800" and can be used in place of the password and pin.
-
-To use tokens in a production environment, you will need to create them first with the corresponding <a href="#tag/Tokens/paths/~1api~1v1~1token/post">Create token</a> API call.
-
-</br>
-
-> **STEP 2: CREATE A NEW VIDEO ID SIGNATURE REQUEST**
+> **STEP 1: CREATE A NEW VIDEO ID SIGNATURE REQUEST**
 
 </br>
 
 **API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid/post">Create Video ID Request</a>
 
-This call must include enough information to identify both the signing user and the RAO approving the request. 
+This call must include preliminary information to identify the signer. 
 
-	1 | curl --location --request POST 'https://one-shot.developers.uanataca.com/api/v1/request' \
-	2 |      --form 'token=6d1cae4d55be4cdf9cac50ee36f73406' \
-	3 |      --form 'profile=PFnubeQAFCiudadano' \
-	4 |      --form 'given_name=name_of_the_user' \
-	5 |      --form 'surname_1=surname_of_the_user' \
-	6 |      --form 'email=user-example@domain.com' \
-	7 |      --form 'mobile_phone_number=+343391234567' \
-	8 |      --form 'document_front=@document_front.png' \
-	9 |      --form 'document_rear=@document_rear.png' \
-	10|      --form 'document_owner=@document_owner.png'
 
-where token is the token representing the RAO credentials obtained in the previous step.
+	1 | curl -i -X POST \
+	2 |   https://one-shot.developers.uanataca.com/api/v1/videoid \
+	3 |   -H 'Content-Type: application/json' \
+	4 |   -d '{
+	5 |     "mobile_phone_number": "+34123123123",
+	6 |     "email": "mail@domain",
+	7 |     "registration_authority": "1000",
+	8 |     "profile": "PFnubeAFCiudadano",
+	9 |     "videoid_mode": "1"
+	10|   }'
 
 If the signature request is completed successfully, we will get the unique identifier assigned to it:
 
 	1 | {
-	2 |     "status": "201 Created",
-	3 |     "details": 1464
-	4 | }
+	2 |     "status": "200 OK",
+	3 |     "details": {
+	4 |         "videoid_pk": 150,
+	5 |         "videoid_link": "",
+	6 |         "request_pk": 45836
+	7 |     }
+	8 | }
 
-The request code will be used to identify this digital signature request in subsequent calls.
+The request_pk output parameter will be used to identify this digital signature request in subsequent calls.
+
 </br>
 
-> STEP 3: Upload a document
+> **STEP 2: UPLOAD EVIDENCES**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}/post">Upload document</a>
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+
+
+</br>
+
+> **STEP 3: VALIDATE VIDEO ID REQUEST**
+
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+
+
+</br>
+
+> **STEP 4: APPROVE VIDEO ID REQUEST**
+
+
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+
+
+</br>
+
+> **STEP 5: UPLOAD A DOCUMENT**
+
+</br>
+
+**API reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}/post">Upload Document</a>
 
 
 After creating the digital signature request, we can associate to it all pdf documents that should be signed by the user.
@@ -813,9 +824,12 @@ If the upload is successful, the response will contain the identifier assigned t
 
 </br>
 
-> STEP 4: Retrieve service contract
+> **STEP 6: RETRIEVE SERVICE CONTRACT**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1contract/get">Retrieve contract</a>
+</br>
+
+
+**API reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1contract/get">Retrieve Contract</a>
 
 As a Trusted Service Provider, Uanataca must inform certificate applicants of the terms and conditions governing the issuance of certificates. 
 
@@ -830,9 +844,11 @@ The response by the server will be the service contract document file in binary 
 
 </br>
 
-> STEP 5: Generate an OTP
+> **STEP 7: GENERATE AN OTP**
 
-API reference: <a href="#tag/Requests/paths/~1api~1v1~1otp~1{pk}/post">Generate OTP code</a>
+</br>
+
+**API reference:** <a href="#tag/Requests/paths/~1api~1v1~1otp~1{pk}/post">Generate OTP code</a>
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">This step is only used for flows using Uanataca SMS.</blockquote>
 
@@ -850,11 +866,14 @@ A successful call will look like this:
 	4 | }
 
 With this call, an SMS with the secret code is sent to the mobile phone number associated to the signature request.
+
 </br>
 
-> STEP 6: Sign the document
+> **STEP 8: SIGN THE DOCUMENT**
 
-API reference: <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">Sign</a>
+</br>
+
+**API reference:** <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">Sign</a>
 
 In this step we are going to issue the digital signature certificate and sign all documents previously uploaded for the signature request.
 
@@ -887,9 +906,11 @@ A successful call will result in the following response:
 
 </br>
 
-> STEP 7: Retrieve signed document
+> **STEP 9: SIGN THE DOCUMENT**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/get">Retrieve document</a>
+</br>
+
+**API reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/get">Retrieve document</a>
 
 Once the signature is done, the next step is getting the signed documents.
 
@@ -904,9 +925,11 @@ The response by the server will be the document in binary format:
 
 </br>
 
-> STEP 8: Delete documents from Optimizer
+> **STEP 10: DELETE DOCUMENTS FROM OPTIMIZER**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete">Delete all request documents</a>
+</br>
+
+API reference: <a href="#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete">Delete All Documents</a>
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ While the service will not delete uploaded files unless explicitly requested through an API call, it is <strong>strongly recommended</strong> that you backup any files that you want to preserve using an alternative system.</blockquote>
 
