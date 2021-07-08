@@ -2724,21 +2724,21 @@ definitions:
                         type: "string"
                         description: "The previous uploaded image id"
 ###########
-  CreateReqObject_VID:
-    type: "object"
-    properties:
-      mobile_phone_number:
-          type: "string"
-          description: "The signer's mobile phone number"
-      email:
-          type: "string"
-          description: "The signer's email"
-      registration_authority:
-          type: "string"
-          description: "The registration Authority ID number"
-      profile:
-          type: "string"
-          description: "The certificate profile"
-      videoid_mode:
-          type: "string"
-          description: "Video ID mode (true)" 
+    CreateReqObject_VID:
+      type: "object"
+      properties:
+        mobile_phone_number:
+            type: "string"
+            description: "The signer's mobile phone number"
+        email:
+            type: "string"
+            description: "The signer's email"
+        registration_authority:
+            type: "string"
+            description: "The registration Authority ID number"
+        profile:
+            type: "string"
+            description: "The certificate profile"
+        videoid_mode:
+            type: "string"
+            description: "Video ID mode (true)" 
