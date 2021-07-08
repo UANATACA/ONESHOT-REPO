@@ -715,9 +715,9 @@ You can follow the example using the developers One-Shot Optimizer configured fo
 
 **2) UPLOAD EVIDENCES (DATA & VIDEO)**
 
-**3) VALIDATE VIDEO ID REQUEST**
+**3) REQUEST VALIDATION**
 
-**4) APPROVE VIDEO ID REQUEST**
+**4) REQUEST APPROVAL**
 
 **5) UPLOAD A DOCUMENT**
 
@@ -766,39 +766,145 @@ If the signature request is completed successfully, we will get the unique ident
 
 The request_pk output parameter will be used to identify this digital signature request in subsequent calls.
 
+If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.
+
+If request data needs to be retrieved, use the <a href="#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get">Get Request</a> call. Check API Reference.
+
 </br>
 
 > **STEP 2: UPLOAD EVIDENCES**
 
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+</br>
+
+A previously created Video ID Request needs a set of information defined as evidences. The succesful upload of **ALL** this information will change the request status to **VIDEOREVIEW**.
+
+Data and images are uploaded by using the following call:
+
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1upload~1data~1{video_identifier}/post">Upload Data Evidence</a>
+
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ For this call the endpoint must be used is <b>lima.demo.bit4id.org</b> instead of <b>api.uanataca.com</b></blockquote>
+
+</br>
+
+**Data objects in detail:**
+
+`acceptance` : Client acceptance parameters (e.g. Terms & Conditions,  Privacy Policy). This is a customizable JSON object.<br>
+`data` : Set of pictures associated to the client's ID document plus a selfie of him/her. **Mandatory object** <br>
+`ocr_data` : Text information extracted from the client's ID document via Optical Character Recognition (OCR). **Mandatory** <br>
+`security_checks` : Set of validation fields associated to the client's identity (underaging, matching info, liveliness, etc) <br>
+`similarity_level` : Similarity between the client's selfie and the picture is shown on his/her ID document. **Mandatory** <br>
+
+    1 | curl -i -X POST https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences \
+    2 |   -H 'Content-Type: application/json' \
+    3 |   -d '{
+    4 |     "acceptance": {
+    5 |       "acceptance_test_data": true,
+    6 |       "another_field": 0
+    7 |     },
+    8 |     "data": {
+    9 |       "images": {
+    10|         "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
+    11|         "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
+    12|         "document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
+    13|         "document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
+    14|       },
+    15|       "ocr_data": {
+    16|         "given_name": "Name",
+    17|         "surname_1": "Surname",
+    18|         "surname_2": Surname 2",
+    19|         "mobile_phone_number": "+34999999999",
+    20|         "serial_number": "A9999999E"
+    21|       },
+    22|       "security_checks": {
+    23|         "a_test_check": true,
+    24|         "another_check": true
+    25|       },
+    26|       "similarity_level": "high"
+    27|     }
+    28|   }'
+
+Successful response status
+
+	1 | {
+	2 |   "status": "200 OK"
+	3 | }
+
+</br>
+
+In the same way, MP4-format Video evidence is uploaded by using the following call:
+
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1upload~1video~1{video_identifier}/post">Upload Video</a>
+
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ For this call the endpoint must be used is <b>lima.demo.bit4id.org</b> instead of <b>api.uanataca.com</b></blockquote>
+
+    1 | curl -i -X POST https://lima.demo.bit4id.org/v1/upload/video/30e57b02819a430d8386fd85be9f499f/ \
+    2 |   -H 'Content-Type: multipart/form-data' \
+    3 |   -F video=@sample_folder/sample_video.mp4 
+
+Successful response status
+
+	1 | {
+	2 |   "status": "200 OK"
+	3 | }
+
+If the uploaded video needs to be retrieved, use <a href="#tag/Video-ID/paths/~1api~1v1~1download~1video~1{video_identifier}/get">Download Video</a>
 
 
 </br>
 
-> **STEP 3: VALIDATE VIDEO ID REQUEST**
-
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-
+> **STEP 3: REQUEST VALIDATION** `2-step mode only`
 
 </br>
 
-> **STEP 4: APPROVE VIDEO ID REQUEST**
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1validate/post">Validate Request</a>
 
+A Registration Authority Officer must validate the request data and evidences before approval. This call is used only for 2-step mode.  
 
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+    1 | curl -i -X POST https://api.uanataca.com/api/v1/videoid/45836/validate \
+    2 | -H 'Content-Type: application/json' \
+    3 | --cert 'cer.pem' --key 'key.pem'
+    4 | -d '{
+    5 |     "username": "5012345",
+    6 |     "password": "Gy6F37xK",
+    7 |     "pin": "belorado74",
+    8 |     "rao": "1400"
+    9 |	   }'
 
+The validation successful response changes the request to **CREATED** status as a JSON object containing full request information is returned.
+
+    1 | {
+	2 |		SUCCESSFUL RESPONSE PENDING
+	3 | }
+
+For unsuccessful validations leading to a request refusal, the corresponding call is  <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1refuse/post">Refuse Request</a>. Check API Reference.
+
+</br>
+
+> **STEP 4: REQUEST APPROVAL**
+
+</br>
+
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1validate/post">Approve Request</a>
+
+This call makes the request ready for signature. Its status changes to **ENROLLREADY**. In 1-step mode, both validation and approval occur when executing this call.
+
+    1 | curl -i -X POST 'https://api.uanataca.com/api/v1/request/45836/approve' \
+    2 | -H 'Content-Type: application/json' \
+    3 | --cert 'cer.pem' --key 'key.pem'
+    4 | -d '{
+    5 |     "username": "1000279",
+    6 |     "password": "3DPTm:N4",
+    7 |     "pin": "23bYQq9a",
+    8 |     "rao": 123
+    9 |	   }'
+
+The response is a JSON object with added request approval information. 
+
+    1 | {
+	2 |		SUCCESSFUL RESPONSE PENDING
+	3 | }
+
+In case of not approving a request for any reason, the call <a href="#tag/Requests/paths/~1api~1v1~1requests~1{id}~1cancel/delete">Cancel Request</a> must be executed. Check API Reference.
 
 </br>
 
