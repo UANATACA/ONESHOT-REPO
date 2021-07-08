@@ -3601,7 +3601,7 @@ paths:
         - application/json
       parameters:
       - in: path
-        name: video_identifier
+        name: request_pk
         type: string
         description: The Video unique identifier
         required: true
