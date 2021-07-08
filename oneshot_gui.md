@@ -737,7 +737,7 @@ You can follow the example using the developers One-Shot Optimizer configured fo
 
 </br>
 
-API reference: <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List tokens</a>
+**API Reference:** <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List tokens</a>
 
 The test One-Shot Optimizer is pre-configured with a Registration Authority Officer (RAO) account ready to be used within the test environment. This account has an associated token, that can be used to identify the RAO in API calls.
 
@@ -759,15 +759,16 @@ On the clean machine, this should return a single token:
 This output tells us that a single token "6d1cae4d55be4cdf9cac50ee36f73406" exists. This token is associated to the RAO account with id "9001800" and can be used in place of the password and pin.
 
 To use tokens in a production environment, you will need to create them first with the corresponding <a href="#tag/Tokens/paths/~1api~1v1~1token/post">Create token</a> API call.
+
 </br>
 
-> STEP 2: Create a new Digital Signature Request
+> **STEP 2: CREATE A NEW VIDEO ID SIGNATURE REQUEST**
 
-API reference: <a href="#tag/Requests/paths/~1api~1v1~1request/post">Create request</a>
+</br>
 
-Within the One-Shot Signature Service, all data pertaining to a given digital signature is collected within a Digital Signature Request. This includes both the identifying information of the signing user, which is provided when you create the signature request, and the document or documents to be signed, which we will upload later.
+**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid/post">Create Video ID Request</a>
 
-This call must include enough information to identify both the signing user and the RAO approving the request. The full description of the arguments accepted by this endpoint can be found in the API call detailed documentation, but for now it is enough to include at least the following:
+This call must include enough information to identify both the signing user and the RAO approving the request. 
 
 	1 | curl --location --request POST 'https://one-shot.developers.uanataca.com/api/v1/request' \
 	2 |      --form 'token=6d1cae4d55be4cdf9cac50ee36f73406' \
