@@ -706,22 +706,36 @@ In External mode Video ID, digital evidences are uploaded to an independent Vide
 
 You can follow the example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
 
-This process involves the following steps:
+</br>
 
-- Retrieve an existing token for the RAO
-- Create a new Digital Signature Request
-- Upload evidences (data & video)
-- Validate a Request with Video ID evidences
-- Approve a Request with Video ID evidences
-- Upload a document
-- Retrieve service contract
-- Generate an OTP (only for Uanataca SMS)
-- Sign the document
-- Retrieve the signed document
-- Delete documents from Optimizer
+*This process involves the following steps:*
 
 
-> STEP 1: Retrieve an existing token for the RAO
+**1) RETRIEVE AN EXISTING TOKEN FOR THE RAO**
+
+**2) CREATE A NEW VIDEO ID SIGNATURE REQUEST**
+
+**3) UPLOAD EVIDENCES (DATA & VIDEO)**
+
+**4) VALIDATE A VIDEO ID REQUEST**
+
+**5) APPROVE A VIDEO ID REQUEST**
+
+**6) UPLOAD A DOCUMENT**
+
+**7) RETRIEVE SERVICE CONTRACT**
+
+**8) GENERATE AN OTP (only for Uanataca SMS)**
+
+**9) SIGN THE DOCUMENT**
+
+**10) DELETE DOCUMENTS FROM OPTIMIZER**
+
+</br>
+
+> **STEP 1: RETRIEVE AN EXISTING TOKEN FOR THE RAO**
+
+</br>
 
 API reference: <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List tokens</a>
 

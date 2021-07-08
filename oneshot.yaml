@@ -140,10 +140,10 @@ This allows the management of One-Shot signature by establishing a video call fo
     <th>Method</th><th>Endpoint</th><th>Action</th>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/Images/paths/~1api~1v1~1image/post'>/image</a></td><td>Create Request</td>
+    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid/post'>/image</a></td><td>Create Request</td>
   </tr>
     <tr>
-    <td>POST</td><td><a href='#tag/Images/paths/~1api~1v1~1image/post'>/image</a></td><td>Update Request</td>
+    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put'>/image</a></td><td>Update Request</td>
   </tr>
     <tr>
     <td>POST</td><td><a href='#tag/Images/paths/~1api~1v1~1image/post'>/image</a></td><td>Cancel Request</td>
@@ -1357,7 +1357,7 @@ paths:
     delete: 
       summary: CANCEL REQUEST
       tags:
-        - Requests
+        - Video ID
       description: Cancels the Video ID One-Shot Signature request
       produces:
         - application/json 
@@ -3214,7 +3214,7 @@ paths:
     post: 
       summary: APPROVE REQUEST
       tags:
-        - Requests
+        - Video ID
       description: Approval of a request by a RAO. At this moment the RAO will sign the receipt and the contract.
       consumes:
         - application/json
