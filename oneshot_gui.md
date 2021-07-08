@@ -585,23 +585,21 @@ You can follow the next example using the developers One-Shot Optimizer configur
 
 **1) CREATE A NEW VIDEO ID SIGNATURE REQUEST**
 
-**2) UPLOAD EVIDENCES (DATA & VIDEO)**
+**2) REQUEST VALIDATION**
 
-**3) REQUEST VALIDATION**
+**3) REQUEST APPROVAL**
 
-**4) REQUEST APPROVAL**
+**4) UPLOAD A DOCUMENT**
 
-**5) UPLOAD A DOCUMENT**
+**5) RETRIEVE SERVICE CONTRACT**
 
-**6) RETRIEVE SERVICE CONTRACT**
+**6) GENERATE AN OTP (only for Uanataca SMS)**
 
-**7) GENERATE AN OTP (only for Uanataca SMS)**
+**7) SIGN THE DOCUMENT**
 
-**8) SIGN THE DOCUMENT**
+**8) RETRIEVE SIGNED DOCUMENT**
 
-**9) RETRIEVE SIGNED DOCUMENT**
-
-**10) DELETE DOCUMENTS FROM OPTIMIZER**
+**9) DELETE DOCUMENTS FROM OPTIMIZER**
 
 </br>
 
@@ -636,7 +634,9 @@ If the signature request is completed successfully, we will get the unique ident
 	7 |     }
 	8 | }
 
-The response is the a JSON containing important request parameters, in **VIDEOPENDING** status after creation. The request_pk output parameter will be used to identify this digital signature request in subsequent calls.
+The request starts at **VIDEOPENDING** status after creation. The request_pk output parameter will be used to identify this digital signature request in subsequent calls. 
+
+> At this point, the workflow progress will depend on the video-identification successful completion. This action will change request status from **VIDEOPENDING** to **VIDEOREVIEW**. To inform both business app and Video ID RAO about this change at the time it takes place, we recommend to enhance the process with the usage of a listener **webhook**. Check our documentation for webhook configuration.  
 
 If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.
 
@@ -644,87 +644,7 @@ If request data needs to be retrieved, use the <a href="#tag/Requests/paths/~1ap
 
 </br>
 
-> **STEP 2: UPLOAD EVIDENCES**
-
-</br>
-
-A previously created Video ID Request needs a set of information defined as evidences. The succesful upload of **ALL** this information will change the request status to **VIDEOREVIEW**.
-
-Data and images are uploaded by using the following call:
-
-**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences/post">Upload Data Evidence</a>
-
-<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ For this call the endpoint must be used is <b>lima.demo.bit4id.org</b> instead of <b>api.uanataca.com</b></blockquote>
-
-</br>
-
-**Data objects in detail:**
-
-`acceptance` : Client acceptance parameters (e.g. Terms & Conditions,  Privacy Policy). This is a customizable JSON object.<br>
-`data` : Set of pictures associated to the client's ID document plus a selfie of him/her. **Mandatory object** <br>
-`ocr_data` : Text information extracted from the client's ID document via Optical Character Recognition (OCR). **Mandatory** <br>
-`security_checks` : Set of validation fields associated to the client's identity (underaging, matching info, liveliness, etc) <br>
-`similarity_level` : Similarity between the client's selfie and the picture is shown on his/her ID document. **Mandatory** <br>
-
-    1 | curl -i -X POST https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences \
-    2 |   -H 'Content-Type: application/json' \
-    3 |   -d '{
-    4 |     "acceptance": {
-    5 |       "acceptance_test_data": true,
-    6 |       "another_field": 0
-    7 |     },
-    8 |     "data": {
-    9 |       "images": {
-    10|         "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
-    11|         "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
-    12|         "document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
-    13|         "document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
-    14|       },
-    15|       "ocr_data": {
-    16|         "given_name": "Name",
-    17|         "surname_1": "Surname 1",
-    18|         "surname_2": "Surname 2",
-    19|         "mobile_phone_number": "+34999999999",
-    20|         "serial_number": "A9999999E"
-    21|       },
-    22|       "security_checks": {
-    23|         "a_test_check": true,
-    24|         "another_check": true
-    25|       },
-    26|       "similarity_level": "high"
-    27|     }
-    28|   }'
-
-Successful response status
-
-	1 | {
-	2 |   SUCCESSFUL RESPONSE PENDING
-	3 | }
-
-</br>
-
-In the same way, binary multiformat Video evidence is uploaded by using the following call:
-
-**API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences~1video/post">Upload Video</a>
-
-<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ For this call the endpoint must be used is <b>lima.demo.bit4id.org</b> instead of <b>api.uanataca.com</b></blockquote>
-
-    1 | curl -i -X POST https://lima.demo.bit4id.org/v1/upload/video/30e57b02819a430d8386fd85be9f499f/ \
-    2 |   -H 'Content-Type: multipart/form-data' \
-    3 |   -F video=@sample_folder/sample_video.mp4 
-
-Successful response status
-
-	1 | {
-	2 |   SUCCESSFUL RESPONSE PENDING
-	3 | }
-
-If the uploaded video needs to be retrieved, use <a href="#tag/Video-ID/paths/~1api~1v1~1download~1video~1{video_identifier}/get">Download Video</a>
-
-
-</br>
-
-> **STEP 3: REQUEST VALIDATION** `2-step mode only`
+> **STEP 2: REQUEST VALIDATION** `2-step mode only`
 
 </br>
 
@@ -748,17 +668,19 @@ The validation successful response changes the request to **CREATED** status as 
 	2 |		SUCCESSFUL RESPONSE PENDING
 	3 | }
 
+This call makes the request ready for approval. Its status changes to **CREATED** and webhook intervention at this point is important for business app status update.
+
 For unsuccessful validations leading to a request refusal, the corresponding call is  <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1refuse/post">Refuse Request</a>. Check API Reference.
 
 </br>
 
-> **STEP 4: REQUEST APPROVAL**
+> **STEP 3: REQUEST APPROVAL**
 
 </br>
 
 **API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1validate/post">Approve Request</a>
 
-This call makes the request ready for signature. Its status changes to **ENROLLREADY**. In 1-step mode, both validation and approval occur when executing this call.
+This call makes the request ready for signature. Its status changes to **ENROLLREADY**.
 
     1 | curl -i -X POST 'https://api.uanataca.com/api/v1/request/45836/approve' \
     2 | -H 'Content-Type: application/json' \
@@ -780,7 +702,7 @@ In case of not approving a request for any reason, the call <a href="#tag/Reques
 
 </br>
 
-> **STEP 5: UPLOAD A DOCUMENT**
+> **STEP 4: UPLOAD A DOCUMENT**
 
 </br>
 
@@ -802,7 +724,7 @@ If the upload is successful, the response will contain the identifier assigned t
 
 </br>
 
-> **STEP 6: RETRIEVE SERVICE CONTRACT**
+> **STEP 5: RETRIEVE SERVICE CONTRACT**
 
 </br>
 
@@ -822,7 +744,7 @@ The response by the server will be the service contract document file in binary 
 
 </br>
 
-> **STEP 7: GENERATE AN OTP**
+> **STEP 6: GENERATE AN OTP**
 
 </br>
 
@@ -847,7 +769,7 @@ With this call, an SMS with the secret code is sent to the mobile phone number a
 
 </br>
 
-> **STEP 8: SIGN THE DOCUMENT**
+> **STEP 7: SIGN THE DOCUMENT**
 
 </br>
 
@@ -884,7 +806,7 @@ A successful call will result in the following response:
 
 </br>
 
-> **STEP 9: RETRIEVE SIGNED DOCUMENT**
+> **STEP 8: RETRIEVE SIGNED DOCUMENT**
 
 </br>
 
@@ -903,7 +825,7 @@ The response by the server will be the document in binary format:
 
 </br>
 
-> **STEP 10: DELETE DOCUMENTS FROM OPTIMIZER**
+> **STEP 9: DELETE DOCUMENTS FROM OPTIMIZER**
 
 </br>
 
