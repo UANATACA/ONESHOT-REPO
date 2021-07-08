@@ -810,8 +810,8 @@ Data and images are uploaded by using the following call:
     14|       },
     15|       "ocr_data": {
     16|         "given_name": "Name",
-    17|         "surname_1": "Surname",
-    18|         "surname_2": Surname 2",
+    17|         "surname_1": "Surname 1",
+    18|         "surname_2": "Surname 2",
     19|         "mobile_phone_number": "+34999999999",
     20|         "serial_number": "A9999999E"
     21|       },
