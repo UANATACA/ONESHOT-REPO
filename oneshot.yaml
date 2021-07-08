@@ -3347,6 +3347,211 @@ paths:
                     }
                   }
 
+#############
+  /api/v1/videoid/{request_pk}/refuse:
+    post: 
+      summary: REFUSE REQUEST
+      tags:
+        - Video ID
+      description: "Refuse validation for a Video ID Request"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: request_pk
+        type: string
+        description: The Request unique identifier
+        required: true
+      - in: "body"
+        name: "body"
+        schema:
+          $ref: "#/definitions/ValidateReqObject_VID"
+      responses:
+        200:
+          description: Successful Response
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://api.uanataca.com/api/v1/videoid/45836/refuse \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "username": "5012345",
+                      "password": "Gy6F37xK",
+                      "pin": "belorado74",
+                      "rao_id": "1400",
+                      "reason": "Expired document"
+                    }'
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    `https://api.uanataca.com/api/v1/requests/45836/refuse`,
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5012345',
+                        password: 'Gy6F37xK',
+                        pin: 'belorado74',
+                        rao_id: '1400',
+                        reason: 'Expired document'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://api.uanataca.com/api/v1/requests/45836/refuse"
+
+                  payload = {
+                    "username": "5012345",
+                    "password": "Gy6F37xK",
+                    "pin": "belorado74",
+                    "rao_id": "1400",
+                    "reason": "Expired document"
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    `https://api.uanataca.com/api/v1/requests/45836/refuse`,
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5012345',
+                        password: 'Gy6F37xK',
+                        pin: 'belorado74',
+                        rao_id: '1400',
+                        reason: 'Expired document'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          username: '5012345',
+                          password: 'Gy6F37xK',
+                          pin: 'belorado74',
+                          rao_id: '1400',
+                          reason: 'Expired document'
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://api.uanataca.com/api/v1/requests/45836/refuse", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
+
+#############
+  api/v1/download/video/{video_identifier}:
+    get: 
+      summary: DOWNLOAD VIDEO
+      tags:
+        - Video ID
+      description: "Download mp4-format binary video file associated to a Request"
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: video_identifier
+        type: string
+        description: The Video unique identifier
+        required: true
+      responses:
+        200:
+          description: Successful Response
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X GET \
+                    https://api.uanataca.com/api/v1/download/video/123456
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    `https://api.uanataca.com/api/v1/download/video/123456`,
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://api.uanataca.com/api/v1/download/video/123456"
+
+                  response = requests.get(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    `https://api.uanataca.com/api/v1/download/video/123456`,
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.GetAsync("https://api.uanataca.com/api/v1/download/video/123456", null);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }         
+
+
 
 
 
