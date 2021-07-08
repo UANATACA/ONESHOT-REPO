@@ -3180,84 +3180,84 @@ definitions:
             type: "string"
             description: "Video ID mode (true)" 
 ###########
-  UploadData_VID:
-    type: "object"
-    properties:
-      acceptance:
-        type: "object"
-        description: Service Terms and Conditions acceptance parameters
-        properties:
-          description:
-            type: "string"
-          url-doc-privacypolicy:
-            type: "string"
-          ip:
-            type: "string"
-          url-web-videoid:
-            type: "string"
-          user-agent:
-            type: "string"
-          date:
-            type: "string"
-          url-doc-termsconditions:
-            type: "string"
-      data:
-        type: "object"
-        description: Data to upload for Video ID
-        properties:
-          images:
-            type: "object"
-            description: Document images
-            properties:
-              document_front:
-                type: "string"
-                description: Base64 document front image
-              document_rear:
-                type: string
-                description: Base64 document rear image
-              document_photo:
-                type: string
-                description: Base64 document client picture (extracted from document)
-              document_owner:
-                type: string
-                description: Base64 client selfie
-          ocr_data:
-            type: "object"
-            description: Optical Character Recognition result
-            properties:
-              given_name:
-                type: string
-                description: Client's given name
-              surname_1:
-                type: string
-                description: Client's first surname
-              surname_2:
-                type: string
-                description: Client's second surname              
-              mobile_phone_number:
-                type: string
-                description: Client's mobile phone number
-              serial_number:
-                type: string
-                description: Client's serial number
-          security_checks:
-            type: "object"
-            description: Security checks related to document integrity
-            properties:
-              otp_validation:
-                type: boolean
-              documents_match:
-                type: boolean
-              data_integrity:
-                type: boolean
-              document_notcopy:
-                type: boolean
-              document_notexpired:
-                type: boolean
-              document_notunderage:
-                type: boolean
-              liveliness:
-                type: boolean
-          similarity_level:
-            type: "string"
-            description: similarity_level description 
+    UploadData_VID:
+      type: "object"
+      properties:
+        acceptance:
+          type: "object"
+          description: Service Terms and Conditions acceptance parameters
+          properties:
+            description:
+              type: "string"
+            url-doc-privacypolicy:
+              type: "string"
+            ip:
+              type: "string"
+            url-web-videoid:
+              type: "string"
+            user-agent:
+              type: "string"
+            date:
+              type: "string"
+            url-doc-termsconditions:
+              type: "string"
+        data:
+          type: "object"
+          description: Data to upload for Video ID
+          properties:
+            images:
+              type: "object"
+              description: Document images
+              properties:
+                document_front:
+                  type: "string"
+                  description: Base64 document front image
+                document_rear:
+                  type: string
+                  description: Base64 document rear image
+                document_photo:
+                  type: string
+                  description: Base64 document client picture (extracted from document)
+                document_owner:
+                  type: string
+                  description: Base64 client selfie
+            ocr_data:
+              type: "object"
+              description: Optical Character Recognition result
+              properties:
+                given_name:
+                  type: string
+                  description: Client's given name
+                surname_1:
+                  type: string
+                  description: Client's first surname
+                surname_2:
+                  type: string
+                  description: Client's second surname              
+                mobile_phone_number:
+                  type: string
+                  description: Client's mobile phone number
+                serial_number:
+                  type: string
+                  description: Client's serial number
+            security_checks:
+              type: "object"
+              description: Security checks related to document integrity
+              properties:
+                otp_validation:
+                  type: boolean
+                documents_match:
+                  type: boolean
+                data_integrity:
+                  type: boolean
+                document_notcopy:
+                  type: boolean
+                document_notexpired:
+                  type: boolean
+                document_notunderage:
+                  type: boolean
+                liveliness:
+                  type: boolean
+            similarity_level:
+              type: "string"
+              description: similarity_level description 
