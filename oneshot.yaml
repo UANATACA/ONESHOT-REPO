@@ -3596,7 +3596,7 @@ paths:
       summary: DOWNLOAD VIDEO
       tags:
         - Video ID
-      description: "Download mp4-format binary video file associated to a Request"
+      description: "Download the video file associated to a Request"
       produces:
         - application/json
       parameters:
