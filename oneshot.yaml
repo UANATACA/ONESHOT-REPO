@@ -2884,6 +2884,228 @@ paths:
 ###############################################################################
 
 
+#############
+  /api/v1/videoid/{request_pk}/evidences:
+    post: 
+      summary: UPLOAD DATA EVIDENCE
+      tags:
+        - Video ID
+      description: "Upload Request associated data"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: request_pk
+        type: string
+        description: The Request unique identifier
+        required: true
+      - in: "body"
+        name: "body"
+        schema:
+          $ref: "#/definitions/UploadData_VID"
+      responses:
+        200:
+          description: Successful Response 
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "acceptance": {
+                        "acceptance_test_data": true,
+                        "another_field": 0
+                      },
+                      "data": {
+                        "images": {
+                          "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
+                          "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
+                          "document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
+                          "document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
+                        },
+                        "ocr_data": {
+                          "given_name": "Name",
+                          "surname_1": "Surname",
+                          "mobile_phone_number": "+34999999999",
+                          "serial_number": "A9999999E"
+                        },
+                        "security_checks": {
+                          "a_test_check": true,
+                          "another_check": true
+                        },
+                        "similarity_level": "high"
+                      }
+                    }'
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    `https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences`,
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        acceptance: {
+                          acceptance_test_data: true,
+                          another_field: 0
+                        },
+                        data: {
+                          images: {
+                            document_front: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)',
+                            document_rear: '/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)',
+                            document_photo: 'AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)',
+                            document_owner: 'SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)'
+                          },
+                          ocr_data: {
+                            given_name: 'Name',
+                            surname_1: 'Surname',
+                            mobile_phone_number: '+34999999999',
+                            serial_number: 'A9999999E'
+                          },
+                          security_checks: {
+                            a_test_check: true,
+                            another_check: true
+                          },
+                          similarity_level: 'high'
+                        }
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences"
+
+                  payload = {
+                    "acceptance": {
+                      "acceptance_test_data": True,
+                      "another_field": 0
+                    },
+                    "data": {
+                      "images": {
+                        "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
+                        "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
+                        "document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
+                        "document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
+                      },
+                      "ocr_data": {
+                        "given_name": "Name",
+                        "surname_1": "Surname",
+                        "mobile_phone_number": "+34999999999",
+                        "serial_number": "Y9999999E"
+                      },
+                      "security_checks": {
+                        "a_test_check": True,
+                        "another_check": True
+                      },
+                      "similarity_level": "high"
+                    }
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    `https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences`,
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        acceptance: {
+                          acceptance_test_data: true,
+                          another_field: 0
+                        },
+                        data: {
+                          images: {
+                            document_front: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)',
+                            document_rear: '/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)',
+                            document_photo: 'AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)',
+                            document_owner: 'SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)'
+                          },
+                          ocr_data: {
+                            given_name: 'Name',
+                            surname_1: 'Surname',
+                            mobile_phone_number: '+34999999999',
+                            serial_number: 'A9999999E'
+                          },
+                          security_checks: {
+                            a_test_check: true,
+                            another_check: true
+                          },
+                          similarity_level: 'high'
+                        }
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          acceptance: {
+                            acceptance_test_data: true,
+                            another_field: 0
+                          },
+                          data: {
+                            images: {
+                              document_front: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)',
+                              document_rear: '/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)',
+                              document_photo: 'AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)',
+                              document_owner: 'SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)'
+                            },
+                            ocr_data: {
+                              given_name: 'Name',
+                              surname_1: 'Surname',
+                              mobile_phone_number: '+34999999999',
+                              serial_number: 'A9999999E'
+                            },
+                            security_checks: {
+                              a_test_check: true,
+                              another_check: true
+                            },
+                            similarity_level: 'high'
+                          }
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
+
+
 
 
 ###### definitions ######
