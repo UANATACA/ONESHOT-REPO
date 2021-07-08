@@ -3209,6 +3209,144 @@ paths:
                   IRestResponse response = client.Execute(request);
                   Console.WriteLine(response.Content);           
 
+#############
+  /api/v1/requests/{request_pk}/pl_approve:
+    post: 
+      summary: APPROVE REQUEST
+      tags:
+        - Requests
+      description: Approval of a request by a RAO. At this moment the RAO will sign the receipt and the contract.
+      consumes:
+        - application/json
+      produces:
+        - application/json 
+      parameters:
+        - in: path
+          name: request_pk
+          type: string
+          description: The Request unique identifier
+          required: true
+        - in: "body"
+          name: "body"
+          schema:
+            $ref: "#/definitions/PlApproveReqObject"
+      responses:
+        200:
+          description: Successful Response
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://api.uanataca.com/api/v1/request/45836/approve/ \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "username": "RAO_Name",
+                      "password": "Rw36:#Y6",
+                      "pin": "belorado74",
+                      "rao": "898"
+                    }'
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    'https://api.uanataca.com/api/v1/request/45836/approve/',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: 'RAO_Name',
+                        password: 'Rw36:#Y6',
+                        pin: 'belorado74',
+                        rao: '898'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://api.uanataca.com/api/v1/request/45836/approve/"
+
+                  payload = {
+                    "username": "RAO_Name",
+                    "password": "Rw36:#Y6",
+                    "pin": "belorado74",
+                    "rao": "898"
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://api.uanataca.com/api/v1/request/45836/approve/',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: 'RAO_Name',
+                        password: 'Rw36:#Y6',
+                        pin: 'belorado74',
+                        rao: '898'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+                  using System.Security.Cryptography.X509Certificates;
+                  
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      X509Certificate2 clientCert = new X509Certificate2("./path/to/cert_and_key.p12", "password"); 
+                      HttpClientHandler handler = new HttpClientHandler();
+
+                      // This disables the SSL verification in TEST mode
+                      handler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
+                      {
+                          return true;
+                      };
+                      
+                      handler.ClientCertificates.Add(clientCert);
+                      
+                      using (var client = new HttpClient(handler))
+                      {
+                        JObject json = JObject.Parse(@"{
+                          username: 'RAO_Name',
+                          password: 'Rw36:#Y6',
+                          pin: 'belorado74',
+                          rao: '898'
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://api.uanataca.com/api/v1/request/45836/approve/", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
+
 
 ###### definitions ######
 ###############################################################################
@@ -3363,3 +3501,22 @@ definitions:
             similarity_level:
               type: "string"
               description: similarity_level description 
+###########
+  PlApproveReqObject:
+    type: "object"
+    properties:
+      username:
+          type: "string"
+          description: "The RAO's username"
+      password:
+          type: "string"
+          description: "The RAO's password"
+      pin:
+          type: "string"
+          description: "The RAO's PIN"
+      rao_id:
+          type: "string"
+          description: "The RAO's id"
+      lang:
+          type: "string"
+          description: "The contract language"
