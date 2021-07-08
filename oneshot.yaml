@@ -2671,7 +2671,7 @@ paths:
 
 
   #############
-  /api/v1/request/{request_pk}:
+  /api/v1/request/{Arequest_pk}:
     put: 
       summary: UPDATE REQUEST
       tags:
