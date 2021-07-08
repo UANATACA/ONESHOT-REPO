@@ -140,7 +140,7 @@ This allows the management of One-Shot signature by establishing a video call fo
     <th>Method</th><th>Endpoint</th><th>Action</th>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid/post'>/videoid</a></td><td>Create Request</td>
+    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid/post'>/videoid</a></td><td>Create Video ID Request</td>
   </tr>
     <tr>
     <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put'>/request/{request_pk}</a></td><td>Update Request</td>
@@ -2768,7 +2768,7 @@ paths:
 
   /api/v1/videoid:
     post: 
-      summary: CREATE REQUEST
+      summary: CREATE VIDEO ID REQUEST
       tags:
         - Video ID
       description: Creates a new signature request to be used over Video ID validation process.
