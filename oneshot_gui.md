@@ -392,7 +392,11 @@ If the signature request is completed successfully, both video and request uniqu
 
 The request starts at **VIDEOPENDING** status after creation. The request_pk output parameter will be used to identify this digital signature request in subsequent calls. 
 
+</br>
+
 > At this point, the workflow progress will depend on the video-identification successful completion. This action will change request status from **VIDEOPENDING** to **VIDEOREVIEW**. To inform both business app and Video ID RAO about this change at the time it takes place, we recommend to enhance the process with the usage of a listener **webhook**. Check our documentation for webhook configuration.  
+
+</br>
 
 If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.
 
@@ -636,7 +640,11 @@ If the signature request is completed successfully, we will get the unique ident
 
 The request starts at **VIDEOPENDING** status after creation. The request_pk output parameter will be used to identify this digital signature request in subsequent calls. 
 
+</br>
+
 > At this point, the workflow progress will depend on the video-identification successful completion. This action will change request status from **VIDEOPENDING** to **VIDEOREVIEW**. To inform both business app and Video ID RAO about this change at the time it takes place, we recommend to enhance the process with the usage of a listener **webhook**. Check our documentation for webhook configuration.  
+
+</br>
 
 If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.
 
