@@ -906,7 +906,7 @@ A successful call will result in the following response:
 
 </br>
 
-> **STEP 9: SIGN THE DOCUMENT**
+> **STEP 9: RETRIEVE SIGNED DOCUMENT**
 
 </br>
 
