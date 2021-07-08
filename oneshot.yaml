@@ -1247,7 +1247,7 @@ paths:
         - application/json
       parameters:
       - in: path
-        name: Arequest_pk
+        name: request_pk
         type: string
         description: The request unique identifier
       - in: "body"
