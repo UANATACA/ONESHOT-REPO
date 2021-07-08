@@ -96,19 +96,29 @@ You can follow the example using the developers One-Shot Optimizer configured fo
 
 The basic digital signature process involves the following steps:
 
-- Retrieve an existing token for the RAO
-- Create a new Digital Signature Request
-- Upload a document
-- Retrieve service contract
-- Generate an OTP (only for Uanataca SMS)
-- Sign the document
-- Retrieve the signed document
-- Delete documents from Optimizer
+**1) RETRIEVE AN EXISTING TOKEN FOR THE RAO**
 
+**2) CREATE A NEW DIGITAL SIGNATURE REQUEST**
 
-> STEP 1: Retrieve an existing token for the RAO
+**3) UPLOAD A DOCUMENT**
 
-API reference: <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List tokens</a>
+**4) RETRIEVE SERVICE CONTRACT**
+
+**5) GENERATE AN OTP (only for Uanataca SMS)**
+
+**6) SIGN THE DOCUMENT**
+
+**7) RETRIEVE SIGNED DOCUMENT**
+
+**8) DELETE DOCUMENTS FROM OPTIMIZER**
+
+</br>
+
+> **STEP 1: RETRIEVE AN EXISTING TOKEN FOR THE RAO**
+
+</br>
+
+**API Reference:** <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List Tokens</a>
 
 The test One-Shot Optimizer is pre-configured with a Registration Authority Officer (RAO) account ready to be used within the test environment. This account has an associated token, that can be used to identify the RAO in API calls.
 
@@ -130,11 +140,15 @@ On the clean machine, this should return a single token:
 This output tells us that a single token "6d1cae4d55be4cdf9cac50ee36f73406" exists. This token is associated to the RAO account with id "9001800" and can be used in place of the password and pin.
 
 To use tokens in a production environment, you will need to create them first with the corresponding <a href="#tag/Tokens/paths/~1api~1v1~1token/post">Create token</a> API call.
+
+
 </br>
 
-> STEP 2: Create a new Digital Signature Request
+> **STEP 2: CREATE A NEW DIGITAL SIGNATURE REQUEST**
 
-API reference: <a href="#tag/Requests/paths/~1api~1v1~1request/post">Create request</a>
+</br>
+
+**API Reference:** <a href="#tag/Requests/paths/~1api~1v1~1request/post">Create Request</a>
 
 Within the One-Shot Signature Service, all data pertaining to a given digital signature is collected within a Digital Signature Request. This includes both the identifying information of the signing user, which is provided when you create the signature request, and the document or documents to be signed, which we will upload later.
 
@@ -161,11 +175,15 @@ If the signature request is completed successfully, we will get the unique ident
 	4 | }
 
 The request code will be used to identify this digital signature request in subsequent calls.
+
+
 </br>
 
-> STEP 3: Upload a document
+> **STEP 3: UPLOAD A DOCUMENT**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}/post">Upload document</a>
+</br>
+
+**API Reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}/post">Upload Document</a>
 
 
 After creating the digital signature request, we can associate to it all pdf documents that should be signed by the user.
@@ -183,9 +201,11 @@ If the upload is successful, the response will contain the identifier assigned t
 
 </br>
 
-> STEP 4: Retrieve service contract
+> **STEP 4: RETRIEVE SERVICE CONTRACT**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1contract/get">Retrieve contract</a>
+</br>
+
+**API Reference:** <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1contract/get">Retrieve Contract</a>
 
 As a Trusted Service Provider, Uanataca must inform certificate applicants of the terms and conditions governing the issuance of certificates. 
 
@@ -200,9 +220,11 @@ The response by the server will be the service contract document file in binary 
 
 </br>
 
-> STEP 5: Generate an OTP
+> **STEP 5: GENERATE AN OTP**
 
-API reference: <a href="#tag/Requests/paths/~1api~1v1~1otp~1{pk}/post">Generate OTP code</a>
+</br>
+
+**API Reference:** <a href="#tag/Requests/paths/~1api~1v1~1otp~1{pk}/post">Generate OTP code</a>
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">This step is only used for flows using Uanataca SMS.</blockquote>
 
@@ -220,11 +242,15 @@ A successful call will look like this:
 	4 | }
 
 With this call, an SMS with the secret code is sent to the mobile phone number associated to the signature request.
+
+
 </br>
 
-> STEP 6: Sign the document
+> **STEP 6: SIGN THE DOCUMENT**
 
-API reference: <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">Sign</a>
+</br>
+
+**API Reference:** <a href="#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post">Sign</a>
 
 In this step we are going to issue the digital signature certificate and sign all documents previously uploaded for the signature request.
 
@@ -257,6 +283,10 @@ A successful call will result in the following response:
 
 </br>
 
+> **STEP 7: SIGN THE DOCUMENT**
+
+</br>
+
 > STEP 7: Retrieve signed document
 
 API reference: <a href="#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/get">Retrieve document</a>
@@ -274,9 +304,11 @@ The response by the server will be the document in binary format:
 
 </br>
 
-> STEP 8: Delete documents from Optimizer
+> **STEP 8: DELETE DOCUMENTS FROM OPTIMIZER**
 
-API reference: <a href="#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete">Delete all request documents</a>
+</br>
+
+**API reference:** <a href="#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete">Delete All Documents</a>
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ While the service will not delete uploaded files unless explicitly requested through an API call, it is <strong>strongly recommended</strong> that you backup any files that you want to preserve using an alternative system.</blockquote>
 
@@ -298,6 +330,27 @@ The 1-step mode Video ID works on the basis of request validation and approval a
 You can follow the example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
 
 This process involves the following steps:
+
+**1) RETRIEVE AN EXISTING TOKEN FOR THE RAO**
+
+**2) CREATE A NEW DIGITAL SIGNATURE REQUEST**
+
+**3) APPROVE A REQUEST**
+
+**4) REQUEST APPROVAL**
+
+**5) UPLOAD A DOCUMENT**
+
+**6) RETRIEVE SERVICE CONTRACT**
+
+**7) GENERATE AN OTP (only for Uanataca SMS)**
+
+**8) SIGN THE DOCUMENT**
+
+**9) RETRIEVE SIGNED DOCUMENT**
+
+**10) DELETE DOCUMENTS FROM OPTIMIZER**
+
 
 - Retrieve an existing token for the RAO
 - Create a new Digital Signature Request
