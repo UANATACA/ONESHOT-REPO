@@ -1232,6 +1232,129 @@ paths:
                       }
                     }
                   }
+
+
+  ############# THIS CALL BELONGS TO VIDEO ID WORKFLOW ############# 
+  #############
+    put: 
+      summary: UPDATE REQUEST
+      tags:
+        - Video ID
+      description: Updates a Video ID signature request.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: Arequest_pk
+        type: string
+        description: The request unique identifier
+      - in: "body"
+        name: "body"
+        schema:
+          $ref: "#/definitions/CreateReqObject_VID"
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                properties:
+                  videoid_pk:
+                    type: string
+                    description: The Video ID primary key
+                  videoid_link:
+                    type: string
+                    description: The Video ID access link
+                  request_pk:
+                    type: string
+                    description: The request id number          
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": {
+                        "videoid_pk": 137,
+                        "videoid_link": "",
+                        "request_pk": 45836
+                    }
+                }
+        400:
+          description: Bad Request | Missing required parameters
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Status message
+              description: 
+                type: string
+                description: Status description  
+          examples:
+            application/json:
+                {
+                    "status": "400 Bad Request",
+                    "details": "Videoid not enabled for Registration Authority 1234"
+                }     
+        403:
+          description: Forbidden
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Status message
+              description: 
+                type: string
+                description: Status description  
+          examples:
+            application/json:
+                  {
+                      "status": "403 Forbidden",
+                      "details": "Error creating new videoid request: {\"detail\":\"You do not have permission to perform this action.\"}"
+                  }    
+        404:
+          description: Invalid Registration Authority
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message  
+          examples:
+            application/json:
+              {
+                  "status": "404 Not Found",
+                  "details": "Registration Authority not found"
+              }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+
+        - lang: 'JavaScript'
+          source: |
+
+        - lang: 'Python'
+          source: |
+
+        - lang: 'Node.js'
+          source: |
+
+        - lang: 'C#'
+          source: |
+
+  ############# THIS CALL BELONGS TO VIDEO ID WORKFLOW ############# 
+
+
   #############
   /api/v1/otp/{pk}:
     post: 
@@ -2668,126 +2791,6 @@ paths:
 
         - lang: 'C#'
           source: |
-
-
-  #############
-  /api/v1/request/{Arequest_pk}:
-    put: 
-      summary: UPDATE REQUEST
-      tags:
-        - Video ID
-      description: Updates a Video ID signature request.
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-      - in: path
-        name: Arequest_pk
-        type: string
-        description: The request unique identifier
-      - in: "body"
-        name: "body"
-        schema:
-          $ref: "#/definitions/CreateReqObject_VID"
-      responses:
-        200:
-          description: Successful Response
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                description: The response status id
-              details: 
-                type: string
-                properties:
-                  videoid_pk:
-                    type: string
-                    description: The Video ID primary key
-                  videoid_link:
-                    type: string
-                    description: The Video ID access link
-                  request_pk:
-                    type: string
-                    description: The request id number          
-          examples:
-            application/json:
-                {
-                    "status": "200 OK",
-                    "details": {
-                        "videoid_pk": 137,
-                        "videoid_link": "",
-                        "request_pk": 45836
-                    }
-                }
-        400:
-          description: Bad Request | Missing required parameters
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                description: Status message
-              description: 
-                type: string
-                description: Status description  
-          examples:
-            application/json:
-                {
-                    "status": "400 Bad Request",
-                    "details": "Videoid not enabled for Registration Authority 1234"
-                }     
-        403:
-          description: Forbidden
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                description: Status message
-              description: 
-                type: string
-                description: Status description  
-          examples:
-            application/json:
-                  {
-                      "status": "403 Forbidden",
-                      "details": "Error creating new videoid request: {\"detail\":\"You do not have permission to perform this action.\"}"
-                  }    
-        404:
-          description: Invalid Registration Authority
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                description: The response status id
-              details: 
-                type: string
-                description: The response error message  
-          examples:
-            application/json:
-              {
-                  "status": "404 Not Found",
-                  "details": "Registration Authority not found"
-              }
-      x-codeSamples:
-        - lang: 'curl'
-          source: |
-
-        - lang: 'JavaScript'
-          source: |
-
-        - lang: 'Python'
-          source: |
-
-        - lang: 'Node.js'
-          source: |
-
-        - lang: 'C#'
-          source: |
-
 
 
 
