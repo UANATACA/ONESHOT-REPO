@@ -90,7 +90,7 @@ The following images summarize One-Shot Signature flow involving both authentica
 
 This section presents the workflow for a simple use case of the One-Shot Signature service with a step-by-step description of the API calls required to allow a user to digitally sign a document provided by the client application. 
 
-<a href="#section/Video-tutorials/Signature-Workflow-(SMS)"><img src="https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/test/img4.png"></a><a href="#section/Video-tutorials/Signature-Workflow-(SMS)"><b>&nbsp;Watch on video!</b></a>
+<a href="#section/Video-tutorials/Signature-Workflow-(SMS)"><img src="https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img4.png"></a><a href="#section/Video-tutorials/Signature-Workflow-(SMS)"><b>&nbsp;Watch on video!</b></a>
 
 You can follow the example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
 
@@ -920,7 +920,7 @@ See the configuration description in:<br>
 
 This configuration requires a server with a Linux CentOS operating system.
 
-<a href="#section/Video-tutorials/Docker-Optimizer-Configuration"><img src="https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/test/img4.png"></a><a href="#section/Video-tutorials/Docker-Optimizer-Configuration"><b>&nbsp;Watch on video!</b></a>
+<a href="#section/Video-tutorials/Docker-Optimizer-Configuration"><img src="https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img4.png"></a><a href="#section/Video-tutorials/Docker-Optimizer-Configuration"><b>&nbsp;Watch on video!</b></a>
 
 
 > STEP 1: Install Docker and Docker-Compose.
@@ -1181,7 +1181,7 @@ Docker:
 
 This section presents the workflow for a simple use case of the One-Shot Signature service with a step-by-step description of the API calls required to allow a user to digitally sign a document provided by the client application. 
 
-<a href="#section/Video-tutorials/Signature-Workflow-(SMS)"><img src="https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/test/img4.png"></a><a href="#section/Video-tutorials/Signature-Workflow-(SMS)"><b>&nbsp;Watch on video!</b></a>
+<a href="#section/Video-tutorials/Signature-Workflow-(SMS)"><img src="https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img4.png"></a><a href="#section/Video-tutorials/Signature-Workflow-(SMS)"><b>&nbsp;Watch on video!</b></a>
 
 You can follow the example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
 
