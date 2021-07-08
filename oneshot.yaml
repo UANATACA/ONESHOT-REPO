@@ -1234,7 +1234,7 @@ paths:
                   }
 
 
-  ############# THIS CALL BELONGS TO VIDEO ID WORKFLOW ############# 
+  ############# THE NEXT TWO CALLS BELONG TO VIDEO ID WORKFLOW ############# 
   #############
     put: 
       summary: UPDATE REQUEST
@@ -1352,7 +1352,94 @@ paths:
         - lang: 'C#'
           source: |
 
-  ############# THIS CALL BELONGS TO VIDEO ID WORKFLOW ############# 
+#############
+
+    delete: 
+      summary: CANCEL REQUEST
+      tags:
+        - Requests
+      description: Cancels the Video ID One-Shot Signature request
+      produces:
+        - application/json 
+      parameters:
+        - in: path
+          name: request_pk
+          type: string
+          description: The unique identifier of the Request
+          required: true
+      responses:
+        200:
+          description: Successful Response
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X DELETE \
+                    https://api.uanataca.com/api/v1/request/45836/
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    'https://api.uanataca.com/api/v1/requests/45836/',
+                    {method: 'DELETE'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://api.uanataca.com/api/v1/requests/45836/"
+
+                  response = requests.delete(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://api.uanataca.com/api/v1/requests/45836/',
+                    {method: 'DELETE'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Security.Cryptography.X509Certificates;
+                  
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      X509Certificate2 clientCert = new X509Certificate2("./path/to/cert_and_key.p12", "password"); 
+                      HttpClientHandler handler = new HttpClientHandler();
+
+                      // This disables the SSL verification in TEST mode
+                      handler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
+                      {
+                          return true;
+                      };
+                      
+                      handler.ClientCertificates.Add(clientCert);
+                      
+                      using (var client = new HttpClient(handler))
+                      {
+                        var request = await client.DeleteAsync("https://api.uanataca.com/api/v1/requests/45836/");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
+
+
+
+  ############# THE LAST TWO CALLS BELONG TO VIDEO ID WORKFLOW ############# 
 
 
   #############
@@ -2791,6 +2878,10 @@ paths:
 
         - lang: 'C#'
           source: |
+
+###############################################################################
+########## THE CALLS UPDATE/CANCEL REQUEST ARE AT "REQUESTS" LIST #############
+###############################################################################
 
 
 
