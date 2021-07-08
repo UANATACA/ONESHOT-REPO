@@ -326,7 +326,7 @@ Delete all documents associated to an ended digital signature request.
 
 ## 1-Step Workflow
 
-In 1-step mode Video ID, a request approval also implies its validation. For this reason, it is not necessary to execute the validation step.
+In 1-step mode Video ID, a request approval also implies its validation. For this reason, executing the validation step is not required.
 
 </br>
 
@@ -379,18 +379,20 @@ This call must include preliminary information to identify the signer.
 	9 |     "videoid_mode": "1"
 	10|   }'
 
-If the signature request is completed successfully, we will get the unique identifier assigned to it:
+If the signature request is completed successfully, both video and request unique identifiers are returned, as well as the video id link assigned to it:
 
 	1 | {
 	2 |     "status": "200 OK",
 	3 |     "details": {
 	4 |         "videoid_pk": 150,
-	5 |         "videoid_link": "",
+	5 |         "videoid_link": "https://cms.access.bit4id.org:13035/lcmpl/videoid/ZWxlY3Ryb25pY2lkOkl3YlBNdTktcXpBTU1yd0ROeUR0VWNRNk02bVVmVV9SQnZqYnFOR0Vhc2(...)",
 	6 |         "request_pk": 45836
 	7 |     }
 	8 | }
 
-The response is the a JSON containing important request parameters, in **VIDEOPENDING** status after creation. The request_pk output parameter will be used to identify this digital signature request in subsequent calls.
+The request starts at **VIDEOPENDING** status after creation. The request_pk output parameter will be used to identify this digital signature request in subsequent calls. 
+
+> At this point, the workflow progress will depend on the video-identification successful completion. This action will change request status from **VIDEOPENDING** to **VIDEOREVIEW**. To inform both business app and Video ID RAO about this change at the time it takes place, we recommend to enhance the process with the usage of a listener **webhook**. Check our documentation for webhook configuration.  
 
 If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.
 
@@ -404,7 +406,7 @@ If request data needs to be retrieved, use the <a href="#tag/Requests/paths/~1ap
 
 **API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1validate/post">Approve Request</a>
 
-This call makes the request ready for signature. Its status changes to **ENROLLREADY**. In 1-step mode, both validation and approval occur when executing this call.
+This call makes the request ready for signature. Its status changes to **ENROLLREADY** and webhook intervention at this point is important for business app status update. In 1-step mode, both validation and approval occur when executing this call.
 
     1 | curl -i -X POST 'https://api.uanataca.com/api/v1/request/45836/approve' \
     2 | -H 'Content-Type: application/json' \
@@ -1092,7 +1094,7 @@ A Registration Authority Officer must validate the request data and evidences be
     8 |     "rao": "1400"
     9 |	   }'
 
-The validation successful response changes the request to **CREATED** status as a JSON object containing full request information is returned.
+The validation successful response status is a JSON object containing request information, as the request status changes to **CREATED**.
 
     1 | {
 	2 |		SUCCESSFUL RESPONSE PENDING
