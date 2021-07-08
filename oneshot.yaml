@@ -3105,7 +3105,109 @@ paths:
                     }
                   }
 
+#############
+  /api/v1/videoid/{request_pk}/evidences/video:
+    post: 
+      summary: UPLOAD VIDEO
+      tags:
+        - Video ID
+      description: "Upload Request associated video"
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: request_pk
+        type: string
+        description: The Request unique identifier
+        required: true
+      - in: formData
+        name: video
+        description: The video to be uploaded
+        required: true
+        type: string
+      responses:
+        200:
+          description: Successful Response
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/ \
+                    -H 'Content-Type: multipart/form-data' \
+                    -F video=@sample_folder/sample_video.mp4 
+        - lang: 'Javascript'
+          source: |
+                  var formdata = new FormData();
+                  formdata.append("type", "document_front");
+                  formdata.append("video", fileInput.files[0], "sample_folder/sample_video.mp4");
 
+                  var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: formdata,
+                    redirect: 'follow'
+                  };
+
+                  fetch("https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/", requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/"
+
+                  payload={'type': 'document_front'}
+                  files=[
+                    ('document',('file',open('sample_folder/sample_video.mp4','rb'),'video/png'))
+                  ]
+                  headers = {
+                    'Content-Type': 'multipart/form-data'
+                  }
+
+                  response = requests.request("POST", url, headers=headers, data=payload, files=files)
+
+                  print(response.text)
+        - lang: 'Node.js'
+          source: |
+                  const fs = require('fs');
+                  const FormData = require('form-data');
+                  const fetch = require('node-fetch');
+                  const formData = new FormData();
+
+                  formData.append('type', 'document_front');
+                  formData.append('document', fs.createReadStream('sample_folder/sample_video.mp4'));
+
+                  const url = 'https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/';
+
+                  const options = {
+                    method: 'POST',
+                    headers: {
+                      Accept: 'text/plain',
+                      'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001'
+                    }
+                  };
+
+                  options.body = formData;
+
+                  fetch(url, options)
+                    .then(res => res.json())
+                    .then(json => console.log(json))
+                    .catch(err => console.error('error:' + err));
+        - lang: 'C#'
+          source: |
+                  var client = new RestClient("https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/");
+                  client.Timeout = -1;
+                  var request = new RestRequest(Method.POST);
+                  request.AddHeader("content-type", "multipart/form-data; boundary=----011000010111000001101001");
+                  request.AddParameter("type", "document_front");
+                  request.AddFile("document", "sample_folder/sample_video.mp4");
+
+                  IRestResponse response = client.Execute(request);
+                  Console.WriteLine(response.Content);           
 
 
 ###### definitions ######
