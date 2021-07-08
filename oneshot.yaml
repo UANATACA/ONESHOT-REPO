@@ -3707,7 +3707,7 @@ definitions:
                 type: "object"
                 description:  Visual graphic signature properties.<br>
                               **It is required prior to uploading an image.** See <a href='#tag/Images'>images</a> api reference <br>
-                              <a href="#section/Video-tutorials/Signature-Image-Configuration"><img src="https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/test/img4.png"></a><a href="#section/Video-tutorials/Signature-Image-Configuration"><b>&nbsp;Watch on video!</b></a>
+                              <a href="#section/Video-tutorials/Signature-Image-Configuration"><img src="https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img4.png"></a><a href="#section/Video-tutorials/Signature-Image-Configuration"><b>&nbsp;Watch on video!</b></a>
                 properties:
                     position:
                         type: "string"
