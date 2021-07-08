@@ -3209,27 +3209,27 @@ paths:
                   IRestResponse response = client.Execute(request);
                   Console.WriteLine(response.Content);           
 
-#############
-  /api/v1/requests/{request_pk}/pl_approve:
+############
+  /api/v1/videoid/{request_pk}/validate:
     post: 
-      summary: APPROVE REQUEST
+      summary: VALIDATE REQUEST
       tags:
         - Video ID
-      description: Approval of a request by a RAO. At this moment the RAO will sign the receipt and the contract.
+      description: "Validation of a Video ID Request"
       consumes:
         - application/json
       produces:
-        - application/json 
+        - application/json
       parameters:
-        - in: path
-          name: request_pk
-          type: string
-          description: The Request unique identifier
-          required: true
-        - in: "body"
-          name: "body"
-          schema:
-            $ref: "#/definitions/PlApproveReqObject"
+      - in: path
+        name: request_pk
+        type: string
+        description: The Request unique identifier
+        required: true
+      - in: "body"
+        name: "body"
+        schema:
+          $ref: "#/definitions/ValidateReqObject_VID"
       responses:
         200:
           description: Successful Response
@@ -3237,28 +3237,28 @@ paths:
         - lang: 'curl'
           source: |
                   curl -i -X POST \
-                    https://api.uanataca.com/api/v1/request/45836/approve/ \
+                    https://api.uanataca.com/api/v1/videoid/45836/validate \
                     -H 'Content-Type: application/json' \
                     -d '{
-                      "username": "RAO_Name",
-                      "password": "Rw36:#Y6",
+                      "username": "5012345",
+                      "password": "Gy6F37xK",
                       "pin": "belorado74",
-                      "rao": "898"
+                      "rao_id": "1400"
                     }'
         - lang: 'Javascript'
           source: |
                   const resp = await fetch(
-                    'https://api.uanataca.com/api/v1/request/45836/approve/',
+                    `https://api.uanataca.com/api/v1/videoid/45836/validate`,
                     {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: 'RAO_Name',
-                        password: 'Rw36:#Y6',
+                        username: '5012345',
+                        password: 'Gy6F37xK',
                         pin: 'belorado74',
-                        rao: '898'
+                        rao_id: '1400'
                       })
                     }
                   );
@@ -3269,13 +3269,13 @@ paths:
           source: |
                   import requests
 
-                  url = "https://api.uanataca.com/api/v1/request/45836/approve/"
+                  url = "https://api.uanataca.com/api/v1/videoid/45836/validate"
 
                   payload = {
-                    "username": "RAO_Name",
-                    "password": "Rw36:#Y6",
+                    "username": "5012345",
+                    "password": "Gy6F37xK",
                     "pin": "belorado74",
-                    "rao": "898"
+                    "rao_id": "1400"
                   }
 
                   headers = {"Content-Type": "application/json"}
@@ -3289,17 +3289,17 @@ paths:
                   const fetch = require('node-fetch');
 
                   const resp = await fetch(
-                    'https://api.uanataca.com/api/v1/request/45836/approve/',
+                    `https://api.uanataca.com/api/v1/videoid/45836/validate`,
                     {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: 'RAO_Name',
-                        password: 'Rw36:#Y6',
+                        username: '5012345',
+                        password: 'Gy6F37xK',
                         pin: 'belorado74',
-                        rao: '898'
+                        rao_id: '1400'
                       })
                     }
                   );
@@ -3313,33 +3313,21 @@ paths:
                   using System.Threading.Tasks;
                   using System.Text;
                   using Newtonsoft.Json.Linq;
-                  using System.Security.Cryptography.X509Certificates;
-                  
+
                   public class Program
                   {
                     public static async Task Main(string[] args)
                     {
-                      X509Certificate2 clientCert = new X509Certificate2("./path/to/cert_and_key.p12", "password"); 
-                      HttpClientHandler handler = new HttpClientHandler();
-
-                      // This disables the SSL verification in TEST mode
-                      handler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
-                      {
-                          return true;
-                      };
-                      
-                      handler.ClientCertificates.Add(clientCert);
-                      
-                      using (var client = new HttpClient(handler))
+                      using (var client = new HttpClient())
                       {
                         JObject json = JObject.Parse(@"{
-                          username: 'RAO_Name',
-                          password: 'Rw36:#Y6',
+                          username: '5012345',
+                          password: 'Gy6F37xK',
                           pin: 'belorado74',
-                          rao: '898'
+                          rao_id: '1400'
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
-                        var request = await client.PostAsync("https://api.uanataca.com/api/v1/request/45836/approve/", postData);
+                        var request = await client.PostAsync("https://api.uanataca.com/api/v1/videoid/45836/validate", postData);
                         var response = await request.Content.ReadAsStringAsync();
 
                         Console.WriteLine(response);
@@ -3471,6 +3459,144 @@ paths:
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
                         var request = await client.PostAsync("https://api.uanataca.com/api/v1/requests/45836/refuse", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
+
+#############
+  /api/v1/requests/{request_pk}/pl_approve:
+    post: 
+      summary: APPROVE REQUEST
+      tags:
+        - Video ID
+      description: Approval of a request by a RAO. At this moment the RAO will sign the receipt and the contract.
+      consumes:
+        - application/json
+      produces:
+        - application/json 
+      parameters:
+        - in: path
+          name: request_pk
+          type: string
+          description: The Request unique identifier
+          required: true
+        - in: "body"
+          name: "body"
+          schema:
+            $ref: "#/definitions/PlApproveReqObject"
+      responses:
+        200:
+          description: Successful Response
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://api.uanataca.com/api/v1/request/45836/approve/ \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "username": "RAO_Name",
+                      "password": "Rw36:#Y6",
+                      "pin": "belorado74",
+                      "rao": "898"
+                    }'
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    'https://api.uanataca.com/api/v1/request/45836/approve/',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: 'RAO_Name',
+                        password: 'Rw36:#Y6',
+                        pin: 'belorado74',
+                        rao: '898'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://api.uanataca.com/api/v1/request/45836/approve/"
+
+                  payload = {
+                    "username": "RAO_Name",
+                    "password": "Rw36:#Y6",
+                    "pin": "belorado74",
+                    "rao": "898"
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://api.uanataca.com/api/v1/request/45836/approve/',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: 'RAO_Name',
+                        password: 'Rw36:#Y6',
+                        pin: 'belorado74',
+                        rao: '898'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+                  using System.Security.Cryptography.X509Certificates;
+                  
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      X509Certificate2 clientCert = new X509Certificate2("./path/to/cert_and_key.p12", "password"); 
+                      HttpClientHandler handler = new HttpClientHandler();
+
+                      // This disables the SSL verification in TEST mode
+                      handler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
+                      {
+                          return true;
+                      };
+                      
+                      handler.ClientCertificates.Add(clientCert);
+                      
+                      using (var client = new HttpClient(handler))
+                      {
+                        JObject json = JObject.Parse(@"{
+                          username: 'RAO_Name',
+                          password: 'Rw36:#Y6',
+                          pin: 'belorado74',
+                          rao: '898'
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://api.uanataca.com/api/v1/request/45836/approve/", postData);
                         var response = await request.Content.ReadAsStringAsync();
 
                         Console.WriteLine(response);
