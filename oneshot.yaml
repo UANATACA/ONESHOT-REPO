@@ -3728,18 +3728,18 @@ definitions:
             type: "string"
             description: "The contract language"
 ###########
-  ValidateReqObject_VID:
-    type: "object"
-    properties:
-      username:
-          type: "string"
-          description: "The RAO's username"
-      password:
-          type: "string"
-          description: "The RAO's password"
-      pin:
-          type: "string"
-          description: "The RAO's pin"
-      rao_id:
-          type: "string"
-          description: "The RAO's id" 
+    ValidateReqObject_VID:
+      type: "object"
+      properties:
+        username:
+            type: "string"
+            description: "The RAO's username"
+        password:
+            type: "string"
+            description: "The RAO's password"
+        pin:
+            type: "string"
+            description: "The RAO's pin"
+        rao_id:
+            type: "string"
+            description: "The RAO's id" 
