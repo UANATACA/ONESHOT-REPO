@@ -142,17 +142,17 @@ This allows the management of One-Shot signature by establishing a video call fo
   <tr>
     <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid/post'>/videoid</a></td><td>Create Video ID Request</td>
   </tr>
-    <tr>
-    <td>PUT</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put'>/request/{request_pk}</a></td><td>Update Request</td>
-  </tr>
-    <tr>
-    <td>DELETE</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/delete'>/request/{request_pk}</a></td><td>Cancel Request</td>
-  </tr>
   <tr>
     <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences/post'>/videoid/{request_pk}/evidences</a></td><td>Upload Data Evidence</td>
   </tr>
   <tr>
     <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences~1video/post'>/videoid/{request_pk}/evidences/video</a></td><td>Upload Video</td>
+  </tr>
+  <tr>
+    <td>PUT</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put'>/request/{request_pk}</a></td><td>Update Request</td>
+  </tr>
+    <tr>
+    <td>DELETE</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/delete'>/request/{request_pk}</a></td><td>Cancel Request</td>
   </tr>
   <tr>
     <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1validate/post'>/videoid/{request_pk}/validate</a></td><td>Validate Request</td>
