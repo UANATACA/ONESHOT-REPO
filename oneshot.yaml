@@ -1122,7 +1122,23 @@ paths:
                   "status": "404 Not Found",
                   "details": "Registration Authority not found"
               }
-
+        500:
+          description: Internal Server Error
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message  
+          examples:
+            application/json:
+              {
+                  "status": "500 Internal Server Error",
+                  "details": "Cannot check the remaining credit for the billing user. Please check the credentials."
+              }
 
 #############
   /api/v1/videoid/{request_pk}/evidences:
@@ -3726,6 +3742,13 @@ definitions:
 ###########
     CreateReqObject_VID:
       type: "object"
+      required:
+        - mobile_phone_number
+        - email
+        - registration_authority
+        - profile
+        - videoid_mode
+        - webhook_url
       properties:
         mobile_phone_number:
             type: "string"
@@ -3735,13 +3758,26 @@ definitions:
             description: "The signer's email"
         registration_authority:
             type: "string"
-            description: "The registration Authority ID number"
+            description: "The Registration Authority ID number"
         profile:
             type: "string"
             description: "The certificate profile"
         videoid_mode:
             type: "string"
-            description: "Video ID mode (true)" 
+            description: "Video ID mode (true)"
+        billing_username:
+            type: "string"
+            description: "The RAO's billing username. Required only if not set at **settings.ini** file"
+        billing_password:
+            type: "string"
+            description: "The RAO's billing password. Required only if not set at **settings.ini** file"
+        webhook_url:
+            type: "string"
+            description: "The webhook URL. See webhook configuration section"
+        env:
+            type: "string"
+            description: "The environment value (**test** or **prod**)"
+         
 ###########
     UploadData_VID:
       type: "object"
