@@ -1374,11 +1374,11 @@ paths:
         - lang: 'curl'
           source: |
                   curl -i -X DELETE \
-                    https://api.uanataca.com/api/v1/request/45836/
+                    https://one-shot.developers.uanataca.com/api/v1/request/45836/
         - lang: 'Javascript'
           source: |
                   const resp = await fetch(
-                    'https://api.uanataca.com/api/v1/requests/45836/',
+                    'https://one-shot.developers.uanataca.com/api/v1/requests/45836/',
                     {method: 'DELETE'}
                   );
 
@@ -1388,7 +1388,7 @@ paths:
           source: |
                   import requests
 
-                  url = "https://api.uanataca.com/api/v1/requests/45836/"
+                  url = "https://one-shot.developers.uanataca.com/api/v1/requests/45836/"
 
                   response = requests.delete(url)
 
@@ -1399,7 +1399,7 @@ paths:
                   const fetch = require('node-fetch');
 
                   const resp = await fetch(
-                    'https://api.uanataca.com/api/v1/requests/45836/',
+                    'https://one-shot.developers.uanataca.com/api/v1/requests/45836/',
                     {method: 'DELETE'}
                   );
 
@@ -1429,7 +1429,7 @@ paths:
                       
                       using (var client = new HttpClient(handler))
                       {
-                        var request = await client.DeleteAsync("https://api.uanataca.com/api/v1/requests/45836/");
+                        var request = await client.DeleteAsync("https://one-shot.developers.uanataca.com/api/v1/requests/45836/");
                         var response = await request.Content.ReadAsStringAsync();
 
                         Console.WriteLine(response);
@@ -3223,7 +3223,7 @@ paths:
         - lang: 'curl'
           source: |
                   curl -i -X POST \
-                    https://api.uanataca.com/api/v1/videoid/45836/validate \
+                    https://one-shot.developers.uanataca.com/api/v1/videoid/45836/validate \
                     -H 'Content-Type: application/json' \
                     -d '{
                       "username": "5012345",
@@ -3234,7 +3234,7 @@ paths:
         - lang: 'Javascript'
           source: |
                   const resp = await fetch(
-                    `https://api.uanataca.com/api/v1/videoid/45836/validate`,
+                    `https://one-shot.developers.uanataca.com/api/v1/videoid/45836/validate`,
                     {
                       method: 'POST',
                       headers: {
@@ -3255,7 +3255,7 @@ paths:
           source: |
                   import requests
 
-                  url = "https://api.uanataca.com/api/v1/videoid/45836/validate"
+                  url = "https://one-shot.developers.uanataca.com/api/v1/videoid/45836/validate"
 
                   payload = {
                     "username": "5012345",
@@ -3275,7 +3275,7 @@ paths:
                   const fetch = require('node-fetch');
 
                   const resp = await fetch(
-                    `https://api.uanataca.com/api/v1/videoid/45836/validate`,
+                    `https://one-shot.developers.uanataca.com/api/v1/videoid/45836/validate`,
                     {
                       method: 'POST',
                       headers: {
@@ -3313,7 +3313,7 @@ paths:
                           rao_id: '1400'
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
-                        var request = await client.PostAsync("https://api.uanataca.com/api/v1/videoid/45836/validate", postData);
+                        var request = await client.PostAsync("https://one-shot.developers.uanataca.com/api/v1/videoid/45836/validate", postData);
                         var response = await request.Content.ReadAsStringAsync();
 
                         Console.WriteLine(response);
@@ -3349,7 +3349,7 @@ paths:
         - lang: 'curl'
           source: |
                   curl -i -X POST \
-                    https://api.uanataca.com/api/v1/videoid/45836/refuse \
+                    https://one-shot.developers.uanataca.com/api/v1/videoid/45836/refuse \
                     -H 'Content-Type: application/json' \
                     -d '{
                       "username": "5012345",
@@ -3361,7 +3361,7 @@ paths:
         - lang: 'Javascript'
           source: |
                   const resp = await fetch(
-                    `https://api.uanataca.com/api/v1/requests/45836/refuse`,
+                    `https://one-shot.developers.uanataca.com/api/v1/requests/45836/refuse`,
                     {
                       method: 'POST',
                       headers: {
@@ -3383,7 +3383,7 @@ paths:
           source: |
                   import requests
 
-                  url = "https://api.uanataca.com/api/v1/requests/45836/refuse"
+                  url = "https://one-shot.developers.uanataca.com/api/v1/requests/45836/refuse"
 
                   payload = {
                     "username": "5012345",
@@ -3404,7 +3404,7 @@ paths:
                   const fetch = require('node-fetch');
 
                   const resp = await fetch(
-                    `https://api.uanataca.com/api/v1/requests/45836/refuse`,
+                    `https://one-shot.developers.uanataca.com/api/v1/requests/45836/refuse`,
                     {
                       method: 'POST',
                       headers: {
@@ -3444,7 +3444,7 @@ paths:
                           reason: 'Expired document'
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
-                        var request = await client.PostAsync("https://api.uanataca.com/api/v1/requests/45836/refuse", postData);
+                        var request = await client.PostAsync("https://one-shot.developers.uanataca.com/api/v1/requests/45836/refuse", postData);
                         var response = await request.Content.ReadAsStringAsync();
 
                         Console.WriteLine(response);
@@ -3480,7 +3480,7 @@ paths:
         - lang: 'curl'
           source: |
                   curl -i -X POST \
-                    https://api.uanataca.com/api/v1/request/45836/approve/ \
+                    https://one-shot.developers.uanataca.com/api/v1/request/45836/approve/ \
                     -H 'Content-Type: application/json' \
                     -d '{
                       "username": "RAO_Name",
@@ -3491,7 +3491,7 @@ paths:
         - lang: 'Javascript'
           source: |
                   const resp = await fetch(
-                    'https://api.uanataca.com/api/v1/request/45836/approve/',
+                    'https://one-shot.developers.uanataca.com/api/v1/request/45836/approve/',
                     {
                       method: 'POST',
                       headers: {
@@ -3512,7 +3512,7 @@ paths:
           source: |
                   import requests
 
-                  url = "https://api.uanataca.com/api/v1/request/45836/approve/"
+                  url = "https://one-shot.developers.uanataca.com/api/v1/request/45836/approve/"
 
                   payload = {
                     "username": "RAO_Name",
@@ -3532,7 +3532,7 @@ paths:
                   const fetch = require('node-fetch');
 
                   const resp = await fetch(
-                    'https://api.uanataca.com/api/v1/request/45836/approve/',
+                    'https://one-shot.developers.uanataca.com/api/v1/request/45836/approve/',
                     {
                       method: 'POST',
                       headers: {
@@ -3582,7 +3582,7 @@ paths:
                           rao: '898'
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
-                        var request = await client.PostAsync("https://api.uanataca.com/api/v1/request/45836/approve/", postData);
+                        var request = await client.PostAsync("https://one-shot.developers.uanataca.com/api/v1/request/45836/approve/", postData);
                         var response = await request.Content.ReadAsStringAsync();
 
                         Console.WriteLine(response);
@@ -3612,11 +3612,11 @@ paths:
         - lang: 'curl'
           source: |
                   curl -i -X GET \
-                    https://api.uanataca.com/api/v1/videoid/45836/download/video
+                    https://one-shot.developers.uanataca.com/api/v1/videoid/45836/download/video
         - lang: 'Javascript'
           source: |
                   const resp = await fetch(
-                    `https://api.uanataca.com/api/v1/videoid/45836/download/video`,
+                    `https://one-shot.developers.uanataca.com/api/v1/videoid/45836/download/video`,
                     {method: 'GET'}
                   );
 
@@ -3626,7 +3626,7 @@ paths:
           source: |
                   import requests
 
-                  url = "https://api.uanataca.com/api/v1/videoid/45836/download/video"
+                  url = "https://one-shot.developers.uanataca.com/api/v1/videoid/45836/download/video"
 
                   response = requests.get(url)
 
@@ -3637,7 +3637,7 @@ paths:
                   const fetch = require('node-fetch');
 
                   const resp = await fetch(
-                    `https://api.uanataca.com/api/v1/videoid/45836/download/video`,
+                    `https://one-shot.developers.uanataca.com/api/v1/videoid/45836/download/video`,
                     {method: 'GET'}
                   );
 
@@ -3655,7 +3655,7 @@ paths:
                     {
                       using (var client = new HttpClient())
                       {
-                        var request = await client.GetAsync("https://api.uanataca.com/api/v1/videoid/45836/download/video", null);
+                        var request = await client.GetAsync("https://one-shot.developers.uanataca.com/api/v1/videoid/45836/download/video", null);
                         var response = await request.Content.ReadAsStringAsync();
 
                         Console.WriteLine(response);
