@@ -143,28 +143,28 @@ This allows the management of One-Shot signature by establishing a video call fo
     <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid/post'>/videoid</a></td><td>Create Video ID Request</td>
   </tr>
     <tr>
-    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put'>/request/{request_pk}</a></td><td>Update Request</td>
+    <td>PUT</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put'>/request/{request_pk}</a></td><td>Update Request</td>
   </tr>
     <tr>
-    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/delete'>/request/{request_pk}</a></td><td>Cancel Request</td>
+    <td>DELETE</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/delete'>/request/{request_pk}</a></td><td>Cancel Request</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences/post'>/videoid/{request_pk}/evidences</a></td><td>Upload Data Evidence</td>
+    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences/post'>/videoid/{request_pk}/evidences</a></td><td>Upload Data Evidence</td>
   </tr>
   <tr>
-    <td>DELETE</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences~1video/post'>/videoid/{request_pk}/evidences/video</a></td><td>Upload Video</td>
+    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences~1video/post'>/videoid/{request_pk}/evidences/video</a></td><td>Upload Video</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1validate/post'>/videoid/{request_pk}/validate</a></td><td>Validate Request</td>
+    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1validate/post'>/videoid/{request_pk}/validate</a></td><td>Validate Request</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1refuse/post'>/videoid/{request_pk}/refuse</a></td><td>Refuse Request</td>
+    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1refuse/post'>/videoid/{request_pk}/refuse</a></td><td>Refuse Request</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1requests~1{request_pk}~1pl_approve/post'>/request/{request_pk}/approve</a></td><td>Approve Request</td>
+    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1requests~1{request_pk}~1pl_approve/post'>/request/{request_pk}/approve</a></td><td>Approve Request</td>
   </tr>
   <tr>
-    <td>DELETE</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1download~1video~1{video_identifier}/get'>/dowload/video/{video_identifier}</a></td><td>Download Video</td>
+    <td>GET</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1download~1video~1{video_identifier}/get'>/dowload/video/{video_identifier}</a></td><td>Download Video</td>
   </tr>
 </table> 
 </br> 
