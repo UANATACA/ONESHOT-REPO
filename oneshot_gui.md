@@ -373,7 +373,7 @@ This call must include preliminary information to identify the signer.
 	5 |     "mobile_phone_number": "+34123123123",
 	6 |     "email": "mail@domain",
 	7 |     "registration_authority": "1000",
-	8 |     "profile": "PFnubeAFCiudadano",
+	8 |     "profile": "PFnubeQAFCiudadano",
 	9 |     "videoid_mode": "1"
 	10|   }'
 
@@ -621,7 +621,7 @@ This call must include preliminary information to identify the signer.
 	5 |     "mobile_phone_number": "+34123123123",
 	6 |     "email": "mail@domain",
 	7 |     "registration_authority": "1000",
-	8 |     "profile": "PFnubeAFCiudadano",
+	8 |     "profile": "PFnubeQAFCiudadano",
 	9 |     "videoid_mode": "1"
 	10|   }'
 
@@ -901,7 +901,7 @@ This call must include preliminary information to identify the signer.
 	5 |     "mobile_phone_number": "+34123123123",
 	6 |     "email": "mail@domain",
 	7 |     "registration_authority": "1000",
-	8 |     "profile": "PFnubeAFCiudadano",
+	8 |     "profile": "PFnubeQAFCiudadano",
 	9 |     "videoid_mode": "1"
 	10|   }'
 
