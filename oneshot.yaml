@@ -3991,6 +3991,11 @@ definitions:
 ###########
     PlApproveReqObject:
       type: "object"
+      required:
+        - username
+        - password
+        - pin
+        - rao
       properties:
         username:
             type: "string"
@@ -4001,15 +4006,17 @@ definitions:
         pin:
             type: "string"
             description: "The RAO's PIN"
-        rao_id:
+        rao:
             type: "string"
             description: "The RAO's id"
-        lang:
-            type: "string"
-            description: "The contract language"
 ###########
     ValidateReqObject_VID:
       type: "object"
+      required:
+        - username
+        - password
+        - pin
+        - rao      
       properties:
         username:
             type: "string"
@@ -4020,12 +4027,18 @@ definitions:
         pin:
             type: "string"
             description: "The RAO's pin"
-        rao_id:
+        rao:
             type: "string"
             description: "The RAO's id" 
 ###########
     RefuseReqObject_VID:
       type: "object"
+      required:
+        - username
+        - password
+        - pin
+        - rao
+        - reason  
       properties:
         username:
             type: "string"
@@ -4036,7 +4049,7 @@ definitions:
         pin:
             type: "string"
             description: "The RAO's pin"
-        rao_id:
+        rao:
             type: "string"
             description: "The RAO's id"
         reason:
