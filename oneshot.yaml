@@ -1072,7 +1072,7 @@ paths:
                     }
                 }
         400:
-          description: Bad Request | Missing required parameters
+          description: Invalid JSON | Missing required parameters
           schema:
             type: object
             properties:
@@ -1123,7 +1123,7 @@ paths:
                   "details": "Registration Authority not found"
               }
         500:
-          description: Internal Server Error
+          description: Internal Server Error | Problems with Billing Credentials
           schema:
             type: object
             properties:
@@ -1866,7 +1866,7 @@ paths:
                     }
                 }
         400:
-          description: Bad Request | Missing required parameters
+          description: Missing required parameters
           schema:
             type: object
             properties:

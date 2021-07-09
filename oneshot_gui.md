@@ -28,10 +28,8 @@ The electronic signatures are performed in Uanataca Trusted Service Center side,
 ![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot-hiw.png)
 
 
-# Classic One-Shot
+# Classic Workflow
 
-
-## Workflow
 
 <div style="text-align: justify">
 In a common One-Shot Signature service, an OTP (One-Time Password) code is sent by sms to the end user directly from Uanataca services. The OTP verification is used to activate the issuing of single-use digital signature certificate and the usage of it to sign the signature request documents.
@@ -321,10 +319,10 @@ Delete all documents associated to an ended digital signature request.
 </br>
 
 
-# Video ID One-Shot
+# Video ID Workflows
 
 
-## 1-Step Workflow
+## 1-Step validation
 
 In 1-step mode Video ID, a request approval also implies its validation. For this reason, executing the validation step is not required.
 
@@ -570,7 +568,7 @@ Delete all documents associated to an ended digital signature request.
 </br>
 
 
-## 2-Step Workflow 
+## 2-Step Validation
 
 In 2-Step mode Video ID, request validations and approvals are performed in different stages, by the same or different operators. 
 
@@ -848,7 +846,7 @@ Delete all documents associated to an ended digital signature request.
 </br>
 
 
-## External mode Workflow 
+## External Mode
 
 In External mode Video ID, digital evidences are uploaded to an independent Video ID platform. External mode Video ID can be executed in 1 or 2 steps.
 
