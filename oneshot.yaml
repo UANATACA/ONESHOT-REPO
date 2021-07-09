@@ -1019,7 +1019,441 @@ paths:
 
                     IRestResponse response = client.Execute(request);
                     Console.WriteLine(response.Content);
-                             
+
+
+###############################################################################################
+################################### VIDEO ID ##################################################
+###############################################################################################
+
+  /api/v1/videoid:
+    post: 
+      summary: CREATE VIDEO ID REQUEST
+      tags:
+        - Video ID
+      description: Creates a new signature request to be used over Video ID validation process.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        schema:
+          $ref: "#/definitions/CreateReqObject_VID"
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                properties:
+                  videoid_pk:
+                    type: string
+                    description: The Video ID primary key
+                  videoid_link:
+                    type: string
+                    description: The Video ID access link
+                  request_pk:
+                    type: string
+                    description: The request primary key          
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": {
+                        "videoid_pk": 137,
+                        "videoid_link": "",
+                        "request_pk": 45836
+                    }
+                }
+        400:
+          description: Bad Request | Missing required parameters
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Status message
+              description: 
+                type: string
+                description: Status description  
+          examples:
+            application/json:
+                {
+                    "status": "400 Bad Request",
+                    "details": "Videoid not enabled for Registration Authority 1234"
+                }     
+        403:
+          description: Forbidden
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Status message
+              description: 
+                type: string
+                description: Status description  
+          examples:
+            application/json:
+                  {
+                      "status": "403 Forbidden",
+                      "details": "Error creating new videoid request: {\"detail\":\"You do not have permission to perform this action.\"}"
+                  }    
+        404:
+          description: Invalid Registration Authority
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message  
+          examples:
+            application/json:
+              {
+                  "status": "404 Not Found",
+                  "details": "Registration Authority not found"
+              }
+
+
+#############
+  /api/v1/videoid/{request_pk}/evidences:
+    post: 
+      summary: UPLOAD DATA EVIDENCE
+      tags:
+        - Video ID
+      description: "Upload Request associated data"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: request_pk
+        type: string
+        description: The Request unique identifier
+        required: true
+      - in: "body"
+        name: "body"
+        schema:
+          $ref: "#/definitions/UploadData_VID"
+      responses:
+        200:
+          description: Successful Response 
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "acceptance": {
+                        "acceptance_test_data": true,
+                        "another_field": 0
+                      },
+                      "videoid_data": {
+                        "images": {
+                          "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
+                          "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
+                          "document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
+                          "document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
+                        },
+                        "ocr_data": {
+                          "given_name": "Name",
+                          "surname_1": "Surname",
+                          "mobile_phone_number": "+34999999999",
+                          "serial_number": "A9999999E"
+                        },
+                        "security_checks": {
+                          "a_test_check": true,
+                          "another_check": true
+                        },
+                        "similarity_level": "high"
+                      }
+                    }'
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    `https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences`,
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        acceptance: {
+                          acceptance_test_data: true,
+                          another_field: 0
+                        },
+                        videoid_data: {
+                          images: {
+                            document_front: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)',
+                            document_rear: '/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)',
+                            document_photo: 'AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)',
+                            document_owner: 'SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)'
+                          },
+                          ocr_data: {
+                            given_name: 'Name',
+                            surname_1: 'Surname',
+                            mobile_phone_number: '+34999999999',
+                            serial_number: 'A9999999E'
+                          },
+                          security_checks: {
+                            a_test_check: true,
+                            another_check: true
+                          },
+                          similarity_level: 'high'
+                        }
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences"
+
+                  payload = {
+                    "acceptance": {
+                      "acceptance_test_data": True,
+                      "another_field": 0
+                    },
+                    "videoid_data": {
+                      "images": {
+                        "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
+                        "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
+                        "document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
+                        "document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
+                      },
+                      "ocr_data": {
+                        "given_name": "Name",
+                        "surname_1": "Surname",
+                        "mobile_phone_number": "+34999999999",
+                        "serial_number": "Y9999999E"
+                      },
+                      "security_checks": {
+                        "a_test_check": True,
+                        "another_check": True
+                      },
+                      "similarity_level": "high"
+                    }
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    `https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences`,
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        acceptance: {
+                          acceptance_test_data: true,
+                          another_field: 0
+                        },
+                        videoid_data: {
+                          images: {
+                            document_front: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)',
+                            document_rear: '/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)',
+                            document_photo: 'AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)',
+                            document_owner: 'SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)'
+                          },
+                          ocr_data: {
+                            given_name: 'Name',
+                            surname_1: 'Surname',
+                            mobile_phone_number: '+34999999999',
+                            serial_number: 'A9999999E'
+                          },
+                          security_checks: {
+                            a_test_check: true,
+                            another_check: true
+                          },
+                          similarity_level: 'high'
+                        }
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          acceptance: {
+                            acceptance_test_data: true,
+                            another_field: 0
+                          },
+                          videoid_data: {
+                            images: {
+                              document_front: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)',
+                              document_rear: '/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)',
+                              document_photo: 'AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)',
+                              document_owner: 'SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)'
+                            },
+                            ocr_data: {
+                              given_name: 'Name',
+                              surname_1: 'Surname',
+                              mobile_phone_number: '+34999999999',
+                              serial_number: 'A9999999E'
+                            },
+                            security_checks: {
+                              a_test_check: true,
+                              another_check: true
+                            },
+                            similarity_level: 'high'
+                          }
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
+
+#############
+  /api/v1/videoid/{request_pk}/evidences/video:
+    post: 
+      summary: UPLOAD VIDEO
+      tags:
+        - Video ID
+      description: "Upload Request associated video"
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+      - in: path
+        name: request_pk
+        type: string
+        description: The Request unique identifier
+        required: true
+      - in: formData
+        name: video
+        description: The video to be uploaded
+        required: true
+        type: string
+      responses:
+        200:
+          description: Successful Response
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/ \
+                    -H 'Content-Type: multipart/form-data' \
+                    -F video=@sample_folder/sample_video.mp4 
+        - lang: 'Javascript'
+          source: |
+                  var formdata = new FormData();
+                  formdata.append("type", "document_front");
+                  formdata.append("video", fileInput.files[0], "sample_folder/sample_video.mp4");
+
+                  var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: formdata,
+                    redirect: 'follow'
+                  };
+
+                  fetch("https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/", requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/"
+
+                  payload={'type': 'document_front'}
+                  files=[
+                    ('document',('file',open('sample_folder/sample_video.mp4','rb'),'video/png'))
+                  ]
+                  headers = {
+                    'Content-Type': 'multipart/form-data'
+                  }
+
+                  response = requests.request("POST", url, headers=headers, data=payload, files=files)
+
+                  print(response.text)
+        - lang: 'Node.js'
+          source: |
+                  const fs = require('fs');
+                  const FormData = require('form-data');
+                  const fetch = require('node-fetch');
+                  const formData = new FormData();
+
+                  formData.append('type', 'document_front');
+                  formData.append('document', fs.createReadStream('sample_folder/sample_video.mp4'));
+
+                  const url = 'https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/';
+
+                  const options = {
+                    method: 'POST',
+                    headers: {
+                      Accept: 'text/plain',
+                      'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001'
+                    }
+                  };
+
+                  options.body = formData;
+
+                  fetch(url, options)
+                    .then(res => res.json())
+                    .then(json => console.log(json))
+                    .catch(err => console.error('error:' + err));
+        - lang: 'C#'
+          source: |
+                  var client = new RestClient("https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/");
+                  client.Timeout = -1;
+                  var request = new RestRequest(Method.POST);
+                  request.AddHeader("content-type", "multipart/form-data; boundary=----011000010111000001101001");
+                  request.AddParameter("type", "document_front");
+                  request.AddFile("document", "sample_folder/sample_video.mp4");
+
+                  IRestResponse response = client.Execute(request);
+                  Console.WriteLine(response.Content);           
+
+###############################################################################################
+################################### VIDEO ID ##################################################
+###############################################################################################
+
+
   #############
   /api/v1/request/{request_pk}:
     get: 
@@ -1234,8 +1668,10 @@ paths:
                   }
 
 
-  ############# THE NEXT TWO CALLS BELONG TO VIDEO ID WORKFLOW ############# 
-  #############
+###############################################################################################
+################################### VIDEO ID ##################################################
+###############################################################################################
+
     put: 
       summary: UPDATE REQUEST
       tags:
@@ -1437,9 +1873,9 @@ paths:
                     }
                   }
 
-
-
-  ############# THE LAST TWO CALLS BELONG TO VIDEO ID WORKFLOW ############# 
+###############################################################################################
+################################### VIDEO ID ##################################################
+###############################################################################################
 
 
   #############
@@ -2763,437 +3199,7 @@ paths:
                   }
 
 
-###### Video ID ######
-###############################################################################
 
-  /api/v1/videoid:
-    post: 
-      summary: CREATE VIDEO ID REQUEST
-      tags:
-        - Video ID
-      description: Creates a new signature request to be used over Video ID validation process.
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-      - in: "body"
-        name: "body"
-        schema:
-          $ref: "#/definitions/CreateReqObject_VID"
-      responses:
-        200:
-          description: Successful Response
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                description: The response status id
-              details: 
-                type: string
-                properties:
-                  videoid_pk:
-                    type: string
-                    description: The Video ID primary key
-                  videoid_link:
-                    type: string
-                    description: The Video ID access link
-                  request_pk:
-                    type: string
-                    description: The request primary key          
-          examples:
-            application/json:
-                {
-                    "status": "200 OK",
-                    "details": {
-                        "videoid_pk": 137,
-                        "videoid_link": "",
-                        "request_pk": 45836
-                    }
-                }
-        400:
-          description: Bad Request | Missing required parameters
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                description: Status message
-              description: 
-                type: string
-                description: Status description  
-          examples:
-            application/json:
-                {
-                    "status": "400 Bad Request",
-                    "details": "Videoid not enabled for Registration Authority 1234"
-                }     
-        403:
-          description: Forbidden
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                description: Status message
-              description: 
-                type: string
-                description: Status description  
-          examples:
-            application/json:
-                  {
-                      "status": "403 Forbidden",
-                      "details": "Error creating new videoid request: {\"detail\":\"You do not have permission to perform this action.\"}"
-                  }    
-        404:
-          description: Invalid Registration Authority
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                description: The response status id
-              details: 
-                type: string
-                description: The response error message  
-          examples:
-            application/json:
-              {
-                  "status": "404 Not Found",
-                  "details": "Registration Authority not found"
-              }
-
-
-###############################################################################
-########## THE CALLS UPDATE/CANCEL REQUEST ARE AT "REQUESTS" LIST #############
-###############################################################################
-
-
-#############
-  /api/v1/videoid/{request_pk}/evidences:
-    post: 
-      summary: UPLOAD DATA EVIDENCE
-      tags:
-        - Video ID
-      description: "Upload Request associated data"
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-      - in: path
-        name: request_pk
-        type: string
-        description: The Request unique identifier
-        required: true
-      - in: "body"
-        name: "body"
-        schema:
-          $ref: "#/definitions/UploadData_VID"
-      responses:
-        200:
-          description: Successful Response 
-      x-codeSamples:
-        - lang: 'curl'
-          source: |
-                  curl -i -X POST \
-                    https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences \
-                    -H 'Content-Type: application/json' \
-                    -d '{
-                      "acceptance": {
-                        "acceptance_test_data": true,
-                        "another_field": 0
-                      },
-                      "videoid_data": {
-                        "images": {
-                          "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
-                          "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
-                          "document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
-                          "document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
-                        },
-                        "ocr_data": {
-                          "given_name": "Name",
-                          "surname_1": "Surname",
-                          "mobile_phone_number": "+34999999999",
-                          "serial_number": "A9999999E"
-                        },
-                        "security_checks": {
-                          "a_test_check": true,
-                          "another_check": true
-                        },
-                        "similarity_level": "high"
-                      }
-                    }'
-        - lang: 'Javascript'
-          source: |
-                  const resp = await fetch(
-                    `https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences`,
-                    {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-                        acceptance: {
-                          acceptance_test_data: true,
-                          another_field: 0
-                        },
-                        videoid_data: {
-                          images: {
-                            document_front: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)',
-                            document_rear: '/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)',
-                            document_photo: 'AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)',
-                            document_owner: 'SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)'
-                          },
-                          ocr_data: {
-                            given_name: 'Name',
-                            surname_1: 'Surname',
-                            mobile_phone_number: '+34999999999',
-                            serial_number: 'A9999999E'
-                          },
-                          security_checks: {
-                            a_test_check: true,
-                            another_check: true
-                          },
-                          similarity_level: 'high'
-                        }
-                      })
-                    }
-                  );
-
-                  const data = await resp.json();
-                  console.log(data);
-        - lang: 'Python'
-          source: |
-                  import requests
-
-                  url = "https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences"
-
-                  payload = {
-                    "acceptance": {
-                      "acceptance_test_data": True,
-                      "another_field": 0
-                    },
-                    "videoid_data": {
-                      "images": {
-                        "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
-                        "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
-                        "document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
-                        "document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
-                      },
-                      "ocr_data": {
-                        "given_name": "Name",
-                        "surname_1": "Surname",
-                        "mobile_phone_number": "+34999999999",
-                        "serial_number": "Y9999999E"
-                      },
-                      "security_checks": {
-                        "a_test_check": True,
-                        "another_check": True
-                      },
-                      "similarity_level": "high"
-                    }
-                  }
-
-                  headers = {"Content-Type": "application/json"}
-
-                  response = requests.post(url, json=payload, headers=headers)
-
-                  data = response.json()
-                  print(data)
-        - lang: 'Node.js'
-          source: |
-                  const fetch = require('node-fetch');
-
-                  const resp = await fetch(
-                    `https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences`,
-                    {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-                        acceptance: {
-                          acceptance_test_data: true,
-                          another_field: 0
-                        },
-                        videoid_data: {
-                          images: {
-                            document_front: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)',
-                            document_rear: '/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)',
-                            document_photo: 'AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)',
-                            document_owner: 'SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)'
-                          },
-                          ocr_data: {
-                            given_name: 'Name',
-                            surname_1: 'Surname',
-                            mobile_phone_number: '+34999999999',
-                            serial_number: 'A9999999E'
-                          },
-                          security_checks: {
-                            a_test_check: true,
-                            another_check: true
-                          },
-                          similarity_level: 'high'
-                        }
-                      })
-                    }
-                  );
-
-                  const data = await resp.json();
-                  console.log(data);
-        - lang: 'C#'
-          source: |
-                  using System;
-                  using System.Net.Http;
-                  using System.Threading.Tasks;
-                  using System.Text;
-                  using Newtonsoft.Json.Linq;
-
-                  public class Program
-                  {
-                    public static async Task Main(string[] args)
-                    {
-                      using (var client = new HttpClient())
-                      {
-                        JObject json = JObject.Parse(@"{
-                          acceptance: {
-                            acceptance_test_data: true,
-                            another_field: 0
-                          },
-                          videoid_data: {
-                            images: {
-                              document_front: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)',
-                              document_rear: '/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)',
-                              document_photo: 'AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)',
-                              document_owner: 'SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)'
-                            },
-                            ocr_data: {
-                              given_name: 'Name',
-                              surname_1: 'Surname',
-                              mobile_phone_number: '+34999999999',
-                              serial_number: 'A9999999E'
-                            },
-                            security_checks: {
-                              a_test_check: true,
-                              another_check: true
-                            },
-                            similarity_level: 'high'
-                          }
-                        }");
-                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
-                        var request = await client.PostAsync("https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences", postData);
-                        var response = await request.Content.ReadAsStringAsync();
-
-                        Console.WriteLine(response);
-                      }
-                    }
-                  }
-
-#############
-  /api/v1/videoid/{request_pk}/evidences/video:
-    post: 
-      summary: UPLOAD VIDEO
-      tags:
-        - Video ID
-      description: "Upload Request associated video"
-      consumes:
-        - multipart/form-data
-      produces:
-        - application/json
-      parameters:
-      - in: path
-        name: request_pk
-        type: string
-        description: The Request unique identifier
-        required: true
-      - in: formData
-        name: video
-        description: The video to be uploaded
-        required: true
-        type: string
-      responses:
-        200:
-          description: Successful Response
-      x-codeSamples:
-        - lang: 'curl'
-          source: |
-                  curl -i -X POST \
-                    https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/ \
-                    -H 'Content-Type: multipart/form-data' \
-                    -F video=@sample_folder/sample_video.mp4 
-        - lang: 'Javascript'
-          source: |
-                  var formdata = new FormData();
-                  formdata.append("type", "document_front");
-                  formdata.append("video", fileInput.files[0], "sample_folder/sample_video.mp4");
-
-                  var requestOptions = {
-                    method: 'POST',
-                    headers: myHeaders,
-                    body: formdata,
-                    redirect: 'follow'
-                  };
-
-                  fetch("https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/", requestOptions)
-                    .then(response => response.text())
-                    .then(result => console.log(result))
-                    .catch(error => console.log('error', error));
-        - lang: 'Python'
-          source: |
-                  import requests
-
-                  url = "https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/"
-
-                  payload={'type': 'document_front'}
-                  files=[
-                    ('document',('file',open('sample_folder/sample_video.mp4','rb'),'video/png'))
-                  ]
-                  headers = {
-                    'Content-Type': 'multipart/form-data'
-                  }
-
-                  response = requests.request("POST", url, headers=headers, data=payload, files=files)
-
-                  print(response.text)
-        - lang: 'Node.js'
-          source: |
-                  const fs = require('fs');
-                  const FormData = require('form-data');
-                  const fetch = require('node-fetch');
-                  const formData = new FormData();
-
-                  formData.append('type', 'document_front');
-                  formData.append('document', fs.createReadStream('sample_folder/sample_video.mp4'));
-
-                  const url = 'https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/';
-
-                  const options = {
-                    method: 'POST',
-                    headers: {
-                      Accept: 'text/plain',
-                      'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001'
-                    }
-                  };
-
-                  options.body = formData;
-
-                  fetch(url, options)
-                    .then(res => res.json())
-                    .then(json => console.log(json))
-                    .catch(err => console.error('error:' + err));
-        - lang: 'C#'
-          source: |
-                  var client = new RestClient("https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences/video/");
-                  client.Timeout = -1;
-                  var request = new RestRequest(Method.POST);
-                  request.AddHeader("content-type", "multipart/form-data; boundary=----011000010111000001101001");
-                  request.AddParameter("type", "document_front");
-                  request.AddFile("document", "sample_folder/sample_video.mp4");
-
-                  IRestResponse response = client.Execute(request);
-                  Console.WriteLine(response.Content);           
 
 ############
   /api/v1/videoid/{request_pk}/validate:
@@ -3661,9 +3667,7 @@ paths:
                         Console.WriteLine(response);
                       }
                     }
-                  }         
-
-
+                  } 
 
 
 
