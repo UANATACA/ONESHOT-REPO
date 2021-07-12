@@ -1326,8 +1326,13 @@ paths:
                           "id_document_country": ES
                         },
                         "security_checks": {
-                          "a_test_check": true,
-                          "another_check": true
+                          "otp_validation": true,
+                          "documents_match": true,
+                          "data_integrity": true,
+                          "document_notcopy": true,
+                          "document_notexpired": true,
+                          "document_notunderage": true,
+                          "liveliness": true
                         },
                         "similarity_level": "high"
                       }
@@ -1369,8 +1374,13 @@ paths:
                             id_document_country: ES
                           },
                           security_checks: {
-                            a_test_check: true,
-                            another_check: true
+                            otp_validation: true,
+                            documents_match: true,
+                            data_integrity: true,
+                            document_notcopy: true,
+                            document_notexpired: true,
+                            document_notunderage: true,
+                            liveliness: true
                           },
                           similarity_level: 'high'
                         }
@@ -1414,8 +1424,13 @@ paths:
                         "id_document_country": ES
                       },
                       "security_checks": {
-                        "a_test_check": True,
-                        "another_check": True
+                        "otp_validation": true,
+                        "documents_match": true,
+                        "data_integrity": true,
+                        "document_notcopy": true,
+                        "document_notexpired": true,
+                        "document_notunderage": true,
+                        "liveliness": true
                       },
                       "similarity_level": "high"
                     }
@@ -1466,8 +1481,13 @@ paths:
                             id_document_country: ES
                           },
                           security_checks: {
-                            a_test_check: true,
-                            another_check: true
+                            otp_validation: true,
+                            documents_match: true,
+                            data_integrity: true,
+                            document_notcopy: true,
+                            document_notexpired: true,
+                            document_notunderage: true,
+                            liveliness: true
                           },
                           similarity_level: 'high'
                         }
@@ -1519,8 +1539,13 @@ paths:
                               id_document_country: ES
                             },
                             security_checks: {
-                              a_test_check: true,
-                              another_check: true
+                              otp_validation: true,
+                              documents_match: true,
+                              data_integrity: true,
+                              document_notcopy: true,
+                              document_notexpired: true,
+                              document_notunderage: true,
+                              liveliness: true
                             },
                             similarity_level: 'high'
                           }

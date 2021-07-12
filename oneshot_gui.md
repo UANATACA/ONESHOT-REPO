@@ -979,12 +979,17 @@ Data and images are uploaded by using the following call:
 	29|			"id_document_country": ES
 	30|		},
 	31|		"security_checks": {
-	32|			"a_test_check": true,
-	33|			"another_check": true
-	34|		},
-	35|		"similarity_level": "high"
-	36|		}
-	37|	}'
+	32|			"otp_validation": true,
+	33|			"documents_match": true,
+	34|			"data_integrity": true,
+	35|			"document_notcopy": true,
+	36|			"document_notexpired": true,
+	37|			"document_notunderage": true,
+	38|			"liveliness": true
+	39|		},
+	40|		"similarity_level": "high"
+	41|		}
+	42|	}'
 
 
 Successful response status
