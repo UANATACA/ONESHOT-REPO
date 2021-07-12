@@ -947,7 +947,6 @@ Data and images are uploaded by using the following call:
 - `security_checks` : Set of validation fields associated to the client's identity (underaging, matching info, liveliness, etc) </br>
 - `similarity_level` : Similarity between the client's selfie and the picture is shown on his/her ID document. **Mandatory**
 
-Successful response status
 
 	1 | {
 	2 |   SUCCESSFUL RESPONSE PENDING
