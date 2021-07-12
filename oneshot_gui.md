@@ -950,13 +950,6 @@ Data and images are uploaded by using the following call:
 	1 | curl -i -X POST https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences \
 	2 |   -H 'Content-Type: application/json' \
 	3 |   -d '{
-	13|     "videoid_data": {
-	14|       "images": {
-	15|         "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
-	16|         "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
-	17|         "document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
-	18|         "document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
-	19|       },
 	20|       "ocr_data": {
 	21|         "given_name": "Name",
 	22|         "surname_1": "Surname 1",
