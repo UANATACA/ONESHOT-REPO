@@ -1903,7 +1903,7 @@ paths:
       - in: "body"
         name: "body"
         schema:
-          $ref: "#/definitions/CreateReqObject_VID"
+          $ref: "#/definitions/UpdateReqObject_VID"
       responses:
         200:
           description: Successful Response
@@ -3975,7 +3975,49 @@ definitions:
         env:
             type: "string"
             description: "The environment value (**test** or **prod**)"
-         
+###########
+    UpdateReqObject_VID:
+      type: "object"
+      required:
+        - scratchcard
+        - country_name
+        - email
+        - registration_authority
+        - profile
+      properties:
+        scratchcard:
+            type: "string"
+            description: "The request scratchcard id"
+        given_name:
+            type: "string"
+            description: "The signer's given name"
+        surname_1:
+            type: "string"
+            description: "The signer's first surname"         
+        surname_2:
+            type: "string"
+            description: "The signer's second surname"
+        mobile_phone_number:
+            type: "string"
+            description: "The signer's mobile phone number"
+        serial_number:
+            type: "string"
+            description: "The signer's document ID number"
+        email:
+            type: "string"
+            description: "The signer's email"
+        registration_authority:
+            type: "string"
+            description: "The Registration Authority id number"
+        profile:
+            type: "string"
+            description: "The certificate profile"
+        country_name:
+            type: "string"
+            description: "The user's id document country two-letters code (ISO 3166-1 alpha-2)"
+        webhook_url:
+            type: "string"
+            description: "The webhook URL. See webhook configuration section"
 ###########
     UploadData_VID:
       type: "object"
