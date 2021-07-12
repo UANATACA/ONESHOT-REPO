@@ -4043,21 +4043,28 @@ definitions:
               properties:
                 otp_validation:
                   type: boolean
+                  description: OTP code validation check
                 documents_match:
                   type: boolean
+                  description: Documents matching official registers check
                 data_integrity:
                   type: boolean
+                  description: Document data is not corrupted check
                 document_notcopy:
                   type: boolean
+                  description: Document is not a copy check
                 document_notexpired:
                   type: boolean
+                  description: Document is not expired check
                 document_notunderage:
                   type: boolean
+                  description: The user is not underage check
                 liveliness:
                   type: boolean
+                  description: The user is real check
             similarity_level:
-              type: "string"
-              description: similarity_level description 
+              type: integer
+              description: Level of similarity between document picture and face selfie. Ranges in [0,100].  
 ###########
     PlApproveReqObject:
       type: "object"
