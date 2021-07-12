@@ -4009,12 +4009,12 @@ definitions:
                 id_document_type:
                   type: string
                   enum: [IDC, PAS, PNO, TIN]
-                  description: >
-                    Document types allowed for the user identification:
-                    * **IDC** - Identification based on national identity card number
-                    * **PAS** - Identification based on passport number
-                    * **PNO** - Identification based on national personal number (national civic registration number)
-                    * **TIN** - Tax Identification Number according to the European Commission
+                  description: "Document types allowed for the user identification:
+                    Document types allowed for the user identification: \n
+                    - **IDC** - Identification based on national identity card number \n
+                    - **PAS** - Identification based on passport number \n
+                    - **PNO** - Identification based on national personal number (national civic registration number)
+                    - **TIN** - Tax Identification Number according to the European Commission"
                 id_document_country:
                   type: string
                   description: The user's id document country two-letters code (ISO 3166-1 alpha-2)            
