@@ -940,17 +940,12 @@ Data and images are uploaded by using the following call:
 
 **Data objects in detail:**
 
-`acceptance` : Client acceptance parameters (e.g. Terms & Conditions,  Privacy Policy). This is a customizable JSON object. \n
+`acceptance` : Client acceptance parameters (e.g. Terms & Conditions,  Privacy Policy). This is a customizable JSON object. </br>
 `videoid_data` : Set of information about the Request. Contains: </br>
 - `images`: Pictures associated to the client's ID document plus a face selfie of him/her. **Mandatory object** </br>
 - `ocr_data` : Text information extracted from the client's ID document via Optical Character Recognition (OCR). **Mandatory** </br>
 - `security_checks` : Set of validation fields associated to the client's identity (underaging, matching info, liveliness, etc) </br>
-- `similarity_level` : Similarity between the client's selfie and the picture is shown on his/her ID document. **Mandatory** </br>
-
-	asasas
-	asas
-	as
-
+- `similarity_level` : Similarity between the client's selfie and the picture is shown on his/her ID document. **Mandatory**
 
 Successful response status
 
