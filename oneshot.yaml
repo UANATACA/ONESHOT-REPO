@@ -1300,8 +1300,13 @@ paths:
                     -H 'Content-Type: application/json' \
                     -d '{
                       "acceptance": {
-                        "acceptance_test_data": true,
-                        "another_field": 0
+                        "description": "User Accepted Terms and Conditions and Privacy Policy",
+                        "url-doc-privacypolicy": "https://www.uanataca.com/public/pki/privacidad-PSC/",
+                        "ip": "186.0.91.53",
+                        "url-web-videoid": "https://cms.access.bit4id.org:13035/lcmpl/videoid/46b92251-4ba8-4930-a5aa-8631ec4666b6",
+                        "user-agent": "Mozilla/5.0 (Linux; Android 11; AC2003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.88 Mobile Safari/537.36",
+                        "date": 1622823879708,
+                        "url-doc-termsconditions": "https://www.uanataca.com/public/pki/terminos-VID/"
                       },
                       "videoid_data": {
                         "images": {
@@ -1334,8 +1339,13 @@ paths:
                       },
                       body: JSON.stringify({
                         acceptance: {
-                          acceptance_test_data: true,
-                          another_field: 0
+                          description: User Accepted Terms and Conditions and Privacy Policy,
+                          url-doc-privacypolicy: https://www.uanataca.com/public/pki/privacidad-PSC/,
+                          ip: 186.0.91.53,
+                          url-web-videoid: https://cms.access.bit4id.org:13035/lcmpl/videoid/46b92251-4ba8-4930-a5aa-8631ec4666b6,
+                          user-agent: Mozilla/5.0 (Linux; Android 11; AC2003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.88 Mobile Safari/537.36,
+                          date: 1622823879708,
+                          url-doc-termsconditions: https://www.uanataca.com/public/pki/terminos-VID/
                         },
                         videoid_data: {
                           images: {
@@ -1370,8 +1380,13 @@ paths:
 
                   payload = {
                     "acceptance": {
-                      "acceptance_test_data": True,
-                      "another_field": 0
+                      "description": "User Accepted Terms and Conditions and Privacy Policy",
+                      "url-doc-privacypolicy": "https://www.uanataca.com/public/pki/privacidad-PSC/",
+                      "ip": "186.0.91.53",
+                      "url-web-videoid": "https://cms.access.bit4id.org:13035/lcmpl/videoid/46b92251-4ba8-4930-a5aa-8631ec4666b6",
+                      "user-agent": "Mozilla/5.0 (Linux; Android 11; AC2003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.88 Mobile Safari/537.36",
+                      "date": 1622823879708,
+                      "url-doc-termsconditions": "https://www.uanataca.com/public/pki/terminos-VID/"
                     },
                     "videoid_data": {
                       "images": {
@@ -1413,8 +1428,13 @@ paths:
                       },
                       body: JSON.stringify({
                         acceptance: {
-                          acceptance_test_data: true,
-                          another_field: 0
+                          description: User Accepted Terms and Conditions and Privacy Policy,
+                          url-doc-privacypolicy: https://www.uanataca.com/public/pki/privacidad-PSC/,
+                          ip: 186.0.91.53,
+                          url-web-videoid: https://cms.access.bit4id.org:13035/lcmpl/videoid/46b92251-4ba8-4930-a5aa-8631ec4666b6,
+                          user-agent: Mozilla/5.0 (Linux; Android 11; AC2003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.88 Mobile Safari/537.36,
+                          date: 1622823879708,
+                          url-doc-termsconditions: https://www.uanataca.com/public/pki/terminos-VID/
                         },
                         videoid_data: {
                           images: {
@@ -1457,8 +1477,13 @@ paths:
                       {
                         JObject json = JObject.Parse(@"{
                           acceptance: {
-                            acceptance_test_data: true,
-                            another_field: 0
+                            description: User Accepted Terms and Conditions and Privacy Policy,
+                            url-doc-privacypolicy: https://www.uanataca.com/public/pki/privacidad-PSC/,
+                            ip: 186.0.91.53,
+                            url-web-videoid: https://cms.access.bit4id.org:13035/lcmpl/videoid/46b92251-4ba8-4930-a5aa-8631ec4666b6,
+                            user-agent: Mozilla/5.0 (Linux; Android 11; AC2003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.88 Mobile Safari/537.36,
+                            date: 1622823879708,
+                            url-doc-termsconditions: https://www.uanataca.com/public/pki/terminos-VID/
                           },
                           videoid_data: {
                             images: {
@@ -3912,22 +3937,28 @@ definitions:
       properties:
         acceptance:
           type: "object"
-          description: Service Terms and Conditions acceptance parameters
+          description: A set of acceptance parameters
           properties:
             description:
               type: "string"
+              description: 
             url-doc-privacypolicy:
               type: "string"
+              description: "Privacy policy document URL"
             ip:
               type: "string"
+              description:
             url-web-videoid:
               type: "string"
+              description: "Video ID platform access URL"
             user-agent:
               type: "string"
+              description: 
             date:
               type: "string"
             url-doc-termsconditions:
               type: "string"
+              description: "Terms and conditions document URL"
         videoid_data:
           type: "object"
           description: Data to upload for Video ID
@@ -3954,19 +3985,36 @@ definitions:
               properties:
                 given_name:
                   type: string
-                  description: Client's given name
+                  description: The user's given name
                 surname_1:
                   type: string
-                  description: Client's first surname
+                  description: The user's first surname
                 surname_2:
                   type: string
-                  description: Client's second surname              
+                  description: The user's second surname              
                 mobile_phone_number:
                   type: string
-                  description: Client's mobile phone number
+                  description: The user's mobile phone number
+                email:
+                  type: string
+                  description: The user's email
                 serial_number:
                   type: string
-                  description: Client's serial number
+                  description: The user's document serial number
+                id_document_type:
+                  type: string
+                  enum: [IDC, PAS, PNO, TIN]
+                  description: >
+                    Document types allowed for the user identification:
+                    * **IDC** - Identification based on national identity card number
+                    * **PAS** - Identification based on passport number
+                    * **PNO** - Identification based on national personal number (national civic registration number)
+                    * **TIN** - Tax Identification Number according to the European Commission
+                id_document_country:
+                  type: string
+                  description: The user's id document country two-letters code (ISO 3166-1 alpha-2)
+                
+                
             security_checks:
               type: "object"
               description: Security checks related to document integrity

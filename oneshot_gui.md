@@ -941,39 +941,45 @@ Data and images are uploaded by using the following call:
 **Data objects in detail:**
 
 `acceptance` : Client acceptance parameters (e.g. Terms & Conditions,  Privacy Policy). This is a customizable JSON object.<br>
-`data` : Set of pictures associated to the client's ID document plus a selfie of him/her. **Mandatory object** <br>
-`ocr_data` : Text information extracted from the client's ID document via Optical Character Recognition (OCR). **Mandatory** <br>
-`security_checks` : Set of validation fields associated to the client's identity (underaging, matching info, liveliness, etc) <br>
-`similarity_level` : Similarity between the client's selfie and the picture is shown on his/her ID document. **Mandatory** <br>
+`videoid_data` : Set of information about the Request. Contains: <br>
+- `images`: Pictures associated to the client's ID document plus a face selfie of him/her. **Mandatory object** <br>
+- `ocr_data` : Text information extracted from the client's ID document via Optical Character Recognition (OCR). **Mandatory** <br>
+- `security_checks` : Set of validation fields associated to the client's identity (underaging, matching info, liveliness, etc) <br>
+- `similarity_level` : Similarity between the client's selfie and the picture is shown on his/her ID document. **Mandatory** <br>
 
     1 | curl -i -X POST https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences \
     2 |   -H 'Content-Type: application/json' \
     3 |   -d '{
     4 |     "acceptance": {
-    5 |       "acceptance_test_data": true,
-    6 |       "another_field": 0
-    7 |     },
-    8 |     "data": {
-    9 |       "images": {
-    10|         "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
-    11|         "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
-    12|         "document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
-    13|         "document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
-    14|       },
-    15|       "ocr_data": {
-    16|         "given_name": "Name",
-    17|         "surname_1": "Surname 1",
-    18|         "surname_2": "Surname 2",
-    19|         "mobile_phone_number": "+34999999999",
-    20|         "serial_number": "A9999999E"
-    21|       },
-    22|       "security_checks": {
-    23|         "a_test_check": true,
-    24|         "another_check": true
-    25|       },
-    26|       "similarity_level": "high"
-    27|     }
-    28|   }'
+    5 |       "description": "User Accepted Terms and Conditions and Privacy Policy",
+    6 |       "url-doc-privacypolicy": "https://www.uanataca.com/public/pki/privacidad-PSC/",
+	7 |		  "ip": "186.0.91.53",
+	8 |		  "url-web-videoid": "https://cms.access.bit4id.org:13035/lcmpl/videoid/46b92251-4ba8-4930-a5aa-8631ec4666b6",
+	9 |		  "user-agent": "Mozilla/5.0 (Linux; Android 11; AC2003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.88 Mobile Safari/537.36",
+	10|		  "date": 1622823879708,
+	11|		  "url-doc-termsconditions": "https://www.uanataca.com/public/pki/terminos-VID/"
+    12|     },
+    13|     "videoid_data": {
+    14|       "images": {
+    15|         "document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
+    16|         "document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
+    17|         "document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
+    18|         "document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
+    19|       },
+    20|       "ocr_data": {
+    21|         "given_name": "Name",
+    22|         "surname_1": "Surname 1",
+    23|         "surname_2": "Surname 2",
+    24|         "mobile_phone_number": "+34999999999",
+    25|         "serial_number": "A9999999E"
+    26|       },
+    27|       "security_checks": {
+    28|         "a_test_check": true,
+    29|         "another_check": true
+    30|       },
+    31|       "similarity_level": "high"
+    32|     }
+    23|   }'
 
 Successful response status
 
