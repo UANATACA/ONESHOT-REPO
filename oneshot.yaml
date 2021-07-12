@@ -3941,19 +3941,16 @@ definitions:
           properties:
             description:
               type: "string"
-              description: 
             url-doc-privacypolicy:
               type: "string"
               description: "Privacy policy document URL"
             ip:
               type: "string"
-              description:
             url-web-videoid:
               type: "string"
               description: "Video ID platform access URL"
             user-agent:
               type: "string"
-              description: 
             date:
               type: "string"
             url-doc-termsconditions:
