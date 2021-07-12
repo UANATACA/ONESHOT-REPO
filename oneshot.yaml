@@ -3981,6 +3981,14 @@ definitions:
                   description: Base64 client selfie
             ocr_data:
               type: "object"
+              required: 
+                - given_name
+                - surname_1
+                - id_document_type
+                - id_document_country
+                - serial_number
+                - email
+                - mobile_phone_number
               description: Optical Character Recognition result
               properties:
                 given_name:
@@ -4012,9 +4020,7 @@ definitions:
                     * **TIN** - Tax Identification Number according to the European Commission
                 id_document_country:
                   type: string
-                  description: The user's id document country two-letters code (ISO 3166-1 alpha-2)
-                
-                
+                  description: The user's id document country two-letters code (ISO 3166-1 alpha-2)            
             security_checks:
               type: "object"
               description: Security checks related to document integrity
