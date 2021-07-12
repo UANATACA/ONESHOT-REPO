@@ -1986,7 +1986,141 @@ paths:
                   "status": "404 Not Found",
                   "details": "Registration Authority not found"
               }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X PUT \
+                    https://one-shot.developers.uanataca.com/api/v1/request/45836 \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "scratchcard": "1234567",
+                      "given_name": "John",
+                      "surname_1": "Smith",
+                      "surname_2": "Lopez",
+                      "birth_date": "01/01/2000",
+                      "email": "mail@domain.com",
+                      "serial_number": "A9999999E",
+                      "registration_authority": "1234",
+                      "profile": "PFnubeQAFCiudadano",
+                      "country_name": "ES"
+                    }'
+        - lang: 'JavaScript'
+          source: |
+                  const requestPk = 'YOUR_request_pk_PARAMETER';
+                  const resp = await fetch(
+                    `https://one-shot.developers.uanataca.com/api/v1/request/45836`,
+                    {
+                      method: 'PUT',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        scratchcard: '1234567',
+                        given_name: 'John',
+                        surname_1: 'Smith',
+                        surname_2: 'Lopez',
+                        birth_date: '01/01/2000',
+                        email: 'mail@domain.com',
+                        serial_number: 'A9999999E',
+                        registration_authority: '1234',
+                        profile: 'PFnubeQAFCiudadano',
+                        country_name: 'ES'
+                      })
+                    }
+                  );
 
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  request_pk = "YOUR_request_pk_PARAMETER"
+                  url = "https://one-shot.developers.uanataca.com/api/v1/request/45836" 
+
+                  payload = {
+                    "scratchcard": "1234567",
+                    "given_name": "John",
+                    "surname_1": "Smith",
+                    "surname_2": "Lopez",
+                    "birth_date": "01/01/2000",
+                    "email": "mail@domain.com",
+                    "serial_number": "A9999999E",
+                    "registration_authority": "1234",
+                    "profile": "PFnubeQAFCiudadano",
+                    "country_name": "ES"
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.put(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const requestPk = 'YOUR_request_pk_PARAMETER';
+                  const resp = await fetch(
+                    `https://one-shot.developers.uanataca.com/api/v1/request/45836`,
+                    {
+                      method: 'PUT',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        scratchcard: '1234567',
+                        given_name: 'John',
+                        surname_1: 'Smith',
+                        surname_2: 'Lopez',
+                        birth_date: '01/01/2000',
+                        email: 'mail@domain.com',
+                        serial_number: 'A9999999E',
+                        registration_authority: '1234',
+                        profile: 'PFnubeQAFCiudadano',
+                        country_name: 'ES'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          scratchcard: '1234567',
+                          given_name: 'John',
+                          surname_1: 'Smith',
+                          surname_2: 'Lopez',
+                          birth_date: '01/01/2000',
+                          email: 'mail@domain.com',
+                          serial_number: 'A9999999E',
+                          registration_authority: '1234',
+                          profile: 'PFnubeQAFCiudadano',
+                          country_name: 'ES'
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var RequestPk = "YOUR_request_pk_PARAMETER";
+                        var request = await client.PutAsync("https://one-shot.developers.uanataca.com/api/v1/request/" + RequestPk, postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
 #############
 
     delete: 
