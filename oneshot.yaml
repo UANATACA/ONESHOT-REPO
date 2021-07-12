@@ -1986,21 +1986,6 @@ paths:
                   "status": "404 Not Found",
                   "details": "Registration Authority not found"
               }
-      x-codeSamples:
-        - lang: 'curl'
-          source: |
-
-        - lang: 'JavaScript'
-          source: |
-
-        - lang: 'Python'
-          source: |
-
-        - lang: 'Node.js'
-          source: |
-
-        - lang: 'C#'
-          source: |
 
 #############
 
