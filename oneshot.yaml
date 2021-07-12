@@ -4009,11 +4009,10 @@ definitions:
                 id_document_type:
                   type: string
                   enum: [IDC, PAS, PNO, TIN]
-                  description: "Document types allowed for the user identification:
-                    Document types allowed for the user identification: \n
+                  description: "Document types allowed for user identification: \n
                     - **IDC** - Identification based on national identity card number \n
                     - **PAS** - Identification based on passport number \n
-                    - **PNO** - Identification based on national personal number (national civic registration number)
+                    - **PNO** - Identification based on national personal number (national civic registration number) \n
                     - **TIN** - Tax Identification Number according to the European Commission"
                 id_document_country:
                   type: string
