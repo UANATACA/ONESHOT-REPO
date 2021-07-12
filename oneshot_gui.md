@@ -950,20 +950,7 @@ Data and images are uploaded by using the following call:
 	1 | curl -i -X POST https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences \
 	2 |   -H 'Content-Type: application/json' \
 	3 |   -d '{
-	20|       "ocr_data": {
-	21|         "given_name": "Name",
-	22|         "surname_1": "Surname 1",
-	23|         "surname_2": "Surname 2",
-	24|         "mobile_phone_number": "+34999999999",
-	25|         "serial_number": "A9999999E"
-	26|       },
-	27|       "security_checks": {
-	28|         "a_test_check": true,
-	29|         "another_check": true
-	30|       },
-	31|       "similarity_level": "high"
-	32|     }
-	23|   }'
+
 
 Successful response status
 
