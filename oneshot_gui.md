@@ -940,7 +940,7 @@ Data and images are uploaded by using the following call:
 
 **Data objects in detail:**
 
-`acceptance` : Client acceptance parameters (e.g. Terms & Conditions,  Privacy Policy). This is a customizable JSON object.</br>
+`acceptance` : Client acceptance parameters (e.g. Terms & Conditions,  Privacy Policy). This is a customizable JSON object. \n
 `videoid_data` : Set of information about the Request. Contains: </br>
 - `images`: Pictures associated to the client's ID document plus a face selfie of him/her. **Mandatory object** </br>
 - `ocr_data` : Text information extracted from the client's ID document via Optical Character Recognition (OCR). **Mandatory** </br>
