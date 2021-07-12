@@ -1317,9 +1317,13 @@ paths:
                         },
                         "ocr_data": {
                           "given_name": "Name",
-                          "surname_1": "Surname",
+                          "surname_1": "Surname 1",
+                          "surname_2": "Surname 2",
                           "mobile_phone_number": "+34999999999",
-                          "serial_number": "A9999999E"
+                          "email": "mail@domain",
+                          "serial_number": "A9999999E",
+                          "id_document_type": "IDC",
+                          "id_document_country": ES
                         },
                         "security_checks": {
                           "a_test_check": true,
@@ -1339,13 +1343,13 @@ paths:
                       },
                       body: JSON.stringify({
                         acceptance: {
-                          description: User Accepted Terms and Conditions and Privacy Policy,
-                          url-doc-privacypolicy: https://www.uanataca.com/public/pki/privacidad-PSC/,
-                          ip: 186.0.91.53,
-                          url-web-videoid: https://cms.access.bit4id.org:13035/lcmpl/videoid/46b92251-4ba8-4930-a5aa-8631ec4666b6,
-                          user-agent: Mozilla/5.0 (Linux; Android 11; AC2003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.88 Mobile Safari/537.36,
-                          date: 1622823879708,
-                          url-doc-termsconditions: https://www.uanataca.com/public/pki/terminos-VID/
+                          description: 'User Accepted Terms and Conditions and Privacy Policy',
+                          url-doc-privacypolicy: 'https://www.uanataca.com/public/pki/privacidad-PSC/',
+                          ip: '186.0.91.53',
+                          url-web-videoid: 'https://cms.access.bit4id.org:13035/lcmpl/videoid/46b92251-4ba8-4930-a5aa-8631ec4666b6',
+                          user-agent: 'Mozilla/5.0 (Linux; Android 11; AC2003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.88 Mobile Safari/537.36',
+                          date: '1622823879708',
+                          url-doc-termsconditions: 'https://www.uanataca.com/public/pki/terminos-VID/'
                         },
                         videoid_data: {
                           images: {
@@ -1357,8 +1361,12 @@ paths:
                           ocr_data: {
                             given_name: 'Name',
                             surname_1: 'Surname',
+                            surname_2: 'Surname 2',
                             mobile_phone_number: '+34999999999',
-                            serial_number: 'A9999999E'
+                            email: 'mail@domain',
+                            serial_number: 'A9999999E',
+                            id_document_type: 'IDC',
+                            id_document_country: ES
                           },
                           security_checks: {
                             a_test_check: true,
@@ -1397,9 +1405,13 @@ paths:
                       },
                       "ocr_data": {
                         "given_name": "Name",
-                        "surname_1": "Surname",
+                        "surname_1": "Surname 1",
+                        "surname_2": "Surname 2",
                         "mobile_phone_number": "+34999999999",
-                        "serial_number": "Y9999999E"
+                        "email": "mail@domain",
+                        "serial_number": "A9999999E",
+                        "id_document_type": "IDC",
+                        "id_document_country": ES
                       },
                       "security_checks": {
                         "a_test_check": True,
@@ -1428,13 +1440,13 @@ paths:
                       },
                       body: JSON.stringify({
                         acceptance: {
-                          description: User Accepted Terms and Conditions and Privacy Policy,
-                          url-doc-privacypolicy: https://www.uanataca.com/public/pki/privacidad-PSC/,
-                          ip: 186.0.91.53,
-                          url-web-videoid: https://cms.access.bit4id.org:13035/lcmpl/videoid/46b92251-4ba8-4930-a5aa-8631ec4666b6,
-                          user-agent: Mozilla/5.0 (Linux; Android 11; AC2003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.88 Mobile Safari/537.36,
-                          date: 1622823879708,
-                          url-doc-termsconditions: https://www.uanataca.com/public/pki/terminos-VID/
+                          description: 'User Accepted Terms and Conditions and Privacy Policy',
+                          url-doc-privacypolicy: 'https://www.uanataca.com/public/pki/privacidad-PSC/',
+                          ip: '186.0.91.53',
+                          url-web-videoid: 'https://cms.access.bit4id.org:13035/lcmpl/videoid/46b92251-4ba8-4930-a5aa-8631ec4666b6',
+                          user-agent: 'Mozilla/5.0 (Linux; Android 11; AC2003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.88 Mobile Safari/537.36',
+                          date: '1622823879708',
+                          url-doc-termsconditions: 'https://www.uanataca.com/public/pki/terminos-VID/'
                         },
                         videoid_data: {
                           images: {
@@ -1446,8 +1458,12 @@ paths:
                           ocr_data: {
                             given_name: 'Name',
                             surname_1: 'Surname',
+                            surname_2: 'Surname 2',
                             mobile_phone_number: '+34999999999',
-                            serial_number: 'A9999999E'
+                            email: 'mail@domain',
+                            serial_number: 'A9999999E',
+                            id_document_type: 'IDC',
+                            id_document_country: ES
                           },
                           security_checks: {
                             a_test_check: true,
@@ -1495,8 +1511,12 @@ paths:
                             ocr_data: {
                               given_name: 'Name',
                               surname_1: 'Surname',
+                              surname_2: 'Surname 2',
                               mobile_phone_number: '+34999999999',
-                              serial_number: 'A9999999E'
+                              email: 'mail@domain',
+                              serial_number: 'A9999999E',
+                              id_document_type: 'IDC',
+                              id_document_country: ES
                             },
                             security_checks: {
                               a_test_check: true,
