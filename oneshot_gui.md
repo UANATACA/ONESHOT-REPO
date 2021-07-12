@@ -940,20 +940,16 @@ Data and images are uploaded by using the following call:
 
 **Data objects in detail:**
 
-`acceptance` : Client acceptance parameters (e.g. Terms & Conditions,  Privacy Policy). This is a customizable JSON object.<br>
-`videoid_data` : Set of information about the Request. Contains: <br>
-- `images`: Pictures associated to the client's ID document plus a face selfie of him/her. **Mandatory object** <br>
-- `ocr_data` : Text information extracted from the client's ID document via Optical Character Recognition (OCR). **Mandatory** <br>
-- `security_checks` : Set of validation fields associated to the client's identity (underaging, matching info, liveliness, etc) <br>
-- `similarity_level` : Similarity between the client's selfie and the picture is shown on his/her ID document. **Mandatory** <br>
+`acceptance` : Client acceptance parameters (e.g. Terms & Conditions,  Privacy Policy). This is a customizable JSON object.</br>
+`videoid_data` : Set of information about the Request. Contains: </br>
+- `images`: Pictures associated to the client's ID document plus a face selfie of him/her. **Mandatory object** </br>
+- `ocr_data` : Text information extracted from the client's ID document via Optical Character Recognition (OCR). **Mandatory** </br>
+- `security_checks` : Set of validation fields associated to the client's identity (underaging, matching info, liveliness, etc) </br>
+- `similarity_level` : Similarity between the client's selfie and the picture is shown on his/her ID document. **Mandatory** </br>
 
     1 | curl -i -X POST https://lima.demo.bit4id.org/v1/upload/video/30e57b02819a430d8386fd85be9f499f/ \
     2 |   -H 'Content-Type: multipart/form-data' \
     3 |   -F video=@sample_folder/sample_video.mp4 
-
-	1 | curl -i -X POST https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences \
-	2 |   -H 'Content-Type: application/json' \
-	3 |   -d '{
 
 
 Successful response status
