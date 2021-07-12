@@ -948,9 +948,43 @@ Data and images are uploaded by using the following call:
 - `similarity_level` : Similarity between the client's selfie and the picture is shown on his/her ID document. **Mandatory**
 
 
-	1 | {
-	2 |   SUCCESSFUL RESPONSE PENDING
-	3 | }
+	curl -i -X POST \
+	https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences \
+	-H 'Content-Type: application/json' \
+	-d '{
+		"acceptance": {
+		"description": "User Accepted Terms and Conditions and Privacy Policy",
+		"url-doc-privacypolicy": "https://www.uanataca.com/public/pki/privacidad-PSC/",
+		"ip": "186.0.91.53",
+		"url-web-videoid": "https://cms.access.bit4id.org:13035/lcmpl/videoid/46b92251-4ba8-4930-a5aa-8631ec4666b6",
+		"user-agent": "Mozilla/5.0 (Linux; Android 11; AC2003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.88 Mobile Safari/537.36",
+		"date": 1622823879708,
+		"url-doc-termsconditions": "https://www.uanataca.com/public/pki/terminos-VID/"
+		},
+		"videoid_data": {
+		"images": {
+			"document_front": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAM (...)",
+			"document_rear": "/I7ye60+aOKS0mVGVSD9RVfyXukjmnS3cAEbpMVm6M1ncWqS3FszptO1lPRRDJ+orI8b (...)",
+			"document_photo": "AkjOOwFfHFrrNlpXxcbU9QuIIIkvR56yddgHpX3GEj1PmanmdS/xV1ySVlv/AIbXLPO (...)",
+			"document_owner": "SSVnovgCZ4Lhk+R3lJPUDJr5t/Z/wBV1DWfjRbeI75B5iQytcykc7yMEAV2/iwC0T34 (...)"
+		},
+		"ocr_data": {
+			"given_name": "Name",
+			"surname_1": "Surname 1",
+			"surname_2": "Surname 2",
+			"mobile_phone_number": "+34999999999",
+			"email": "mail@domain",
+			"serial_number": "A9999999E",
+			"id_document_type": "IDC",
+			"id_document_country": ES
+		},
+		"security_checks": {
+			"a_test_check": true,
+			"another_check": true
+		},
+		"similarity_level": "high"
+		}
+	}'
 
 
 Successful response status
