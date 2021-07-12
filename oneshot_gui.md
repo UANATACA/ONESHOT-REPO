@@ -953,6 +953,13 @@ Successful response status
 	2 |   SUCCESSFUL RESPONSE PENDING
 	3 | }
 
+
+Successful response status
+
+	1 | {
+	2 |   SUCCESSFUL RESPONSE PENDING
+	3 | }
+
 </br>
 
 In the same way, binary multiformat Video evidence is uploaded by using the following call:
