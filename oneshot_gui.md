@@ -1032,14 +1032,14 @@ If the uploaded video needs to be retrieved, use <a href="#tag/Video-ID/paths/~1
 
 A Registration Authority Officer must validate the request data and evidences before approval. This call is used only for 2-step mode.  
 
-curl -i -X POST https://api.uanataca.com/api/v1/videoid/45836/validate \
-	-H 'Content-Type: application/json' \
-	-d '{
-		"username": "5012345",
-		"password": "Gy6F37xK",
-		"pin": "belorado74",
-		"rao": "1400"
-	}'
+	curl -i -X POST https://api.uanataca.com/api/v1/videoid/45836/validate \
+		-H 'Content-Type: application/json' \
+		-d '{
+			"username": "5012345",
+			"password": "Gy6F37xK",
+			"pin": "belorado74",
+			"rao": "1400"
+		}'
 
 The validation successful response status is a JSON object containing request information, as the request status changes to **CREATED**.
 
