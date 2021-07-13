@@ -1936,7 +1936,7 @@ paths:
                     }
                 }
         400:
-          description: Missing required parameters
+          description: JSON syntax error
           schema:
             type: object
             properties:
@@ -1949,9 +1949,9 @@ paths:
           examples:
             application/json:
                 {
-                    "status": "400 Bad Request",
-                    "details": "Videoid not enabled for Registration Authority 1234"
-                }     
+                    "title": "Invalid JSON",
+                    "description": "Could not parse JSON body - Expecting ',' delimiter: line 9 column 5 (char 220)"
+                }    
         403:
           description: Forbidden
           schema:
@@ -1986,6 +1986,23 @@ paths:
                   "status": "404 Not Found",
                   "details": "Registration Authority not found"
               }
+        500:
+          description: Internal Server Error - Missing required parameters
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message  
+          examples:
+            application/json:
+                {
+                    "status": "500 Internal Server Error",
+                    "details": "Cannot update the Request 46263: {\"code\": \"500\", \"id\": \"5c05e064d7a903ac\", \"error\": \"Invalid ScratchCard\"}"
+                }
       x-codeSamples:
         - lang: 'curl'
           source: |
@@ -4106,7 +4123,7 @@ definitions:
       properties:
         scratchcard:
             type: "string"
-            description: "The request scratchcard id"
+            description: "The request scratchcard id". Found when executing <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Get Request</a> call.<br>
         given_name:
             type: "string"
             description: "The signer's given name"
