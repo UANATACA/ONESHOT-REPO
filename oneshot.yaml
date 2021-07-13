@@ -143,7 +143,7 @@ This allows the management of One-Shot signature by establishing a video call fo
     <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid/post'>/videoid</a></td><td>Create Video ID Request</td>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences/post'>/videoid/{request_pk}/evidences</a></td><td>Upload Data Evidence</td>
+    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences/post'>/videoid/{request_pk}/evidences</a></td><td>Upload Data Evidences</td>
   </tr>
   <tr>
     <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences~1video/post'>/videoid/{request_pk}/evidences/video</a></td><td>Upload Video</td>
@@ -1089,7 +1089,7 @@ paths:
                     "details": "Videoid not enabled for Registration Authority 1234"
                 }     
         403:
-          description: Forbidden
+          description: Permission Denied
           schema:
             type: object
             properties:
@@ -1271,7 +1271,7 @@ paths:
 #############
   /api/v1/videoid/{request_pk}/evidences:
     post: 
-      summary: UPLOAD DATA EVIDENCE
+      summary: UPLOAD DATA EVIDENCES
       tags:
         - Video ID
       description: "Upload Request associated data"
@@ -1323,7 +1323,24 @@ paths:
                 {
                     "title": "Invalid JSON",
                     "description": "Could not parse JSON body - Expecting ',' delimiter: line 5 column 11 (char 205)"
-                }               
+                }
+        404:
+          description: Invalid Request id
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Response error message
+              description: 
+                type: string
+                description: Message description  
+          examples:
+            application/json:
+                {
+                    "title": "404 Not Found",
+                    "description": "Request not found"
+                }              
         500:
           description: Missing information | Evidences already uploaded
           schema:
@@ -1633,6 +1650,38 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status code
+              details: 
+                type: string
+                description: The response status message       
+          examples:
+            application/json:
+              {
+                  "status": "200 OK",
+                  "details": "Videoid video upload completed"
+              }
+        404:
+          description: Invalid Request id
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Response error message
+              description: 
+                type: string
+                description: Message description  
+          examples:
+            application/json:
+                {
+                    "title": "404 Not Found",
+                    "description": "Request not found"
+                } 
       x-codeSamples:
         - lang: 'curl'
           source: |
@@ -2036,7 +2085,7 @@ paths:
                   "details": "Registration Authority not found"
               }
         500:
-          description: Internal Server Error - Missing required parameters
+          description: Invalid Request id | Missing required parameters
           schema:
             type: object
             properties:
@@ -3642,8 +3691,57 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Successful response code
+              details: 
+                type: object
+                description: Successful response message
+          examples:
+            application/json:
+                {
+                  "status": "200 OK",
+                  "details": "Videoid validated"
+                }
+        400:
+          description: Invalid JSON
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Response error message
+              description: 
+                type: string
+                description: Message description  
+          examples:
+            application/json:
+                {
+                    "title": "Invalid JSON",
+                    "description": "Could not parse JSON body - Expecting ',' delimiter: line 5 column 11 (char 205)"
+                }
+        403:
+          description: Invalid credentials
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Response error message
+              details: 
+                type: string
+                description: Message description  
+          examples:
+            application/json:
+                {
+                    "status": "403 Forbidden",
+                    "details": "Invalid RAO credentials"
+                }
         500:
-          description: Wrong Validation | Invalid request status
+          description: Missing required parameters
           schema:
             type: object
             properties:
@@ -3657,7 +3755,7 @@ paths:
             application/json:
                 {
                     "status": "500 Internal Server Error",
-                    "details": "Error during Videoid validation: {\"code\": \"412\", \"id\": \"9c941b0a924b7a27\", \"error\": \"Two-step validation disabled, approve the request instead\"}"
+                    "details": "Error during Videoid validation: {\"code\": \"500\", \"id\": \"d6f30c831f827d9e\", \"error\": \"Rao matching query does not exist.\"}"
                 }
       x-codeSamples:
         - lang: 'curl'
@@ -3785,6 +3883,72 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Successful response code
+              details: 
+                type: object
+                description: Successful response message
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": "Videoid refuse completed"
+                }
+        400:
+          description: Invalid JSON | Missing required parameters
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Response error message
+              description: 
+                type: string
+                description: Message description  
+          examples:
+            application/json:
+                {
+                    "title": "Invalid JSON",
+                    "description": "Could not parse JSON body - Expecting ',' delimiter: line 5 column 11 (char 205)"
+                }
+        403:
+          description: Invalid RAO credentials
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Response error message
+              details: 
+                type: string
+                description: Message description  
+          examples:
+            application/json:
+                {
+                    "status": "403 Forbidden",
+                    "details": "Invalid RAO credentials"
+                }
+        500:
+          description: Missing required parameters
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response status message
+          examples:
+            application/json:
+                {
+                    "status": "500 Internal Server Error",
+                    "details": "Error during Videoid validation: {\"code\": \"500\", \"id\": \"d6f30c831f827d9e\", \"error\": \"Rao matching query does not exist.\"}"
+                }
       x-codeSamples:
         - lang: 'curl'
           source: |
@@ -3916,6 +4080,72 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Successful response code
+              details: 
+                type: object
+                description: Successful response message
+          examples:
+            application/json:
+                {
+                  "status": "200 OK",
+                  "details": "Request approved successfully"
+                }
+        400:
+          description: Invalid JSON | Missing required parameters
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Response error message
+              description: 
+                type: string
+                description: Message description  
+          examples:
+            application/json:
+                {
+                    "status": "400 Bad Request",
+                    "details": "Missing required parameters: incomplete RAO's credentials"
+                }
+        403:
+          description: Invalid RAO credentials
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: Response error message
+              details: 
+                type: string
+                description: Message description  
+          examples:
+            application/json:
+                {
+                    "status": "403 Forbidden",
+                    "details": "Invalid RAO credentials"
+                }
+        500:
+          description: Missing required parameters | Invalid Request id
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response status message
+          examples:
+            application/json:
+                {
+                    "status": "500 Internal Server Error",
+                    "details": "Cannot approve Request 46391: Invalid request fields: serial_number; surname_1; mobile_phone_number; given_name"
+                }
       x-codeSamples:
         - lang: 'curl'
           source: |
