@@ -4533,7 +4533,6 @@ definitions:
                   description: Base64 client selfie
             ocr_data:
               type: "object"
-              required: 
               description: Optical Character Recognition result
               properties:
                 given_name:
