@@ -1291,7 +1291,56 @@ paths:
           $ref: "#/definitions/UploadData_VID"
       responses:
         200:
-          description: Successful Response 
+          description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status code
+              details: 
+                type: string
+                description: The response status message       
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": "Videoid evidences uploaded"
+                }
+        400:
+          description: Invalid JSON | Missing required parameters
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Response error message
+              description: 
+                type: string
+                description: Message description  
+          examples:
+            application/json:
+                {
+                    "title": "Invalid JSON",
+                    "description": "Could not parse JSON body - Expecting ',' delimiter: line 5 column 11 (char 205)"
+                }               
+        500:
+          description: Missing information | Evidences already uploaded
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status code
+              details: 
+                type: string
+                description: The response error message        
+          examples:
+            application/json:
+                {
+                    "status": "500 Internal Server Error",
+                    "details": "Cannot upload evidences data for Request 46289: {\"code\": \"412\", \"id\": \"22981d7f5029e78d\", \"error\": \"Invalid VideoId status 'COMPLETE'\"}"
+                }
       x-codeSamples:
         - lang: 'curl'
           source: |
