@@ -862,23 +862,25 @@ You can follow the example using the developers One-Shot Optimizer configured fo
 
 **1) CREATE A NEW VIDEO ID SIGNATURE REQUEST**
 
-**2) UPLOAD EVIDENCES (DATA & VIDEO)**
+**2) UPLOAD DATA EVIDENCES**
 
-**3) REQUEST VALIDATION**
+**3) UPLOAD VIDEO**
 
-**4) REQUEST APPROVAL**
+**4) REQUEST VALIDATION**
 
-**5) UPLOAD A DOCUMENT**
+**5) REQUEST APPROVAL**
 
-**6) RETRIEVE SERVICE CONTRACT**
+**6) UPLOAD A DOCUMENT**
 
-**7) GENERATE AN OTP (only for Uanataca SMS)**
+**7) RETRIEVE SERVICE CONTRACT**
 
-**8) SIGN THE DOCUMENT**
+**8) GENERATE AN OTP (only for Uanataca SMS)**
 
-**9) RETRIEVE SIGNED DOCUMENT**
+**9) SIGN THE DOCUMENT**
 
-**10) DELETE DOCUMENTS FROM OPTIMIZER**
+**10) RETRIEVE SIGNED DOCUMENT**
+
+**11) DELETE DOCUMENTS FROM OPTIMIZER**
 
 </br>
 
@@ -891,15 +893,15 @@ You can follow the example using the developers One-Shot Optimizer configured fo
 This call must include preliminary information to identify the signer. 
 
 
-curl -i -X POST https://one-shot.developers.uanataca.com/api/v1/videoid \
-	-H 'Content-Type: application/json' \
-	-d '{
-		"mobile_phone_number": "+34123123123",
-		"email": "mail@domain",
-		"registration_authority": "1000",
-		"profile": "PFnubeQAFCiudadano",
-		"videoid_mode": "1"
-	}'
+	curl -i -X POST https://one-shot.developers.uanataca.com/api/v1/videoid \
+		-H 'Content-Type: application/json' \
+		-d '{
+			"mobile_phone_number": "+34123123123",
+			"email": "mail@domain",
+			"registration_authority": "1000",
+			"profile": "PFnubeQAFCiudadano",
+			"videoid_mode": "1"
+		}'
 
 If the signature request is completed successfully, we will get the unique identifier assigned to it:
 
@@ -920,7 +922,7 @@ If request data needs to be retrieved, use the <a href="#tag/Requests/paths/~1ap
 
 </br>
 
-> **STEP 2: UPLOAD EVIDENCES**
+> **STEP 2: UPLOAD DATA EVIDENCES**
 
 </br>
 
@@ -996,7 +998,11 @@ Successful response status
 
 </br>
 
-In the same way, binary multiformat Video evidence is uploaded by using the following call:
+> **STEP 3: UPLOAD VIDEO**
+
+</br>
+
+In the same way, binary multiformat Video is uploaded by using the following call:
 
 **API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences~1video/post">Upload Video</a>
 
@@ -1018,7 +1024,7 @@ If the uploaded video needs to be retrieved, use <a href="#tag/Video-ID/paths/~1
 
 </br>
 
-> **STEP 3: REQUEST VALIDATION** `2-step mode only`
+> **STEP 4: REQUEST VALIDATION** `2-step mode only`
 
 </br>
 
@@ -1046,7 +1052,7 @@ For unsuccessful validations leading to a request refusal, the corresponding cal
 
 </br>
 
-> **STEP 4: REQUEST APPROVAL**
+> **STEP 5: REQUEST APPROVAL**
 
 </br>
 
@@ -1074,7 +1080,7 @@ In case of not approving a request for any reason, the call <a href="#tag/Reques
 
 </br>
 
-> **STEP 5: UPLOAD A DOCUMENT**
+> **STEP 6: UPLOAD A DOCUMENT**
 
 </br>
 
@@ -1096,7 +1102,7 @@ If the upload is successful, the response will contain the identifier assigned t
 
 </br>
 
-> **STEP 6: RETRIEVE SERVICE CONTRACT**
+> **STEP 7: RETRIEVE SERVICE CONTRACT**
 
 </br>
 
@@ -1116,7 +1122,7 @@ The response by the server will be the service contract document file in binary 
 
 </br>
 
-> **STEP 7: GENERATE AN OTP**
+> **STEP 8: GENERATE AN OTP**
 
 </br>
 
@@ -1141,7 +1147,7 @@ With this call, an SMS with the secret code is sent to the mobile phone number a
 
 </br>
 
-> **STEP 8: SIGN THE DOCUMENT**
+> **STEP 9: SIGN THE DOCUMENT**
 
 </br>
 
@@ -1178,7 +1184,7 @@ A successful call will result in the following response:
 
 </br>
 
-> **STEP 9: RETRIEVE SIGNED DOCUMENT**
+> **STEP 10: RETRIEVE SIGNED DOCUMENT**
 
 </br>
 
@@ -1197,7 +1203,7 @@ The response by the server will be the document in binary format:
 
 </br>
 
-> **STEP 10: DELETE DOCUMENTS FROM OPTIMIZER**
+> **STEP 11: DELETE DOCUMENTS FROM OPTIMIZER**
 
 </br>
 

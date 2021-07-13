@@ -773,7 +773,7 @@ paths:
                 description: The response status id
               details: 
                 type: number
-                description: The created request id        
+                description: The created request pk        
           examples:
             application/json:
               {
@@ -1325,7 +1325,7 @@ paths:
                     "description": "Could not parse JSON body - Expecting ',' delimiter: line 5 column 11 (char 205)"
                 }
         404:
-          description: Invalid Request id
+          description: Invalid Request pk
           schema:
             type: object
             properties:
@@ -1666,7 +1666,7 @@ paths:
                   "details": "Videoid video upload completed"
               }
         404:
-          description: Invalid Request id
+          description: Invalid Request pk
           schema:
             type: object
             properties:
@@ -2022,7 +2022,7 @@ paths:
                     description: The Video ID access link
                   request_pk:
                     type: string
-                    description: The request id number          
+                    description: The request pk number          
           examples:
             application/json:
                 {
@@ -2085,7 +2085,7 @@ paths:
                   "details": "Registration Authority not found"
               }
         500:
-          description: Invalid Request id | Missing required parameters
+          description: Invalid Request pk | Missing required parameters
           schema:
             type: object
             properties:
@@ -2256,7 +2256,7 @@ paths:
         200:
           description: Successful Response
         404:
-          description: Invalid Request id
+          description: Invalid Request pk
           schema:
             type: object
             properties:
@@ -4130,7 +4130,7 @@ paths:
                     "details": "Invalid RAO credentials"
                 }
         500:
-          description: Missing required parameters | Invalid Request id
+          description: Missing required parameters | Invalid Request pk
           schema:
             type: object
             properties:
@@ -4279,7 +4279,7 @@ paths:
         200:
           description: Successful Response
         400:
-          description: Invalid Request id
+          description: Invalid Request pk
           schema:
             type: object
             properties:
@@ -4534,13 +4534,6 @@ definitions:
             ocr_data:
               type: "object"
               required: 
-                - given_name
-                - surname_1
-                - id_document_type
-                - id_document_country
-                - serial_number
-                - email
-                - mobile_phone_number
               description: Optical Character Recognition result
               properties:
                 given_name:
