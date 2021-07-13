@@ -4123,7 +4123,7 @@ definitions:
       properties:
         scratchcard:
             type: "string"
-            description: "The request scratchcard id". Found when executing <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Get Request</a> call.<br>
+            description: The request scratchcard id. Found when executing <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Get Request</a> call.<br>
         given_name:
             type: "string"
             description: "The signer's given name"
