@@ -1060,14 +1060,14 @@ For unsuccessful validations leading to a request refusal, the corresponding cal
 
 This call makes the request ready for signature. Its status changes to **ENROLLREADY**. In 1-step mode, both validation and approval occur when executing this call.
 
-curl -i -X POST 'https://api.uanataca.com/api/v1/request/45836/approve' \
-	-H 'Content-Type: application/json' \
-	-d '{
-		"username": "1000279",
-		"password": "3DPTm:N4",
-		"pin": "23bYQq9a",
-		"rao": 123
-	}'
+	curl -i -X POST 'https://api.uanataca.com/api/v1/request/45836/approve' \
+		-H 'Content-Type: application/json' \
+		-d '{
+			"username": "1000279",
+			"password": "3DPTm:N4",
+			"pin": "23bYQq9a",
+			"rao": 123
+		}'
 
 The response is a JSON object with added request approval information. 
 
