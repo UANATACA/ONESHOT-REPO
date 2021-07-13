@@ -2205,6 +2205,23 @@ paths:
       responses:
         200:
           description: Successful Response
+        404:
+          description: Invalid Request id
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message  
+          examples:
+            application/json:
+                {
+                    "status": "404 Not Found",
+                    "details": "Request 1234567 not found"
+                }
       x-codeSamples:
         - lang: 'curl'
           source: |
@@ -3624,6 +3641,23 @@ paths:
       responses:
         200:
           description: Successful Response
+        500:
+          description: Wrong Validation | Invalid request status
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response status message
+          examples:
+            application/json:
+                {
+                    "status": "500 Internal Server Error",
+                    "details": "Error during Videoid validation: {\"code\": \"412\", \"id\": \"9c941b0a924b7a27\", \"error\": \"Two-step validation disabled, approve the request instead\"}"
+                }
       x-codeSamples:
         - lang: 'curl'
           source: |
@@ -4008,7 +4042,7 @@ paths:
       - in: path
         name: request_pk
         type: string
-        description: The Video unique identifier
+        description: The video unique identifier
         required: true
       responses:
         200:

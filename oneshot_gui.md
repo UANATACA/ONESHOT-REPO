@@ -127,16 +127,16 @@ The test One-Shot Optimizer is pre-configured with a Registration Authority Offi
 
 On the clean machine, this should return a single token:
 
-	1 | {
-	2 |     "status": "200 OK",
-	3 |     "details": {
-	4 |         "6d1cae4d55be4cdf9cac50ee36f73406": {
-	5 |             "username": "9001800",
-	6 |             "password": true,
-	7 |             "pin": true
-	8 |         }
-	9 |     }
-	10| }
+	{
+		"status": "200 OK",
+		"details": {
+			"6d1cae4d55be4cdf9cac50ee36f73406": {
+				"username": "9001800",
+				"password": true,
+				"pin": true
+			}
+		}
+	}
 
 This output tells us that a single token "6d1cae4d55be4cdf9cac50ee36f73406" exists. This token is associated to the RAO account with id "9001800" and can be used in place of the password and pin.
 
@@ -945,7 +945,7 @@ Data and images are uploaded by using the following call:
 - `images`: Pictures associated to the client's ID document plus a face selfie of him/her. </br>
 - `ocr_data` : Text information extracted from the client's ID document via Optical Character Recognition (OCR). </br>
 - `security_checks` : Set of validation fields associated to the client's identity (underaging, matching info, liveliness, etc) </br>
-- `similarity_level` : Similarity between the client's selfie and the picture is shown on his/her ID document.
+- `similarity_level` : Similarity level between document picture and face selfie. Ranges: Very low (0~20) Low (21~40) Medium (41~60) High (61~80) Very High (81~100) 
 
 
 	curl -i -X POST \
@@ -957,7 +957,7 @@ Data and images are uploaded by using the following call:
 				"url-doc-privacypolicy": "https://www.uanataca.com/public/pki/privacidad-PSC/",
 				"ip": "186.0.91.53",
 				"url-web-videoid": "https://cms.access.bit4id.org:13035/lcmpl/videoid/46b92251-4ba8-4930-a5aa-8631ec4666b6",
-				"user-agent": "Mozilla/5.0 (Linux; Android 11; AC2003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.88 Mobile Safari/537.36",
+				"user-agent": "Mozilla/5.0 (Linux; Android 11; AC2003)",
 				"date": 1622823879708,
 				"url-doc-termsconditions": "https://www.uanataca.com/public/pki/terminos-VID/"
 			},
