@@ -15,12 +15,37 @@ schemes:
 x-tagGroups:
   - name: API Reference
     tags:
+      - Settings
       - Tokens
       - Requests
       - Documents
       - Images
       - Video ID
 tags:
+- name: "Settings"
+  description: "
+<html>
+Configure Settings to modify default parameters on setting.ini file. Check <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Update Settings</a></br>
+<table>
+  <tr>
+    <th>Method</th><th>Endpoint</th><th>Action</th>
+  </tr>
+  <tr>
+    <td>POST</td><td><a href='#tag/Tokens/paths/~1api~1v1~1token/post'>/token</a></td><td>Update Settings</td>
+  </tr>
+  <tr>
+    <td>GET</td><td><a href='#tag/Tokens/paths/~1api~1v1~1token~1{uid}/get'>/token/{pk}</a></td><td>Get Settings</td>
+  </tr>
+  <tr>
+    <td>GET</td><td><a href='#tag/Tokens/paths/~1api~1v1~1token~1{uid}/delete'>/token/{uid}</a></td><td>Retrieve Optimizer version</td>
+  </tr>
+ <tr>
+    <td>GET</td><td><a href='#tag/Tokens/paths/~1api~1v1~1tokens/get'>/tokens</a></td><td>Check if server is UP</td>
+  </tr>
+</table> 
+</html>
+  "
+
 - name: "Tokens"
   description: "
   
@@ -173,6 +198,73 @@ This allows the management of One-Shot signature by establishing a video call fo
 
 
 paths:
+
+
+###### Settings ######
+###############################################################################
+
+
+  /api/v1/hello:
+    get: 
+      summary: HELLO 
+      tags:
+        - Settings
+      description: Checks if server is UP.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Response
+
+#############
+
+  /api/v1/settings:
+    post: 
+      summary: UPDATE SETTINGS
+      tags:
+        - Settings
+      description: Updates configuration parameters present in settings.ini file.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        schema:
+          $ref: "#/definitions/SettingsObject"
+      responses:
+        200:
+          description: Successful Response
+
+#############
+
+    get: 
+      summary: GET SETTINGS
+      tags:
+        - Settings
+      description: Retrieves the content of the settings.ini file.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Response
+
+
+#############
+
+  /api/v1/version:
+    get: 
+      summary: VERSION
+      tags:
+        - Settings
+      description: Retrieves the current Optimizer version.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Response        
+
 
 ###### tokens ######
 ###############################################################################
@@ -4372,6 +4464,39 @@ paths:
 
 
 definitions:
+    SettingsObject:
+        type: "object"
+        properties:
+            tsa:
+              type: "object"
+              properties:
+                tsa_url:
+                  type: "string"
+                  description: "The default Timestamp Authority URL"
+            request:
+              type: "object"
+              properties:
+                default_profile: 
+                  type: "string"
+                  description: "The default certificate profile"
+                default_ra: 
+                  type: "string"
+                  description: "The default Registration Authority id"                
+            billing:
+              type: "object"
+              properties: 
+                billing_username:
+                  type: "string"
+                  description: "The default Billing username"
+                billing_password:
+                  type: "string"
+                  description: "The default Billing password"
+            general:
+              type: "object"
+              properties:
+                environment:
+                  type: "string"                          
+                  description: "The API environment (test or prod)"
     TokenObject:
         type: "object"
         required:
