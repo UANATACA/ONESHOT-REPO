@@ -1443,6 +1443,8 @@ Docker:
 
 You should have received a certificate (.cer) and key (.key) file to be used to identify your application in communications with the production signature service. Place both files in the certificates folder, replacing the certificates for the test environment present in the virtual machine.
 
+settings.ini file location:
+
 **/opt/oneshot_optimizer/common/etc/certs** or custom mapped volume (Docker)
 
 **/opt/bit4id/oneshot_optimizer/etc/certs** (Virtual Machine)
