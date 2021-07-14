@@ -31,16 +31,16 @@ Configure Settings to modify default parameters on setting.ini file. Check <a hr
     <th>Method</th><th>Endpoint</th><th>Action</th>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/Tokens/paths/~1api~1v1~1token/post'>/token</a></td><td>Update Settings</td>
+    <td>POST</td><td><a href='#tag/Settings/paths/~1api~1v1~1settings/post'>/settings</a></td><td>Update Settings</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Tokens/paths/~1api~1v1~1token~1{uid}/get'>/token/{pk}</a></td><td>Get Settings</td>
+    <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1settings/get'>/settings</a></td><td>Get Settings</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Tokens/paths/~1api~1v1~1token~1{uid}/delete'>/token/{uid}</a></td><td>Retrieve Optimizer version</td>
+    <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1version/get'>/version</a></td><td>Retrieve Optimizer version</td>
   </tr>
  <tr>
-    <td>GET</td><td><a href='#tag/Tokens/paths/~1api~1v1~1tokens/get'>/tokens</a></td><td>Check if server is UP</td>
+    <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1hello/get'>/hello</a></td><td>Check if server is UP</td>
   </tr>
 </table> 
 </html>
