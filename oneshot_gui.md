@@ -1393,7 +1393,7 @@ One-Shot Signature can be configured to use in test or production environment.
 
 The file `settings.ini` contains default parameters that can also be adjusted via API using <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Update Settings</a> call.
 
-Except by `tsa_url`, all parameter values will be replaced if included as fields in API calls.  
+Except by `tsa_url`, all parameter values are replaced every time an API call containing them is executed. 
 
 settings.ini file location:
 
@@ -1466,7 +1466,9 @@ Open the settings.ini file in /opt/bit4id/oneshot_optimizer/etc and configure it
 	13|	default_ra = 1000
 
 
-The file `settings.ini` contains default parameters that can also be adjusted via API using <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Update Settings</a> call.<br>. Except by `tsa_url`, all parameter values will be replaced if included as fields in API calls.  
+The file `settings.ini` contains default parameters that can also be adjusted via API using <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Update Settings</a> call.
+
+Except by `tsa_url`, all parameter values are replaced every time an API call containing them is executed.  
 
 Once you are done editing the file, restart the One-Shot Optimizer service to changes take effect.
 
