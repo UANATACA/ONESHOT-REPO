@@ -421,7 +421,8 @@ This call makes the request ready for signature. Its status changes to **ENROLLR
 The response is a JSON object with added request approval information. 
 
 	{
-		SUCCESSFUL RESPONSE PENDING
+		"status": "200 OK",
+		"details": "Request approved successfully"
 	}
 
 In case of not approving a request for any reason, the call <a href="#tag/Requests/paths/~1api~1v1~1requests~1{id}~1cancel/delete">Cancel Request</a> must be executed. Check API Reference.
@@ -1390,25 +1391,29 @@ One-Shot Signature can be configured to use in test or production environment.
 
 - Billing credentials for Uanataca test environment.
 
-One-Shot Optimizer is already configured to use the Uanataca test environment. To start testing One-Shot Signature, it is enough to configure your Uanataca Billing account for test environment.
+The file `settings.ini` contains default parameters that can also be adjusted via API using <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Update Settings</a> call.<br>. Except by `tsa_url`, all parameter values will be replaced if included as fields in API calls.  
 
-To do so, open the settings file `custom.ini` and insert the provided username and password under the [BILLING] section.
+settings.ini file location:
 
-Custom.ini folder:
+**/opt/oneshot_optimizer/common/etc/settings.ini** or custom mapped volume (Docker)
 
-**/opt/oneshot_optimizer/common/etc/custom.ini** or custom mapped volume (Docker)
+**/opt/bit4id/oneshot_optimizer/etc/settings.ini** (Virtual Machine)
 
-**/opt/bit4id/oneshot_optimizer/etc/custom.ini** (Virtual Machine)
+The following is a view of the settings.ini file. Important: If billing password is specified, it must be previously converted into Base64 format.
 
-**Password must be inserted in base64 format.** Run this command to convert your password to base64
-
-	echo -n <<billing_password>> | base64
-
-Custom.ini settings:
-
-	1 | [BILLING]
-	2 | USERNAME = billing-test-account@organization
-	3 | PASSWORD = base64-password
+	1 |	[general]
+	2 |	environment = test
+	3 |
+	4 |	[tsa]
+	5 |	tsa_url = https://tsa.uanataca.com/tsa/tss03
+	6 |
+	7 |	[billing]
+	8 |	billing_username = user@uanataca.com
+	9 |	billing_password = ejVxTnFrZkI=
+	10|
+	11|	[request]
+	12|	default_profile = PFnubeAFCiudadano
+	13|	default_ra = 1000
 
 Once you are done editing the file, restart the One-Shot Optimizer service to changes take effect.
 
@@ -1442,47 +1447,24 @@ You should have received a certificate (.cer) and key (.key) file to be used to 
 
 ![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot-docker5.png)
 
-Open the custom.ini file in /opt/bit4id/oneshot_optimizer/etc and configure it to interact with the production environment. The parts that you will likely need to change are listed below:
+Open the settings.ini file in /opt/bit4id/oneshot_optimizer/etc and configure it to interact with the production environment. The parts that you will likely need to change are listed below:
 
-	1 | [ENV]
-	2 | ENVIRONMENT = prod
+	1 |	[general]
+	2 |	environment = test
 	3 |
-	4 | [TSA]
-	5 | URL      = https://tsa.uanataca.com/tsa/tss03
+	4 |	[tsa]
+	5 |	tsa_url = https://tsa.uanataca.com/tsa/tss03
 	6 |
-	7 | [BILLING]
-	8 | USERNAME = example@uanataca.com
-	9 | PASSWORD = my-password
+	7 |	[billing]
+	8 |	billing_username = user@uanataca.com
+	9 |	billing_password = ejVxTnFrZkI=
 	10|
-	11| [RA]
-	12| NO_REQUIRED_DOCUMENTS          = true
-	13|
-	14| DEFAULT_RA                     = 999
-	15| DEFAULT_PROFILE                = PFnubeQAFCiudadano
+	11|	[request]
+	12|	default_profile = PFnubeAFCiudadano
+	13|	default_ra = 1000
 
 
-Under [ENV] section, set environment to `prod`
-
-[ENV]
-
- `ENVIRONMENT = prod`
-
-Under the [BILLING] section, introduce the production Uanataca Billing credentials. **Password must be inserted in base64 format**. Run this command to convert your password to base64
-
-	echo -n <<billing_password>> | base64
-
-[BILLING]:
-
-`USERNAME = billing-prod-account@organization`<br>
-`PASSWORD = base64-password`
-
-Under the [RA] section, make sure that the DEFAULT_RA matches your Registration Authority's identifer and the DEFAULT_PROFILE is set to the correct profile. Typically, this will be either `PFnubeQAFCiudadano` for EU eIDAS qualified certificates or `PFnubeNC` for non-qualified certificates.
-
-[RA]:
-
-`DEFAULT_RA = 999`<br>
-`DEFAULT_PROFILE = PFnubeQAFCiudadano`
-
+The file `settings.ini` contains default parameters that can also be adjusted via API using <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Update Settings</a> call.<br>. Except by `tsa_url`, all parameter values will be replaced if included as fields in API calls.  
 
 Once you are done editing the file, restart the One-Shot Optimizer service to changes take effect.
 
