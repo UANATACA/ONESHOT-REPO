@@ -1391,7 +1391,9 @@ One-Shot Signature can be configured to use in test or production environment.
 
 - Billing credentials for Uanataca test environment.
 
-The file `settings.ini` contains default parameters that can also be adjusted via API using <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Update Settings</a> call.<br>. Except by `tsa_url`, all parameter values will be replaced if included as fields in API calls.  
+The file `settings.ini` contains default parameters that can also be adjusted via API using <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Update Settings</a> call.
+
+Except by `tsa_url`, all parameter values will be replaced if included as fields in API calls.  
 
 settings.ini file location:
 
