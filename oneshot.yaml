@@ -2255,6 +2255,21 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The successful response message
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": "Request directory removed successfully"
+                }
         404:
           description: Invalid Request pk
           schema:
