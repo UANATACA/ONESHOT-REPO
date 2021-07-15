@@ -5439,12 +5439,7 @@ definitions:
 ###########
     ValidateReqObject_VID:
       type: "object"
-      required:
-        - token
-        - username
-        - password
-        - pin
-        - rao      
+      required:  
       properties:
         token:
             type: "string"
@@ -5465,16 +5460,11 @@ definitions:
     RefuseReqObject_VID:
       type: "object"
       required:
-        - token
-        - username
-        - password
-        - pin
-        - rao
         - reason  
       properties:
         token:
             type: "string"
-            description: "The token containing RAO's credentials. **Mandatory if username/password/pin/rao are not provided**"
+            description: "<blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'>⚠ We recommend starting from a clean copy of One-Shot Optimizer for this step. This prevents leftover files from the test environment from causing errors in production.</blockquote>"
         username:
             type: "string"
             description: "The RAO's username. **Mandatory if token is not provided**"
