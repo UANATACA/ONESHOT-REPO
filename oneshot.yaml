@@ -369,6 +369,12 @@ paths:
       tags:
         - Metadata
       description: Deletes the metadata associated to an specific id.
+      parameters:
+      - in: path
+        name: metadata_uid
+        type: string 
+        description: The metadata object unique identifier
+        required: true      
       produces:
         - application/json
       responses:
