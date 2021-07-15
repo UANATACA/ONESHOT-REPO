@@ -1407,6 +1407,8 @@ The following is a view of the settings.ini file. **Important: If billing passwo
 
 </br>
 
+settings.ini file:
+
 	1 |	[general]
 	2 |	environment = test
 	3 |
@@ -1460,6 +1462,8 @@ The following is a view of the settings.ini file. **Important: If billing passwo
 	echo -n <<billing_password>> | base64
 
 </br>
+
+settings.ini file:
 
 	1 |	[general]
 	2 |	environment = prod
