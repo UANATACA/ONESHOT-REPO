@@ -5196,6 +5196,9 @@ definitions:
                 type: "string"
                 description: "The OTP code sent to the user.<br>
                               For external authenticacion method, a customer code is provided"
+            metadata:
+                type: "string"
+                description: The metadata unique id code obtained from <a href='#tag/Metadata/paths/~1api~1v1~1metadata/post'> Upload Metadata </a> call.
             ext_unlock_type:
                 type: "string"
                 description: "The external authentication method type.
