@@ -5415,66 +5415,78 @@ definitions:
     PlApproveReqObject:
       type: "object"
       required:
+        - token
         - username
         - password
         - pin
         - rao
       properties:
+        token:
+            type: "string"
+            description: "The token containing RAO's credentials. Mandatory if username/password/pin/rao are not provided"
         username:
             type: "string"
-            description: "The RAO's username"
+            description: "The RAO's username. Mandatory if token is not provided"
         password:
             type: "string"
-            description: "The RAO's password"
+            description: "The RAO's password. Mandatory if token is not provided"
         pin:
             type: "string"
-            description: "The RAO's PIN"
+            description: "The RAO's PIN. Mandatory if token is not provided"
         rao:
             type: "string"
-            description: "The RAO's id"
+            description: "The RAO's id. Mandatory if token is not provided"
 ###########
     ValidateReqObject_VID:
       type: "object"
       required:
+        - token
         - username
         - password
         - pin
         - rao      
       properties:
+        token:
+            type: "string"
+            description: "The token containing RAO's credentials. Mandatory if username/password/pin/rao are not provided"
         username:
             type: "string"
-            description: "The RAO's username"
+            description: "The RAO's username. Mandatory if token is not provided"
         password:
             type: "string"
-            description: "The RAO's password"
+            description: "The RAO's password. Mandatory if token is not provided"
         pin:
             type: "string"
-            description: "The RAO's pin"
+            description: "The RAO's PIN. Mandatory if token is not provided"
         rao:
             type: "string"
-            description: "The RAO's id" 
+            description: "The RAO's id. Mandatory if token is not provided"
 ###########
     RefuseReqObject_VID:
       type: "object"
       required:
+        - token
         - username
         - password
         - pin
         - rao
         - reason  
       properties:
+        token:
+            type: "string"
+            description: "The token containing RAO's credentials. Mandatory if username/password/pin/rao are not provided"
         username:
             type: "string"
-            description: "The RAO's username"
+            description: "The RAO's username. Mandatory if token is not provided"
         password:
             type: "string"
-            description: "The RAO's password"
+            description: "The RAO's password. Mandatory if token is not provided"
         pin:
             type: "string"
-            description: "The RAO's pin"
+            description: "The RAO's PIN. Mandatory if token is not provided"
         rao:
             type: "string"
-            description: "The RAO's id"
+            description: "The RAO's id. Mandatory if token is not provided"
         reason:
             type: "string"
             description: "Reason that caused Video ID refusal"
