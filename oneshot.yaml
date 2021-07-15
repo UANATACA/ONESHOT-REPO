@@ -386,14 +386,14 @@ paths:
                         JObject json = JObject.Parse(@"{
                           tsa: {tsa_url: 'https://tsa.access.bit4id.org:13035/tsa/test01'},
                           request: {
-                            default_profile: 'string',
-                            default_ra: 'string'
+                            default_profile: 'PFnubeQAFCiudadano',
+                            default_ra: '1000'
                           },
                           billing: {
-                            billing_username: 'string',
-                            billing_password: 'string'
+                            billing_username: 'user@uanataca.com',
+                            billing_password: 'ejVxTnFrZkI='
                           },
-                          general: {environment: 'string'}
+                          general: {environment: 'test'}
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
                         var request = await client.PostAsync("https://one-shot.developers.uanataca.com/api/v1/settings", postData);
@@ -453,7 +453,97 @@ paths:
       responses:
         200:
           description: Successful Response
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://one-shot.developers.uanataca.com/api/v1/metadata \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "metadata": "bmF2ZWdhZG9yIMOhw6HDocOhw6EKMTIzNAplc3RvIGVzIHVuYSBwcnVlYmE6IGhveSBlcwptYXJ0ZXNzcwp4eXoxMjM0",
+                      "metadata_oid": "1.8.6.7.4.1.47289.100.2.9"
+                    }'
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    `https://one-shot.developers.uanataca.com/api/v1/metadata`,
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        metadata: 'bmF2ZWdhZG9yIMOhw6HDocOhw6EKMTIzNAplc3RvIGVzIHVuYSBwcnVlYmE6IGhveSBlcwptYXJ0ZXNzcwp4eXoxMjM0',
+                        metadata_oid: '1.8.6.7.4.1.47289.100.2.9'
+                      })
+                    }
+                  );
 
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/metadata"
+
+                  payload = {
+                    "metadata": "bmF2ZWdhZG9yIMOhw6HDocOhw6EKMTIzNAplc3RvIGVzIHVuYSBwcnVlYmE6IGhveSBlcwptYXJ0ZXNzcwp4eXoxMjM0",
+                    "metadata_oid": "1.8.6.7.4.1.47289.100.2.9"
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    `https://one-shot.developers.uanataca.com/api/v1/metadata`,
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        metadata: 'bmF2ZWdhZG9yIMOhw6HDocOhw6EKMTIzNAplc3RvIGVzIHVuYSBwcnVlYmE6IGhveSBlcwptYXJ0ZXNzcwp4eXoxMjM0',
+                        metadata_oid: '1.8.6.7.4.1.47289.100.2.9'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          metadata: 'bmF2ZWdhZG9yIMOhw6HDocOhw6EKMTIzNAplc3RvIGVzIHVuYSBwcnVlYmE6IGhveSBlcwptYXJ0ZXNzcwp4eXoxMjM0',
+                          metadata_oid: '1.8.6.7.4.1.47289.100.2.9'
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://one-shot.developers.uanataca.com/api/v1/metadata", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  } 
 #############
 
     get: 
