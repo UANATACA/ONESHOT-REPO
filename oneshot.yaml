@@ -853,6 +853,23 @@ paths:
                         "metadata": "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\nmGItRIKNwB6BNMGb\n"
                     }
                 }
+        404:
+          description: Invalid metadata uid
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status id
+              details: 
+                type: string
+                description: The response error message  
+          examples:
+            application/json:
+                {
+                    "status": "404 Not Found",
+                    "details": "Metadata not found on disk"
+                }
 #############
 
     delete: 
