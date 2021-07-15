@@ -56,19 +56,19 @@ Configure Settings to modify default parameters on setting.ini file. Check <a hr
     <th>Method</th><th>Endpoint</th><th>Action</th>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/Settings/paths/~1api~1v1~1hello/get'>/metadata</a></td><td>Upload Metadata</td>
+    <td>POST</td><td><a href='#tag/Metadata/paths/~1api~1v1~1metadata/post'>/metadata</a></td><td>Upload Metadata</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1settings/post'>/settings</a></td><td>List Metadata</td>
+    <td>GET</td><td><a href='#tag/Metadata/paths/~1api~1v1~1metadata/get'>/settings</a></td><td>List Metadata</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1settings/get'>/settings</a></td><td>Get Metadata</td>
+    <td>DELETE</td><td><a href='#tag/Metadata/paths/~1api~1v1~1metadata/delete'>/version</a></td><td>Delete Metadata</td>
   </tr>
   <tr>
-    <td>DELETE</td><td><a href='#tag/Settings/paths/~1api~1v1~1version/get'>/version</a></td><td>Delete Metadata</td>
+    <td>GET</td><td><a href='#tag/Metadata/paths/~1api~1v1~1metadata~1{metadata_uid}/get'>/settings</a></td><td>Get Metadata</td>
   </tr>
   <tr>
-    <td>DELETE</td><td><a href='#tag/Settings/paths/~1api~1v1~1version/get'>/version</a></td><td>Delete All Metadata</td>
+    <td>DELETE</td><td><a href='#tag/Metadata/paths/~1api~1v1~1metadata~1{metadata_uid}/delete'>/version</a></td><td>Delete All Metadata</td>
   </tr>
 </table> 
 </html>
