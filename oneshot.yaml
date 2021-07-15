@@ -4968,12 +4968,14 @@ definitions:
         type: "object"
         properties:
             tsa:
+              description: "Timestamp Authority Settings"
               type: "object"
               properties:
                 tsa_url:
                   type: "string"
                   description: "The default Timestamp Authority URL"
             request:
+              description: "Request Settings"
               type: "object"
               properties:
                 default_profile: 
@@ -4983,6 +4985,7 @@ definitions:
                   type: "string"
                   description: "The default Registration Authority id"                
             billing:
+              description: "Billing Settings"
               type: "object"
               properties: 
                 billing_username:
@@ -4992,6 +4995,7 @@ definitions:
                   type: "string"
                   description: "The default Billing password"
             general:
+              description: "General Settings"
               type: "object"
               properties:
                 environment:
