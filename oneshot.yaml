@@ -16,6 +16,7 @@ x-tagGroups:
   - name: API Reference
     tags:
       - Settings
+      - Metadata
       - Tokens
       - Requests
       - Documents
@@ -28,7 +29,31 @@ tags:
 Configure Settings to modify default parameters on setting.ini file. Check <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Update Settings</a></br>
 <table>
   <tr>
+    <th>Method</th><th>Endpoint</th><th>Action</th>
+  </tr>
+  <tr>
     <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1hello/get'>/hello</a></td><td>Check if server is UP</td>
+  </tr>
+  <tr>
+    <td>POST</td><td><a href='#tag/Settings/paths/~1api~1v1~1settings/post'>/settings</a></td><td>Update Settings</td>
+  </tr>
+  <tr>
+    <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1settings/get'>/settings</a></td><td>Get Settings</td>
+  </tr>
+  <tr>
+    <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1version/get'>/version</a></td><td>Retrieve Optimizer version</td>
+  </tr>
+</table> 
+</html>
+  "
+
+- name: "Metadata"
+  description: "
+<html>
+Configure Settings to modify default parameters on setting.ini file. Check <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Update Settings</a></br>
+<table>
+  <tr>
+    <td>POST</td><td><a href='#tag/Settings/paths/~1api~1v1~1hello/get'>/metadata</a></td><td>Upload Metadata</td>
   </tr>
   <tr>
     <th>Method</th><th>Endpoint</th><th>Action</th>
