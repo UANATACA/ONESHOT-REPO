@@ -549,7 +549,7 @@ paths:
                 properties:
                   info:
                     type: object
-                    description: General info about the local machine and One-Shot Optimizer
+                    description: General info about the terminal the Optimizer is installed.
                     properties:
                       machine:
                         type: string
@@ -565,7 +565,7 @@ paths:
                         type: string            
                   version:
                     type: string
-                    description: The version release date  
+                    description: The Optimizer version release date.  
                   name:
                     type: string
                     description: 'The software name "One-Shot Optimizer"'

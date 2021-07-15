@@ -1393,7 +1393,7 @@ One-Shot Signature can be configured to use in test or production environment.
 
 The `settings.ini` file contains default parameters that can also be adjusted via API using <a href='#tag/Settings/paths/~1api~1v1~1settings/post'>Update Settings</a> call.
 
-Except by `tsa_url`, all parameters shown below are replaced every time an API call containing them is executed. 
+Except by `tsa_url`, all parameters shown below are replaced every time the <a href='#tag/Video-ID/paths/~1api~1v1~1videoid/post'>Create Video ID Request</a> call is executed. 
 
 settings.ini file location:
 
@@ -1401,7 +1401,11 @@ settings.ini file location:
 
 **/opt/bit4id/oneshot_optimizer/etc/settings.ini** (Virtual Machine)
 
-The following is a view of the settings.ini file. Important: If billing password is specified, it must be previously converted into Base64 format.
+The following is a view of the settings.ini file. **Important: If billing password is specified, it must be previously converted into Base64 format.** 
+
+Run the following command to convert your password to base64:
+
+	echo -n <<billing_password>> | base64
 
 	1 |	[general]
 	2 |	environment = test
@@ -1418,11 +1422,6 @@ The following is a view of the settings.ini file. Important: If billing password
 	13|	default_ra = 1000
 
 Once you are done editing the file, restart the One-Shot Optimizer service to changes take effect.
-
-
-
-
-
 
 Virtual Machine:
 
@@ -1456,7 +1455,11 @@ settings.ini file location:
 
 ![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot-docker5.png)
 
-Open the settings.ini file in /opt/bit4id/oneshot_optimizer/etc and configure it to interact with the production environment. The parts that you will likely need to change are listed below:
+The following is a view of the settings.ini file. **Important: If billing password is specified, it must be previously converted into Base64 format.** 
+
+Run the following command to convert your password to base64:
+
+	echo -n <<billing_password>> | base64
 
 	1 |	[general]
 	2 |	environment = prod
@@ -1475,7 +1478,7 @@ Open the settings.ini file in /opt/bit4id/oneshot_optimizer/etc and configure it
 
 The file `settings.ini` contains default parameters that can also be adjusted via API using <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>Update Settings</a> call.
 
-Except by `tsa_url`, all parameters shown below are replaced every time an API call containing them is executed.  
+Except by `tsa_url`, all parameters shown below are replaced every time the <a href='#tag/Video-ID/paths/~1api~1v1~1videoid/post'>Create Video ID Request</a> call is executed.  
 
 Once you are done editing the file, restart the One-Shot Optimizer service to changes take effect.
 
