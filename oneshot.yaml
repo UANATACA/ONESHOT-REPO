@@ -28,6 +28,9 @@ tags:
 Configure Settings to modify default parameters on setting.ini file. Check <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Update Settings</a></br>
 <table>
   <tr>
+    <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1hello/get'>/hello</a></td><td>Check if server is UP</td>
+  </tr>
+  <tr>
     <th>Method</th><th>Endpoint</th><th>Action</th>
   </tr>
   <tr>
@@ -38,9 +41,6 @@ Configure Settings to modify default parameters on setting.ini file. Check <a hr
   </tr>
   <tr>
     <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1version/get'>/version</a></td><td>Retrieve Optimizer version</td>
-  </tr>
- <tr>
-    <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1hello/get'>/hello</a></td><td>Check if server is UP</td>
   </tr>
 </table> 
 </html>
