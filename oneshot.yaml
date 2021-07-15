@@ -266,7 +266,7 @@ paths:
       summary: UPDATE SETTINGS
       tags:
         - Settings
-      description: Updates configuration parameters present in settings.ini file.
+      description: Updates configuration parameters present in <a href="#section/Configuration/Service-settings">settings.ini</a> file.
       consumes:
         - application/json
       produces:
