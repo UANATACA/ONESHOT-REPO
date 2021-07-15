@@ -5414,63 +5414,79 @@ definitions:
 ###########
     PlApproveReqObject:
       type: "object"
+      required:
+        - username
+        - password
+        - pin
+        - rao
       properties:
         token:
             type: "string"
-            description: "The token containing RAO's credentials. **Mandatory if username/password/pin/rao are not provided**"
+            description: "The token containing RAO's credentials. </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ This field becomes mandatory if username/password/pin/rao are not provided</b></blockquote>"
         username:
             type: "string"
-            description: "The RAO's username. **Mandatory if token is not provided**"
+            description: "The RAO's username"
         password:
             type: "string"
-            description: "The RAO's password. **Mandatory if token is not provided**"
+            description: "The RAO's password"
         pin:
             type: "string"
-            description: "The RAO's PIN. **Mandatory if token is not provided**"
+            description: "The RAO's PIN"
         rao:
             type: "string"
-            description: "The RAO's id. **Mandatory if token is not provided**"
+            description: "The RAO's id"
 ###########
     ValidateReqObject_VID:
       type: "object"
+      required:
+        - username
+        - password
+        - pin
+        - rao 
       properties:
         token:
             type: "string"
-            description: "The token containing RAO's credentials"
+            description: "The token containing RAO's credentials. </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ This field becomes mandatory if username/password/pin/rao are not provided</b></blockquote>"
         username:
             type: "string"
-            description: "The RAO's username. **Mandatory if token is not provided**"
+            description: "The RAO's username"
         password:
             type: "string"
-            description: "The RAO's password. **Mandatory if token is not provided**"
+            description: "The RAO's password"
         pin:
             type: "string"
-            description: "The RAO's PIN. **Mandatory if token is not provided**"
+            description: "The RAO's PIN"
         rao:
             type: "string"
-            description: "The RAO's id. **Mandatory if token is not provided**"
+            description: "The RAO's id"
 ###########
     RefuseReqObject_VID:
       type: "object"
       required:
+        - username
+        - password
+        - pin
+        - rao
         - reason  
       properties:
         token:
             type: "string"
             description: "The token containing RAO's credentials. </br> 
-                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'>⚠ This field becomes mandatory if username/password/pin/rao are not provided</blockquote>"
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ This field becomes mandatory if username/password/pin/rao are not provided</b></blockquote>"
         username:
             type: "string"
-            description: "The RAO's username. **Mandatory if token is not provided**"
+            description: "The RAO's username"
         password:
             type: "string"
-            description: "The RAO's password. **Mandatory if token is not provided**"
+            description: "The RAO's password"
         pin:
             type: "string"
-            description: "The RAO's PIN. **Mandatory if token is not provided**"
+            description: "The RAO's PIN"
         rao:
             type: "string"
-            description: "The RAO's id. **Mandatory if token is not provided**"
+            description: "The RAO's id"
         reason:
             type: "string"
             description: "Reason that caused Video ID refusal"
