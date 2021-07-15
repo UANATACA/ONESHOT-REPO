@@ -243,6 +243,21 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status code
+              details: 
+                type: string
+                description: The response status message       
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": "Hello"
+                } 
 
 #############
 
@@ -402,7 +417,25 @@ paths:
                         Console.WriteLine(response);
                       }
                     }
-                  }     
+                  }
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status code
+              details: 
+                type: string
+                description: The response status message       
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": "Settings saved successfully"
+                } 
 #############
 
     get: 
@@ -415,7 +448,83 @@ paths:
       responses:
         200:
           description: Successful Response
-
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status code
+              details: 
+                type: object
+                properties:
+                  tsa:
+                    type: object
+                    properties:
+                      tsa_url:
+                        type: string
+                        description: The default Timestamp Authority URL
+                  request:
+                    type: object
+                    properties:
+                      default_profile:
+                        type: string
+                        description: The default certificate profile
+                      default_ra:
+                        type: string
+                        description: The default registration Authority id
+                  billing:
+                    type: object
+                    properties:
+                      billing_username:
+                        type: string
+                        description: The default Billing username
+                      billing_password:
+                        type: string
+                        description: The default Billing password
+                  general:
+                    type: object
+                    properties:
+                      environment:
+                        type: string
+                        description: The API environment (test or prod)
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": {
+                        "tsa": {
+                            "tsa_url": "https://tsa.access.bit4id.org:13035/tsa/test01"
+                        },
+                        "request": {
+                            "default_profile": "PFnubeQAFCiudadano",
+                            "default_ra": "9999"
+                        },
+                        "billing": {
+                            "billing_username": "user@uanataca.com",
+                            "billing_password": "UGVyb2xpdG8xLg=="
+                        },
+                        "general": {
+                            "environment": "test"
+                        }
+                    }
+                }
+        400:
+          description: Invalid JSON
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Invalid JSON
+              description: 
+                type: string
+                description: The response error message  
+          examples:
+            application/json:
+              {
+                  "status": "Invalid JSON",
+                  "details": "Could not parse JSON body – Invalid control character at: line 4 column 24 (char 82)"
+              }    
 
 #############
 
@@ -429,9 +538,59 @@ paths:
         - application/json
       responses:
         200:
-          description: Successful Response        
-
-
+          description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status code
+              details: 
+                type: object
+                properties:
+                  info:
+                    type: object
+                    description: General info about the local machine and One-Shot Optimizer
+                    properties:
+                      machine:
+                        type: string
+                      version:
+                        type: string
+                      release:
+                        type: string
+                      hostname:
+                        type: string
+                      system:
+                        type: string
+                      processor:
+                        type: string            
+                  version:
+                    type: string
+                    description: The version release date  
+                  name:
+                    type: string
+                    description: 'The software name "One-Shot Optimizer"'
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": {
+                        "tsa": {
+                            "tsa_url": "https://tsa.access.bit4id.org:13035/tsa/test01"
+                        },
+                        "request": {
+                            "default_profile": "PFnubeQAFCiudadano",
+                            "default_ra": "9999"
+                        },
+                        "billing": {
+                            "billing_username": "user@uanataca.com",
+                            "billing_password": "UGVyb2xpdG8xLg=="
+                        },
+                        "general": {
+                            "environment": "test"
+                        }
+                    }
+                }     
 ###### Metadata ######
 ###############################################################################
 
@@ -4805,8 +4964,6 @@ paths:
 
 ###### definitions ######
 ###############################################################################
-
-
 definitions:
     SettingsObject:
         type: "object"
