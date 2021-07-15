@@ -293,7 +293,24 @@ paths:
                 {
                     "status": "200 OK",
                     "details": "Settings saved successfully"
-                } 
+                }
+        400:
+          description: Invalid JSON
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Invalid JSON
+              description: 
+                type: string
+                description: The response error message  
+          examples:
+            application/json:
+              {
+                  "status": "Invalid JSON",
+                  "details": "Could not parse JSON body – Invalid control character at: line 4 column 24 (char 82)"
+              }   
       x-codeSamples:
         - lang: 'curl'
           source: |
@@ -506,23 +523,7 @@ paths:
                         }
                     }
                 }
-        400:
-          description: Invalid JSON
-          schema:
-            type: object
-            properties:
-              title:
-                type: string
-                description: Invalid JSON
-              description: 
-                type: string
-                description: The response error message  
-          examples:
-            application/json:
-              {
-                  "status": "Invalid JSON",
-                  "details": "Could not parse JSON body – Invalid control character at: line 4 column 24 (char 82)"
-              }    
+ 
 
 #############
 
