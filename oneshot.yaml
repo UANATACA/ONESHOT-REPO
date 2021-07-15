@@ -620,7 +620,7 @@ paths:
               details: 
                 type: object
                 description: The response status object
-                parameters:
+                properties:
                   metadata:
                     type: string
                     description: The metadata unique id to be used in <a href='#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post'>Sign</a> call.
