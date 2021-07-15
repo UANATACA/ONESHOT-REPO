@@ -50,7 +50,7 @@ Configure Settings to modify default parameters on setting.ini file. Check <a hr
 - name: "Metadata"
   description: "
 <html>
-Metadata can be prepared to be added as part of the One-Shot Signature. Check <a href='#section/Configuration/Metadata'>Service Settings</a> section. 
+Metadata can be prepared to be added as part of the One-Shot Signature. Check <a href='#section/Configuration/Metadata'>Metadata</a> section. 
 <table>
   <tr>
     <th>Method</th><th>Endpoint</th><th>Action</th>
@@ -611,6 +611,44 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status code
+              details: 
+                type: object
+                description: The response status object
+                  parameters:
+                    metadata:
+                      type: string
+                      description: The metadata unique id to be used in <a href='#tag/Requests/paths/~1api~1v1~1sign~1{pk}/post'>Sign</a> call.
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": {
+                        "metadata": "78d94fead7844136804afcc87f6a80b5"
+                    }
+                }
+        400:
+          description: Invalid JSON
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Invalid JSON
+              description: 
+                type: string
+                description: The response error message  
+          examples:
+            application/json:
+              {
+                  "status": "Invalid JSON",
+                  "details": "Could not parse JSON body – Invalid control character at: line 4 column 24 (char 82)"
+              }  
       x-codeSamples:
         - lang: 'curl'
           source: |
