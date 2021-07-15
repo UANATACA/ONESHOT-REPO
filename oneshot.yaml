@@ -5414,12 +5414,6 @@ definitions:
 ###########
     PlApproveReqObject:
       type: "object"
-      required:
-        - token
-        - username
-        - password
-        - pin
-        - rao
       properties:
         token:
             type: "string"
@@ -5439,7 +5433,6 @@ definitions:
 ###########
     ValidateReqObject_VID:
       type: "object"
-      required:  
       properties:
         token:
             type: "string"
