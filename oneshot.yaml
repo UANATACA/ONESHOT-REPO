@@ -53,19 +53,22 @@ Configure Settings to modify default parameters on setting.ini file. Check <a hr
 Configure Settings to modify default parameters on setting.ini file. Check <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Update Settings</a></br>
 <table>
   <tr>
-    <td>POST</td><td><a href='#tag/Settings/paths/~1api~1v1~1hello/get'>/metadata</a></td><td>Upload Metadata</td>
-  </tr>
-  <tr>
     <th>Method</th><th>Endpoint</th><th>Action</th>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/Settings/paths/~1api~1v1~1settings/post'>/settings</a></td><td>Update Settings</td>
+    <td>POST</td><td><a href='#tag/Settings/paths/~1api~1v1~1hello/get'>/metadata</a></td><td>Upload Metadata</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1settings/get'>/settings</a></td><td>Get Settings</td>
+    <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1settings/post'>/settings</a></td><td>List Metadata</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1version/get'>/version</a></td><td>Retrieve Optimizer version</td>
+    <td>GET</td><td><a href='#tag/Settings/paths/~1api~1v1~1settings/get'>/settings</a></td><td>Get Metadata</td>
+  </tr>
+  <tr>
+    <td>DELETE</td><td><a href='#tag/Settings/paths/~1api~1v1~1version/get'>/version</a></td><td>Delete Metadata</td>
+  </tr>
+  <tr>
+    <td>DELETE</td><td><a href='#tag/Settings/paths/~1api~1v1~1version/get'>/version</a></td><td>Delete All Metadata</td>
   </tr>
 </table> 
 </html>
@@ -289,6 +292,82 @@ paths:
       responses:
         200:
           description: Successful Response        
+
+
+###### Metadata ######
+###############################################################################
+
+  /api/v1/metadata:
+    post: 
+      summary: UPLOAD METADATA
+      tags:
+        - Metadata
+      description: Uploads all metadata information previously converted into Base64 format.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        schema:
+          $ref: "#/definitions/MetadataObject"
+      responses:
+        200:
+          description: Successful Response
+
+#############
+
+    get: 
+      summary: LIST METADATA
+      tags:
+        - Metadata
+      description: Lists all metadata objects available.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Response
+
+#############
+
+    delete: 
+      summary: DELETE METADATA
+      tags:
+        - Metadata
+      description: Deletes all metadata objects available.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Response
+
+#############
+
+  /api/v1/metadata/{{metadata_uid}}:
+    get: 
+      summary: GET METADATA
+      tags:
+        - Metadata
+      description: Retrieves the metadata associated to an specific id.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Response  
+
+#############
+
+    delete: 
+      summary: DELETE METADATA
+      tags:
+        - Metadata
+      description: Deletes the metadata associated to an specific id.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Response
 
 
 ###### tokens ######
@@ -4522,6 +4601,15 @@ definitions:
                 environment:
                   type: "string"                          
                   description: "The API environment (test or prod)"
+    MetadataObject:
+        type: "object"
+        properties:
+            metadata:
+              type: "string"
+              description: "The metadata information previously converted into Base64 format"
+            metadata_oid:
+              type: "string"
+              description: "The metadata associated OID"
     TokenObject:
         type: "object"
         required:
