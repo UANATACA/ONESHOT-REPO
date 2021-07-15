@@ -761,6 +761,16 @@ paths:
               details: 
                 type: object
                 description: The response object containing all uploaded sets of metadata
+                properties:
+                  metadata_uid:
+                    type: object
+                    properties:
+                      oid:
+                        type: string
+                        description: The metadata OID code
+                      metadata:
+                        type: string
+                        description: The metadata information in Base64 format
           examples:
             application/json:
                 {
