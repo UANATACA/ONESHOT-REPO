@@ -279,6 +279,21 @@ paths:
       responses:
         200:
           description: Successful Response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status code
+              details: 
+                type: string
+                description: The response status message       
+          examples:
+            application/json:
+                {
+                    "status": "200 OK",
+                    "details": "Settings saved successfully"
+                } 
       x-codeSamples:
         - lang: 'curl'
           source: |
@@ -418,24 +433,7 @@ paths:
                       }
                     }
                   }
-      responses:
-        200:
-          description: Successful Response
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                description: The response status code
-              details: 
-                type: string
-                description: The response status message       
-          examples:
-            application/json:
-                {
-                    "status": "200 OK",
-                    "details": "Settings saved successfully"
-                } 
+
 #############
 
     get: 
