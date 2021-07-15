@@ -1405,6 +1405,8 @@ The following is a view of the settings.ini file. **Important: If billing passwo
 
 	echo -n <<billing_password>> | base64
 
+</br>
+
 	1 |	[general]
 	2 |	environment = test
 	3 |
@@ -1456,6 +1458,8 @@ settings.ini file location:
 The following is a view of the settings.ini file. **Important: If billing password is specified, it must be previously converted into Base64 format.** Run the following command to convert your password to base64:
 
 	echo -n <<billing_password>> | base64
+
+</br>
 
 	1 |	[general]
 	2 |	environment = prod
