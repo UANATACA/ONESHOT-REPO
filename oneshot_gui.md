@@ -1407,17 +1407,22 @@ The following is a view of the settings.ini file. Important: If billing password
 	2 |	environment = test
 	3 |
 	4 |	[tsa]
-	5 |	tsa_url = https://tsa.uanataca.com/tsa/tss03
+	5 |	tsa_url = https://tsa.access.bit4id.org:13035/tsa/test01
 	6 |
 	7 |	[billing]
 	8 |	billing_username = user@uanataca.com
 	9 |	billing_password = ejVxTnFrZkI=
 	10|
 	11|	[request]
-	12|	default_profile = PFnubeAFCiudadano
+	12|	default_profile = PFnubeQAFCiudadano
 	13|	default_ra = 1000
 
 Once you are done editing the file, restart the One-Shot Optimizer service to changes take effect.
+
+
+
+
+
 
 Virtual Machine:
 
@@ -1454,7 +1459,7 @@ settings.ini file location:
 Open the settings.ini file in /opt/bit4id/oneshot_optimizer/etc and configure it to interact with the production environment. The parts that you will likely need to change are listed below:
 
 	1 |	[general]
-	2 |	environment = test
+	2 |	environment = prod
 	3 |
 	4 |	[tsa]
 	5 |	tsa_url = https://tsa.uanataca.com/tsa/tss03
@@ -1464,7 +1469,7 @@ Open the settings.ini file in /opt/bit4id/oneshot_optimizer/etc and configure it
 	9 |	billing_password = ejVxTnFrZkI=
 	10|
 	11|	[request]
-	12|	default_profile = PFnubeAFCiudadano
+	12|	default_profile = PFnubeQAFCiudadano
 	13|	default_ra = 1000
 
 
