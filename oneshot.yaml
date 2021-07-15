@@ -344,7 +344,7 @@ paths:
 
 #############
 
-  /api/v1/metadata/{{metadata_uid}}:
+  /api/v1/metadata/{metadata_uid}:
     get: 
       summary: GET METADATA
       tags:
