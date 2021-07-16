@@ -1455,7 +1455,7 @@ settings.ini file location:
 
 **/opt/bit4id/oneshot_optimizer/etc/certs** (Virtual Machine)
 
-![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot-docker5.png)
+![img](https://github.com/UANATACA/ONESHOT-REPO/raw/test3/img/oneshot-docker5.png)
 
 The following is a view of the settings.ini file. **Important: If billing password is specified, it must be previously converted into Base64 format.** Run the following command to convert your password to base64:
 
