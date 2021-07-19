@@ -643,19 +643,30 @@ If the signature request is completed successfully, we will get the unique ident
 		}
 	}
 
+
 The request starts at **VIDEOPENDING** status after creation. The request_pk output parameter will be used to identify this digital signature request in subsequent calls. 
 
 </br>
 
-> At this point, the workflow progress will depend on the video-identification successful completion. This action will change request status from **VIDEOPENDING** to **VIDEOREVIEW**. To inform both business app and Video ID RAO about this change at the time it takes place, we recommend to enhance the process with the usage of a listener **webhook**. Check our documentation for webhook configuration.  
+> At this point, the workflow progress will depend on the video-identification successful completion. This action will change request status from **VIDEOPENDING** to **VIDEOREVIEW**. 
 
 </br>
+
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ In case the process is not totally completed or has failed for any reason, the request will change to <b>VIDEOINCOMPLETE</b> or <b>VIDEOERROR</b> respectively.</blockquote>
+
+</br>
+
+To inform both business app and Video ID RAO about this change at the time it takes place, we recommend to enhance the process with the usage of a listener **Webhook**. A Webhook is an event notification sent to a URL of your choice. Users can configure them to trigger events on one site to invoke behavior on another. Check our documentation for <a href='#section/Configuration/Webhooks'>Webhook Configuration</a>.  
+
+</br>
+
 
 If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.
 
 If request data needs to be retrieved, use the <a href="#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get">Get Request</a> call. Check API Reference.
 
 </br>
+
 
 > **STEP 2: REQUEST VALIDATION** `2-step mode only`
 
@@ -932,11 +943,12 @@ If request data needs to be retrieved, use the <a href="#tag/Requests/paths/~1ap
 
 </br>
 
+
 > **STEP 2: UPLOAD DATA EVIDENCES**
 
 </br>
 
-A previously created Video ID Request needs a set of information defined as evidences. The succesful upload of **ALL** this information will change the request status to **VIDEOREVIEW**.
+A previously created Video ID Request needs a set of information defined as evidences. The successful upload of this information will change the request status to **VIDEOINCOMPLETE**. In case of failure, the request status might change to **VIDEOERROR**.
 
 Data and images are uploaded by using the following call:
 
@@ -1028,6 +1040,10 @@ Successful response status
 		"status": "200 OK",
 		"details": "Videoid video upload completed"
 	}
+
+The successful upload of the required video will change the request status to **VIDEOREVIEW**. In case of failure, the request status might change to **VIDEOERROR**.
+
+
 
 If the uploaded video needs to be retrieved, use <a href="#tag/Video-ID/paths/~1api~1v1~1download~1video~1{video_identifier}/get">Download Video</a>
 

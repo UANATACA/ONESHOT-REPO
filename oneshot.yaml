@@ -5337,7 +5337,8 @@ definitions:
               description: "Terms and conditions document URL"
         videoid_data:
           type: "object"
-          description: Data to upload for Video ID
+          description: "Data to upload for Video ID
+                        <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Customizable object for external authentication.</b></blockquote>"
           properties:
             images:
               type: "object"
