@@ -5312,7 +5312,7 @@ definitions:
         acceptance:
           type: "object"
           description: "A set of acceptance parameters. </br> 
-                        <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠Customizable object for external authentication.</b></blockquote>"
+                        <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Customizable object for external authentication.</b></blockquote>"
           properties:
             description:
               type: "string"
@@ -5358,7 +5358,7 @@ definitions:
             ocr_data:
               type: "object"
               description: "Optical Character Recognition result
-                           <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠Customizable object for external authentication.</b></blockquote>"
+                           <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Customizable object for external authentication.</b></blockquote>"
               properties:
                 given_name:
                   type: string
@@ -5392,7 +5392,7 @@ definitions:
             security_checks:
               type: "object"
               description: "Security checks related to document integrity
-                           <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠Customizable object for external authentication.</b></blockquote>"
+                           <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Customizable object for external authentication.</b></blockquote>"
               properties:
                 otp_validation:
                   type: boolean
