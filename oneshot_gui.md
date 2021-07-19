@@ -395,7 +395,7 @@ The request starts at **VIDEOPENDING** status after creation. The request_pk out
 
 </br>
 
-<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ In case the process is not totally completed or has failed for any reason, the request will change to <b>VIDEOINCOMPLETE</b> or <b>VIDEOERROR</b> respectively</blockquote>
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ In case the process is not totally completed or has failed for any reason, the request will change to <b>VIDEOINCOMPLETE</b> or <b>VIDEOERROR</b> respectively.</blockquote>
 
 </br>
 
@@ -403,9 +403,6 @@ To inform both business app and Video ID RAO about this change at the time it ta
 
 </br>
 
-<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ In case the process is not totally completed or has failed for any reason, the request might probably change to <b>VIDEOINCOMPLETE</b> or <b>VIDEOERROR</b></blockquote>
-
-</br>
 
 If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.
 
