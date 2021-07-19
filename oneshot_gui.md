@@ -1498,6 +1498,115 @@ Docker:
 <br></br>
 
 
+## Webhooks
+
+
+
+SignBox API requires that the customer business develop a webhook to manage the service callbacks. There are two callbacks in the service that must be set in the parameters `url_out` and `urlback` of the <a href="#tag/Signature/paths/~1api~1sign/post"> SIGN</a> API call.
+
+
+**urlback**
+
+The service logs are sent as a string in a HTTP POST request to the webhook url defined in this parameter.
+Each signature generates a single string composed by the error message and the signature job identifier. For a successful signature the string only contains the job id.
+
+Successful response:<br>
+
+	id=104.2
+
+Error response:
+
+	message=Error%3A+Pin+invalid&exception=Error&id=980.4
+
+**url_out**
+
+In a successful signature process, the result signed file is sent as a binary file in a HTTP POST request to the webhoook url defined in this parameter.
+</br>
+
+> Sample code
+
+In this sample, signed files are saved with the original filename in a folder named 'signbox-files'.
+For the logs, a new log file is generated everyday containing daily logs. Log files are saved in a folder name 'logs', inside signbox-files folder.
+
+The **url_out** parameter is defined as:  
+
+	{host}/result_{filename}
+
+The **urlback** parameter is defined as:
+
+	{host}/servicelogs
+
+where {filename} is the filename of the document to be signed, and {host} is the IP or domaing from the server exposing the webhook.
+
+
+*Python*
+
+	import web
+	import os
+	
+	urls = (
+	        '/result_(.+), 'url_out',
+	        '/servicelogs', 'urlback'
+	        )
+	
+	app = web.application(urls, globals())
+	app = app.wsgifunc()
+	
+	class url_out:
+		def POST(self, name):
+		    data = web.data()
+		    os.chdir('/signbox-files')
+		    f = open("%s" % name,'w')
+		    f.write(data)
+		    f.close()
+		    return ''
+
+	class urlback:
+		def POST(self,name):
+		    data = web.data()
+		    os.chdir('/signbox-files/logs')
+		    f = open("%Y%m%d.txt" % name, 'a+')
+		    f.write(str(data))
+		    f.write(str("\n"))
+		    f.close()
+		    return ''
+	
+	if __name__ == "__main__":
+	    app.run()
+
+
+*PHP*
+
+	<?php
+	
+	//url_out
+
+	$post = file_get_contents('php://input',true);
+	$file_handle = fopen('/signbox-files/', 'w');
+	fwrite($file_handle, $post);
+	fclose($file_handle);
+	
+
+	//urlback
+
+	$post = file_get_contents('php://input');
+	$line = $post.PHP_EOL;
+	$myfile = fopen("/signbox-files/logs/%Y%m%d.txt", "a") or die("Unable to open file!");
+	fwrite($myfile, $line );
+	fclose($myfile);
+	
+	?>
+
+
+# Logs
+
+Service logs files are stored in a local folder in SignBox Optimizer.
+
+**/opt/signbox_optimizer/logs** or custom mapped volume (Docker) 
+
+**/var/log/de** (Virtual Machine)
+
+
 # Logs
 
 Service logs file `optimizer.log` is stored in a local folder in One-Shot Optimizer.
