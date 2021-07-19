@@ -2127,7 +2127,7 @@ paths:
                         "url-doc-privacypolicy": "https://www.uanataca.com/public/pki/privacidad-PSC/",
                         "ip": "186.0.91.53",
                         "url-web-videoid": "https://cms.access.bit4id.org:13035/lcmpl/videoid/46b92251-4ba8-4930-a5aa-8631ec4666b6",
-                        "user-agent": "Mozilla/5.0 (Linux; Android 11; AC2003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.88 Mobile Safari/537.36",
+                        "user-agent": "Mozilla/5.0 (Linux; Android 11; AC2003)",
                         "date": 1622823879708,
                         "url-doc-termsconditions": "https://www.uanataca.com/public/pki/terminos-VID/"
                       },
@@ -5311,22 +5311,27 @@ definitions:
       properties:
         acceptance:
           type: "object"
-          description: A set of acceptance parameters
+          description: "A set of acceptance parameters. </br> 
+                        <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠Customizable object for external authentication.</b></blockquote>"
           properties:
             description:
               type: "string"
+              description: "Terms and Conditions descriptive text"
             url-doc-privacypolicy:
               type: "string"
               description: "Privacy policy document URL"
             ip:
               type: "string"
+              description: "The local IP adress"
             url-web-videoid:
               type: "string"
               description: "Video ID platform access URL"
             user-agent:
               type: "string"
+              description: "A user agent (e.g. web browser)"
             date:
               type: "string"
+              description: "The current date"
             url-doc-termsconditions:
               type: "string"
               description: "Terms and conditions document URL"
@@ -5352,7 +5357,8 @@ definitions:
                   description: Base64 client selfie
             ocr_data:
               type: "object"
-              description: Optical Character Recognition result
+              description: "Optical Character Recognition result
+                           <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠Customizable object for external authentication.</b></blockquote>"
               properties:
                 given_name:
                   type: string
@@ -5385,7 +5391,8 @@ definitions:
                   description: The user's id document country two-letters code (ISO 3166-1 alpha-2)            
             security_checks:
               type: "object"
-              description: Security checks related to document integrity
+              description: "Security checks related to document integrity
+                           <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠Customizable object for external authentication.</b></blockquote>"
               properties:
                 otp_validation:
                   type: boolean
