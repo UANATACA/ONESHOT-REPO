@@ -391,7 +391,11 @@ The request starts at **VIDEOPENDING** status after creation. The request_pk out
 
 </br>
 
-> At this point, the workflow progress will depend on the video-identification successful completion. This action will change request status from **VIDEOPENDING** to **VIDEOREVIEW**. To inform both business app and Video ID RAO about this change at the time it takes place, we recommend to enhance the process with the usage of a listener **webhook**. Check our documentation for webhook configuration.  
+> At this point, the workflow progress will depend on the video-identification successful completion. This action will change request status from **VIDEOPENDING** to **VIDEOREVIEW**. To inform both business app and Video ID RAO about this change at the time it takes place, we recommend to enhance the process with the usage of a listener **Webhook**. A Webhook is an event notification sent to a URL of your choice. Users can configure them to trigger events on one site to invoke behavior on another. Check our documentation for <a href='#section/Configuration/Webhooks'>Webhook Configuration</a>.  
+
+</br>
+
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ In case the process is not totally completed or has failed for any reason, the request might probably change to <b>VIDEOINCOMPLETE</b> or <b>VIDEOERROR</b></blockquote>
 
 </br>
 
@@ -1504,36 +1508,10 @@ Docker:
 One-Shot API requires that the customer business develop a webhook to manage our service callbacks. 
 
 
-**urlback**
-
-The service logs are sent as a string in a HTTP POST request to the webhook url defined in this parameter.
-Each signature generates a single string composed by the error message and the signature job identifier. For a successful signature the string only contains the job id.
-
-Successful response:<br>
-
-	id=104.2
-
-Error response:
-
-	message=Error%3A+Pin+invalid&exception=Error&id=980.4
-
-**url_out**
-
-In a successful signature process, the result signed file is sent as a binary file in a HTTP POST request to the webhoook url defined in this parameter.
-</br>
-
 > Sample code
 
 In this sample, signed files are saved with the original filename in a folder named 'signbox-files'.
 For the logs, a new log file is generated everyday containing daily logs. Log files are saved in a folder name 'logs', inside signbox-files folder.
-
-The **url_out** parameter is defined as:  
-
-	{host}/result_{filename}
-
-The **urlback** parameter is defined as:
-
-	{host}/servicelogs
 
 where {filename} is the filename of the document to be signed, and {host} is the IP or domaing from the server exposing the webhook.
 
