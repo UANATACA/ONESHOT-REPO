@@ -1501,8 +1501,7 @@ Docker:
 ## Webhooks
 
 
-
-SignBox API requires that the customer business develop a webhook to manage the service callbacks. There are two callbacks in the service that must be set in the parameters `url_out` and `urlback` of the <a href="#tag/Signature/paths/~1api~1sign/post"> SIGN</a> API call.
+One-Shot API requires that the customer business develop a webhook to manage our service callbacks. 
 
 
 **urlback**
