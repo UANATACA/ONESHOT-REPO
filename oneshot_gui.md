@@ -1600,15 +1600,6 @@ where {filename} is the filename of the document to be signed, and {host} is the
 
 # Logs
 
-Service logs files are stored in a local folder in SignBox Optimizer.
-
-**/opt/signbox_optimizer/logs** or custom mapped volume (Docker) 
-
-**/var/log/de** (Virtual Machine)
-
-
-# Logs
-
 Service logs file `optimizer.log` is stored in a local folder in One-Shot Optimizer.
 
 Docker path:
