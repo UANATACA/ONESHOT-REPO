@@ -1296,7 +1296,7 @@ In high performance environments with a pool of One-Shot Optimizer, service sett
 
 Docker-compose.yml settings file:
 
-![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot-docker3.png)
+![img](https://github.com/UANATACA/ONESHOT-REPO/raw/test3/img/oneshot-docker3.png)
 
 </br>
 
