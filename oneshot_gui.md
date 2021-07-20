@@ -1532,7 +1532,8 @@ Where:
 **request** is the request unique id.
 **registration_authority** is the Registration Authority id number the request is associated.
 
-> Sample code
+
+> **Sample code**
 
 In this sample, every JSON object is stored in a file named 'videoid'.
 
