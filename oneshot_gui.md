@@ -1412,7 +1412,11 @@ settings.ini file location:
 
 **/opt/bit4id/oneshot_optimizer/etc/settings.ini** (Virtual Machine)
 
-The following is a view of the settings.ini file. **Important: If billing password is specified, it must be previously converted into Base64 format.** Run the following command to convert your password to base64:
+The following is a view of the settings.ini file. 
+
+<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ If billing password is specified, it must be previously converted into Base64 format.</blockquote>
+
+Run the following command to convert your password to base64:
 
 	echo -n <<billing_password>> | base64
 
