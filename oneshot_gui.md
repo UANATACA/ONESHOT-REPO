@@ -1509,51 +1509,60 @@ Docker:
 <br></br>
 
 
-# Webhooks
+# Webhook Configuration
 
 
-One-Shot API requires a Webhook implemented on customer business applications to manage our service callbacks. Every request status change will trigger a simple event-notification via HTTP POST, consisting on a JSON object to an URL that must be explicitly included as a **required parameter** in the <a href='#tag/Video-ID/paths/~1api~1v1~1videoid/post'>Create Video ID Request</a> call.
+One-Shot API requires a listener Webhook implemented on customer business applications to manage our service callbacks. Every request status change will trigger a simple event-notification via HTTP POST, consisting on a JSON object to an URL that must be explicitly included as a **required parameter** in the <a href='#tag/Video-ID/paths/~1api~1v1~1videoid/post'>Create Video ID Request</a> call when using Uanataca 1-step or 2-step mode. 
+
+The following is a sample view of the JSON object that is sent as a callback at every status change:
+
+	{
+		"status": "VIDEOINCOMPLETE", 
+		"date": "2021-07-20T08:08:21.132394", 
+		"previous_status": "VIDEOPENDING", 
+		"request": 46760, 
+		"registration_authority": 455
+	}
+
+Where:
+
+**status** is the most recent status, this is, the status that triggered the notification.
+**date** is the date of the request status change.
+**previous_status** is the status inmediately previous to last change.
+**request** is the request unique id.
+**registration_authority** is the Registration Authority id number the request is associated.
 
 > Sample code
 
-In this sample, signed files are saved with the original filename in a folder named 'signbox-files'.
-For the logs, a new log file is generated everyday containing daily logs. Log files are saved in a folder name 'logs', inside signbox-files folder.
+In this sample, every JSON object is stored in a file named 'videoid'.
 
-where {filename} is the filename of the document to be signed, and {host} is the IP or domaing from the server exposing the webhook.
+The webhook parameter used in the <a href='#tag/Video-ID/paths/~1api~1v1~1videoid/post'>Create Video ID Request</a> call is defined as:
+
+{host}/videoid
+
+where {host} is the IP or domain from the server exposing the webhook.
 
 
 *Python*
 
 	import web
-	import os
+	import datetime
 	
 	urls = (
-	        '/result_(.+), 'url_out',
-	        '/servicelogs', 'urlback'
+	        '/videoid, 'videoid',
 	        )
 	
 	app = web.application(urls, globals())
 	app = app.wsgifunc()
 	
-	class url_out:
-		def POST(self, name):
-		    data = web.data()
-		    os.chdir('/signbox-files')
-		    f = open("%s" % name,'w')
-		    f.write(data)
-		    f.close()
-		    return ''
+	class video:
+		def POST(self):
+			data = web.data()
+			f = open("status.json",'w')
+			f.write(data)
+			f.close()
+			return ''
 
-	class urlback:
-		def POST(self,name):
-		    data = web.data()
-		    os.chdir('/signbox-files/logs')
-		    f = open("%Y%m%d.txt" % name, 'a+')
-		    f.write(str(data))
-		    f.write(str("\n"))
-		    f.close()
-		    return ''
-	
 	if __name__ == "__main__":
 	    app.run()
 
@@ -1562,21 +1571,12 @@ where {filename} is the filename of the document to be signed, and {host} is the
 
 	<?php
 	
-	//url_out
+	//videoid.json
 
 	$post = file_get_contents('php://input',true);
-	$file_handle = fopen('/signbox-files/', 'w');
+	$file_handle = fopen('/videoid/status.json', 'w');
 	fwrite($file_handle, $post);
 	fclose($file_handle);
-	
-
-	//urlback
-
-	$post = file_get_contents('php://input');
-	$line = $post.PHP_EOL;
-	$myfile = fopen("/signbox-files/logs/%Y%m%d.txt", "a") or die("Unable to open file!");
-	fwrite($myfile, $line );
-	fclose($myfile);
 	
 	?>
 
