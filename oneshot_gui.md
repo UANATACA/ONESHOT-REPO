@@ -1532,6 +1532,7 @@ Where:
 **request** is the request unique id.
 **registration_authority** is the Registration Authority id number the request is associated.
 
+</br>
 
 > **Sample code**
 
