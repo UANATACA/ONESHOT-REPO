@@ -1528,7 +1528,7 @@ Where:
 
 **status** is the most recent status, this is, the status that triggered the notification.
 
-**date** is the date of the request status change.
+**date** is the date of the request status change in datetime format.
 
 **previous_status** is the status inmediately previous to last change.
 
