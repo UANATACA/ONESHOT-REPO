@@ -869,25 +869,23 @@ You can follow the example using the developers One-Shot Optimizer configured fo
 
 **1) CREATE A NEW VIDEO ID SIGNATURE REQUEST**
 
-**2) UPLOAD DATA EVIDENCES**
+**2) UPLOAD DATA & VIDEO**
 
-**3) UPLOAD VIDEO**
+**3) REQUEST VALIDATION**
 
-**4) REQUEST VALIDATION**
+**4) REQUEST APPROVAL**
 
-**5) REQUEST APPROVAL**
+**5) UPLOAD A DOCUMENT**
 
-**6) UPLOAD A DOCUMENT**
+**6) RETRIEVE SERVICE CONTRACT**
 
-**7) RETRIEVE SERVICE CONTRACT**
+**7) GENERATE AN OTP (only for Uanataca SMS)**
 
-**8) GENERATE AN OTP (only for Uanataca SMS)**
+**8) SIGN THE DOCUMENT**
 
-**9) SIGN THE DOCUMENT**
+**9) RETRIEVE SIGNED DOCUMENT**
 
-**10) RETRIEVE SIGNED DOCUMENT**
-
-**11) DELETE DOCUMENTS FROM OPTIMIZER**
+**10) DELETE DOCUMENTS FROM OPTIMIZER**
 
 </br>
 
@@ -929,12 +927,15 @@ If request data needs to be retrieved, use the <a href="#tag/Requests/paths/~1ap
 
 </br>
 
-
-> **STEP 2: UPLOAD DATA EVIDENCES**
+> **STEP 2: UPLOAD DATA & VIDEO**
 
 </br>
 
-A previously created Video ID Request needs a set of information defined as evidences. The successful upload of this information will change the request status to **VIDEOINCOMPLETE**. In case of failure, the request status might change to **VIDEOERROR**.
+A previously created Video ID Request needs a set of information defined as evidences. 
+
+- The successful upload of **ALL** information will change the request status to **VIDEOREVIEW**. 
+- The partial upload of the information will change the request status to **VIDEOINCOMPLETE**.
+- If the upload process fails for any reason, the request status will change to **VIDEOERROR**. 
 
 Data and images are uploaded by using the following call:
 
@@ -1006,10 +1007,6 @@ Successful response status
 
 </br>
 
-> **STEP 3: UPLOAD VIDEO**
-
-</br>
-
 In the same way, binary multiformat Video is uploaded by using the following call:
 
 **API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences~1video/post">Upload Video</a>
@@ -1026,10 +1023,6 @@ Successful response status
 		"status": "200 OK",
 		"details": "Videoid video upload completed"
 	}
-
-The successful upload of the required video will change the request status to **VIDEOREVIEW**. In case of failure, the request status might change to **VIDEOERROR**.
-
-
 
 If the uploaded video needs to be retrieved, use <a href="#tag/Video-ID/paths/~1api~1v1~1download~1video~1{video_identifier}/get">Download Video</a>
 
