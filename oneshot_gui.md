@@ -396,10 +396,9 @@ The request starts at **VIDEOPENDING** status after creation. The request_pk out
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ In case the process is not totally completed or has failed for any reason, the request will change to <b>VIDEOINCOMPLETE</b> or <b>VIDEOERROR</b> respectively.</blockquote>
 
-To inform both business app and Video ID RAO about this change at the time it takes place, we recommend to enhance the process with the usage of a listener **Webhook**. A Webhook is an event notification sent to a URL of your choice. Users can configure them to trigger events on one site to invoke behavior on another. Check our documentation for <a href='#section/Configuration/Webhooks'>Webhook Configuration</a>.  
+To inform business app and validation RAO about this change at the time it takes place, we recommend the implementation of a **Webhook**. Check our documentation for <a href='#section/Configuration/Webhooks'>Webhook Configuration</a>.  
 
-If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.
-
+If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.</br>
 If request data needs to be retrieved, use the <a href="#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get">Get Request</a> call. Check API Reference.
 
 </br>
@@ -647,10 +646,9 @@ The request starts at **VIDEOPENDING** status after creation. The request_pk out
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ In case the process is not totally completed or has failed for any reason, the request will change to <b>VIDEOINCOMPLETE</b> or <b>VIDEOERROR</b> respectively.</blockquote>
 
-To inform both business app and Video ID RAO about this change at the time it takes place, we recommend to enhance the process with the usage of a listener **Webhook**. A Webhook is an event notification sent to a URL of your choice. Users can configure them to trigger events on one site to invoke behavior on another. Check our documentation for <a href='#section/Configuration/Webhooks'>Webhook Configuration</a>.  
+To inform business app and validation RAO about this change at the time it takes place, we recommend the implementation of a **Webhook**. Check our documentation for <a href='#section/Configuration/Webhooks'>Webhook Configuration</a>.  
 
-If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.
-
+If request data needs to be modified, use the <a href="#tag/Video-ID/paths/~1api~1v1~1request~1{request_pk}/put">Update Request</a> call. Check API Reference.</br>
 If request data needs to be retrieved, use the <a href="#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get">Get Request</a> call. Check API Reference.
 
 </br>
