@@ -1559,7 +1559,7 @@ where {host} is the IP or domain from the server exposing the webhook.
 	class video:
 		def POST(self):
 			data = web.data()
-			f = open("status.json",'w')
+			f = open("status.json",'a+')
 			f.write(data)
 			f.close()
 			return ''
