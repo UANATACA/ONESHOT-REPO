@@ -1509,11 +1509,10 @@ Docker:
 <br></br>
 
 
-## Webhooks
+# Webhooks
 
 
-One-Shot API requires that the customer business develop a webhook to manage our service callbacks. 
-
+One-Shot API requires a Webhook implemented on customer business applications to manage our service callbacks. Every request status change will trigger a simple event-notification via HTTP POST, consisting on a JSON object to an URL that must be explicitly included as a **required parameter** in the <a href='#tag/Video-ID/paths/~1api~1v1~1videoid/post'>Create Video ID Request</a> call.
 
 > Sample code
 
