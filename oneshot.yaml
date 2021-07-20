@@ -5248,7 +5248,7 @@ definitions:
             description: "The certificate profile"
         videoid_mode:
             type: "string"
-            description: "Video ID mode (true)"
+            description: "Video ID mode (value=1)"
         billing_username:
             type: "string"
             description: "The RAO's billing username. Required only if not set at **settings.ini** file"

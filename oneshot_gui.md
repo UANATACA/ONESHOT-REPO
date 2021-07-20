@@ -369,11 +369,12 @@ This call must include preliminary information to identify the signer.
 	curl -i -X POST https://one-shot.developers.uanataca.com/api/v1/videoid \
 		-H 'Content-Type: application/json' \
 		-d '{
-			"mobile_phone_number": "+34123123123",
+			"mobile_phone_number": "+34699999999",
 			"email": "mail@domain",
-			"registration_authority": "1000",
+			"registration_authority": "1234",
 			"profile": "PFnubeQAFCiudadano",
-			"videoid_mode": "1"
+			"videoid_mode": 1,
+			"webhook_url": "my-webhook-url.com"
 		}'
 
 If the signature request is completed successfully, both video and request unique identifiers are returned, as well as the video id link assigned to it:
@@ -618,11 +619,12 @@ This call must include preliminary information to identify the signer.
 	curl -i -X POST https://one-shot.developers.uanataca.com/api/v1/videoid \
 		-H 'Content-Type: application/json' \
 		-d '{
-			"mobile_phone_number": "+34123123123",
+			"mobile_phone_number": "+34699999999",
 			"email": "mail@domain",
-			"registration_authority": "1000",
+			"registration_authority": "1234",
 			"profile": "PFnubeQAFCiudadano",
-			"videoid_mode": "1"
+			"videoid_mode": 1,
+			"webhook_url": "my-webhook-url.com"
 		}'
 
 If the signature request is completed successfully, we will get the unique identifier assigned to it:
@@ -897,15 +899,14 @@ You can follow the example using the developers One-Shot Optimizer configured fo
 
 This call must include preliminary information to identify the signer. 
 
-
 	curl -i -X POST https://one-shot.developers.uanataca.com/api/v1/videoid \
 		-H 'Content-Type: application/json' \
 		-d '{
-			"mobile_phone_number": "+34123123123",
+			"mobile_phone_number": "+34699999999",
 			"email": "mail@domain",
-			"registration_authority": "1000",
+			"registration_authority": "1234",
 			"profile": "PFnubeQAFCiudadano",
-			"videoid_mode": "1"
+			"videoid_mode": 1
 		}'
 
 If the signature request is completed successfully, we will get the unique identifier assigned to it:
