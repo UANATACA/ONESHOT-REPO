@@ -1527,9 +1527,13 @@ The following is a sample view of the JSON object that is sent as a callback at 
 Where:
 
 **status** is the most recent status, this is, the status that triggered the notification.
+
 **date** is the date of the request status change.
+
 **previous_status** is the status inmediately previous to last change.
+
 **request** is the request unique id.
+
 **registration_authority** is the Registration Authority id number the request is associated.
 
 </br>
