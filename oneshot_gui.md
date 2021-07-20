@@ -1526,8 +1526,7 @@ The following is a sample view of the JSON object that is sent as a callback at 
 
 Where:
 
-**status** is the most recent status, this is, the status that triggered the notification.
-
+**status** is the most recent status, this is, the status that triggered the notification.</br>
 **date** is the date of the request status change in datetime format.
 
 **previous_status** is the status inmediately previous to last change.
