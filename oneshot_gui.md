@@ -1404,8 +1404,7 @@ Except by `tsa_url`, all parameters shown below are replaced every time the <a h
 
 settings.ini file location:
 
-**/opt/oneshot_optimizer/common/etc/settings.ini** or custom mapped volume (Docker)
-
+**/opt/oneshot_optimizer/common/etc/settings.ini** or custom mapped volume (Docker)</br>
 **/opt/bit4id/oneshot_optimizer/etc/settings.ini** (Virtual Machine)
 
 The following is a view of the settings.ini file. 
@@ -1462,8 +1461,7 @@ You should have received a certificate (.cer) and key (.key) file to be used to 
 
 settings.ini file location:
 
-**/opt/oneshot_optimizer/common/etc/certs/prod** or custom mapped volume (Docker)
-
+**/opt/oneshot_optimizer/common/etc/certs/prod** or custom mapped volume (Docker)</br>
 **/opt/bit4id/oneshot_optimizer/etc/certs/prod** (Virtual Machine)
 
 ![img](https://github.com/UANATACA/ONESHOT-REPO/raw/test3/img/oneshot-docker5.png)
@@ -1527,13 +1525,10 @@ The following is a sample view of the JSON object that is sent as a callback at 
 Where:
 
 **status** is the most recent status, this is, the status that triggered the notification.</br>
-**date** is the date of the request status change in datetime format.
-
-**previous_status** is the status inmediately previous to last change.
-
-**request** is the request unique id.
-
-**registration_authority** is the Registration Authority id number the request is associated.
+**date** is the date of the request status change in datetime format.</br>
+**previous_status** is the status inmediately previous to last change.</br>
+**request** is the request unique id.</br>
+**registration_authority** is the Registration Authority id number the request is associated.</br>
 
 </br>
 
