@@ -945,7 +945,7 @@ Data and images are uploaded by using the Upload Data Evidence call.
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ For this call the endpoint must be used is <b>lima.demo.bit4id.org</b> instead of <b>api.uanataca.com</b></blockquote>
 
-**Data objects in detail:**
+Data objects in detail:
 
 `acceptance` : Client acceptance parameters (e.g. Terms & Conditions,  Privacy Policy). This is a customizable JSON object. </br>
 `videoid_data` : Set of information about the Request. Contains: </br>
