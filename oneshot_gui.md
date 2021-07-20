@@ -937,15 +937,13 @@ A previously created Video ID Request needs a set of information defined as evid
 - The partial upload of the information will change the request status to **VIDEOINCOMPLETE**.
 - If the upload process fails for any reason, the request status will change to **VIDEOERROR**. 
 
-Data and images are uploaded by using the following call:
+Data and images are uploaded by using the Upload Data Evidence call.
 
 </br>
 
 **API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences/post">Upload Data Evidence</a>
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ For this call the endpoint must be used is <b>lima.demo.bit4id.org</b> instead of <b>api.uanataca.com</b></blockquote>
-
-</br>
 
 **Data objects in detail:**
 
@@ -1009,15 +1007,13 @@ Successful response status
 
 </br>
 
-In the same way, binary multiformat Video is uploaded by using the following call:
+In the same way, binary multiformat Video is uploaded by using the Upload Video call.
 
 </br>
 
 **API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences~1video/post">Upload Video</a>
 
 <blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ For this call the endpoint must be used is <b>lima.demo.bit4id.org</b> instead of <b>api.uanataca.com</b></blockquote>
-
-</br>
 
 	curl -i -X POST https://lima.demo.bit4id.org/v1/upload/video/30e57b02819a430d8386fd85be9f499f/ \
 		-H 'Content-Type: multipart/form-data' \
