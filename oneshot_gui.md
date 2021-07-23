@@ -40,7 +40,6 @@ For testing purposes, we provide integrators of our pre-configured One-Shot Opti
 
 In the same way, you can find the instructions to set up your own One-Shot Optimizer in the <a href="#section/Configuration"> configuration section</a>.
 
-
 # Classic Workflow
 
 
