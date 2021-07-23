@@ -103,8 +103,6 @@ This section presents the workflow for a simple use case of the One-Shot Signatu
 
 <a href="#section/Video-tutorials/Signature-Workflow-(SMS)"><img src="https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img4.png"></a><a href="#section/Video-tutorials/Signature-Workflow-(SMS)"><b>&nbsp;Watch on video!</b></a>
 
-You can follow the next example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
-
 </br>
 
 *The basic digital signature process involves the following steps:*
@@ -341,10 +339,6 @@ In 1-step mode Video ID, a request approval also implies its validation. For thi
 </br>
 
 ![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/test2/img/oneshot_1step.png)
-
-</br>
-
-You can follow the next example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
 
 </br>
 
@@ -588,10 +582,6 @@ In 2-Step mode Video ID, request validations and approvals are performed in diff
 </br>
 
 ![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/test2/img/oneshot_2step.png)
-
-</br>
-
-You can follow the next example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
 
 </br>
 
@@ -869,10 +859,6 @@ In External mode Video ID, digital evidences are uploaded to an independent Vide
 </br>
 
 ![img](https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/test2/img/oneshot_ext.png)
-
-</br>
-
-You can follow the example using the developers One-Shot Optimizer configured for test environment in https://one-shot.developers.uanataca.com, or you can find the instructions to set up your One-Shot Opimizer in the <a href="#section/Configuration"> configuration section</a>.
 
 </br>
 
