@@ -5257,7 +5257,7 @@ definitions:
             description: "The RAO's billing password in Base64 format. Required only if not set at **settings.ini** file"
         webhook_url:
             type: "string"
-            description: "The webhook URL. Not required for external authentication. See <a href='#section/Configuration/Webhooks'>Webhook Configuration</a> section"   
+            description: "The webhook URL. Not required for external authentication. See <a href='#section/Webhook-Configuration'>Webhook Configuration</a> section"   
         env:
             type: "string"
             description: "The environment value (**test** or **prod**)"
