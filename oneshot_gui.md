@@ -28,6 +28,19 @@ The electronic signatures are performed in Uanataca Trusted Service Center side,
 ![img](https://github.com/UANATACA/ONESHOT-REPO/raw/main/img/oneshot-hiw.png)
 
 
+# Test URL
+
+For testing purposes, we provide integrators of our pre-configured One-Shot Optimizer test environment accessible at the following URL:
+
+</br>
+
+	https://one-shot.developers.uanataca.com
+
+</br>
+
+In the same way, you can find the instructions to set up your own One-Shot Optimizer in the <a href="#section/Configuration"> configuration section</a>.
+
+
 # Classic Workflow
 
 
