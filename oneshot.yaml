@@ -5265,8 +5265,11 @@ definitions:
         - email
         - registration_authority
         - profile
+        - billing_username
+        - billing_password
         - videoid_mode
         - webhook_url
+        - env
       properties:
         mobile_phone_number:
             type: "string"
@@ -5292,7 +5295,8 @@ definitions:
                           <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
         webhook_url:
             type: "string"
-            description: "The webhook URL. Not required for external authentication. See <a href='#section/Webhook-Configuration'>Webhook Configuration</a> section"   
+            description: "The webhook URL. </br>
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required for external authentication. See <a href='#section/Webhook-Configuration'>Webhook Configuration</a> section</b></blockquote>"   
         env:
             type: "string"
             enum: [test, prod]
