@@ -1442,23 +1442,20 @@ paths:
       - in: formData
         name: surname_2
         description: The user's second surname
-        required: true
         type: string
       - in: formData
         name: id_document_type
-        required: true
         type: string
         enum: [IDC, PAS, PNO, TIN]
         description: >
           Document types allowed for the user identification:
-           * **IDC** - Identification based on national identity card number
+           * **IDC** - Identification based on national identity card number. **Default if field is not included.**
            * **PAS** - Identification based on passport number
            * **PNO** - Identification based on national personal number (national civic registration number)
            * **TIN** - Tax Identification Number according to the European Commission
       - in: formData
         name: id_document_country
-        description: The user's id document country two-letters code (ISO 3166-1 alpha-2)
-        required: true
+        description: The user's id document country two-letters code (ISO 3166-1 alpha-2). Default **ES** if field is not included.
         type: string
       - in: formData
         name: serial_number
@@ -1477,34 +1474,44 @@ paths:
         type: string
       - in: formData
         name: registration_authority 
-        description: The Registration Authority id number
+        description: "The Registration Authority id number.</br>
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
         required: true
         type: string
       - in: formData
         name: profile
         enum: [PFnubeQAFCiudadano, PFnubeNC]
         type: string
-        description: >
+        description: "
           Digital certificate profiles allowed:
            * **PFnubeQAFCiudadano** - Uanataca's eIDAS qualified digital certificate used for qualified signature in the European Union
-           * **PFnubeNC** - Uanataca's normalized digital certificate used for advanced signature
+           * **PFnubeNC** - Uanataca's normalized digital certificate used for advanced signature </br>
+          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
         required: true
       - in: formData
         name: token
-        description: "The Registration Authority Officer (RAO)'s token unique id containing RAO's digital identity credentials"
+        description: "The Registration Authority Officer (RAO)'s token unique id containing RAO's digital identity credentials. </br>
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if RAO's credentials are included.</b></blockquote>"
+        required: true
         type: string
       - in: formData
         name: username
-        description: The RAO's digital ident username. This field is only required if it's not specified in the token
+        description: "The RAO's digital identity username. </br>
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if token is included.</b></blockquote>"
         type: string
+        required: true
       - in: formData
         name: password
-        description: The RAO's digital identity password. This field is only required if it's not specified in the token
+        description: "The RAO's digital identity password. </br>
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if token is included.</b></blockquote>"
         type: string
+        required: true
       - in: formData
         name: pin
-        description: The RAO's digital identity PIN. This field is only required if it's not specified in the token
+        description: "The RAO's digital identity PIN.</br>
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if token is included.</b></blockquote>"
         type: string
+        required: true
       - in: formData
         name: document_front
         description: Front side image of the user's identification document (JPEG or PNG). 
@@ -1519,6 +1526,25 @@ paths:
         name: document_owner
         description: A selfie image of the user holding the identifying document below his/her chin (JPEG or PNG).
         type: file
+        required: true
+      - in: formData
+        name: env
+        description: "The Optimizer work environment. </br>
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
+        type: file
+        required: true
+      - in: formData
+        name: billing_username
+        description: "The RAO's billing username. </br>
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
+        type: file
+        required: true
+      - in: formData
+        name: billing_password
+        description: "The RAO's billing password. </br>
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
+        type: file
+        required: true
       responses:
         201:
           description: Successful Response
