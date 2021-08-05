@@ -1483,8 +1483,8 @@ paths:
         enum: [PFnubeQAFCiudadano, PFnubeNC]
         type: string
         description: "
-          Digital certificate profiles allowed:
-           * **PFnubeQAFCiudadano** - Uanataca's eIDAS qualified digital certificate used for qualified signature in the European Union
+          Digital certificate profiles allowed:</br>
+           * **PFnubeQAFCiudadano** - Uanataca's eIDAS qualified digital certificate used for qualified signature in the European Union </br>
            * **PFnubeNC** - Uanataca's normalized digital certificate used for advanced signature </br>
           <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
         required: true
