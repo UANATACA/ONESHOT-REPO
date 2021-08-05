@@ -5212,10 +5212,10 @@ definitions:
                 description: "The RAO's digital identity username"
             password:
                 type: "string"
-                description: "The RAO's digital identity password. **Must be included in request when is not in this call.**"
+                description: "The RAO's digital identity password. **Must be included in calls that require RAO's credentials if is not in this call.**"
             pin:
                 type: "string"
-                description: "The RAO's digital identity PIN. **Must be included in request when is not in this call.**"
+                description: "The RAO's digital identity PIN. **Must be included in calls that require RAO's credentials if is not in this call.**"
             env:
                 type: "string"
                 enum: [test, prod]
@@ -5239,7 +5239,7 @@ definitions:
                               This field is required for requests using external authenticacion methods"
             ext_unlock_value:
                 type: "string"
-                description: "The id of the external authenticacion request.
+                description: "The id of the external authentication request.
                               This field is required for requests using external authenticacion methods"
             options:
                 type: "object"
