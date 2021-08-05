@@ -1491,7 +1491,7 @@ paths:
       - in: formData
         name: token
         description: "The Registration Authority Officer (RAO)'s token unique id containing RAO's digital identity credentials. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if RAO's credentials are included.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if RAO's credentials (username, password, pin) are included.</b></blockquote>"
         required: true
         type: string
       - in: formData
