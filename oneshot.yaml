@@ -1491,25 +1491,25 @@ paths:
       - in: formData
         name: token
         description: "The Registration Authority Officer (RAO)'s token unique id containing RAO's digital identity credentials. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if RAO's credentials (username, password, pin) are included as fields of this call.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when RAO's credentials (username, password, pin) are included as fields of this call.</b></blockquote>"
         required: true
         type: string
       - in: formData
         name: username
         description: "The RAO's digital identity username. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         type: string
         required: true
       - in: formData
         name: password
         description: "The RAO's digital identity password. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         type: string
         required: true
       - in: formData
         name: pin
         description: "The RAO's digital identity PIN.</br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         type: string
         required: true
       - in: formData
@@ -5211,13 +5211,15 @@ definitions:
                 description: "The RAO's digital identity username"
             password:
                 type: "string"
-                description: "The RAO's digital identity password"
+                description: "The RAO's digital identity password. **Must be included in request when is not in this call**"
             pin:
                 type: "string"
-                description: "The RAO's digital identity PIN"
+                description: "The RAO's digital identity PIN. **Must be included in request when is not in this call**"
             env:
                 type: "string"
-                description: "The RAO's digital identity PIN"            
+                enum: [test, prod]
+                description: "The API work environment. </br>
+                              <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"            
     SignObject:
         type: "object"
         required:
