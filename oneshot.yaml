@@ -5494,6 +5494,7 @@ definitions:
     ValidateReqObject_VID:
       type: "object"
       required:
+        - token
         - username
         - password
         - pin
@@ -5523,6 +5524,7 @@ definitions:
     RefuseReqObject_VID:
       type: "object"
       required:
+        - token
         - username
         - password
         - pin
