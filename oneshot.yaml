@@ -1455,7 +1455,7 @@ paths:
            * **TIN** - Tax Identification Number according to the European Commission
       - in: formData
         name: id_document_country
-        description: The user's id document country two-letters code (ISO 3166-1 alpha-2). Default **ES** if field is not included.
+        description: The user's id document country two-letters code (ISO 3166-1 alpha-2). **Default ES if field is not included.**
         type: string
       - in: formData
         name: serial_number
