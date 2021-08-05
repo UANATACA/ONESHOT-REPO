@@ -1491,25 +1491,25 @@ paths:
       - in: formData
         name: token
         description: "The Registration Authority Officer (RAO)'s token unique id containing RAO's digital identity credentials. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if RAO's credentials (username, password, pin) are included.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if RAO's credentials (username, password, pin) are included as fields of this call.</b></blockquote>"
         required: true
         type: string
       - in: formData
         name: username
         description: "The RAO's digital identity username. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if token is included.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'></a>token.</b></blockquote>"
         type: string
         required: true
       - in: formData
         name: password
         description: "The RAO's digital identity password. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if token is included.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'></a>token.</b></blockquote>"
         type: string
         required: true
       - in: formData
         name: pin
         description: "The RAO's digital identity PIN.</br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if token is included.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'></a>token.</b></blockquote>"
         type: string
         required: true
       - in: formData
@@ -1529,7 +1529,7 @@ paths:
         required: true
       - in: formData
         name: env
-        description: "The Optimizer work environment. </br>
+        description: "The API work environment. </br>
                       <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
         type: string
         enum: [test, prod]
@@ -5189,8 +5189,9 @@ definitions:
               type: "object"
               properties:
                 environment:
-                  type: "string"                          
-                  description: "The API environment (test or prod)"
+                  type: "string"
+                  enum: [test, prod]                          
+                  description: "The API work environment"
     MetadataObject:
         type: "object"
         properties:
@@ -5214,6 +5215,9 @@ definitions:
             pin:
                 type: "string"
                 description: "The RAO's digital identity PIN"
+            env:
+                type: "string"
+                description: "The RAO's digital identity PIN"            
     SignObject:
         type: "object"
         required:
@@ -5269,10 +5273,12 @@ definitions:
             description: "The signer's email"
         registration_authority:
             type: "string"
-            description: "The Registration Authority ID number"
+            description: "The Registration Authority ID number </br>
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
         profile:
             type: "string"
-            description: "The certificate profile"
+            description: "The certificate profile </br>
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
         videoid_mode:
             type: "string"
             description: "Video ID mode (value=1)"
