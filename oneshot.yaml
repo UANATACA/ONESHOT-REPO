@@ -1497,19 +1497,19 @@ paths:
       - in: formData
         name: username
         description: "The RAO's digital identity username. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'></a>token.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         type: string
         required: true
       - in: formData
         name: password
         description: "The RAO's digital identity password. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'></a>token.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         type: string
         required: true
       - in: formData
         name: pin
         description: "The RAO's digital identity PIN.</br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'></a>token.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required if included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         type: string
         required: true
       - in: formData
