@@ -5475,16 +5475,20 @@ definitions:
                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ This field becomes mandatory if username/password/pin/rao are not provided</b></blockquote>"
         username:
             type: "string"
-            description: "The RAO's username"
+            description: "The RAO's username </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         password:
             type: "string"
-            description: "The RAO's password"
+            description: "The RAO's password </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         pin:
             type: "string"
-            description: "The RAO's PIN"
+            description: "The RAO's PIN </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         rao:
             type: "string"
-            description: "The RAO's id"
+            description: "The RAO's id </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
 ###########
     ValidateReqObject_VID:
       type: "object"
@@ -5500,16 +5504,20 @@ definitions:
                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ This field becomes mandatory if username/password/pin/rao are not provided</b></blockquote>"
         username:
             type: "string"
-            description: "The RAO's username"
+            description: "The RAO's username </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         password:
             type: "string"
-            description: "The RAO's password"
+            description: "The RAO's password </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         pin:
             type: "string"
-            description: "The RAO's PIN"
+            description: "The RAO's PIN </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         rao:
             type: "string"
-            description: "The RAO's id"
+            description: "The RAO's id </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
 ###########
     RefuseReqObject_VID:
       type: "object"
@@ -5526,16 +5534,22 @@ definitions:
                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ This field becomes mandatory if username/password/pin/rao are not provided</b></blockquote>"
         username:
             type: "string"
-            description: "The RAO's username"
+            description: "The RAO's username </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         password:
             type: "string"
-            description: "The RAO's password"
+            description: "The RAO's password </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         pin:
             type: "string"
-            description: "The RAO's PIN"
+            description: "The RAO's PIN </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         rao:
             type: "string"
-            description: "The RAO's id"
+            description: "The RAO's id </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         reason:
             type: "string"
             description: "Reason that caused Video ID refusal"
+
+
