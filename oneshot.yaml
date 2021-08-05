@@ -1536,13 +1536,13 @@ paths:
         required: true
       - in: formData
         name: billing_username
-        description: "The RAO's billing username. </br>
+        description: "The client billing username. </br>
                       <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
         type: string
         required: true
       - in: formData
         name: billing_password
-        description: "The RAO's billing password in Base64 format. </br>
+        description: "The client billing password in Base64 format. </br>
                       <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
         type: string
         required: true
@@ -5180,10 +5180,10 @@ definitions:
               properties: 
                 billing_username:
                   type: "string"
-                  description: "The default Billing username"
+                  description: "The default client billing username"
                 billing_password:
                   type: "string"
-                  description: "The default Billing password"
+                  description: "The default client billing password"
             general:
               description: "General Settings"
               type: "object"
@@ -5282,21 +5282,22 @@ definitions:
             type: "string"
             description: "The certificate profile </br>
                           <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
-        videoid_mode:
-            type: "string"
-            description: "Video ID mode (value=1)"
         billing_username:
             type: "string"
-            description: "The RAO's billing username. Required only if not set at **settings.ini** file"
+            description: "The client billing username. </br>
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
         billing_password:
             type: "string"
-            description: "The RAO's billing password in Base64 format. Required only if not set at **settings.ini** file"
+            description: "The client billing password in Base64 format. </br>
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
         webhook_url:
             type: "string"
             description: "The webhook URL. Not required for external authentication. See <a href='#section/Webhook-Configuration'>Webhook Configuration</a> section"   
         env:
             type: "string"
-            description: "The Optimizer work environment."
+            enum: [test, prod]
+            description: "The API work environment. </br>
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"         
 ###########
     UpdateReqObject_VID:
       type: "object"
