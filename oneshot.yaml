@@ -1531,19 +1531,20 @@ paths:
         name: env
         description: "The Optimizer work environment. </br>
                       <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
-        type: file
+        type: string
+        enum: [test, prod]
         required: true
       - in: formData
         name: billing_username
         description: "The RAO's billing username. </br>
                       <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
-        type: file
+        type: string
         required: true
       - in: formData
         name: billing_password
-        description: "The RAO's billing password. </br>
+        description: "The RAO's billing password in Base64 format. </br>
                       <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
-        type: file
+        type: string
         required: true
       responses:
         201:
@@ -5286,7 +5287,7 @@ definitions:
             description: "The webhook URL. Not required for external authentication. See <a href='#section/Webhook-Configuration'>Webhook Configuration</a> section"   
         env:
             type: "string"
-            description: "The environment value (**test** or **prod**)"
+            description: "The Optimizer work environment."
 ###########
     UpdateReqObject_VID:
       type: "object"
