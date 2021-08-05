@@ -1475,7 +1475,7 @@ paths:
       - in: formData
         name: registration_authority 
         description: "The Registration Authority id number.</br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
         required: true
         type: string
       - in: formData
@@ -1486,7 +1486,7 @@ paths:
           Digital certificate profiles allowed:</br>
            * **PFnubeQAFCiudadano** - Uanataca's eIDAS qualified digital certificate used for qualified signature in the European Union </br>
            * **PFnubeNC** - Uanataca's normalized digital certificate used for advanced signature </br>
-          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
+          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
         required: true
       - in: formData
         name: token
@@ -1530,20 +1530,20 @@ paths:
       - in: formData
         name: env
         description: "The API work environment. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
         type: string
         enum: [test, prod]
         required: true
       - in: formData
         name: billing_username
         description: "The RAO's billing username. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
         type: string
         required: true
       - in: formData
         name: billing_password
         description: "The RAO's billing password in Base64 format. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
         type: string
         required: true
       responses:
@@ -5219,7 +5219,7 @@ definitions:
                 type: "string"
                 enum: [test, prod]
                 description: "The API work environment. </br>
-                              <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"            
+                              <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"            
     SignObject:
         type: "object"
         required:
@@ -5276,11 +5276,11 @@ definitions:
         registration_authority:
             type: "string"
             description: "The Registration Authority ID number </br>
-                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
         profile:
             type: "string"
             description: "The certificate profile </br>
-                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not at settings.ini file.</b></blockquote>"
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
         videoid_mode:
             type: "string"
             description: "Video ID mode (value=1)"
