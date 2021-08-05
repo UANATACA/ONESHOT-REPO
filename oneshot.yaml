@@ -5205,16 +5205,17 @@ definitions:
         type: "object"
         required:
           - username
+          - env
         properties:
             username:
                 type: "string"
                 description: "The RAO's digital identity username"
             password:
                 type: "string"
-                description: "The RAO's digital identity password. **Must be included in request when is not in this call**"
+                description: "The RAO's digital identity password. **Must be included in request when is not in this call.**"
             pin:
                 type: "string"
-                description: "The RAO's digital identity PIN. **Must be included in request when is not in this call**"
+                description: "The RAO's digital identity PIN. **Must be included in request when is not in this call.**"
             env:
                 type: "string"
                 enum: [test, prod]
