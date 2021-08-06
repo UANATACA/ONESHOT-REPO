@@ -1491,7 +1491,7 @@ paths:
       - in: formData
         name: token
         description: "The Registration Authority Officer (RAO)'s token unique id containing RAO's digital identity credentials. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when RAO's credentials (username, password, pin) are included as fields of this call.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when RAO's credentials (username, password, pin) are included as fields in this call.</b></blockquote>"
         required: true
         type: string
       - in: formData
@@ -5212,10 +5212,10 @@ definitions:
                 description: "The RAO's digital identity username"
             password:
                 type: "string"
-                description: "The RAO's digital identity password. **Must be included in calls that require RAO's credentials if is not in this call.**"
+                description: "The RAO's digital identity password. **Must be included in calls that require RAO's credentials when is not included in this call.**"
             pin:
                 type: "string"
-                description: "The RAO's digital identity PIN. **Must be included in calls that require RAO's credentials if is not in this call.**"
+                description: "The RAO's digital identity PIN. **Must be included in calls that require RAO's credentials when is not included in this call.**"
             env:
                 type: "string"
                 enum: [test, prod]
@@ -5473,7 +5473,7 @@ definitions:
         token:
             type: "string"
             description: "The token containing RAO's credentials. </br> 
-                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when RAO's credentials (username, password, pin) are included as fields of this call.</b></blockquote>"
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when RAO's credentials (username, password, pin) are included as fields in this call.</b></blockquote>"
         username:
             type: "string"
             description: "The RAO's username </br> 
@@ -5503,7 +5503,7 @@ definitions:
         token:
             type: "string"
             description: "The token containing RAO's credentials. </br> 
-                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when RAO's credentials (username, password, pin) are included as fields of this call.</b></blockquote>"
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when RAO's credentials (username, password, pin) are included as fields in this call.</b></blockquote>"
         username:
             type: "string"
             description: "The RAO's username </br> 
@@ -5534,7 +5534,7 @@ definitions:
         token:
             type: "string"
             description: "The token containing RAO's credentials. </br> 
-                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when RAO's credentials (username, password, pin) are included as fields of this call.</b></blockquote>"
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when RAO's credentials (username, password, pin) are included as fields in this call.</b></blockquote>"
         username:
             type: "string"
             description: "The RAO's username </br> 
