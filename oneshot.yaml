@@ -1464,7 +1464,7 @@ paths:
         type: string
       - in: formData
         name: serial_number
-        description: Serial number of the user's id document
+        description: User's id document serial number
         required: true
         type: string
       - in: formData
