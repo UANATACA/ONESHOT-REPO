@@ -1735,15 +1735,15 @@ paths:
                   'token': 'a44765ab8ca04e429a565f02d22179a0',
                   'username': '5057249',
                   'password': 'Gy6F89xK',
-                  'pin': 't8tr6vkg'}
+                  'pin': 't8tr6vkg',
+                  'env': 'test',
+                  'billing_username': 'user@uanataca.com',
+                  'billing_password': 'ejVxTnFrZkI='}
                   files=[
                     ('document_front',('file',open('sample_folder/img_front.png','rb'),'image/png')),
                     ('document_rear',('file',open('sample_folder/img_rear.png','rb'),'image/png')),
                     ('document_owner',('file',open('sample_folder/img_selfie.png','rb'),'image/png'))
                   ]
-                  'env': 'test',
-                  'billing_username': 'user@uanataca.com',
-                  'billing_password': 'ejVxTnFrZkI=',
                   headers = {
                     'Content-Type': 'application/json'
                   }
@@ -1955,7 +1955,6 @@ paths:
                       "email": "mail@domain",
                       "registration_authority": "1234",
                       "profile": "PFnubeQAFCiudadano",
-                      "videoid_mode": 1,
                       "billing_username": "billing-test-account@organization",
                       "billing_password": "base64-password",
                       "webhook_url": "my-webhook-url.com",
@@ -1975,7 +1974,6 @@ paths:
                       'email': 'mail@domain',
                       'registration_authority': '1234',
                       'profile': 'PFnubeQAFCiudadano',
-                      'videoid_mode': 1,
                       'billing_username': 'billing-test-account@organization',
                       'billing_password': 'base64-password',
                       'webhook_url': 'my-webhook-url.com',
@@ -1998,7 +1996,6 @@ paths:
                       "email": "mail@domain",
                       "registration_authority": "1234",
                       "profile": "PFnubeQAFCiudadano",
-                      "videoid_mode": 1,
                       "billing_username": "billing-test-account@organization",
                       "billing_password": "base64-password",
                       "webhook_url": "my-webhook-url.com",
@@ -2027,7 +2024,6 @@ paths:
                       'email': 'mail@domain',
                       'registration_authority': '1234',
                       'profile': 'PFnubeQAFCiudadano',
-                      'videoid_mode': 1,
                       'billing_username': 'billing-test-account@organization',
                       'billing_password': 'base64-password',
                       'webhook_url': 'my-webhook-url.com',
@@ -2057,7 +2053,6 @@ paths:
                           email: 'mail@domain',
                           registration_authority: '1234',
                           profile: 'PFnubeQAFCiudadano',
-                          videoid_mode: 1,
                           billing_username: 'billing-test-account@organization',
                           billing_password: 'base64-password',
                           webhook_url: 'my-webhook-url.com',
@@ -4584,6 +4579,7 @@ paths:
                     https://one-shot.developers.uanataca.com/api/v1/videoid/45836/validate \
                     -H 'Content-Type: application/json' \
                     -d '{
+                      "token": "6d1cae4d55be4cdf9cac50ee36f73406",
                       "username": "5012345",
                       "password": "Gy6F37xK",
                       "pin": "belorado74",
@@ -4599,6 +4595,7 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
+                        token: '6d1cae4d55be4cdf9cac50ee36f73406',
                         username: '5012345',
                         password: 'Gy6F37xK',
                         pin: 'belorado74',
@@ -4616,6 +4613,7 @@ paths:
                   url = "https://one-shot.developers.uanataca.com/api/v1/videoid/45836/validate"
 
                   payload = {
+                    "token": "6d1cae4d55be4cdf9cac50ee36f73406",
                     "username": "5012345",
                     "password": "Gy6F37xK",
                     "pin": "belorado74",
@@ -4640,6 +4638,7 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
+                        token: '6d1cae4d55be4cdf9cac50ee36f73406',
                         username: '5012345',
                         password: 'Gy6F37xK',
                         pin: 'belorado74',
@@ -4665,6 +4664,7 @@ paths:
                       using (var client = new HttpClient())
                       {
                         JObject json = JObject.Parse(@"{
+                          token: '6d1cae4d55be4cdf9cac50ee36f73406',
                           username: '5012345',
                           password: 'Gy6F37xK',
                           pin: 'belorado74',
@@ -4776,6 +4776,7 @@ paths:
                     https://one-shot.developers.uanataca.com/api/v1/videoid/45836/refuse \
                     -H 'Content-Type: application/json' \
                     -d '{
+                      "token": "6d1cae4d55be4cdf9cac50ee36f73406",
                       "username": "5012345",
                       "password": "Gy6F37xK",
                       "pin": "belorado74",
@@ -4792,6 +4793,7 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
+                        token: '6d1cae4d55be4cdf9cac50ee36f73406',
                         username: '5012345',
                         password: 'Gy6F37xK',
                         pin: 'belorado74',
@@ -4810,6 +4812,7 @@ paths:
                   url = "https://one-shot.developers.uanataca.com/api/v1/requests/45836/refuse"
 
                   payload = {
+                    "token": "6d1cae4d55be4cdf9cac50ee36f73406",
                     "username": "5012345",
                     "password": "Gy6F37xK",
                     "pin": "belorado74",
@@ -4835,6 +4838,7 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
+                        token: '6d1cae4d55be4cdf9cac50ee36f73406',
                         username: '5012345',
                         password: 'Gy6F37xK',
                         pin: 'belorado74',
@@ -4861,6 +4865,7 @@ paths:
                       using (var client = new HttpClient())
                       {
                         JObject json = JObject.Parse(@"{
+                          token: '6d1cae4d55be4cdf9cac50ee36f73406',
                           username: '5012345',
                           password: 'Gy6F37xK',
                           pin: 'belorado74',
@@ -4973,6 +4978,7 @@ paths:
                     https://one-shot.developers.uanataca.com/api/v1/request/45836/approve/ \
                     -H 'Content-Type: application/json' \
                     -d '{
+                      "token": "6d1cae4d55be4cdf9cac50ee36f73406",
                       "username": "RAO_Name",
                       "password": "Rw36:#Y6",
                       "pin": "belorado74",
@@ -4988,6 +4994,7 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
+                        token: '6d1cae4d55be4cdf9cac50ee36f73406',
                         username: 'RAO_Name',
                         password: 'Rw36:#Y6',
                         pin: 'belorado74',
@@ -5005,6 +5012,7 @@ paths:
                   url = "https://one-shot.developers.uanataca.com/api/v1/request/45836/approve/"
 
                   payload = {
+                    "token": "6d1cae4d55be4cdf9cac50ee36f73406",
                     "username": "RAO_Name",
                     "password": "Rw36:#Y6",
                     "pin": "belorado74",
@@ -5029,6 +5037,7 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
+                        token: '6d1cae4d55be4cdf9cac50ee36f73406',
                         username: 'RAO_Name',
                         password: 'Rw36:#Y6',
                         pin: 'belorado74',
@@ -5066,6 +5075,7 @@ paths:
                       using (var client = new HttpClient(handler))
                       {
                         JObject json = JObject.Parse(@"{
+                          token: '6d1cae4d55be4cdf9cac50ee36f73406',
                           username: 'RAO_Name',
                           password: 'Rw36:#Y6',
                           pin: 'belorado74',
