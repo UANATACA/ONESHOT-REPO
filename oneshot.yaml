@@ -968,7 +968,7 @@ paths:
                   "details": "a44765ab8ca04e429a565f02d22179a0"
               }
         400:
-          description: Invalid JSON
+          description: Invalid JSON | Token already exists
           schema:
             type: object
             properties:
@@ -981,9 +981,9 @@ paths:
           examples:
             application/json:
               {
-                  "status": "Invalid JSON",
-                  "details": "Could not parse JSON body – Invalid control character at: line 4 column 24 (char 82)"
-              }        
+                  "status": "400 Bad Request",
+                  "details": "A token with these credentials already exist!"
+              }       
         404:
           description: Invalid username
           schema:
@@ -1010,7 +1010,8 @@ paths:
                     -d '{
                       "username": "5057249",
                       "password": "Gy6F89xK",
-                      "pin": "t8tr6vkg"
+                      "pin": "t8tr6vkg",
+                      "env": "test"
                     }'
         - lang: 'JavaScript'
           source: |
@@ -1024,7 +1025,8 @@ paths:
                       body: JSON.stringify({
                         username: '5057249',
                         password: 'Gy6F89xK',
-                        pin: 't8tr6vkg'
+                        pin: 't8tr6vkg',
+                        'env': 'test'
                       })
                     }
                   );
@@ -1040,7 +1042,8 @@ paths:
                   payload = {
                     "username": "5057249",
                     "password": "Gy6F89xK",
-                    "pin": "t8tr6vkg"
+                    "pin": "t8tr6vkg",
+                    "env": "test"
                   }
 
                   headers = {"Content-Type": "application/json"}
@@ -1063,7 +1066,8 @@ paths:
                       body: JSON.stringify({
                         username: '5057249',
                         password: 'Gy6F89xK',
-                        pin: 't8tr6vkg'
+                        pin: 't8tr6vkg',
+                        env: 'test'
                       })
                     }
                   );
@@ -1087,7 +1091,8 @@ paths:
                         JObject json = JObject.Parse(@"{
                           username: '5057249',
                           password: 'Gy6F89xK',
-                          pin: 't8tr6vkg'
+                          pin: 't8tr6vkg',
+                          env: 'test'
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
                         var request = await client.PostAsync("https://one-shot.developers.uanataca.com/api/v1/token", postData);
@@ -1565,7 +1570,7 @@ paths:
                   "details": 29571
               }  
         400:
-          description: Missing parameters
+          description: Missing username/password/pin | Invalid profile
           schema:
             type: object
             properties:
@@ -1577,12 +1582,12 @@ paths:
                 description: The response error message        
           examples:
             application/json:
-              { 
-                  "status": "400 Bad Request", 
-                  "details": "Missing Parameters" 
+              {
+                  "status": "400 Bad Request",
+                  "details": "Missing parameter: mobile_phone_number required"
               }
-        412:
-          description: Missing parameters
+        403:
+          description: Invalid username | password | PIN  | registration authority
           schema:
             type: object
             properties:
@@ -1594,12 +1599,12 @@ paths:
                 description: The response error message        
           examples:
             application/json:
-              { 
-                  "status": "412 Precondition Failed", 
-                  "details": "Error occured during request approval: Invalid request fields: mobile_phone_number" 
+              {
+                  "status": "403 Forbidden",
+                  "details": "Invalid RAO credentials"
               }
         404:
-          description: Invalid username
+          description: Invalid username/password/pin
           schema:
             type: object
             properties:
@@ -1615,8 +1620,8 @@ paths:
                   "status": "404 Not Found", 
                   "details": "Error getting RAO's id. Make sure the credentials are correct" 
               }
-        403:
-          description: Invalid PIN or password
+        412:
+          description: Missing parameters
           schema:
             type: object
             properties:
@@ -1628,12 +1633,12 @@ paths:
                 description: The response error message        
           examples:
             application/json:
-              { 
-                  "status": "404 Not Found", 
-                  "details": "Error getting RAO's id. Make sure the credentials are correct"
+              {
+                  "status": "412 Precondition Failed",
+                  "details": "Error occured during request approval: Invalid request fields: given_name"
               }
         500:
-          description: Invalid PIN or password
+          description: Invalid environment | Invalid registration authority | Invalid certificates | Invalid billing credentials
           schema:
             type: object
             properties:
@@ -1645,10 +1650,10 @@ paths:
                 description: The response error message        
           examples:
             application/json:
-              { 
-                  "status": "500 Internal Server Error", 
-                  "details": "You do not have permission to perform this action."
-              }    
+              {
+                  "status": "500 Internal Server Error",
+                  "details": "Configuration error: Please check the certificates path for the environment selected"
+              }  
       x-codeSamples:
         - lang: 'curl'
           source: |
@@ -1666,12 +1671,16 @@ paths:
                     -F registration_authority=124 \
                     -F profile=PFnubeQAFCiudadano \
                     -F token=a44765ab8ca04e429a565f02d22179a0 \
-                    -F username=5057249
+                    -F username=5057249 \
                     -F password=Gy6F89xK \
                     -F pin=t8tr6vkg \
                     -F document_front=@sample_folder/img_front.png \
                     -F document_rear=@sample_folder/img_rear.png \
                     -F document_owner=@sample_folder/img_selfie.png \
+                    -F env=test \
+                    -F billing_username=user@uanataca.com \
+                    -F billing_password=ejVxTnFrZkI= \
+
         - lang: 'JavaScript'
           source: |
                   var formdata = new FormData();
@@ -1692,6 +1701,9 @@ paths:
                   formdata.append("document_front", fileInput.files[0], "sample_folder/img_front.png");
                   formdata.append("document_rear", fileInput.files[0], "sample_folder/img_rear.png");
                   formdata.append("document_selfie", fileInput.files[0], "sample_folder/img_selfie.png");
+                  formdata.append("env", "test");
+                  formdata.append("billing_username", "user@uanataca.com");
+                  formdata.append("billing_password", "ejVxTnFrZkI=");
 
                   var requestOptions = {
                     method: 'POST',
@@ -1729,6 +1741,9 @@ paths:
                     ('document_rear',('file',open('sample_folder/img_rear.png','rb'),'image/png')),
                     ('document_owner',('file',open('sample_folder/img_selfie.png','rb'),'image/png'))
                   ]
+                  'env': 'test',
+                  'billing_username': 'user@uanataca.com',
+                  'billing_password': 'ejVxTnFrZkI=',
                   headers = {
                     'Content-Type': 'application/json'
                   }
@@ -1760,6 +1775,9 @@ paths:
                   formData.append('document_front', fs.createReadStream('sample_folder/img_front.png'));
                   formData.append('document_rear', fs.createReadStream('sample_folder/img_rear.png'));
                   formData.append('document_owner', fs.createReadStream('sample_folder/img_selfie.png'));
+                  formdata.append("env", "test");
+                  formdata.append("billing_username", "user@uanataca.com");
+                  formdata.append("billing_password", "ejVxTnFrZkI=");
 
                   const url = 'https://one-shot.developers.uanataca.com/api/v1/request';
 
@@ -1800,6 +1818,9 @@ paths:
                     request.AddFile("document_front", "sample_folder/img_front.png");
                     request.AddFile("document_rear", "sample_folder/img_rear.png");
                     request.AddFile("document_owner", "sample_folder/img_selfie.png");
+                    request.AddParameter("env", "test");
+                    request.AddParameter("billing_username", "user@uanataca.com");
+                    request.AddParameter("billing_password", "ejVxTnFrZkI=");
 
                     IRestResponse response = client.Execute(request);
                     Console.WriteLine(response.Content);
@@ -5244,8 +5265,7 @@ definitions:
             options:
                 type: "object"
                 description:  Visual graphic signature properties.<br>
-                              **It is required prior to uploading an image.** See <a href='#tag/Images'>images</a> api reference <br>
-                              <a href="#section/Video-tutorials/Signature-Image-Configuration"><img src="https://raw.githubusercontent.com/UANATACA/ONESHOT-REPO/main/img4.png"></a><a href="#section/Video-tutorials/Signature-Image-Configuration"><b>&nbsp;Watch on video!</b></a>
+                              **It is required prior to uploading an image.** See <a href='#tag/Images'>images</a> api reference <br>                           
                 properties:
                     position:
                         type: "string"
