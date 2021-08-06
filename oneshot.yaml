@@ -5243,10 +5243,10 @@ definitions:
                 description: "The RAO's digital identity username"
             password:
                 type: "string"
-                description: "The RAO's digital identity password. **Must be included in calls that require RAO's credentials when is not included in this call.**"
+                description: "The RAO's digital identity password. **If not included in this call, must be included in calls that require RAO's credentials**"
             pin:
                 type: "string"
-                description: "The RAO's digital identity PIN. **Must be included in calls that require RAO's credentials when is not included in this call.**"
+                description: "The RAO's digital identity PIN. **If not included in this call, must be included in calls that require RAO's credentials**"
             env:
                 type: "string"
                 enum: [test, prod]
