@@ -1928,7 +1928,7 @@ paths:
                   "details": "Registration Authority not found"
               }
         500:
-          description: Internal Server Error | Problems with Billing Credentials
+          description: Invalid Billing Credentials
           schema:
             type: object
             properties:
