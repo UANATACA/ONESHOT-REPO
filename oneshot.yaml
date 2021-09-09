@@ -50,7 +50,7 @@ Configure Settings to modify default parameters on settings.ini file. Check <a h
 - name: "Metadata"
   description: "
 <html>
-Metadata can be prepared to be added as part of the One-Shot Signature. Check <a href='#section/Configuration/Metadata'>Metadata</a> section. 
+Metadata can be prepared to be added as part of the One-Shot Signature.
 <table>
   <tr>
     <th>Method</th><th>Endpoint</th><th>Action</th>
