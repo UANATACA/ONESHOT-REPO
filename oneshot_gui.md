@@ -1481,7 +1481,7 @@ settings.ini file:
 	13|	default_ra = 1000
 
 
-The file `settings.ini` contains default parameters that can also be adjusted via API using the <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>Update Settings</a> call.
+The file `settings.ini` contains default parameters that can also be adjusted via API using the <a href='#tag/Settings/paths/~1api~1v1~1settings/post'>Update Settings</a> call.
 
 Except by `tsa_url`, all parameters shown below are replaced every time the <a href='#tag/Video-ID/paths/~1api~1v1~1videoid/post'>Create Video ID Request</a> call is executed.  
 

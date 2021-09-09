@@ -142,10 +142,10 @@ Manage documents associated to a signature request.</br>
     <td>DELETE</td><td><a href='#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/delete'>/document/{pk}/{type}/{uid}</a></td><td>Delete a document</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Documents/paths/~1api~1v1~1documents~1{pk}/get'>/documents/{pk}</a></td><td>List all request's documents</td>
+    <td>GET</td><td><a href='#tag/Documents/paths/~1api~1v1~1documents~1{pk}/get'>/documents/{pk}</a></td><td>List all request associated documents</td>
   </tr>
   <tr>
-    <td>DELETE</td><td><a href='#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete'>/documents/{pk}</a></td><td>Delete all requests's documents</td>
+    <td>DELETE</td><td><a href='#tag/Documents/paths/~1api~1v1~1documents~1{pk}/delete'>/documents/{pk}</a></td><td>Delete all request associated documents</td>
   </tr>
   <tr>
     <td>GET</td><td><a href='#tag/Documents/paths/~1api~1v1~1document~1{pk}~1contract/get'>/document/{pk}/contract</a></td><td>Retrieve the service contract</td>
