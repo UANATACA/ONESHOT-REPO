@@ -26,7 +26,7 @@ tags:
 - name: "Settings"
   description: "
 <html>
-Configure Settings to modify default parameters on setting.ini file. Check <a href='#section/Configuration/Service-settings'>Service Settings</a> section.
+Configure Settings to modify default parameters on settings.ini file. Check <a href='#section/Configuration/Service-settings'>Service Settings</a> section.
 <table>
   <tr>
     <th>Method</th><th>Endpoint</th><th>Action</th>
@@ -111,7 +111,7 @@ A digital signature request contains user identification data and associated doc
     <td>POST</td><td><a href='#tag/Requests/paths/~1api~1v1~1request/post'>/request</a></td><td>Create a new request</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Requests/paths/~1api~1v1~1request~1{pk}/get'>/request/{pk}</a></td><td>Retrieve a new request</td>
+    <td>GET</td><td><a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>/request/{pk}</a></td><td>Retrieve a new request</td>
   </tr>
   <tr>
     <td>POST</td><td><a href='#tag/Requests/paths/~1api~1v1~1otp~1{pk}/post'>/otp/{pk}</a></td><td>Generate a new OTP</td>
@@ -136,10 +136,10 @@ Manage documents associated to a signature request.</br>
     <td>POST</td><td><a href='#tag/Documents/paths/~1api~1v1~1document~1{pk}/post'>/document/{pk}</a></td><td>Upload a document to be signed</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{docid}/get'>/document/{pk}/{type}/{uid}</a></td><td>Retrieve a document</td>
+    <td>GET</td><td><a href='#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/get'>/document/{pk}/{type}/{uid}</a></td><td>Retrieve a document</td>
   </tr>
   <tr>
-    <td>DELETE</td><td><a href='#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{docid}/delete'>/document/{pk}/{type}/{uid}</a></td><td>Delete a document</td>
+    <td>DELETE</td><td><a href='#tag/Documents/paths/~1api~1v1~1document~1{pk}~1{type}~1{uid}/delete'>/document/{pk}/{type}/{uid}</a></td><td>Delete a document</td>
   </tr>
   <tr>
     <td>GET</td><td><a href='#tag/Documents/paths/~1api~1v1~1documents~1{pk}/get'>/documents/{pk}</a></td><td>List all request's documents</td>
@@ -214,10 +214,10 @@ This allows the management of One-Shot signature by establishing a video call fo
     <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1refuse/post'>/videoid/{request_pk}/refuse</a></td><td>Refuse Request</td>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1requests~1{request_pk}~1pl_approve/post'>/request/{request_pk}/approve</a></td><td>Approve Request</td>
+    <td>POST</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1requests~1{request_pk}~1approve/post'>/request/{request_pk}/approve</a></td><td>Approve Request</td>
   </tr>
   <tr>
-    <td>GET</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1download~1video~1{video_identifier}/get'>/dowload/video/{video_identifier}</a></td><td>Download Video</td>
+    <td>GET</td><td><a href='#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1download~1video/get'>/download/video/{video_identifier}</a></td><td>Download Video</td>
   </tr>
 </table> 
 </br> 
@@ -551,45 +551,48 @@ paths:
                     type: object
                     description: General info about the terminal the Optimizer is installed.
                     properties:
-                      machine:
+                      machine: 
                         type: string
+                        description: The Optimizer processing technology
                       version:
                         type: string
+                        description: Version related information
                       release:
                         type: string
+                        description: Release related information
                       hostname:
                         type: string
+                        description: Hostname related information
                       system:
                         type: string
+                        description: The Optimizer Operative system
                       processor:
-                        type: string            
+                        type: string           
+                        description: The Optimizer processing technology
                   version:
                     type: string
                     description: The Optimizer version release date.  
                   name:
                     type: string
-                    description: 'The software name "One-Shot Optimizer"'
+                    description: 'One-Shot Optimizer'
           examples:
             application/json:
                 {
                     "status": "200 OK",
                     "details": {
-                        "tsa": {
-                            "tsa_url": "https://tsa.access.bit4id.org:13035/tsa/test01"
+                        "info": {
+                            "machine": "x86_64",
+                            "version": "#1 SMP Mon Jun 30 12:09:22 UTC 2014",
+                            "release": "3.10.0-123.el7.x86_64",
+                            "hostname": "ip-172-31-5-91",
+                            "system": "Linux",
+                            "processor": "x86_64"
                         },
-                        "request": {
-                            "default_profile": "PFnubeQAFCiudadano",
-                            "default_ra": "9999"
-                        },
-                        "billing": {
-                            "billing_username": "user@uanataca.com",
-                            "billing_password": "UGVyb2xpdG8xLg=="
-                        },
-                        "general": {
-                            "environment": "test"
-                        }
+                        "version": "20210721",
+                        "name": "OneShot Optimizer"
                     }
-                }     
+                }
+
 ###### Metadata ######
 ###############################################################################
 
@@ -848,9 +851,6 @@ paths:
                 type: object
                 description: The response object containing all uploaded sets of metadata
                 properties:
-                  oid:
-                    type: string
-                    description: The metadata OID code
                   metadata:
                     type: string
                     description: The metadata information in Base64 format.
@@ -880,6 +880,60 @@ paths:
                     "status": "404 Not Found",
                     "details": "Metadata not found on disk"
                 }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X GET https://one-shot.developers.uanataca.com/api/v1/metadata/1b8eac803b75418e8e1a9cad0e342949
+
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    `https://one-shot.developers.uanataca.com/api/v1/metadata/1b8eac803b75418e8e1a9cad0e342949`,
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/metadata/1b8eac803b75418e8e1a9cad0e342949"
+
+                  response = requests.get(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    `https://one-shot.developers.uanataca.com/api/v1/metadata/1b8eac803b75418e8e1a9cad0e342949`,
+                    {method: 'GET'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.GetAsync("https://one-shot.developers.uanataca.com/api/v1/metadata/1b8eac803b75418e8e1a9cad0e342949");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
 #############
 
     delete: 
@@ -930,6 +984,60 @@ paths:
                     "status": "404 Not Found",
                     "details": "Metadata not found on disk"
                 }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X DELETE https://one-shot.developers.uanataca.com/api/v1/metadata/1b8eac803b75418e8e1a9cad0e342949
+
+        - lang: 'JavaScript'
+          source: |
+                  const resp = await fetch(
+                    `https://one-shot.developers.uanataca.com/api/v1/metadata/1b8eac803b75418e8e1a9cad0e342949`,
+                    {method: 'DELETE'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://one-shot.developers.uanataca.com/api/v1/metadata/1b8eac803b75418e8e1a9cad0e342949"
+
+                  response = requests.delete(url)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    `https://one-shot.developers.uanataca.com/api/v1/metadata/1b8eac803b75418e8e1a9cad0e342949`,
+                    {method: 'DELETE'}
+                  );
+
+                  const data = await resp.text();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        var request = await client.DeleteAsync("https://one-shot.developers.uanataca.com/api/v1/metadata/1b8eac803b75418e8e1a9cad0e342949");
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
 
 ###### tokens ######
 ###############################################################################
@@ -1008,9 +1116,9 @@ paths:
                     https://one-shot.developers.uanataca.com/api/v1/token \
                     -H 'Content-Type: application/json' \
                     -d '{
-                      "username": "5057249",
-                      "password": "Gy6F89xK",
-                      "pin": "t8tr6vkg",
+                      "username": "1234567",
+                      "password": "AaBbCcDd",
+                      "pin": "xxyyzzww",
                       "env": "test"
                     }'
         - lang: 'JavaScript'
@@ -1023,9 +1131,9 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
-                        pin: 't8tr6vkg',
+                        'username': '1234567',
+                        'password': 'AaBbCcDd',
+                        'pin': 'xxyyzzww',
                         'env': 'test'
                       })
                     }
@@ -1040,10 +1148,10 @@ paths:
                   url = "https://one-shot.developers.uanataca.com/api/v1/token"
 
                   payload = {
-                    "username": "5057249",
-                    "password": "Gy6F89xK",
-                    "pin": "t8tr6vkg",
-                    "env": "test"
+                      "username": "1234567",
+                      "password": "AaBbCcDd",
+                      "pin": "xxyyzzww",
+                      "env": "test"
                   }
 
                   headers = {"Content-Type": "application/json"}
@@ -1064,10 +1172,10 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
-                        pin: 't8tr6vkg',
-                        env: 'test'
+                        'username': '1234567',
+                        'password': 'AaBbCcDd',
+                        'pin': 'xxyyzzww',
+                        'env': 'test'
                       })
                     }
                   );
@@ -1089,10 +1197,10 @@ paths:
                       using (var client = new HttpClient())
                       {
                         JObject json = JObject.Parse(@"{
-                          username: '5057249',
-                          password: 'Gy6F89xK',
-                          pin: 't8tr6vkg',
-                          env: 'test'
+                          'username': '1234567',
+                          'password': 'AaBbCcDd',
+                          'pin': 'xxyyzzww',
+                          'env': 'test'
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
                         var request = await client.PostAsync("https://one-shot.developers.uanataca.com/api/v1/token", postData);
@@ -1109,7 +1217,7 @@ paths:
       tags:
         - Tokens
       description: "Retrieves the token associated credentials with the given unique identifier.<br>
-                    The response get a `true` or `false` value regarding if password and PIN parameters are associated to the token."
+                    The response gets a `true` or `false` value regarding if password and PIN parameters are associated to the token."
       produces:
         - application/json
       parameters:
@@ -1132,16 +1240,19 @@ paths:
                 properties:
                   username: 
                     type: string
+                    description: The RAO's username
                   password:
                     type: boolean
+                    description: The RAO's token associated password condition (true or false)
                   pin:
                     type: boolean
+                    description: The RAO's token associated pin condition (true or false)
           examples:
             application/json:
                 {
                     "status": "200 OK",
                     "details": {
-                        "username": "5057249",
+                        "username": "1234567",
                         "password": true,
                         "pin": true
                     }
@@ -1342,13 +1453,18 @@ paths:
                 description: A JSON object with the token id and the user credentials
                 properties:
                   tokenid:
-                    type: string
-                  username: 
-                    type: string
-                  password:
-                    type: boolean
-                  pin:
-                    type: boolean
+                    type: object
+                    description: The token id
+                    properties:
+                      username: 
+                        type: string
+                        description: The RAO's username
+                      password:
+                        type: string
+                        description: The RAO's password
+                      pin:
+                        type: string
+                        description: The RAO's pin
           examples:
             application/json:
                 {
@@ -1454,7 +1570,7 @@ paths:
         enum: [IDC, PAS, PNO, TIN]
         description: >
           Document types allowed for the user identification:
-           * **IDC** - Identification based on national identity card number. **Default if field is not included.**
+           * **IDC** - Identification based on national identity card number. **Default when this field is not specified.**
            * **PAS** - Identification based on passport number
            * **PNO** - Identification based on national personal number (national civic registration number)
            * **TIN** - Tax Identification Number according to the European Commission
@@ -1480,7 +1596,7 @@ paths:
       - in: formData
         name: registration_authority 
         description: "The Registration Authority id number.</br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file. Check <a href='#tag/Settings/paths/~1api~1v1~1settings/post'>Update Settings</a> call.</b></blockquote>"
         required: true
         type: string
       - in: formData
@@ -1491,7 +1607,7 @@ paths:
           Digital certificate profiles allowed:</br>
            * **PFnubeQAFCiudadano** - Uanataca's eIDAS qualified digital certificate used for qualified signature in the European Union </br>
            * **PFnubeNC** - Uanataca's normalized digital certificate used for advanced signature </br>
-          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
+          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file. Check <a href='#tag/Settings/paths/~1api~1v1~1settings/post'>Update Settings</a> call.</b></blockquote>"
         required: true
       - in: formData
         name: token
@@ -1502,19 +1618,19 @@ paths:
       - in: formData
         name: username
         description: "The RAO's digital identity username. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         type: string
         required: true
       - in: formData
         name: password
         description: "The RAO's digital identity password. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         type: string
         required: true
       - in: formData
         name: pin
         description: "The RAO's digital identity PIN.</br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         type: string
         required: true
       - in: formData
@@ -1855,14 +1971,14 @@ paths:
                 type: string
                 description: The response status id
               details: 
-                type: string
+                type: object
                 properties:
                   videoid_pk:
                     type: string
                     description: The Video ID primary key
                   videoid_link:
                     type: string
-                    description: The Video ID access link
+                    description: The Video ID access link. Available only for <a href="#section/Video-ID-Workflows/1-Step-validation">1-Step</a> and <a href="#section/Video-ID-Workflows/2-Step-validation">2-Step</a> validation mode.
                   request_pk:
                     type: string
                     description: The request primary key          
@@ -1955,8 +2071,8 @@ paths:
                       "email": "mail@domain",
                       "registration_authority": "1234",
                       "profile": "PFnubeQAFCiudadano",
-                      "billing_username": "billing-test-account@organization",
-                      "billing_password": "base64-password",
+                      "billing_username": "user@uanataca.com",
+                      "billing_password": "ejVxTnFrZkI=",
                       "webhook_url": "my-webhook-url.com",
                       "env": "test"
                     }'
@@ -1974,8 +2090,8 @@ paths:
                       'email': 'mail@domain',
                       'registration_authority': '1234',
                       'profile': 'PFnubeQAFCiudadano',
-                      'billing_username': 'billing-test-account@organization',
-                      'billing_password': 'base64-password',
+                      'billing_username': 'user@uanataca.com',
+                      'billing_password': 'ejVxTnFrZkI=',
                       'webhook_url': 'my-webhook-url.com',
                       'env': 'test'
                       })
@@ -1996,8 +2112,8 @@ paths:
                       "email": "mail@domain",
                       "registration_authority": "1234",
                       "profile": "PFnubeQAFCiudadano",
-                      "billing_username": "billing-test-account@organization",
-                      "billing_password": "base64-password",
+                      "billing_username": "user@uanataca.com",
+                      "billing_password": "ejVxTnFrZkI=",
                       "webhook_url": "my-webhook-url.com",
                       "env": "test"
                   }
@@ -2024,8 +2140,8 @@ paths:
                       'email': 'mail@domain',
                       'registration_authority': '1234',
                       'profile': 'PFnubeQAFCiudadano',
-                      'billing_username': 'billing-test-account@organization',
-                      'billing_password': 'base64-password',
+                      'billing_username': 'user@uanatca.com',
+                      'billing_password': 'ejVxTnFrZkI=',
                       'webhook_url': 'my-webhook-url.com',
                       'env': 'test'
                       })
@@ -2053,8 +2169,8 @@ paths:
                           email: 'mail@domain',
                           registration_authority: '1234',
                           profile: 'PFnubeQAFCiudadano',
-                          billing_username: 'billing-test-account@organization',
-                          billing_password: 'base64-password',
+                          billing_username: 'user@uanataca.com',
+                          billing_password: 'ejVxTnFrZkI=',
                           webhook_url: 'my-webhook-url.com',
                           env: 'test'
                         }");
@@ -2562,7 +2678,7 @@ paths:
                   Console.WriteLine(response.Content);           
 
 ###############################################################################################
-################################### VIDEO ID ##################################################
+################################### END OF VIDEO ID ###########################################
 ###############################################################################################
 
 
@@ -2595,135 +2711,140 @@ paths:
                 description: JSON object with information associated to the request 
           examples:
             application/json:
-              {
-                  "status": "200 OK",
-                  "details": {
-                      "citizen_tax_number": null,
-                      "paperless_mode": true,
-                      "organization_rol":,
-                      "birth_country": null,
-                      "birth_city": null,
-                      "mobile_phone_number": "",
-                      "residence_state": null,
-                      "title": null,
-                      "ext_recognition_data": null,
-                      "process_application": null,
-                      "country_name": "ES",
-                      "approving_user": {
-                          "pk": ,
-                          "request": ,
-                          "permission_profile": ,
-                          "registration_authority": 
-                      },
-                      "birth_province": null,
-                      "birth_state": null,
-                      "residence_postal_code": null,
-                      "id_document_number": null,
-                      "smartcard_sn": null,
-                      "secure_element": 2,
-                      "organization_state": null,
-                      "responsible_legal_documents": null,
-                      "id_document_issuer": null,
-                      "profile": "",
-                      "organization_address": null,
-                      "provider_registration_number": null,
-                      "sex": null,
-                      "registering_user": {
-                          "pk": ,
-                          "request": ,
-                          "permission_profile": ,
-                          "registration_authority": 
-                      },
-                      "description": null,
-                      "organization_tax_number": null,
-                      "administrative_unit": null,
-                      "organization_name": null,
-                      "approving_rao": {
-                          "id_document_description": "",
-                          "certificate": {
-                              "profile": "",
-                              "status": 0,
-                              "valid_from": "",
-                              "valid_to": "",
-                              "valid": "VALID",
-                              "revokation_reason": null,
-                              "serial_number": "",
-                              "issuer": "2.5.4.97=VATES-A66721499, CN=UANATACA CA1 DEVEL 2016, OU=AC-UANATACA, O=UANATACA S.A., L=Barcelona (see current address at www.uanataca.com/address), C=ES",
-                              "data": "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",
-                              "subject": "CN=Operator Example, 2.5.4.5=IDCES-Y9999999E, 2.5.4.42=Operator, 2.5.4.4=Operator Example, OU=Operator Example DPR:www.uanataca.com, C=ES"
-                          },
-                          "registration_authority": [],
-                          "registration_authority_master": ,
-                          "id_document_number": "",
-                          "given_name": "",
-                          "surname_2": "",
-                          "pk": ,
-                          "surname_1": "",
-                          "id_document_issuer": ""
-                      },
-                      "organization_country": null,
-                      "email": "",
-                      "producing_user": null,
-                      "responsible_second_surname": null,
-                      "responsible_name": null,
-                      "professional_id_number": null,
-                      "residence_address": null,
-                      "responsible_legal_level": null,
-                      "residence_district": null,
-                      "entity_owner_serial_number": null,
-                      "id_responsible_document_type": null,
-                      "residence_city": null,
-                      "subscriber_responsible_serial": null,
-                      "organization_city": null,
-                      "surname_2": "",
-                      "surname_1": "",
-                      "fix_phone_number": null,
-                      "id_responsible_document_number": null,
-                      "validity_time": "1",
-                      "registration": null,
-                      "organization_province": null,
-                      "organization_identifier": null,
-                      "subscriber": null,
-                      "birth_canton": null,
-                      "special_conditions": null,
-                      "serial_number": "",
-                      "scratchcard": "",
-                      "registration_authority": ,
-                      "responsible_serial": null,
-                      "id_document_type": "IDC",
-                      "empowerment": null,
-                      "responsible_registry_data": null,
-                      "id_responsible_document_country": null,
-                      "entity_owner": null,
-                      "pk": ,
-                      "circumstances": null,
-                      "responsible_position": null,
-                      "producing_rao": null,
-                      "organization_email": null,
-                      "limit": null,
-                      "residence": null,
-                      "residence_canton": null,
-                      "citizenship": null,
-                      "organizational_unit_3": null,
-                      "organizational_unit_2": null,
-                      "organizational_unit_1": null,
-                      "organization_postal_code": null,
-                      "responsible_email": null,
-                      "given_name": "John",
-                      "id_responsible_document_issuer": null,
-                      "organization_url": null,
-                      "status": "ENROLLREADY",
-                      "id_document_description": null,
-                      "certificate_set": [],
-                      "residence_province": null,
-                      "responsible_first_surname": null,
-                      "id_document_country": "ES",
-                      "complement_number": null,
-                      "birth_district": null,
-                      "birth_date": null,
-                      "representation": null
-                  }
-              }
+                {
+                    "status": "200 OK",
+                    "details": {
+                        "citizen_tax_number": null,
+                        "paperless_mode": true,
+                        "organization_rol": null,
+                        "birth_country": null,
+                        "birth_city": null,
+                        "mobile_phone_number": "+34600123123",
+                        "residence_state": null,
+                        "title": null,
+                        "ext_recognition_data": null,
+                        "process_application": null,
+                        "country_name": "ES",
+                        "approving_user": {
+                            "pk": 232,
+                            "request": 4721,
+                            "permission_profile": 1,
+                            "registration_authority": 139
+                        },
+                        "birth_province": null,
+                        "birth_state": null,
+                        "residence_postal_code": null,
+                        "id_document_number": null,
+                        "smartcard_sn": null,
+                        "secure_element": 2,
+                        "organization_state": null,
+                        "communication_language": "",
+                        "responsible_legal_documents": null,
+                        "id_document_issuer": null,
+                        "profile": "PFnubeQAFCiudadano",
+                        "organization_address": null,
+                        "provider_registration_number": null,
+                        "sex": null,
+                        "registering_user": {
+                            "pk": 232,
+                            "request": 4721,
+                            "permission_profile": 1,
+                            "registration_authority": 139
+                        },
+                        "description": null,
+                        "organization_tax_number": null,
+                        "administrative_unit": null,
+                        "organization_name": null,
+                        "approving_rao": {
+                            "is_identificator": false,
+                            "id_document_description": "",
+                            "certificate": {
+                                "profile": "PFnubeAF",
+                                "status": 0,
+                                "valid_from": "2019-10-31T16:38:00Z",
+                                "valid_to": "2021-10-30T16:38:00Z",
+                                "valid": "VALID",
+                                "revokation_reason": null,
+                                "serial_number": "58edb21a8a653533",
+                                "issuer": "2.5.4.97=VATES-A66721499, CN=UANATACA CA1 DEVEL 2016, OU=AC-UANATACA, O=UANATACA S.A., L=Barcelona (see current address at www.uanataca.com/address), C=ES",
+                                "data": "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",
+                                "subject": "CN=OneShot Operator, 2.5.4.5=IDCES-123213123, 2.5.4.42=OneShot, 2.5.4.4=Operator, C=ES"
+                            },
+                            "registration_authority": [],
+                            "registration_authority_master": 139,
+                            "id_document_number": "123213213213",
+                            "given_name": "OneShot",
+                            "surname_2": "",
+                            "pk": 972,
+                            "surname_1": "Operator",
+                            "id_document_issuer": ""
+                        },
+                        "organization_country": null,
+                        "email": "name@domain.com",
+                        "producing_user": null,
+                        "responsible_second_surname": null,
+                        "responsible_name": null,
+                        "professional_id_number": null,
+                        "residence_address": null,
+                        "responsible_legal_level": null,
+                        "residence_district": null,
+                        "entity_owner_serial_number": null,
+                        "id_responsible_document_type": null,
+                        "residence_city": null,
+                        "subscriber_responsible_serial": null,
+                        "organization_city": null,
+                        "surname_2": "Surname2",
+                        "surname_1": "Surname1",
+                        "identification_rao": null,
+                        "fix_phone_number": null,
+                        "id_responsible_document_number": null,
+                        "validity_time": "1",
+                        "registration": null,
+                        "organization_province": null,
+                        "organization_identifier": null,
+                        "videoid_mode": false,
+                        "subscriber": null,
+                        "birth_canton": null,
+                        "special_conditions": null,
+                        "serial_number": "12345678A",
+                        "scratchcard": "5039078",
+                        "registration_authority": 139,
+                        "responsible_serial": null,
+                        "id_document_type": "IDC",
+                        "empowerment": null,
+                        "responsible_registry_data": null,
+                        "id_responsible_document_country": null,
+                        "entity_owner": null,
+                        "pk": 45836,
+                        "circumstances": null,
+                        "responsible_position": null,
+                        "producing_rao": null,
+                        "organization_email": null,
+                        "limit": null,
+                        "residence": null,
+                        "residence_canton": null,
+                        "citizenship": null,
+                        "videoid_data": null,
+                        "organizational_unit_3": null,
+                        "organizational_unit_2": null,
+                        "organizational_unit_1": null,
+                        "organization_postal_code": null,
+                        "responsible_email": null,
+                        "given_name": "Name",
+                        "id_responsible_document_issuer": null,
+                        "organization_url": null,
+                        "status": "ENROLLREADY",
+                        "id_document_description": null,
+                        "certificate_set": [],
+                        "residence_province": null,
+                        "responsible_first_surname": null,
+                        "id_document_country": "ES",
+                        "complement_number": null,
+                        "birth_district": null,
+                        "birth_date": null,
+                        "representation": null
+                    }
+                }
       x-codeSamples:
         - lang: 'curl'
           source: |
@@ -2812,7 +2933,7 @@ paths:
                 type: string
                 description: The response status id
               details: 
-                type: string
+                type: object
                 properties:
                   videoid_pk:
                     type: string
@@ -3155,7 +3276,7 @@ paths:
                   }
 
 ###############################################################################################
-################################### VIDEO ID ##################################################
+################################### END OF VIDEO ID ###########################################
 ###############################################################################################
 
 
@@ -3166,7 +3287,7 @@ paths:
       tags:
         - Requests
       description: "Generates a One-Time Password (OTP) code for the user. The OTP is sent directly to the user's mobile phone as an SMS message.</br>
-                    <html><blockquote style='background-color:#faf3ac; border-color:#DFDFDF; color:#3b3b3b;'><b>⚠This method is only required and available for requests with Uanataca SMS</b></blockquote></html>"
+                    <html><blockquote style='background-color:#faf3ac; border-color:#DFDFDF; color:#3b3b3b;'><b>⚠This method is only required and available for requests using Uanataca SMS method</b></blockquote></html>"
       produces:
         - application/json
       parameters:
@@ -3253,7 +3374,7 @@ paths:
       summary: SIGN
       tags:
         - Requests
-      description: Signs all documents associated to a request using a one-time usage certificate generated for the signature request. 
+      description: Signs all documents associated to a request using a single-use certificate generated for the signature request. 
       consumes:
         - application/json
       produces:
@@ -3753,14 +3874,19 @@ paths:
                     properties:
                       upload_date: 
                         type: string
+                        description: The document upload date 
                       ext:
                         type: string
+                        description: The file extension
                       size:
                         type: string
+                        description: The file size in bytes
                       mime:
                         type: string
+                        description: The MIME type name
                       filename:
-                        type: string    
+                        type: string
+                        description: The file name
           examples:
             application/json:
               {
@@ -4304,46 +4430,51 @@ paths:
                 description: A JSON object containing the image id object
                 properties:
                   imgid:
+                    type: object
                     description: Image related information
                     properties:
                       upload_date: 
                         type: string
+                        description: The image upload date 
                       ext:
                         type: string
+                        description: The file extension
                       size:
                         type: string
+                        description: The file size in bytes
                       mime:
                         type: string
+                        description: The MIME type name
                       filename:
-                        type: string  
+                        type: string
+                        description: The file name 
           examples:
             application/json:
-              {
-                  "status": "200 OK",
-                  "details": {
-                      "{imgid_1}": {
-                          "upload_date": "",
-                          "ext": ".png",
-                          "size": [   ],
-                          "mime": "image/png",
-                          "filename": "image_1.png"
-                      },
-                      "{imgid_2}": {
-                          "upload_date": "",
-                          "ext": ".png",
-                          "size": [   ],
-                          "mime": "image/png",
-                          "filename": "image_2.png"
-                      },
-                      "{imgid_N}": {
-                          "upload_date": "",
-                          "ext": ".png",
-                          "size": [   ],
-                          "mime": "image/png",
-                          "filename": "image_N.png"
-                      }                      
-                  }
-              }
+                {
+                    "status": "200 OK",
+                    "details": {
+                        "2d845d2c-c94f-47f0-b9ad-6275d294bb25": {
+                            "upload_date": "2021-06-02 02:12:16.369317",
+                            "ext": ".png",
+                            "size": [
+                                1920,
+                                1080
+                            ],
+                            "mime": "image/png",
+                            "filename": "tmprubric-4499623105711609371.png"
+                        },
+                        "33a1886f-3546-46b4-b981-031cdf7ba9ff": {
+                            "upload_date": "2021-06-03 15:18:20.671054",
+                            "ext": ".png",
+                            "size": [
+                                600,
+                                600
+                            ],
+                            "mime": "image/png",
+                            "filename": "tmprubric-4873527110174301865.png"
+                        }
+                    }
+                }
     x-codeSamples:
       - lang: 'curl'
         source: |
@@ -5260,22 +5391,22 @@ definitions:
             secret:
                 type: "string"
                 description: "The OTP code sent to the user.<br>
-                              For external authenticacion method, a customer code is provided"
+                              For external authenticacion method, a customer code is provided."
             metadata:
                 type: "string"
                 description: The metadata unique id code obtained from <a href='#tag/Metadata/paths/~1api~1v1~1metadata/post'> Upload Metadata </a> call.
             ext_unlock_type:
                 type: "string"
                 description: "The external authentication method type.
-                              This field is required for requests using external authenticacion methods"
+                              This field is required for requests using external authenticacion methods."
             ext_unlock_value:
                 type: "string"
                 description: "The id of the external authentication request.
-                              This field is required for requests using external authenticacion methods"
+                              This field is required for requests using external authenticacion methods."
             options:
                 type: "object"
                 description:  Visual graphic signature properties.<br>
-                              **It is required prior to uploading an image.** See <a href='#tag/Images'>images</a> api reference <br>                           
+                              **It is required prior to image upload.** See <a href='#tag/Images'>images</a> api reference <br>                           
                 properties:
                     position:
                         type: "string"
@@ -5283,10 +5414,10 @@ definitions:
                                       1px = 0.75pt"
                     page:
                         type: "number"
-                        description: "The document page where the signature will be placed. The first page starts in `0`"
+                        description: "The document page where the signature will be placed. The first page starts at `0`"
                     image:
                         type: "string"
-                        description: "The previous uploaded image id"
+                        description: "The previously uploaded image id"
 ###########
     CreateReqObject_VID:
       type: "object"
@@ -5310,19 +5441,19 @@ definitions:
         registration_authority:
             type: "string"
             description: "The Registration Authority ID number </br>
-                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file. Check <a href='#tag/Settings/paths/~1api~1v1~1settings/post'>Update Settings</a> call.</b></blockquote>"
         profile:
             type: "string"
             description: "The certificate profile </br>
-                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file. Check <a href='#tag/Settings/paths/~1api~1v1~1settings/post'>Update Settings</a> call.</b></blockquote>"
         billing_username:
             type: "string"
             description: "The client billing username. </br>
-                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file. Check <a href='#tag/Settings/paths/~1api~1v1~1settings/post'>Update Settings</a> call.</b></blockquote>"
         billing_password:
             type: "string"
             description: "The client billing password in Base64 format. </br>
-                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file. Check <a href='#tag/Settings/paths/~1api~1v1~1settings/post'>Update Settings</a> call.</b></blockquote>"
         webhook_url:
             type: "string"
             description: "The webhook URL. </br>
@@ -5331,7 +5462,7 @@ definitions:
             type: "string"
             enum: [test, prod]
             description: "The API work environment. </br>
-                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"         
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file. Check <a href='#tag/Settings/paths/~1api~1v1~1settings/post'>Update Settings</a> call.</b></blockquote>"     
 ###########
     UpdateReqObject_VID:
       type: "object"
@@ -5344,7 +5475,7 @@ definitions:
       properties:
         scratchcard:
             type: "string"
-            description: The request scratchcard id. Found when executing <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Get Request</a> call.<br>
+            description: The request scratchcard id. Can be found at "details" when executing <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Get Request</a> call<br>
         given_name:
             type: "string"
             description: "The signer's given name"
@@ -5507,15 +5638,15 @@ definitions:
         username:
             type: "string"
             description: "The RAO's username </br> 
-                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         password:
             type: "string"
             description: "The RAO's password </br> 
-                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         pin:
             type: "string"
             description: "The RAO's PIN </br> 
-                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         rao:
             type: "string"
             description: "The RAO's id"
@@ -5537,15 +5668,15 @@ definitions:
         username:
             type: "string"
             description: "The RAO's username </br> 
-                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         password:
             type: "string"
             description: "The RAO's password </br> 
-                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         pin:
             type: "string"
             description: "The RAO's PIN </br> 
-                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         rao:
             type: "string"
             description: "The RAO's id"
@@ -5568,15 +5699,15 @@ definitions:
         username:
             type: "string"
             description: "The RAO's username </br> 
-                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         password:
             type: "string"
             description: "The RAO's password </br> 
-                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         pin:
             type: "string"
             description: "The RAO's PIN </br> 
-                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='https://oneshot-test.redoc.ly/#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         rao:
             type: "string"
             description: "The RAO's id"
