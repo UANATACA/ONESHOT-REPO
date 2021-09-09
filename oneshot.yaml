@@ -1651,20 +1651,20 @@ paths:
       - in: formData
         name: env
         description: "The API work environment. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file. Check <a href='#tag/Settings/paths/~1api~1v1~1settings/post'>Update Settings</a> call.</b></blockquote>"
         type: string
         enum: [test, prod]
         required: true
       - in: formData
         name: billing_username
         description: "The client billing username. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file. Check <a href='#tag/Settings/paths/~1api~1v1~1settings/post'>Update Settings</a> call.</b></blockquote>"
         type: string
         required: true
       - in: formData
         name: billing_password
         description: "The client billing password in Base64 format. </br>
-                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"
+                      <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file. Check <a href='#tag/Settings/paths/~1api~1v1~1settings/post'>Update Settings</a> call.</b></blockquote>"
         type: string
         required: true
       responses:
@@ -5382,7 +5382,7 @@ definitions:
                 type: "string"
                 enum: [test, prod]
                 description: "The API work environment. </br>
-                              <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file.</b></blockquote>"            
+                              <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Required only if not set at settings.ini file. Check <a href='#tag/Settings/paths/~1api~1v1~1settings/post'>Update Settings</a> call.</b></blockquote>"         
     SignObject:
         type: "object"
         required:
