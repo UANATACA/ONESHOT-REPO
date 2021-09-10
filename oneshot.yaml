@@ -471,15 +471,18 @@ paths:
                 description: The response status code
               details: 
                 type: object
+                description: Miscellaneous API parameter details
                 properties:
                   tsa:
                     type: object
+                    description: Timestamp Authority Settings
                     properties:
                       tsa_url:
                         type: string
                         description: The default Timestamp Authority URL
                   request:
                     type: object
+                    description: Request Settings
                     properties:
                       default_profile:
                         type: string
@@ -489,6 +492,7 @@ paths:
                         description: The default registration Authority id
                   billing:
                     type: object
+                    description: Billing Settings
                     properties:
                       billing_username:
                         type: string
@@ -498,6 +502,7 @@ paths:
                         description: The default Billing password
                   general:
                     type: object
+                    description: General Settings
                     properties:
                       environment:
                         type: string
