@@ -29,7 +29,7 @@ The electronic signatures are performed on Uanataca Trusted Service Center side,
 
 # Test Environment
 
-For testing purposes, we provide integrators of our pre-configured One-Shot Optimizer test environment accessible at the following URL:
+For testing purposes, we provide integrators of our pre-configured test-mode One-Shot Optimizer accessible at the following URL:
 
 </br>
 
@@ -37,7 +37,8 @@ For testing purposes, we provide integrators of our pre-configured One-Shot Opti
 
 </br>
 
-In the same way, you can find the instructions to set up your own One-Shot Optimizer in the <a href="#section/Configuration"> configuration section</a>.
+In test environment, requests can be easily created, validated or approved by using a stored default Operator credentials set represented by an alfanumeric string called token. This token can be found when executing the <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List Tokens</a> call. No billing credentials are required, as the default Registration Authority number will be assigned by our staff according to your location.  
+
 
 # Classic Workflow
 
@@ -128,11 +129,11 @@ The next section presents the workflow for a simple use case of the One-Shot Sig
 
 **API Reference:** <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List Tokens</a>
 
-The test One-Shot Optimizer is pre-configured with a Registration Authority Officer (RAO) account ready to be used within the test environment. This account has an associated token that can be used to identify the RAO in API calls.
+The test-mode One-Shot Optimizer is pre-configured with a Registration Authority Officer (RAO) account ready to be used within the test environment. This account has an associated token that can be used to identify the RAO in API calls.
 
 	curl -X GET https://one-shot.developers.uanataca.com/api/v1/tokens
 
-This call should return a single token from a clear Optimizer:
+This call should return the following JSON object:
 
 	{
 		"status": "200 OK",
@@ -374,7 +375,7 @@ This call must include preliminary information to identify the signer.
 		-d '{
 			"mobile_phone_number": "+34699999999",
 			"email": "mail@domain",
-			"registration_authority": "1234",
+			"registration_authority": "139",
 			"profile": "PFnubeQAFCiudadano",
 			"videoid_mode": 1,
 			"webhook_url": "my-webhook-url.com"
@@ -420,8 +421,20 @@ This call makes the request ready for signature. Its status changes to **ENROLLR
 			"username": "1000279",
 			"password": "3DPTm:N4",
 			"pin": "23bYQq9a",
-			"rao": 123
+			"rao": "1400"
 		}'
+
+	OR
+
+	curl -i -X POST 'https://api.uanataca.com/api/v1/request/45836/approve' \
+		-H 'Content-Type: application/json' \
+		-d '{
+			"token": "f734066d1ce36f9cae4d55be4cdac50e",
+			"rao": "1400"
+		}'	
+
+In case of using a token containing RAO's credentials.
+
 
 The response is a JSON object with added request approval information. 
 
@@ -621,7 +634,7 @@ This call must include preliminary information to identify the signer.
 		-d '{
 			"mobile_phone_number": "+34699999999",
 			"email": "mail@domain",
-			"registration_authority": "1234",
+			"registration_authority": "139",
 			"profile": "PFnubeQAFCiudadano",
 			"videoid_mode": 1,
 			"webhook_url": "my-webhook-url.com"
@@ -670,6 +683,16 @@ A Registration Authority Officer must validate the request data and evidences be
 			"rao": "1400"
 		}'
 
+	OR
+
+	curl -i -X POST 'https://api.uanataca.com/api/v1/request/45836/validate' \
+		-H 'Content-Type: application/json' \
+		-d '{
+			"token": "f734066d1ce36f9cae4d55be4cdac50e"
+		}'	
+
+In case of using a token containing RAO's credentials.
+
 The validation successful response changes the request to **CREATED** status as a JSON object containing full request information is returned.
 
 	{
@@ -697,8 +720,18 @@ This call makes the request ready for signature. Its status will change to **ENR
 			"username": "1000279",
 			"password": "3DPTm:N4",
 			"pin": "23bYQq9a",
-			"rao": 123
+			"rao": "1400"
 		}'
+
+	OR
+
+	curl -i -X POST 'https://api.uanataca.com/api/v1/request/45836/approve' \
+		-H 'Content-Type: application/json' \
+		-d '{
+			"token": "f734066d1ce36f9cae4d55be4cdac50e"
+		}'	
+
+In case of using a token containing RAO's credentials.
 
 The response is a JSON object with added request approval information. 
 
@@ -898,7 +931,7 @@ This call must include preliminary information to identify the signer.
 		-d '{
 			"mobile_phone_number": "+34699999999",
 			"email": "mail@domain",
-			"registration_authority": "1234",
+			"registration_authority": "139",
 			"profile": "PFnubeQAFCiudadano",
 			"videoid_mode": 1
 		}'
@@ -938,8 +971,6 @@ Data and images are uploaded by using the Upload Data Evidence call.
 
 **API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences/post">Upload Data Evidence</a>
 
-<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ For this call the endpoint must be used is <b>lima.demo.bit4id.org</b> instead of <b>api.uanataca.com</b></blockquote>
-
 Data objects in detail:
 
 `acceptance` : Client acceptance parameters (e.g. Terms & Conditions,  Privacy Policy). This is a customizable JSON object. </br>
@@ -950,7 +981,7 @@ Data objects in detail:
 - `similarity_level` : Similarity level between document picture and face selfie. Ranges within 0 to 100] 
 
 
-	curl -i -X POST https://lima.demo.bit4id.org/api/v1/videoid/45836/evidences \
+	curl -i -X POST https://one-shot.developers.uanataca.com/api/v1/videoid/45836/evidences \
 		-H 'Content-Type: application/json' \
 		-d '{
 			"acceptance": {
@@ -1008,9 +1039,7 @@ In the same way, binary multiformat Video is uploaded by using the Upload Video 
 
 **API Reference:** <a href="#tag/Video-ID/paths/~1api~1v1~1videoid~1{request_pk}~1evidences~1video/post">Upload Video</a>
 
-<blockquote style="background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;">⚠ For this call the endpoint must be used is <b>lima.demo.bit4id.org</b> instead of <b>api.uanataca.com</b></blockquote>
-
-	curl -i -X POST https://lima.demo.bit4id.org/v1/upload/video/30e57b02819a430d8386fd85be9f499f/ \
+	curl -i -X POST https://one-shot.developers.uanataca.com/v1/upload/video/30e57b02819a430d8386fd85be9f499f/ \
 		-H 'Content-Type: multipart/form-data' \
 		-F video=@sample_folder/sample_video.mp4 
 
@@ -1043,6 +1072,16 @@ A Registration Authority Officer must validate the request data and evidences be
 			"rao": "1400"
 		}'
 
+	OR
+
+	curl -i -X POST 'https://api.uanataca.com/api/v1/request/45836/validate' \
+		-H 'Content-Type: application/json' \
+		-d '{
+			"token": "f734066d1ce36f9cae4d55be4cdac50e"
+		}'	
+
+In case of using a token containing RAO's credentials.
+
 The validation successful response status is a JSON object containing request information, as the request status changes to **CREATED**.
 
 	{
@@ -1068,7 +1107,7 @@ This call makes the request ready for signature. Its status changes to **ENROLLR
 			"username": "1000279",
 			"password": "3DPTm:N4",
 			"pin": "23bYQq9a",
-			"rao": 123
+			"rao": 972
 		}'
 
 The response is a JSON object with added request approval information. 
@@ -1510,7 +1549,7 @@ The following is a sample view of the JSON object that is sent as a callback at 
 		"date": "2021-07-20T08:08:21.132394", 
 		"previous_status": "VIDEOPENDING", 
 		"request": 46760, 
-		"registration_authority": 455
+		"registration_authority": 139
 	}
 
 Where:

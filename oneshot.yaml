@@ -1121,9 +1121,9 @@ paths:
                     https://one-shot.developers.uanataca.com/api/v1/token \
                     -H 'Content-Type: application/json' \
                     -d '{
-                      "username": "1234567",
-                      "password": "AaBbCcDd",
-                      "pin": "xxyyzzww",
+                      "username": "9001800",
+                      "password": "Gy6F89xK",
+                      "pin": "belorado74",
                       "env": "test"
                     }'
         - lang: 'JavaScript'
@@ -1136,9 +1136,9 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        'username': '1234567',
-                        'password': 'AaBbCcDd',
-                        'pin': 'xxyyzzww',
+                        'username': '9001800',
+                        'password': 'Gy6F89xK',
+                        'pin': 'belorado74',
                         'env': 'test'
                       })
                     }
@@ -1154,8 +1154,8 @@ paths:
 
                   payload = {
                       "username": "1234567",
-                      "password": "AaBbCcDd",
-                      "pin": "xxyyzzww",
+                      "password": "Gy6F37xK",
+                      "pin": "belorado74",
                       "env": "test"
                   }
 
@@ -1177,9 +1177,9 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        'username': '1234567',
-                        'password': 'AaBbCcDd',
-                        'pin': 'xxyyzzww',
+                        'username': '9001800',
+                        'password': 'Gy6F89xK',
+                        'pin': 'belorado74',
                         'env': 'test'
                       })
                     }
@@ -1202,9 +1202,9 @@ paths:
                       using (var client = new HttpClient())
                       {
                         JObject json = JObject.Parse(@"{
-                          'username': '1234567',
-                          'password': 'AaBbCcDd',
-                          'pin': 'xxyyzzww',
+                          'username': '9001800',
+                          'password': 'Gy6F89xK',
+                          'pin': 'belorado74',
                           'env': 'test'
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
@@ -1257,7 +1257,7 @@ paths:
                 {
                     "status": "200 OK",
                     "details": {
-                        "username": "1234567",
+                        "username": "9001800",
                         "password": true,
                         "pin": true
                     }
@@ -1475,13 +1475,13 @@ paths:
                 {
                     "status": "200 OK",
                     "details": {
-                        "b35b97802217598e9fa4b63fcf6b6497": {
-                            "username": "1122338",
+                        "6d1cae4d55be4cdf9cac50ee36f73406": {
+                            "username": "9001800",
                             "password": true,
                             "pin": true
                         },
                         "2edfa0ff321b6cf09174e1326c40e174": {
-                            "username": "1153349",
+                            "username": "9001800",
                             "password": true,
                             "pin": false
                         }
@@ -1792,9 +1792,9 @@ paths:
                     -F registration_authority=124 \
                     -F profile=PFnubeQAFCiudadano \
                     -F token=a44765ab8ca04e429a565f02d22179a0 \
-                    -F username=5057249 \
+                    -F username=9001800 \
                     -F password=Gy6F89xK \
-                    -F pin=t8tr6vkg \
+                    -F pin=belorado74 \
                     -F document_front=@sample_folder/img_front.png \
                     -F document_rear=@sample_folder/img_rear.png \
                     -F document_owner=@sample_folder/img_selfie.png \
@@ -1815,10 +1815,10 @@ paths:
                   formdata.append("mobile_phone_number", "+34999999999");
                   formdata.append("registration_authority", "124");
                   formdata.append("profile", "PFnubeQAFCiudadano");
-                  formdata.append("token", "a44765ab8ca04e429a565f02d22179a0");
-                  formdata.append("username", "5057249");
+                  formdata.append("token", "6d1cae4d55be4cdf9cac50ee36f73406");
+                  formdata.append("username", "9001800");
                   formdata.append("password", "Gy6F89xK");
-                  formdata.append("pin", "t8tr6vkg");
+                  formdata.append("pin", "belorado74");
                   formdata.append("document_front", fileInput.files[0], "sample_folder/img_front.png");
                   formdata.append("document_rear", fileInput.files[0], "sample_folder/img_rear.png");
                   formdata.append("document_selfie", fileInput.files[0], "sample_folder/img_selfie.png");
@@ -1853,10 +1853,10 @@ paths:
                   'mobile_phone_number': '+34999999999',
                   'registration_authority': '124',
                   'profile': 'PFnubeQAFCiudadano',
-                  'token': 'a44765ab8ca04e429a565f02d22179a0',
-                  'username': '5057249',
+                  'token': '6d1cae4d55be4cdf9cac50ee36f73406',
+                  'username': '9001800',
                   'password': 'Gy6F89xK',
-                  'pin': 't8tr6vkg',
+                  'pin': 'belorado74',
                   'env': 'test',
                   'billing_username': 'user@uanataca.com',
                   'billing_password': 'ejVxTnFrZkI='}
@@ -1889,10 +1889,10 @@ paths:
                   formData.append('mobile_phone_number', '+34999999999');
                   formData.append('registration_authority', '124');
                   formData.append('profile', 'PFnubeQAFCiudadano');
-                  formData.append('token', 'a44765ab8ca04e429a565f02d22179a0');
-                  formData.append('username', '5057249');
+                  formData.append('token', '6d1cae4d55be4cdf9cac50ee36f73406');
+                  formData.append('username', '9001800');
                   formData.append('password', 'Gy6F89xK');
-                  formData.append('pin', 't8tr6vkg');
+                  formData.append('pin', 'belorado74');
                   formData.append('document_front', fs.createReadStream('sample_folder/img_front.png'));
                   formData.append('document_rear', fs.createReadStream('sample_folder/img_rear.png'));
                   formData.append('document_owner', fs.createReadStream('sample_folder/img_selfie.png'));
@@ -1932,10 +1932,10 @@ paths:
                     request.AddParameter("mobile_phone_number", "+34999999999");
                     request.AddParameter("registration_authority", "124");
                     request.AddParameter("profile", "PFnubeQAFCiudadano");
-                    request.AddParameter("token", "a44765ab8ca04e429a565f02d22179a0");
-                    request.AddParameter("username", "5057249");
+                    request.AddParameter("token", "6d1cae4d55be4cdf9cac50ee36f73406");
+                    request.AddParameter("username", "9001800");
                     request.AddParameter("password", "Gy6F89xK");
-                    request.AddParameter("pin", "t8tr6vkg");
+                    request.AddParameter("pin", "belorado74");
                     request.AddFile("document_front", "sample_folder/img_front.png");
                     request.AddFile("document_rear", "sample_folder/img_rear.png");
                     request.AddFile("document_owner", "sample_folder/img_selfie.png");
@@ -2074,7 +2074,7 @@ paths:
                     -d '{
                       "mobile_phone_number": "+34699999999",
                       "email": "mail@domain",
-                      "registration_authority": "1234",
+                      "registration_authority": "139",
                       "profile": "PFnubeQAFCiudadano",
                       "billing_username": "user@uanataca.com",
                       "billing_password": "ejVxTnFrZkI=",
@@ -2093,7 +2093,7 @@ paths:
                       body: JSON.stringify({
                       'mobile_phone_number': '+34699999999',
                       'email': 'mail@domain',
-                      'registration_authority': '1234',
+                      'registration_authority': '139',
                       'profile': 'PFnubeQAFCiudadano',
                       'billing_username': 'user@uanataca.com',
                       'billing_password': 'ejVxTnFrZkI=',
@@ -2115,7 +2115,7 @@ paths:
                   payload = {
                       "mobile_phone_number": "+34699999999",
                       "email": "mail@domain",
-                      "registration_authority": "1234",
+                      "registration_authority": "139",
                       "profile": "PFnubeQAFCiudadano",
                       "billing_username": "user@uanataca.com",
                       "billing_password": "ejVxTnFrZkI=",
@@ -2143,7 +2143,7 @@ paths:
                       body: JSON.stringify({
                       'mobile_phone_number': '+34699999999',
                       'email': 'mail@domain',
-                      'registration_authority': '1234',
+                      'registration_authority': '139',
                       'profile': 'PFnubeQAFCiudadano',
                       'billing_username': 'user@uanatca.com',
                       'billing_password': 'ejVxTnFrZkI=',
@@ -2172,7 +2172,7 @@ paths:
                         JObject json = JObject.Parse(@"{
                           mobile_phone_number: '+34699999999',
                           email: 'mail@domain',
-                          registration_authority: '1234',
+                          registration_authority: '139',
                           profile: 'PFnubeQAFCiudadano',
                           billing_username: 'user@uanataca.com',
                           billing_password: 'ejVxTnFrZkI=',
@@ -4716,7 +4716,7 @@ paths:
                     -H 'Content-Type: application/json' \
                     -d '{
                       "token": "6d1cae4d55be4cdf9cac50ee36f73406",
-                      "username": "5012345",
+                      "username": "9001800",
                       "password": "Gy6F37xK",
                       "pin": "belorado74",
                       "rao_id": "1400"
@@ -4750,7 +4750,7 @@ paths:
 
                   payload = {
                     "token": "6d1cae4d55be4cdf9cac50ee36f73406",
-                    "username": "5012345",
+                    "username": "9001800",
                     "password": "Gy6F37xK",
                     "pin": "belorado74",
                     "rao_id": "1400"
@@ -4913,7 +4913,7 @@ paths:
                     -H 'Content-Type: application/json' \
                     -d '{
                       "token": "6d1cae4d55be4cdf9cac50ee36f73406",
-                      "username": "5012345",
+                      "username": "9001800",
                       "password": "Gy6F37xK",
                       "pin": "belorado74",
                       "rao_id": "1400",
@@ -4949,7 +4949,7 @@ paths:
 
                   payload = {
                     "token": "6d1cae4d55be4cdf9cac50ee36f73406",
-                    "username": "5012345",
+                    "username": "9001800",
                     "password": "Gy6F37xK",
                     "pin": "belorado74",
                     "rao_id": "1400",
@@ -5115,8 +5115,8 @@ paths:
                     -H 'Content-Type: application/json' \
                     -d '{
                       "token": "6d1cae4d55be4cdf9cac50ee36f73406",
-                      "username": "RAO_Name",
-                      "password": "Rw36:#Y6",
+                      "username": "9001800",
+                      "password": "Gy6F89xK",
                       "pin": "belorado74",
                       "rao": "898"
                     }'
@@ -5132,7 +5132,7 @@ paths:
                       body: JSON.stringify({
                         token: '6d1cae4d55be4cdf9cac50ee36f73406',
                         username: 'RAO_Name',
-                        password: 'Rw36:#Y6',
+                        password: 'Gy6F89xK',
                         pin: 'belorado74',
                         rao: '898'
                       })
@@ -5149,8 +5149,8 @@ paths:
 
                   payload = {
                     "token": "6d1cae4d55be4cdf9cac50ee36f73406",
-                    "username": "RAO_Name",
-                    "password": "Rw36:#Y6",
+                    "username": "9001800",
+                    "password": "Gy6F89xK",
                     "pin": "belorado74",
                     "rao": "898"
                   }
@@ -5175,7 +5175,7 @@ paths:
                       body: JSON.stringify({
                         token: '6d1cae4d55be4cdf9cac50ee36f73406',
                         username: 'RAO_Name',
-                        password: 'Rw36:#Y6',
+                        password: 'Gy6F89xK',
                         pin: 'belorado74',
                         rao: '898'
                       })
@@ -5213,7 +5213,7 @@ paths:
                         JObject json = JObject.Parse(@"{
                           token: '6d1cae4d55be4cdf9cac50ee36f73406',
                           username: 'RAO_Name',
-                          password: 'Rw36:#Y6',
+                          password: 'Gy6F89xK',
                           pin: 'belorado74',
                           rao: '898'
                         }");
