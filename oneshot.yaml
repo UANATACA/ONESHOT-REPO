@@ -5480,7 +5480,8 @@ definitions:
       properties:
         scratchcard:
             type: "string"
-            description: The request scratchcard id. Can be found at "details" when executing <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Get Request</a> call<br>
+            description: "The request scratchcard id. </br> 
+                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ The scratchcard id can be found as a field of the object "details" when executing <a href='#tag/Requests/paths/~1api~1v1~1request~1{request_pk}/get'>Get Request</a> call.</b></blockquote>" 
         given_name:
             type: "string"
             description: "The signer's given name"
