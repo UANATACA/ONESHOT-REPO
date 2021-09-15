@@ -51,8 +51,9 @@ Configure Settings to modify default parameters on settings.ini file. Check <a h
   description: "
 
 <html>
-Metadata can be prepared to be added as part of the One-Shot Signature. </br>
-<blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'> To inspect Metadata from a signed file, please download our Metadata extraction tool available <a href='https://cdn.bit4id.com/es/uanataca/public/tools/metadata_extractor_tool_2.zip'> here</a>. Execute /bin/metadataextractor.exe.</blockquote>
+Metadata can be prepared to be added as part of the One-Shot Signature. 
+</br>
+<blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'> <b>To inspect Metadata from a signed file, please download our Metadata extraction tool available <a href='https://cdn.bit4id.com/es/uanataca/public/tools/metadata_extractor_tool_2.zip'> here</a>. Execute /bin/metadataextractor.exe.</b></blockquote>
 <table>
   <tr>
     <th>Method</th><th>Endpoint</th><th>Action</th>
