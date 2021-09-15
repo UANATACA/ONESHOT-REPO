@@ -29,7 +29,8 @@ The electronic signatures are performed on Uanataca Trusted Service Center side,
 
 # Test Environment
 
-For testing purposes, we provide integrators of our pre-configured test-mode One-Shot Optimizer accessible at the following URL:
+
+**For testing purposes, we provide integrators of our pre-configured test-mode One-Shot Optimizer accessible at the following URL:**
 
 </br>
 
@@ -37,7 +38,27 @@ For testing purposes, we provide integrators of our pre-configured test-mode One
 
 </br>
 
-In test environment, requests can be easily created, validated or approved by using a stored default Operator credentials set represented by an alfanumeric string called token. This token can be found when executing the <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List Tokens</a> call. No billing credentials are required, as the default Registration Authority number will be assigned by our staff according to your location.  
+In test environment, requests can be easily created, validated or approved by using a stored default Operator credentials set represented by an alfanumeric string called token. This token can be found when executing the <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List Tokens</a> call. 
+
+List Tokens call output:
+
+	{
+		"status": "200 OK",
+		"details": {
+			"6d1cae4d55be4cdf9cac50ee36f73406": {
+				"username": "9001800",
+				"password": true,
+				"pin": true,
+				"NOTE": "On this demo environment, this method will only return the demo token"
+			}
+		}
+	}
+
+When using our test-mode Optimizer, you must consider:
+
+1) No Billing credentials are required.
+2) The Registration Authority id number will be explicitly assigned by our staff.
+3) The token ´6d1cae4d55be4cdf9cac50ee36f73406´ is valid for using in <a href="#tag/Requests/paths/~1api~1v1~1request/post">Create Request</a> call. Cannot be deleted.
 
 
 # Classic Workflow

@@ -5635,7 +5635,6 @@ definitions:
         - username
         - password
         - pin
-        - rao
       properties:
         token:
             type: "string"
@@ -5655,7 +5654,8 @@ definitions:
                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         rao:
             type: "string"
-            description: "The RAO's id"
+            description: "The RAO's id </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
              
 ###########
     ValidateReqObject_VID:
@@ -5665,7 +5665,6 @@ definitions:
         - username
         - password
         - pin
-        - rao 
       properties:
         token:
             type: "string"
@@ -5685,7 +5684,8 @@ definitions:
                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         rao:
             type: "string"
-            description: "The RAO's id"
+            description: "The RAO's id </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
 
 ###########
     RefuseReqObject_VID:
@@ -5695,7 +5695,6 @@ definitions:
         - username
         - password
         - pin
-        - rao
         - reason  
       properties:
         token:
@@ -5716,7 +5715,8 @@ definitions:
                          <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         rao:
             type: "string"
-            description: "The RAO's id"
+            description: "The RAO's id </br> 
+                         <blockquote style='background-color: #faf3ac; border-color: #5a5a5a; color: #3b3b3b;'><b>⚠ Not required when included in <a href='#tag/Tokens/paths/~1api~1v1~1token/post'>token</a>.</b></blockquote>"
         reason:
             type: "string"
             description: "Reason that caused Video ID refusal"
