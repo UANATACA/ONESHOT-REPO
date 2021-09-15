@@ -36,9 +36,9 @@ The electronic signatures are performed on Uanataca Trusted Service Center side,
 
 	https://one-shot.developers.uanataca.com
 
-</br>
-
 In test environment, requests can be easily created, validated or approved by using a stored default Operator credentials set represented by an alfanumeric string called token. This token can be found when executing the <a href="#tag/Tokens/paths/~1api~1v1~1tokens/get">List Tokens</a> call. 
+
+</br>
 
 List Tokens call output:
 
@@ -54,11 +54,13 @@ List Tokens call output:
 		}
 	}
 
+</br>
+
 When using our test-mode Optimizer, you must consider:
 
-1) No Billing credentials are required.
-2) The Registration Authority id number will be explicitly assigned by our staff.
-3) The token ´6d1cae4d55be4cdf9cac50ee36f73406´ is valid for using in <a href="#tag/Requests/paths/~1api~1v1~1request/post">Create Request</a> call. Cannot be deleted.
+1) No Billing credentials are required. </br>
+2) The Registration Authority id number will be explicitly assigned by our staff. </br>
+3) The token ´6d1cae4d55be4cdf9cac50ee36f73406´ is valid for using in <a href="#tag/Requests/paths/~1api~1v1~1request/post">Create Request</a> call. Cannot be deleted. </br>
 
 </br>
 
