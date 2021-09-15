@@ -30,7 +30,7 @@ The electronic signatures are performed on Uanataca Trusted Service Center side,
 # Test Environment
 
 
-**For testing purposes, we provide integrators of our pre-configured test-mode One-Shot Optimizer accessible at the following URL:**
+**For testing purposes, Uanataca provides integrators of a pre-configured test-mode One-Shot Optimizer accessible at the following URL:**
 
 </br>
 
@@ -59,6 +59,10 @@ When using our test-mode Optimizer, you must consider:
 1) No Billing credentials are required.
 2) The Registration Authority id number will be explicitly assigned by our staff.
 3) The token ´6d1cae4d55be4cdf9cac50ee36f73406´ is valid for using in <a href="#tag/Requests/paths/~1api~1v1~1request/post">Create Request</a> call. Cannot be deleted.
+
+</br>
+
+Want to configure your own test-mode Optimizer? Find instructions in the <a href='#section/Configuration'>configuration</a> section.
 
 
 # Classic Workflow
